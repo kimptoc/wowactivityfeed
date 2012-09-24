@@ -3,9 +3,12 @@
     "version":"0.0.1",
     "dependencies":{
         "express":"",
+        "jade":"",
+        "stylus":"",
         "armory":"",
         "wowhead":"",
         "coffee-script":"",
-        "jasmine-node":""
+        "jasmine-node":"",
+        "nodemon":""
     }
 }
