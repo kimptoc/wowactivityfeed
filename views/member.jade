@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  h2 #{p.region} / #{p.realm} / member: #{w.name}, level: #{w.level}
+  hr
+  #{JSON.stringify(w)} 

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h2 #{p.region} / #{p.realm} / guild: #{w.name}
+  hr
+  each char in w.members
+    a(href='/view/member/#{p.region}/#{p.realm}/#{char.character.name}')= char.character.name
+    &nbsp;
+  hr
+  #{JSON.stringify(w)} 
