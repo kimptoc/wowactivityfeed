@@ -5,8 +5,16 @@ $ coffee --compile --watch --output js/ src/ spec/
 
 another To run tests (at least on my win7 box)
 
-$ node node_modules/jasmine-node/bin/jasmine-node js/
+$ node node_modules/jasmine-node/bin/jasmine-node --autotest js/
 
-to run express under nodemon, so its restarted when code changes
+and another to run express under nodemon, so its restarted when code changes
 
 $ node_modules/.bin/nodemon js/app.js
+
+
+
+
+LINKS
+
+heroku deploy
+http://shapeshed.com/creating-a-basic-site-with-node-and-express/

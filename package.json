@@ -9,6 +9,7 @@
         "wowhead":"",
         "coffee-script":"",
         "jasmine-node":"",
-        "nodemon":""
+        "nodemon":"",
+        "rss":""
     }
 }

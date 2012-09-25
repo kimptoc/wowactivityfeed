@@ -2,6 +2,7 @@ global.wf ||= {}
 
 fs = require "fs"
 
+#crude filesystem store
 class wf.Store
   storeDir = "./store"
 

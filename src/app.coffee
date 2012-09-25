@@ -4,6 +4,8 @@ express = require('express')
 http = require('http')
 path = require('path')
 
+require('./wow')
+
 #wf.app = express()
 
 app = module.exports = express()
@@ -25,6 +27,7 @@ wf.app.configure ->
   wf.app.use(express.logger('dev'))  
   wf.app.use(require('stylus').middleware(__dirname + '\\..\\public'))  
   wf.app.use(express.static(path.join(__dirname + '\\..\\', 'public')))
+  wf.app.wow = new wf.WoW()
 
 
 wf.app.configure 'development', ->
@@ -37,6 +40,15 @@ wf.app.configure 'production', ->
 
 wf.app.get '/', (req, res) ->
     res.render 'index', title: 'Home'
+#    res.send 'Hello from WoW Feed2'
+
+wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
+    type = req.params.type
+    region = req.params.region
+    realm = req.params.realm
+    name = req.params.name
+    wowthing = wf.app.wow.get region, realm, type, name
+    res.render req.params.type, p: req.params, w: wowthing
 #    res.send 'Hello from WoW Feed2'
 
 
