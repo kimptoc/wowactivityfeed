@@ -23,8 +23,8 @@ class wf.Store
 
   load: (key)->
     console.log "loading #{key}"
-    data = fs.readFileSync "#{storeDir}/#{key}.json"
     try 
+      data = fs.readFileSync "#{storeDir}/#{key}.json"
       myObj = JSON.parse(data)
       # console.dir(myObj)
     catch err

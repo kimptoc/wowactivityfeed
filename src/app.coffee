@@ -42,15 +42,21 @@ wf.app.get '/', (req, res) ->
     res.render 'index', title: 'Home'
 #    res.send 'Hello from WoW Feed2'
 
+wf.app.get '/armory_load', (req, res) ->
+  res.send "Armory load result: #{wf.app.wow.armory_load()}"
+
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     type = req.params.type
     region = req.params.region
     realm = req.params.realm
     name = req.params.name
     wowthing = wf.app.wow.get region, realm, type, name
-    res.render req.params.type, p: req.params, w: wowthing
-#    res.send 'Hello from WoW Feed2'
-
+    console.log JSON.stringify(wf.app.wow.get_registered())
+    if wowthing
+      #console.log wowthing
+      res.render req.params.type, p: req.params, w: wowthing
+    else
+      res.send "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 
 #wf.app.listen(process.env.VCAP_APP_PORT || 3000)
 

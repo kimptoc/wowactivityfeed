@@ -18,3 +18,8 @@ LINKS
 
 heroku deploy
 http://shapeshed.com/creating-a-basic-site-with-node-and-express/
+
+nodejitsu handbook
+https://github.com/nodejitsu/handbook
+http://cheatsheet.nodejitsu.com/
+http://docs.nodejitsu.com/
