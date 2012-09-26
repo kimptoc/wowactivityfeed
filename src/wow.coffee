@@ -26,7 +26,7 @@ class wf.WoW
       a_realm = []
       h_region[realm] = a_realm 
     a_realm.push(name) if ! (name in a_realm)
-    console.log "a_realm:#{JSON.stringify(a_realm)}"
+    wf.debug "a_realm:#{JSON.stringify(a_realm)}"
     # registered[type][region][realm][name] = true
 
   get_registered: ->
@@ -42,12 +42,12 @@ class wf.WoW
   armory_load: ->
     console.log "armory_load..."
     for type, region of registered
-      console.log "Processing type #{type}"
+      wf.debug "Processing type #{type}"
       for region_name, realm of region
-        console.log "Processing region #{region_name}"
+        wf.debug "Processing region #{region_name}"
         for realm_name, items of realm
-          console.log "Processing realm #{realm_name}"
+          wf.debug "Processing realm #{realm_name}"
           for item in items
-            console.log "Processing item #{item}"
+            wf.debug "Processing item #{item}"
             wowlookup.get type, region_name, realm_name, item
     "TBD"

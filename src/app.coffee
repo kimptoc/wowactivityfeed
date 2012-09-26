@@ -4,6 +4,7 @@ express = require('express')
 http = require('http')
 path = require('path')
 
+require('./init_logger')
 require('./wow')
 
 #wf.app = express()
@@ -15,7 +16,7 @@ wf.app = app
 # Configuration
 
 wf.app.configure ->
-  console.log "dirname=#{__dirname}"
+  wf.info "App Startup/Express configure:dirname=#{__dirname}"
   wf.app.set('views', __dirname + '/../views')  
   wf.app.set('view engine', 'jade')  
   wf.app.engine('jade', require('jade').__express)
@@ -51,7 +52,7 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     realm = req.params.realm
     name = req.params.name
     wowthing = wf.app.wow.get region, realm, type, name
-    console.log JSON.stringify(wf.app.wow.get_registered())
+    wf.debug JSON.stringify(wf.app.wow.get_registered())
     if wowthing
       #console.log wowthing
       res.render req.params.type, p: req.params, w: wowthing
@@ -61,4 +62,4 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
 #wf.app.listen(process.env.VCAP_APP_PORT || 3000)
 
 http.createServer(app).listen(app.get('port'), ->
-  console.log("Express server listening on port " + app.get('port')))
+  wf.info("Express server listening on port " + app.get('port')))

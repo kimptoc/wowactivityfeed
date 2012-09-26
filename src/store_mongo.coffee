@@ -22,7 +22,7 @@ class wf.StoreMongo
       mongo_db.collection collection_name, (err, coll) ->
         coll.insert document_object, (err, docs) ->
           throw err if err
-          console.log "saved:#{document_object}"
+          wf.debug "saved:#{document_object}"
           stored_handler?()
 
   load: (collection_name, document_key, loaded_handler) ->
@@ -47,7 +47,7 @@ class wf.StoreMongo
       mongo_db.open (err, client) ->
         throw err if err
         mongo_client = client
-        console.log "Connected to MongoDB"
+        wf.info "Connected to MongoDB"
         worker()
 
   # add: (key, obj, okHandler)->

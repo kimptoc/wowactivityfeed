@@ -1,3 +1,4 @@
 #creates an exception for .coffee files
 src/*.coffee
 store/*
+logs/*

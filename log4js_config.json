@@ -1,0 +1,5 @@
+{
+ "appenders": [
+   { "type": "file", "filename": "logs/server.log" }
+  ]
+}

@@ -11,6 +11,7 @@
         "jasmine-node":"",
         "nodemon":"",
         "rss":"",
-        "mongodb":""
+        "mongodb":"",
+        "log4js":""
     }
 }
