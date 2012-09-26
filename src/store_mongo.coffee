@@ -15,6 +15,9 @@ class wf.StoreMongo
     mongo_server = new Mongodb.Server('127.0.0.1',27017)
     mongo_db = new Mongodb.Db('wowfeed', mongo_server)
 
+  close: ->
+    mongo_db?.close()
+
   add: (collection_name, document_object, stored_handler) ->
     @with_connection ->
       mongo_db.collection collection_name, (err, coll) ->

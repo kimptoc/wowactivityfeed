@@ -7,15 +7,23 @@ describe "simple file store", ->
     it "test1", ->
       store = new wf.Store
 
+      expect(1).toEqual(1)
+
       someObj = 
         id: 123
         name: "foo"
 
-      store.add "foo",someObj, ->
-        wf.debug "store complete"
-        thatObj = store.load "foo"
+      thatObj = null
 
-        wf.debug "reloaded obj:"
-        wf.debug thatObj
+      runs ->
+        store.add "foo",someObj, ->
+          wf.debug "store complete"
+          thatObj = store.load "foo"
 
+          wf.debug "reloaded obj:"
+          wf.debug thatObj
+
+      waitsFor (-> thatObj != null), 1000
+
+      runs ->
         expect(thatObj).toEqual(someObj)

@@ -13,7 +13,7 @@ class wf.WowLookup
   guild: (region, realm, guild) ->
     wf.debug "Finding guild info for #{region}, #{realm}, #{guild}"
 
-  get: (type, region, realm, name) ->
+  get: (type, region, realm, name, result_handler) ->
     wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}"
     armory.guild
       region: region
@@ -23,3 +23,4 @@ class wf.WowLookup
       (err,guild) ->
         wf.debug "wowlookup result:#{JSON.stringify(guild)}"
         store.add name,guild
+        result_handler?(guild)
