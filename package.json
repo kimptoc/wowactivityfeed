@@ -10,6 +10,7 @@
         "coffee-script":"",
         "jasmine-node":"",
         "nodemon":"",
-        "rss":""
+        "rss":"",
+        "mongodb":""
     }
 }

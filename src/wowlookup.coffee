@@ -18,5 +18,5 @@ class wf.WowLookup
       name: name
       fields:["members","achievements","news"]
       (err,guild) ->
-        console.log "wowlookup result:#{JSON.stringify(guild)}"
+        # console.log "wowlookup result:#{JSON.stringify(guild)}"
         store.add name,guild

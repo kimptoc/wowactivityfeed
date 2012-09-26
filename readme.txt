@@ -23,3 +23,10 @@ nodejitsu handbook
 https://github.com/nodejitsu/handbook
 http://cheatsheet.nodejitsu.com/
 http://docs.nodejitsu.com/
+http://docs.nodejitsu.com/articles/file-system/how-to-store-local-config-data
+
+cloud9/azure
+http://www.windowsazure.com/en-us/develop/nodejs/tutorials/deploying-with-cloud9/
+
+appfrog/mongodb
+http://docs.appfog.com/frameworks/node
