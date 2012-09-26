@@ -2,6 +2,9 @@ global.wf ||= {}
 
 fs = require "fs"
 
+require('./init_logger')
+
+
 #crude filesystem store
 class wf.Store
   storeDir = "./store"
@@ -11,7 +14,7 @@ class wf.Store
     
   add: (key, obj, okHandler)->
     wf.debug "saving #{key}, object:"
-    # console.log obj
+    # wf.debug obj
     data = JSON.stringify(obj);
     fs.writeFile "#{storeDir}/#{key}.json", data,  (err) ->
         if (err) 

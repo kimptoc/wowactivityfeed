@@ -54,7 +54,7 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     wowthing = wf.app.wow.get region, realm, type, name
     wf.debug JSON.stringify(wf.app.wow.get_registered())
     if wowthing
-      #console.log wowthing
+      #wf.debug wowthing
       res.render req.params.type, p: req.params, w: wowthing
     else
       res.send "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"

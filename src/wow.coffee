@@ -3,6 +3,8 @@ global.wf ||= {}
 require "./store"
 require "./wowlookup"
 
+require('./init_logger')
+
 store = new wf.Store()
 wowlookup = new wf.WowLookup()
 
@@ -40,7 +42,7 @@ class wf.WoW
       null
 
   armory_load: ->
-    console.log "armory_load..."
+    wf.info "armory_load..."
     for type, region of registered
       wf.debug "Processing type #{type}"
       for region_name, realm of region

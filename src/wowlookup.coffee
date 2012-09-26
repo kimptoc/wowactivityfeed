@@ -1,7 +1,10 @@
 global.wf ||= {}
 
 armory = require('armory')
+
 require "./store"
+require('./init_logger')
+
 
 store = new wf.Store()
 
@@ -18,5 +21,5 @@ class wf.WowLookup
       name: name
       fields:["members","achievements","news"]
       (err,guild) ->
-        # console.log "wowlookup result:#{JSON.stringify(guild)}"
+        wf.debug "wowlookup result:#{JSON.stringify(guild)}"
         store.add name,guild

@@ -12,10 +12,10 @@ describe "simple file store", ->
         name: "foo"
 
       store.add "foo",someObj, ->
-        console.log "store complete"
+        wf.debug "store complete"
         thatObj = store.load "foo"
 
-        console.log "reloaded obj:"
-        console.log thatObj
+        wf.debug "reloaded obj:"
+        wf.debug thatObj
 
         expect(thatObj).toEqual(someObj)
