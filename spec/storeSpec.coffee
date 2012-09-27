@@ -1,4 +1,4 @@
-require "jasmine-node"
+require "./commonSpec"
 
 require "./store"
 

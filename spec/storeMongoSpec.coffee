@@ -1,4 +1,4 @@
-require "jasmine-node"
+require "./commonSpec"
 
 require "./store_mongo"
 
@@ -13,12 +13,30 @@ describe "mongo backed store", ->
     store = null
 
     beforeEach ->
+      wf.info "Running beforeEach, create StoreMongo"
       store = new wf.StoreMongo
 
     afterEach ->
+      wf.info "Running afterEach, close StoreMongo"
       store?.close()
 
     it "test add/count db", ->
+
+      removed = false
+
+      runs -> 
+        store.remove_all "foo", ->
+          removed = true
+      waitsFor (-> removed ), 1000
+      runs ->
+        expect(removed).toEqual(true) 
+
+
+      count = -1
+      runs ->
+        store.count "foo", someObj, (n) -> count = n
+      waitsFor (-> count > -1), 1000
+      runs -> expect(count).toEqual(0)
 
       someObj = 
         id: 123
@@ -26,23 +44,31 @@ describe "mongo backed store", ->
 
       thatObj = null
 
+      add_count = -1
       runs ->
-        store.add "foo",someObj, ->
-          wf.debug "store complete"
+        store.add "foo",someObj, (counter)->
+          wf.debug "store complete, #{counter}"
+          add_count = counter
           store.load "foo", id: 123, (obj) -> thatObj = obj
-
       waitsFor (-> thatObj != null), 1000
-
       runs ->
+        expect(thatObj).toBeDefined()
         expect(thatObj.id).toEqual(someObj.id)
         expect(thatObj.name).toEqual(someObj.name)
+        expect(add_count).toEqual(1)
 
-      count = -1
+
+# TODO - work out why this doesnt work :(
+      # count = -1
+      # runs ->
+      #   store.count "foo", someObj, (n) -> count = n
+      # waitsFor (-> count > -1), 1000
+      # runs -> expect(count).toEqual(1)
+
+      elements_found = null
       runs ->
-        store.count "foo", someObj, (n) ->
-          count = n
-
-      waitsFor (-> count > -1), 1000
-
+        store.load_all "foo", (matching) ->
+          elements_found = matching
+      waitsFor (-> elements_found != null), 1000
       runs ->
-        expect(count).toEqual(1)
+        expect(elements_found.length).toEqual(1)

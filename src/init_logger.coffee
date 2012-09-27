@@ -2,7 +2,10 @@ global.wf ||= {}
 
 log4js = require "log4js"
 
-log4js.configure('log4js_config.json')
+if process.env.NODE_ENV == "test"
+  log4js.configure('log4js_config_test.json')
+else
+  log4js.configure('log4js_config.json')
 
 wf.logger = log4js.getLogger()
 
