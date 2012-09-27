@@ -14,11 +14,22 @@ describe "mongo backed store", ->
 
     beforeEach ->
       wf.info "Running beforeEach, create StoreMongo"
-      store = new wf.StoreMongo
+      store = new wf.StoreMongo()
 
     afterEach ->
       wf.info "Running afterEach, close StoreMongo"
       store?.close()
+
+    it "test call remove all", ->
+
+      removed = false
+
+      runs -> 
+        store.remove_all "foo", ->
+          removed = true
+      waitsFor (-> removed ), "removed wait",1000
+      runs ->
+        expect(removed).toEqual(true) 
 
     it "test add/count db", ->
 
@@ -27,7 +38,7 @@ describe "mongo backed store", ->
       runs -> 
         store.remove_all "foo", ->
           removed = true
-      waitsFor (-> removed ), 1000
+      waitsFor (-> removed ), "removed wait", 1000
       runs ->
         expect(removed).toEqual(true) 
 
@@ -35,7 +46,7 @@ describe "mongo backed store", ->
       count = -1
       runs ->
         store.count "foo", someObj, (n) -> count = n
-      waitsFor (-> count > -1), 1000
+      waitsFor (-> count > -1),"count wait", 1000
       runs -> expect(count).toEqual(0)
 
       someObj = 
@@ -50,7 +61,7 @@ describe "mongo backed store", ->
           wf.debug "store complete, #{counter}"
           add_count = counter
           store.load "foo", id: 123, (obj) -> thatObj = obj
-      waitsFor (-> thatObj != null), 1000
+      waitsFor (-> thatObj != null),"thatObj wait", 1000
       runs ->
         expect(thatObj).toBeDefined()
         expect(thatObj.id).toEqual(someObj.id)
@@ -69,6 +80,6 @@ describe "mongo backed store", ->
       runs ->
         store.load_all "foo", (matching) ->
           elements_found = matching
-      waitsFor (-> elements_found != null), 1000
+      waitsFor (-> elements_found != null),"elements_found wait", 1000
       runs ->
         expect(elements_found.length).toEqual(1)

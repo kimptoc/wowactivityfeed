@@ -4,19 +4,19 @@ Mongodb = require "mongodb"
 
 require('./init_logger')
 
+wf.mongo_db = null
+
 #crude filesystem store
 class wf.StoreMongo
   mongo_server = null
-  mongo_db = null
   mongo_client = null
 
   constructor: ->
     wf.info "StoreMongo.constructor"
     mongo_server = new Mongodb.Server('127.0.0.1',27017)
-    mongo_db = new Mongodb.Db('wowfeed', mongo_server)
 
   close: ->
-    mongo_db?.close()
+    # mongo_db?.close()
 
   remove_all: (collection_name, removed_handler) ->
     @with_collection collection_name, (coll) ->
@@ -66,19 +66,19 @@ class wf.StoreMongo
   
   with_collection: (collection_name, worker) ->
     @with_connection ->
-      mongo_db.collection collection_name, (err, coll) ->
+      wf.mongo_db.collection collection_name, (err, coll) ->
         wf.error(err) if err
         throw err if err
         worker?(coll)
 
   with_connection: (worker) ->
-    if mongo_client
+    if wf.mongo_db
       worker()
     else
-      mongo_db.open (err, client) ->
+      new Mongodb.Db('wowfeed', mongo_server).open (err, client) ->
         wf.error(err) if err
         throw err if err
-        mongo_client = client
+        wf.mongo_db = client
         wf.info "Connected to MongoDB"
         worker()
 

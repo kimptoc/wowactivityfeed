@@ -29,7 +29,6 @@ class wf.Store
     try 
       data = fs.readFileSync "#{storeDir}/#{key}.json"
       myObj = JSON.parse(data)
-      # console.dir(myObj)
     catch err
       wf.error('There has been an error parsing your JSON.')
       wf.error(err)

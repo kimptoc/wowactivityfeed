@@ -1,5 +1,7 @@
 TODO
 - rss feed showing level changes for a character
+- ensure uniqueness of registered entries
+- store char/guild histories - snapshot with datetime
 
 LATER
 - feed for guild
@@ -14,7 +16,7 @@ coffee --compile --watch --output js/ src/ spec/
 
 another To run tests (at least on my win7 box)
 
-node node_modules/jasmine-node/bin/jasmine-node --autotest js/
+node node_modules/jasmine-node/bin/jasmine-node --verbose js/
 
 and another to run express under nodemon, so its restarted when code changes
 
