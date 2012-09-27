@@ -1,3 +1,12 @@
+TODO
+- rss feed showing level changes for a character
+
+LATER
+- feed for guild
+- feed for char/guild achievements
+- feed for items?
+- feed for profession levels?
+
 NOTES
 
 one window to compile

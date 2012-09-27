@@ -2,6 +2,11 @@ require "jasmine-node"
 
 require "./store_mongo"
 
+#todo - handle registered collection, of guilds/members, add/find
+#todo - handle guilds/members collections, one each, holding history of object
+#todo - handle guild/member history/audit collections, whats changed, ready for feed
+#todo - are/can collections ordered?
+
 describe "mongo backed store", ->
   describe "save and load", ->
 
@@ -13,7 +18,7 @@ describe "mongo backed store", ->
     afterEach ->
       store?.close()
 
-    it "test1", ->
+    it "test add/count db", ->
 
       someObj = 
         id: 123
@@ -31,3 +36,13 @@ describe "mongo backed store", ->
       runs ->
         expect(thatObj.id).toEqual(someObj.id)
         expect(thatObj.name).toEqual(someObj.name)
+
+      count = -1
+      runs ->
+        store.count "foo", someObj, (n) ->
+          count = n
+
+      waitsFor (-> count > -1), 1000
+
+      runs ->
+        expect(count).toEqual(1)

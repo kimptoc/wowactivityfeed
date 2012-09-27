@@ -4,7 +4,7 @@ require "./wowlookup"
 
 describe "wow armory lookup", ->
   describe "get", ->
-    it "valid", ->
+    it "valid armory lookup", ->
 
       call_result = null
 
@@ -14,7 +14,7 @@ describe "wow armory lookup", ->
         wow.get "guild", "eu", "Darkspear", "Mean Girls", (result) ->
           call_result = result
 
-      waitsFor (-> call_result != null), 1000
+      waitsFor (-> call_result != null), 3000
 
       runs ->
         expect(call_result).toBeDefined()
