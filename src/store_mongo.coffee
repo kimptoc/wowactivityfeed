@@ -10,6 +10,7 @@ wf.mongo_db = null
 class wf.StoreMongo
   mongo_server = null
   mongo_client = null
+  collection_cache = {}
 
   constructor: ->
     wf.info "StoreMongo.constructor"
@@ -66,9 +67,11 @@ class wf.StoreMongo
   
   with_collection: (collection_name, worker) ->
     @with_connection ->
+      return worker?(collection_cache[collection_name]) if collection_cache[collection_name]
       wf.mongo_db.collection collection_name, (err, coll) ->
         wf.error(err) if err
         throw err if err
+        collection_cache[collection_name] ?= coll 
         worker?(coll)
 
   with_connection: (worker) ->
