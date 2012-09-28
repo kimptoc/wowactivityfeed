@@ -12,6 +12,7 @@ class wf.WoW
   store = new wf.StoreMongo()
   wowlookup = new wf.WowLookup()
   registered = {}
+  registered_collection = "registered"
 
   get_hash: (h, key) ->
     val = h[key]
@@ -24,12 +25,20 @@ class wf.WoW
     # store?.close()
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
-    store.add "registered",
+    store.load registered_collection,
       region : region
       realm : realm
       type : type
-      name : name, ->
-        registered_handler?()
+      name : name, (doc) ->
+        if doc?
+          registered_handler?()
+        else
+          store.add registered_collection,
+              region : region
+              realm : realm
+              type : type
+              name : name, ->
+                registered_handler?()
     # h_type = @get_hash registered, type
     # h_region = @get_hash h_type, region
     # a_realm = h_region[realm]
@@ -41,11 +50,11 @@ class wf.WoW
     # registered[type][region][realm][name] = true
 
   get_registered: (registered_handler)->
-    store.load_all "registered", (results) ->
+    store.load_all registered_collection, (results) ->
       registered_handler?(results)
 
   clear_registered: (cleared_handler) ->
-    store.remove_all "registered", cleared_handler
+    store.remove_all registered_collection, cleared_handler
 
   get: (region, realm, type, name) ->
     if type == "guild" or type == "member"
