@@ -6,7 +6,6 @@ require('./init_logger')
 
 wf.mongo_db = null
 
-#crude filesystem store
 class wf.StoreMongo
   mongo_server = null
   mongo_client = null
@@ -40,10 +39,7 @@ class wf.StoreMongo
             throw err if err
             stored_handler?(count)
 
-# TODO - work out why neither route works ...
   count: (collection_name, document_key, count_handler) ->
-    # @load_all collection_name, (results) ->
-    #   count_handler?(results.length)
     @with_collection (collection_name), (coll) ->
       coll.find document_key, (err, cur) ->
         wf.error(err) if err

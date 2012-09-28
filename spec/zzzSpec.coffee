@@ -1,6 +1,8 @@
 require "./commonSpec"
 
 describe "Is this run last?", ->
-  it "finalise...", ->
-    wf.mongo_db?.close()
-    wf.info "Should be last test, Goodbye"
+  it "finalise...", (done)->
+    wf.info "========================================================="
+    wf.info "==============       TESTS END          ================="
+    wf.info "========================================================="
+    done()

@@ -37,13 +37,13 @@ class wf.WoW
           registered_handler?()
         else
           wf.debug "Not Registered #{name}"
-            store.add registered_collection,
-              region : region
-              realm : realm
-              type : type
-              name : name, ->
-                wf.debug "Now Registered #{name}"
-                registered_handler?()
+          store.add registered_collection,
+            region : region
+            realm : realm
+            type : type
+            name : name, ->
+              wf.debug "Now Registered #{name}"
+              registered_handler?()
 
   get_registered: (registered_handler)->
     store.load_all registered_collection, (results) ->

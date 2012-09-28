@@ -1,3 +1,4 @@
+should = require 'should'
 require "./commonSpec"
 
 require "./store_mongo"
@@ -20,66 +21,38 @@ describe "mongo backed store", ->
       # wf.info "Running afterEach, close StoreMongo"
       # store?.close()
 
-    it "test call remove all", ->
+    it "test call remove all", (done) ->
 
-      removed = false
+      store.remove_all "foo", ->
+        done()
 
-      runs -> 
-        store.remove_all "foo", ->
-          removed = true
-      waitsFor (-> removed ), "removed wait",1000
-      runs ->
-        expect(removed).toEqual(true) 
+    it "test add/count db", (done) ->
 
-    it "test add/count db", ->
+      store.remove_all "foo", ->
 
-      removed = false
-
-      runs -> 
-        store.remove_all "foo", ->
-          removed = true
-      waitsFor (-> removed ), "removed wait", 1000
-      runs ->
-        expect(removed).toEqual(true) 
+        someObj =
+          id: 123
+          name: "foo"
 
 
-      count = -1
-      runs ->
-        store.count "foo", someObj, (n) -> count = n
-      waitsFor (-> count > -1),"count wait", 1000
-      runs -> expect(count).toEqual(0)
+        store.count "foo", someObj, (n) ->
+          n.should.equal 0
 
-      someObj = 
-        id: 123
-        name: "foo"
+          thatObj = null
 
-      thatObj = null
+          store.add "foo",someObj, (counter)->
+            wf.debug "store complete, #{counter}"
+            counter.should.equal 1
+            store.load "foo", id: 123, (obj) ->
+              thatObj = obj
+              should.exist thatObj
+              thatObj.id.should.equal someObj.id
+              thatObj.name.should.equal someObj.name
 
-      add_count = -1
-      runs ->
-        store.add "foo",someObj, (counter)->
-          wf.debug "store complete, #{counter}"
-          add_count = counter
-          store.load "foo", id: 123, (obj) -> thatObj = obj
-      waitsFor (-> thatObj != null),"thatObj wait", 1000
-      runs ->
-        expect(thatObj).toBeDefined()
-        expect(thatObj.id).toEqual(someObj.id)
-        expect(thatObj.name).toEqual(someObj.name)
-        expect(add_count).toEqual(1)
+              store.count "foo", someObj, (n) ->
+                n.should.equal 1
 
-
-# TODO - work out why this doesnt work :(
-      # count = -1
-      # runs ->
-      #   store.count "foo", someObj, (n) -> count = n
-      # waitsFor (-> count > -1), 1000
-      # runs -> expect(count).toEqual(1)
-
-      elements_found = null
-      runs ->
-        store.load_all "foo", (matching) ->
-          elements_found = matching
-      waitsFor (-> elements_found != null),"elements_found wait", 1000
-      runs ->
-        expect(elements_found.length).toEqual(1)
+                store.load_all "foo", (matching) ->
+                  wf.debug "matching.length:#{matching.length}"
+                  matching.length.should.equal 1
+                  done()

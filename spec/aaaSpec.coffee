@@ -2,4 +2,6 @@ require "./commonSpec"
 
 describe "Is this run first?", ->
   it "init...", ->
-    wf.info "Should be first test, Hello"
+    wf.info "========================================================="
+    wf.info "==============      TESTS BEGIN         ================="
+    wf.info "========================================================="
