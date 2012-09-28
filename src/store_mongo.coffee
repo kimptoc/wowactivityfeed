@@ -16,7 +16,7 @@ class wf.StoreMongo
     mongo_server = new Mongodb.Server('127.0.0.1',27017)
 
   close: ->
-    # mongo_db?.close()
+    mongo_db?.close()
 
   remove_all: (collection_name, removed_handler) ->
     @with_collection collection_name, (coll) ->

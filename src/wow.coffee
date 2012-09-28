@@ -20,8 +20,8 @@ class wf.WoW
       h[key] = val
     return val 
 
-  close: ->
-    store?.close()
+  # close: ->
+    # store?.close()
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
     store.add "registered",

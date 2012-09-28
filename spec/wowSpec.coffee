@@ -10,8 +10,8 @@ describe "wow wrapper", ->
     beforeEach ->
       wow = new wf.WoW()
 
-    afterEach ->
-      wow?.close()
+    # afterEach ->
+      # wow?.close()
 
     it "clear wow", ->
 

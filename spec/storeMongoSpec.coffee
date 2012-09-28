@@ -16,9 +16,9 @@ describe "mongo backed store", ->
       wf.info "Running beforeEach, create StoreMongo"
       store = new wf.StoreMongo()
 
-    afterEach ->
-      wf.info "Running afterEach, close StoreMongo"
-      store?.close()
+    # afterEach ->
+      # wf.info "Running afterEach, close StoreMongo"
+      # store?.close()
 
     it "test call remove all", ->
 
