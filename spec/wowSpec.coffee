@@ -89,3 +89,19 @@ describe "wow wrapper", ->
       runs ->
         expect(registered_elements.length).toEqual(1)
 
+
+      runs ->
+        wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls2", ->
+          registered_ok = true
+      waitsFor (-> registered_ok), 1000
+      runs ->
+        expect(registered_ok).toEqual(true)
+
+      registered_elements = null
+      runs ->
+        wow.get_registered (items) ->
+          registered_elements = items
+      waitsFor (-> registered_elements != null), 1000
+      runs ->
+        expect(registered_elements.length).toEqual(2)
+

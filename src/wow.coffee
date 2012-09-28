@@ -25,29 +25,25 @@ class wf.WoW
     # store?.close()
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
+    wf.debug "Registering #{name}"
     store.load registered_collection,
       region : region
       realm : realm
       type : type
       name : name, (doc) ->
+        wf.info "ensure_registered:#{JSON.stringify(doc)}"
         if doc?
+          wf.debug "Registered already: #{name}"
           registered_handler?()
         else
-          store.add registered_collection,
+          wf.debug "Not Registered #{name}"
+            store.add registered_collection,
               region : region
               realm : realm
               type : type
               name : name, ->
+                wf.debug "Now Registered #{name}"
                 registered_handler?()
-    # h_type = @get_hash registered, type
-    # h_region = @get_hash h_type, region
-    # a_realm = h_region[realm]
-    # if ! a_realm
-    #   a_realm = []
-    #   h_region[realm] = a_realm 
-    # a_realm.push(name) if ! (name in a_realm)
-    # wf.debug "a_realm:#{JSON.stringify(a_realm)}"
-    # registered[type][region][realm][name] = true
 
   get_registered: (registered_handler)->
     store.load_all registered_collection, (results) ->
