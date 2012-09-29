@@ -62,7 +62,7 @@ class wf.WoW
     else
       result_handler(null)
 
-  armory_load: =>
+  armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     @get_registered (results_array) =>
       for item in results_array
@@ -71,6 +71,7 @@ class wf.WoW
           wf.info "Info back for #{item.name}"
           coll_name = @get_coll_name(item.type, item.region, item.realm, item.name)
           store.add coll_name, info
+          loaded_callback?(info)
     "In progress..."
 
   get_coll_name: (type, region_name, realm_name, item) ->

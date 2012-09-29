@@ -25,7 +25,9 @@ wf.app.configure ->
   wf.app.use(wf.app.router)  
   wf.app.set('port', process.env.VCAP_APP_PORT || 3000)  
   wf.app.use(express.favicon())  
-  wf.app.use(express.logger('dev'))  
+  # wf.app.use(express.logger('dev'))  
+  wf.app.use(wf.expressLogger())
+
   wf.app.use(require('stylus').middleware(__dirname + '\\..\\public'))  
   wf.app.use(express.static(path.join(__dirname + '\\..\\', 'public')))
   wf.app.wow = new wf.WoW()

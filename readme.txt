@@ -1,5 +1,6 @@
 TODO
 - store char/guild histories from armory - snapshot with datetime
+- diff db for tests versus web (-test/-dev)
 - query back to webpage
 - rss feed showing level changes for a character
 

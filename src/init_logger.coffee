@@ -17,3 +17,6 @@ wf.info = (x) ->
 
 wf.debug = (x) ->
   wf.logger.debug(x)
+
+wf.expressLogger = ->
+  log4js.connectLogger(wf.logger)
