@@ -48,6 +48,10 @@ wf.app.get '/', (req, res) ->
 wf.app.get '/armory_load', (req, res) ->
   res.send "Armory load result: #{wf.app.wow.armory_load()}"
 
+wf.app.get '/registered', (req, res) ->
+  wf.app.wow.get_registered (results) ->
+    res.send "Registered: #{JSON.stringify(results)}"
+
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     type = req.params.type
     region = req.params.region
