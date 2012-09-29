@@ -27,6 +27,13 @@ and another to run express under nodemon, so its restarted when code changes
 node_modules/.bin/nodemon js/app.js
 
 
+ON OSX
+
+start mongo - sudo port load mongodb
+run tests - bash ./node_modules/.bin/mocha js/*Spec.js
+run app - node node_modules/nodemon/nodemon js/app.js
+compile coffee - same as above
+
 
 
 LINKS
