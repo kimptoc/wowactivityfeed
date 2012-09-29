@@ -46,11 +46,15 @@ wf.app.get '/', (req, res) ->
 #    res.send 'Hello from WoW Feed2'
 
 wf.app.get '/armory_load', (req, res) ->
-  res.send "Armory load result: #{wf.app.wow.armory_load()}"
+  res.render "armory_load", res: "Processing ? items"
 
 wf.app.get '/registered', (req, res) ->
   wf.app.wow.get_registered (results) ->
-    res.send "Registered: #{JSON.stringify(results)}"
+    res.render "registered", reg: results
+
+wf.app.get '/loaded', (req, res) ->
+  wf.app.wow.get_collections (results) ->
+    res.render "loaded", colls: results
 
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     type = req.params.type

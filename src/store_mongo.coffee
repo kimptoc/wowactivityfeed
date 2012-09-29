@@ -25,6 +25,13 @@ class wf.StoreMongo
         wf.error(err) if err
         removed_handler()
 
+  get_collections: (collections_handler) ->
+    @with_connection ->
+      wf.mongo_db.collectionNames (err, results) ->
+        wf.error(err) if err
+        throw err if err
+        collections_handler(results)
+        
   add: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
       coll.insert document_object, safe:true, (err, docs) ->

@@ -51,6 +51,10 @@ class wf.WoW
     store.load_all registered_collection, (results) ->
       registered_handler?(results)
 
+  get_collections: (collections_handler) ->
+    store.get_collections (results) ->
+      collections_handler(results)
+      
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
 
