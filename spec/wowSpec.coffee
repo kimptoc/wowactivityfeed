@@ -40,3 +40,14 @@ describe "wow wrapper", ->
                 items.length.should.equal 2
                 done()
 
+    it "armory load/valid guild", (done) ->
+      wf.info "load valid"
+
+    it "armory load/invalid guild", (done) ->
+      wf.info "load valid"
+
+    it "armory load/valid member", (done) ->
+      wf.info "load valid"
+
+    it "armory load/invalid member", (done) ->
+      wf.info "load valid"

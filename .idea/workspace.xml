@@ -2,126 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\.bin\jasmine-node" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\.bin\jasmine-node.cmd" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\bin\jasmine-node" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\async-callback.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\autotest.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\cli.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\index.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\jasmine-2.0.0.rc1.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\reporter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\requirejs-runner.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\requirejs-spec-loader.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\requirejs-wrapper-template.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\lib\jasmine-node\spec-collection.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\.bin\r.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\.bin\r.js.cmd" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\README.markdown" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\env.rhino.1.2.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\jasmine-html.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\jasmine.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\jasmine.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\jline.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\ext\js.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\src\jasmine.console_reporter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\src\jasmine.junit_reporter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\src\jasmine.teamcity_reporter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\src\load_reporters.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\JUnitXmlReporterSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\console_reporter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\envjs.bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\envjs.runner.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\junit_xml_reporter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\phantomjs-testrunner.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\phantomjs.runner.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\jasmine-reporters\test\teamcity_reporter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\requirejs\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\requirejs\bin\r.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\requirejs\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\requirejs\require.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\CNAME" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\index.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\raw\underscore.psd" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\underscore-min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\underscore\underscore.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\.jshintignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\license" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\readme.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\async.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\find.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\find.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\finditsynctest.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\findittest.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\fstream.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\install_test_deps.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\lsr.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\comparison\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\foo\a\b\c\w" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\foo\a\b\z" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\foo\a\y" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\foo\x" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\symlinks\dir1\file1" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\symlinks\dir2\file2" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\dir\symlinks\file" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\endearly.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\max_depth.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\no_recurse.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\nofailemptydir.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\pauseresume.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\symlink.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\test\sync.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\node_modules\walkdir\walkdir.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\package.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\scripts\specs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec-requirejs\requirejs.spec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec-requirejs\requirejs.sut.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\AsyncSpec.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\CoffeeSpec.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\GrammarHelper.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\HelperSpec.coffee" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\SampleSpecs.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\TestSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\async-callback_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\helper_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\nested.js\NestedSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\nested\NestedSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\nested\uber-nested\UberNestedSpec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\reporter_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\spec\sample_helper.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\node_modules\jasmine-node\specs.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\kimptoc\Dropbox\dev\wowfeed\spec\mongoSpec.coffee" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/aaaSpec.coffee" afterPath="$PROJECT_DIR$/spec/aaaSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/commonSpec.coffee" afterPath="$PROJECT_DIR$/spec/commonSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/storeMongoSpec.coffee" afterPath="$PROJECT_DIR$/spec/storeMongoSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/storeSpec.coffee" afterPath="$PROJECT_DIR$/spec/storeSpec.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.txt" afterPath="$PROJECT_DIR$/readme.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/wowSpec.coffee" afterPath="$PROJECT_DIR$/spec/wowSpec.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/wowlookupSpec.coffee" afterPath="$PROJECT_DIR$/spec/wowlookupSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/zzzSpec.coffee" afterPath="$PROJECT_DIR$/spec/zzzSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store_mongo.coffee" afterPath="$PROJECT_DIR$/src/store_mongo.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow.coffee" afterPath="$PROJECT_DIR$/src/wow.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/Elvean.json" afterPath="$PROJECT_DIR$/store/Elvean.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/Kimptoc.json" afterPath="$PROJECT_DIR$/store/Kimptoc.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/meangirls.json" afterPath="$PROJECT_DIR$/store/meangirls.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wowlookup.coffee" afterPath="$PROJECT_DIR$/src/wowlookup.coffee" />
     </list>
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -143,16 +30,7 @@
       <file leaf-file-name="wow.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wow.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="42" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wowSpec.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/wowSpec.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="28" selection-start="312" selection-end="312" vertical-scroll-proportion="0.48469388">
+            <state line="64" column="16" selection-start="1685" selection-end="1685" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -161,44 +39,68 @@
       <file leaf-file-name="wowlookupSpec.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/wowlookupSpec.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="15" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+            <state line="36" column="19" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="aaaSpec.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/aaaSpec.coffee">
+      <file leaf-file-name="readme.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/readme.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="30" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
+            <state line="14" column="15" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zzzSpec.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/zzzSpec.coffee">
+      <file leaf-file-name="Mean Girls.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/store/Mean Girls.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="10" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="storeSpec.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/storeSpec.coffee">
+      <file leaf-file-name="meangirls.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/store/meangirls.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="18" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commonSpec.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/commonSpec.coffee">
+      <file leaf-file-name="app.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="7" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+            <state line="38" column="11" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wowlookup.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/wowlookup.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="24" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.6819728">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wow.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/wow.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="97" column="14" selection-start="3065" selection-end="3157" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1348864231060" expanded="true" signature="12:3496" placeholder="{...}" />
+                <marker date="1348864231060" expanded="true" signature="247:3489" placeholder="{...}" />
+                <marker date="1348864231060" expanded="true" signature="432:445" placeholder="{...}" />
+                <marker date="1348864231060" expanded="true" signature="2713:3300" placeholder="{...}" />
+                <marker date="1348864231060" expanded="true" signature="2713:3261" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -212,11 +114,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="store_mongo.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store_mongo.coffee">
+      <file leaf-file-name="wowSpec.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/wowSpec.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="28" column="28" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1348903691844" expanded="true" signature="96:1157" placeholder="{...}" />
+                <marker date="1348903691844" expanded="true" signature="125:1157" placeholder="{...}" />
+                <marker date="1348903691844" expanded="true" signature="376:492" placeholder="{...}" />
+                <marker date="1348903691844" expanded="true" signature="408:492" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -235,16 +142,20 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/js/wowSpec.js" />
-        <option value="$PROJECT_DIR$/src/wow.coffee" />
         <option value="$PROJECT_DIR$/spec/storeSpec.coffee" />
         <option value="$PROJECT_DIR$/src/store_mongo.coffee" />
         <option value="$PROJECT_DIR$/spec/commonSpec.coffee" />
         <option value="$PROJECT_DIR$/spec/storeMongoSpec.coffee" />
         <option value="$PROJECT_DIR$/js/wowlookupSpec.js" />
-        <option value="$PROJECT_DIR$/spec/wowlookupSpec.coffee" />
         <option value="$PROJECT_DIR$/spec/aaaSpec.coffee" />
         <option value="$PROJECT_DIR$/spec/zzzSpec.coffee" />
         <option value="$PROJECT_DIR$/spec/wowSpec.coffee" />
+        <option value="$PROJECT_DIR$/js/wow.js" />
+        <option value="$PROJECT_DIR$/src/app.coffee" />
+        <option value="$PROJECT_DIR$/src/wow.coffee" />
+        <option value="$PROJECT_DIR$/readme.txt" />
+        <option value="$PROJECT_DIR$/spec/wowlookupSpec.coffee" />
+        <option value="$PROJECT_DIR$/src/wowlookup.coffee" />
       </list>
     </option>
   </component>
@@ -295,6 +206,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,13 +307,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13689604" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13689604" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -456,86 +381,37 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/store_mongo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="19" selection-start="3777" selection-end="3777" vertical-scroll-proportion="3.131579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/storeSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/commonSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="48" selection-end="48" vertical-scroll-proportion="0.08388158">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/storeMongoSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.49671054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="42" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store_mongo.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/wowSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="41" selection-start="884" selection-end="884" vertical-scroll-proportion="0.8322368">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/wowlookupSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/wowlookup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/wowlookupSpec.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="15" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/aaaSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="30" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
+        <state line="6" column="30" selection-start="251" selection-end="251" vertical-scroll-proportion="0.16776316">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/commonSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="7" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+        <state line="3" column="7" selection-start="30" selection-end="30" vertical-scroll-proportion="0.08388158">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/storeSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="18" selection-start="44" selection-end="44" vertical-scroll-proportion="0.027960526">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/zzzSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="10" selection-start="312" selection-end="312" vertical-scroll-proportion="0.19572368">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store_mongo.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="5" selection-start="182" selection-end="200" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -547,23 +423,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/storeSpec.coffee">
+    <entry file="file://$PROJECT_DIR$/js/wowlookup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="18" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
+        <state line="32" column="23" selection-start="875" selection-end="875" vertical-scroll-proportion="0.5782313">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/zzzSpec.coffee">
+    <entry file="file://$PROJECT_DIR$/js/wow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
+        <state line="97" column="14" selection-start="3065" selection-end="3157" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1348864231060" expanded="true" signature="12:3496" placeholder="{...}" />
+            <marker date="1348864231060" expanded="true" signature="247:3489" placeholder="{...}" />
+            <marker date="1348864231060" expanded="true" signature="432:445" placeholder="{...}" />
+            <marker date="1348864231060" expanded="true" signature="2713:3300" placeholder="{...}" />
+            <marker date="1348864231060" expanded="true" signature="2713:3261" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="16" selection-start="1685" selection-end="1685" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="11" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/wowSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="28" selection-start="312" selection-end="312" vertical-scroll-proportion="0.48469388">
+        <state line="28" column="28" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1348903691844" expanded="true" signature="96:1157" placeholder="{...}" />
+            <marker date="1348903691844" expanded="true" signature="125:1157" placeholder="{...}" />
+            <marker date="1348903691844" expanded="true" signature="376:492" placeholder="{...}" />
+            <marker date="1348903691844" expanded="true" signature="408:492" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Mean Girls.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/meangirls.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="15" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/wowlookupSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="19" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wowlookup.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="24" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.6819728">
           <folding />
         </state>
       </provider>

@@ -1,9 +1,10 @@
 TODO
+- store char/guild histories from armory - snapshot with datetime
+- query back to webpage
 - rss feed showing level changes for a character
-- ensure uniqueness of registered entries
-- store char/guild histories - snapshot with datetime
 
 LATER
+- update registered entry with date/time of last change (ie when an update had a diff)
 - feed for guild
 - feed for char/guild achievements
 - feed for items?
@@ -11,12 +12,13 @@ LATER
 
 NOTES
 
+member or char?
 one window to compile
 coffee --compile --watch --output js/ src/ spec/
 
 another To run tests (at least on my win7 box)
 
-node node_modules/jasmine-node/bin/jasmine-node --verbose  --forceexit js/
+mocha js/*Spec.js
 
 and another to run express under nodemon, so its restarted when code changes
 

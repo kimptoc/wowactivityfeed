@@ -11,8 +11,10 @@ class wf.WoW
 
   store = new wf.StoreMongo()
   wowlookup = new wf.WowLookup()
-  registered = {}
   registered_collection = "registered"
+
+  constructor: ->
+    wf.info "WoW constructor"
 
   get_hash: (h, key) ->
     val = h[key]
@@ -52,22 +54,24 @@ class wf.WoW
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
 
-  get: (region, realm, type, name) ->
+  get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered(region, realm, type, name)
-      store.load name
+      store.load @get_coll_name(type, region, realm, name), name: name, (info) ->
+        result_handler(info)
     else
-      null
+      result_handler(null)
 
-  armory_load: ->
+  armory_load: =>
     wf.info "armory_load..."
-    for type, region of registered
-      wf.debug "Processing type #{type}"
-      for region_name, realm of region
-        wf.debug "Processing region #{region_name}"
-        for realm_name, items of realm
-          wf.debug "Processing realm #{realm_name}"
-          for item in items
-            wf.debug "Processing item #{item}"
-            wowlookup.get type, region_name, realm_name, item
-    "TBD"
+    @get_registered (results_array) =>
+      for item in results_array
+        wf.info JSON.stringify(item)
+        wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
+          wf.info "Info back for #{item.name}"
+          coll_name = @get_coll_name(item.type, item.region, item.realm, item.name)
+          store.add coll_name, info
+    "In progress..."
+
+  get_coll_name: (type, region_name, realm_name, item) ->
+    return "#{type}:#{region_name}:#{realm_name}:#{item}"
