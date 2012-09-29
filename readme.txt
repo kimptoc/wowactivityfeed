@@ -6,6 +6,7 @@ TODO
 
 LATER
 - update registered entry with date/time of last change (ie when an update had a diff)
+- track armory import requests, date/time/requesting ip
 - feed for guild
 - feed for char/guild achievements
 - feed for items?
