@@ -11,7 +11,7 @@ describe "wow wrapper", ->
     beforeEach (done)->
       wf.info "wowSpec:beforeEach"
       wow = new wf.WoW()
-      wow.clear_registered ->
+      wow.clear_all ->
         done()
 
     afterEach ->
@@ -74,3 +74,88 @@ describe "wow wrapper", ->
               wow.armory_load ->
                 callbacks += 1
                 done() if callbacks == 4
+
+    it "try store update 1", (done) ->
+      item =
+        type: "guild"
+        region: "eu"
+        realm: "wwewe"
+        name: "test"
+        lastModified: 123
+      wow.store_update item, ->
+        wow.get_history item.region,item.realm,item.type,item.name, (results) ->
+          results.length.should.equal 1 
+          done()
+
+    it "try store update 2diff", (done) ->
+      item =
+        type: "guild"
+        region: "eu"
+        realm: "wwewe"
+        name: "test"
+        lastModified: 123
+      item2 =
+        type: "guild"
+        region: "eu"
+        realm: "wwewe"
+        name: "test"
+        lastModified: 124
+      wow.store_update item, ->
+        wow.store_update item2, ->
+          wow.get_history item.region,item.realm,item.type,item.name, (results) ->
+            results.length.should.equal 2 
+            done()
+
+    it "try store update 2same", (done) ->
+      item =
+        type: "guild"
+        region: "eu"
+        realm: "wwewe"
+        name: "test"
+        lastModified: 123
+      wow.store_update item, ->
+        wow.store_update item, ->
+          wow.get_history item.region,item.realm,item.type,item.name, (results) ->
+            results.length.should.equal 1 
+            done()
+
+    it "should be no history initially", (done) ->
+      wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
+        results.length.should.equal 0
+        done()
+
+    it "save new update for valid item", (done) ->
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+        wow.armory_load ->
+          wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
+            should.exist results
+            results.length.should.equal 1
+            done()
+
+    it "save 2 updates, identical for valid item", (done)->
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+        wow.armory_load ->
+          wow.armory_load ->
+            wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
+              should.exist results
+              results.length.should.equal 1
+              done()
+    
+    it "save new update for invalid item", (done)->
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->
+        wow.armory_load ->
+          wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
+            should.exist results
+            results.length.should.equal 0
+            done()
+
+    it "save 2 updates, identical for invalid item", (done)->
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->
+        wow.armory_load ->
+          wow.armory_load ->
+            wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
+              should.exist results
+              results.length.should.equal 0
+              done()
+
+    

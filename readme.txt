@@ -5,6 +5,8 @@ TODO
 - rss feed showing level changes for a character
 
 LATER
+- count number of api calls per day, page to view them
+- store dateSaved on member/guild updates
 - update registered entry with date/time of last change (ie when an update had a diff)
 - track armory import requests, date/time/requesting ip
 - feed for guild
@@ -20,7 +22,7 @@ coffee --compile --watch --output js/ src/ spec/
 
 another To run tests (at least on my win7 box)
 
-mocha js/*Spec.js
+mocha -t 3000 js/*Spec.js
 
 and another to run express under nodemon, so its restarted when code changes
 

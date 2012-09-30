@@ -21,6 +21,23 @@ describe "mongo backed store", ->
       # wf.info "Running afterEach, close StoreMongo"
       # store?.close()
 
+    it "clear all", (done) ->
+      store.clear_all ->
+        done()
+
+    it "add item then clear all", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+
+      store.add "foo",someObj, (counter)->
+        wf.debug "store complete, #{counter}"
+        counter.should.equal 1
+        store.clear_all ->
+          store.count "foo", someObj, (n) ->
+            n.should.equal 0
+            done()
+
     it "test call remove all", (done) ->
 
       store.remove_all "foo", ->
@@ -33,7 +50,6 @@ describe "mongo backed store", ->
         someObj =
           id: 123
           name: "foo"
-
 
         store.count "foo", someObj, (n) ->
           n.should.equal 0

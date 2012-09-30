@@ -25,6 +25,11 @@ class wf.StoreMongo
         wf.error(err) if err
         removed_handler()
 
+  clear_all: (cleared_handler) ->
+    @with_connection ->
+      wf.mongo_db.dropDatabase ->
+        cleared_handler()
+
   get_collections: (collections_handler) ->
     @with_connection ->
       wf.mongo_db.collectionNames (err, results) ->
@@ -64,7 +69,7 @@ class wf.StoreMongo
   load_all: (collection_name, loaded_handler) ->
     @with_collection collection_name, (coll) ->
       coll.find().toArray (err, results) ->
-        wf.error(err) if err
+        wf.error("load_all:#{err}") if err
         throw err if err
         loaded_handler?(results)
   

@@ -55,6 +55,9 @@ class wf.WoW
     store.get_collections (results) ->
       collections_handler(results)
       
+  clear_all: (cleared_handler) ->
+    store.clear_all(cleared_handler)
+
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
 
@@ -66,6 +69,14 @@ class wf.WoW
     else
       result_handler(null)
 
+  get_history: (region, realm, type, name, result_handler) =>
+    if type == "guild" or type == "member"
+      @ensure_registered(region, realm, type, name)
+      store.load_all @get_coll_name(type, region, realm, name), (info) ->
+        result_handler(info)
+    else
+      result_handler(null)
+
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     @get_registered (results_array) =>
@@ -73,10 +84,27 @@ class wf.WoW
         wf.info JSON.stringify(item)
         wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
           wf.info "Info back for #{item.name}"
-          coll_name = @get_coll_name(item.type, item.region, item.realm, item.name)
-          store.add coll_name, info
-          loaded_callback?(info)
+          @store_update info, ->
+            loaded_callback?(info)
     "In progress..."
+
+  store_update: (info, stored_handler) => 
+    coll_name = @get_coll_name(info.type, info.region, info.realm, info.name)
+    store.load coll_name,
+      lastModified : info.lastModified
+      region : info.region
+      realm : info.realm
+      type : info.type
+      name : info.name, (doc) ->
+        wf.info "store_update:#{JSON.stringify(doc)}"
+        if doc?
+          wf.debug "Ignored as saved already: #{info.name}"
+          stored_handler?()
+        else
+          wf.debug "Not saved #{info.name}"
+          store.add coll_name, info, ->
+              wf.debug "Now saved #{info.name}"
+              stored_handler?()
 
   get_coll_name: (type, region_name, realm_name, item) ->
     return "#{type}:#{region_name}:#{realm_name}:#{item}"
