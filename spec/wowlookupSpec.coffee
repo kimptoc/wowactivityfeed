@@ -3,8 +3,8 @@ require "./commonSpec"
 
 require "./wowlookup"
 
-describe "wow armory lookup", ->
-  describe "get", ->
+describe "wow armory lookup:", ->
+  describe "get:", ->
     it "valid guild armory lookup", (done) ->
       wow = new wf.WowLookup()
       wow.get "guild", "eu", "Darkspear", "Mean Girls", (result) ->

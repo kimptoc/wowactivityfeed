@@ -23,11 +23,15 @@ class wf.StoreMongo
       wf.debug "now to remove all"
       coll.remove (err) ->
         wf.error(err) if err
+        throw err if err
         removed_handler()
 
   clear_all: (cleared_handler) ->
-    @with_connection ->
-      wf.mongo_db.dropDatabase ->
+    @with_connection (client) ->
+      client.dropDatabase (err, done_thing) ->
+        wf.error(err) if err
+        throw err if err
+        wf.debug "clear_all completed"
         cleared_handler()
 
   get_collections: (collections_handler) ->
@@ -84,12 +88,12 @@ class wf.StoreMongo
 
   with_connection: (worker) ->
     if wf.mongo_db
-      worker()
+      worker(wf.mongo_db)
     else
       new Mongodb.Db('wowfeed', mongo_server).open (err, client) ->
         wf.error(err) if err
         throw err if err
         wf.mongo_db = client
         wf.info "Connected to MongoDB"
-        worker()
+        worker(client)
 

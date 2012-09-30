@@ -3,8 +3,8 @@ require "./commonSpec"
 
 require "./store"
 
-describe "simple file store", ->
-  describe "save and load", ->
+describe "simple file store:", ->
+  describe "save and load:", ->
     it "test1", (done) ->
       store = new wf.Store
 

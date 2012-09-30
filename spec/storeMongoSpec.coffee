@@ -8,8 +8,8 @@ require "./store_mongo"
 #todo - handle guild/member history/audit collections, whats changed, ready for feed
 #todo - are/can collections ordered?
 
-describe "mongo backed store", ->
-  describe "save and load", ->
+describe "mongo backed store:", ->
+  describe "save and load:", ->
 
     store = null
 

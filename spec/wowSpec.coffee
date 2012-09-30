@@ -3,8 +3,8 @@ require "./commonSpec"
 
 require "./wow"
 
-describe "wow wrapper", ->
-  describe "register", ->
+describe "wow wrapper:", ->
+  describe "register:", ->
 
     wow = null
 
