@@ -81,7 +81,7 @@ class wf.WoW
     wf.info "armory_load..."
     @get_registered (results_array) =>
       for item in results_array
-        wf.info JSON.stringify(item)
+        wf.info "About to do Armory lookup for:#{JSON.stringify(item)}"
         wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
           wf.info "Info back for #{item.name}"
           @store_update info, ->

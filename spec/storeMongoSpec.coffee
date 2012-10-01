@@ -22,7 +22,8 @@ describe "mongo backed store:", ->
       # store?.close()
 
     it "clear all", (done) ->
-      store.clear_all ->
+      store.clear_all (was_clear_done)->
+        was_clear_done.should.equal true
         done()
 
     it "add item then clear all", (done) ->
@@ -33,7 +34,8 @@ describe "mongo backed store:", ->
       store.add "foo",someObj, (counter)->
         wf.debug "store complete, #{counter}"
         counter.should.equal 1
-        store.clear_all ->
+        store.clear_all (was_clear_done)->
+          was_clear_done.should.equal true
           store.count "foo", someObj, (n) ->
             n.should.equal 0
             done()

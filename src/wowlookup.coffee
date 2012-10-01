@@ -28,9 +28,17 @@ class wf.WowLookup
           (err,guild) ->
             if err
               wf.error(JSON.stringify(err))
-              result_handler?(error: err.message, info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
+              result_handler?(
+                type: type
+                region: region
+                realm: realm
+                name: name
+                error: err.message
+                info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
               wf.debug "wowlookup result:#{JSON.stringify(guild)}"
+              guild.type = type
+              guild.region = region
               result_handler?(guild)
       when "member"
         armory.character
@@ -41,7 +49,15 @@ class wf.WowLookup
           (err,char) ->
             if err
               wf.error(JSON.stringify(err))
-              result_handler?(error: err.message, info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
+              result_handler?(
+                type: type
+                region: region
+                realm: realm
+                name: name
+                error: err.message
+                info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
               wf.debug "wowlookup result:#{JSON.stringify(char)}"
+              char.type = type
+              char.region = region
               result_handler?(char)

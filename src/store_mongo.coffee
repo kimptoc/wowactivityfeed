@@ -28,11 +28,11 @@ class wf.StoreMongo
 
   clear_all: (cleared_handler) ->
     @with_connection (client) ->
-      client.dropDatabase (err, done_thing) ->
+      client.dropDatabase (err, was_clear_done) ->
         wf.error(err) if err
         throw err if err
-        wf.debug "clear_all completed"
-        cleared_handler()
+        wf.debug "clear_all completed:#{was_clear_done}"
+        cleared_handler(was_clear_done)
 
   get_collections: (collections_handler) ->
     @with_connection ->

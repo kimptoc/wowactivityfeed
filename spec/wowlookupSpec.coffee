@@ -18,7 +18,7 @@ describe "wow armory lookup:", ->
       wow.get "guild", "eu", "Darkspear", "Mean Girlsaaa", (result) ->
         should.exist result
         should.exist result.error
-        should.not.exist result.name
+        should.exist result.name
         done()
 
     it "valid member armory lookup", (done) ->
@@ -34,5 +34,5 @@ describe "wow armory lookup:", ->
       wow.get "member", "eu", "Darkspear", "Kimptocaaa", (result) ->
         should.exist result
         should.exist result.error
-        should.not.exist result.name
+        should.exist result.name
         done()

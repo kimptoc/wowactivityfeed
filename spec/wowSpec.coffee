@@ -146,7 +146,7 @@ describe "wow wrapper:", ->
         wow.armory_load ->
           wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
             should.exist results
-            results.length.should.equal 0
+            results.length.should.equal 1
             done()
 
     it "save 2 updates, identical for invalid item", (done)->
@@ -155,7 +155,7 @@ describe "wow wrapper:", ->
           wow.armory_load ->
             wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
               should.exist results
-              results.length.should.equal 0
+              results.length.should.equal 1
               done()
 
     

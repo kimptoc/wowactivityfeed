@@ -1,5 +1,4 @@
 TODO
-- clear all Btn on web
 - load data from file option/cli
 
 - store char/guild histories from armory - snapshot with datetime
