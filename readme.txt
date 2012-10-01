@@ -1,9 +1,10 @@
 TODO
 - load data from file option/cli
-
-- store char/guild histories from armory - snapshot with datetime
+- get latest/current
+- calculate diffs between char snapshots - store with latest image
+- webpage showing history for char, including details of each snapshot (or first 5...)
+- store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
 - diff db for tests versus web (-test/-dev)
-- query back to webpage
 - rss feed showing level changes for a character
 
 LATER

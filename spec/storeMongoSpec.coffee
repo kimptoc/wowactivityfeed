@@ -61,7 +61,7 @@ describe "mongo backed store:", ->
           store.add "foo",someObj, (counter)->
             wf.debug "store complete, #{counter}"
             counter.should.equal 1
-            store.load "foo", id: 123, (obj) ->
+            store.load "foo", id: 123, {}, (obj) ->
               thatObj = obj
               should.exist thatObj
               thatObj.id.should.equal someObj.id
@@ -74,3 +74,25 @@ describe "mongo backed store:", ->
                   wf.debug "matching.length:#{matching.length}"
                   matching.length.should.equal 1
                   done()
+
+    it "check order of results", (done) ->
+      store.remove_all "bar", ->
+        obj1 =
+          id: 123
+          name: "one"
+        obj2 = 
+          id: 123
+          name: "two"
+        store.add "bar", obj1, (counter) ->
+          # counter.should.equal 1
+          store.add "bar", obj2, (counter) ->
+            # todo - this should work...
+            # counter.should.equal 2
+            store.load "bar", id: 123, { sort: ['name', 'ascending']}, (doc)->
+              should.exist doc
+              doc.name.should.equal "one"
+              store.load "bar", id: 123, { sort: ['name', 'descending']}, (doc)->
+                should.exist doc
+                doc.name.should.equal "name"
+                done()
+

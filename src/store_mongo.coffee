@@ -63,9 +63,9 @@ class wf.StoreMongo
           wf.error(err) if err
           count_handler?(count)
 
-  load: (collection_name, document_key, loaded_handler) ->
+  load: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      coll.findOne document_key, (err, doc) ->
+      coll.findOne document_key, options, (err, doc) ->
         wf.error(err) if err
         throw err if err
         loaded_handler?(doc)
