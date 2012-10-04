@@ -28,18 +28,19 @@ class wf.StoreMongo
 
   clear_all: (cleared_handler) ->
     @with_connection (client) ->
+      wf.debug "clear_all about to drop db"
       client.dropDatabase (err, was_clear_done) ->
+        wf.debug "clear_all completed:#{was_clear_done}"
         wf.error(err) if err
         throw err if err
-        wf.debug "clear_all completed:#{was_clear_done}"
-        cleared_handler(was_clear_done)
+        cleared_handler?(was_clear_done)
 
   get_collections: (collections_handler) ->
     @with_connection ->
       wf.mongo_db.collectionNames (err, results) ->
         wf.error(err) if err
         throw err if err
-        collections_handler(results)
+        collections_handler?(results)
         
   add: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
@@ -65,10 +66,25 @@ class wf.StoreMongo
 
   load: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      coll.findOne document_key, options, (err, doc) ->
+      options = options or {}
+      options["limit"] = -1
+      options["batchSize"] = 1
+      wf.debug "options:#{JSON.stringify(options)}"
+      coll.find document_key, options, (err, cur) ->
         wf.error(err) if err
         throw err if err
-        loaded_handler?(doc)
+        if cur
+          cur.toArray (err, docs) ->
+            wf.error(err) if err
+            throw err if err
+            if docs.length >= 1
+              loaded_handler?(docs[0])
+            else
+              wf.error "Did not find any matching documents for key:#{JSON.stringify(document_key)}"
+              loaded_handler?(null)
+        else
+          wf.error "No cursor returned for key:#{JSON.stringify(document_key)}"
+          loaded_handler?(null)
 
   load_all: (collection_name, loaded_handler) ->
     @with_collection collection_name, (coll) ->
@@ -94,6 +110,6 @@ class wf.StoreMongo
         wf.error(err) if err
         throw err if err
         wf.mongo_db = client
-        wf.info "Connected to MongoDB"
+        wf.info "Connected to MongoDB:#{client}"
         worker(client)
 

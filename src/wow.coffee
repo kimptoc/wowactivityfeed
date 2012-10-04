@@ -32,7 +32,7 @@ class wf.WoW
       region : region
       realm : realm
       type : type
-      name : name, (doc) ->
+      name : name, null, (doc) ->
         wf.info "ensure_registered:#{JSON.stringify(doc)}"
         if doc?
           wf.debug "Registered already: #{name}"
@@ -95,7 +95,7 @@ class wf.WoW
       region : info.region
       realm : info.realm
       type : info.type
-      name : info.name, (doc) ->
+      name : info.name, null, (doc) ->
         wf.info "store_update:#{JSON.stringify(doc)}"
         if doc?
           wf.debug "Ignored as saved already: #{info.name}"
