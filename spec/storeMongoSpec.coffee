@@ -27,19 +27,19 @@ describe "mongo backed store:", ->
         done()
 
 #TODO - why this is not working, it used to...
-    # it "add item then clear all", (done) ->
-    #   someObj =
-    #     id: 123
-    #     name: "foo"
+    it "add item then clear all", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
 
-    #   store.add "foo",someObj, (counter)->
-    #     wf.debug "store complete, #{counter}"
-    #     counter.should.equal 1
-    #     store.clear_all (was_clear_done)->
-    #       was_clear_done.should.equal true
-    #       store.count "foo", someObj, (n) ->
-    #         n.should.equal 0
-    #         done()
+      store.add "foo",someObj, (counter)->
+        wf.debug "store complete, #{counter}"
+        counter.should.equal 1
+        store.clear_all (was_clear_done)->
+          was_clear_done.should.equal true
+          store.count "foo", someObj, (n) ->
+            n.should.equal 0
+            done()
 
     it "test call remove all", (done) ->
 
