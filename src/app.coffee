@@ -16,7 +16,7 @@ wf.app = app
 # Configuration
 
 wf.app.configure ->
-  wf.info "App Startup/Express configure:dirname=#{__dirname}"
+  wf.info "App Startup/Express configure:env=#{app.get('env')},dirname=#{__dirname}"
   wf.app.set('views', __dirname + '/../views')  
   wf.app.set('view engine', 'jade')  
   wf.app.engine('jade', require('jade').__express)
@@ -30,14 +30,26 @@ wf.app.configure ->
 
   wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
-  wf.app.wow = new wf.WoW()
 
 
 wf.app.configure 'development', ->
+  wf.info "Express app.configure/development"
+  wf.mongo_info = 
+      "hostname":"localhost"
+      "port":27017
+      "username":""
+      "password":""
+      "name":""
+      "db":"db"
   wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))   
+  wf.app.wow = new wf.WoW()
   
 wf.app.configure 'production', ->
+  wf.info "Express app.configure/production"
+  env = JSON.parse(process.env.VCAP_SERVICES)
+  wf.mongo_info = env['mongodb-1.8'][0]['credentials']
   wf.app.use(express.errorHandler())   
+  wf.app.wow = new wf.WoW()
 
 # Routes
 

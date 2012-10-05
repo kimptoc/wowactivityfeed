@@ -46,6 +46,14 @@ describe "wow wrapper:", ->
         wow.armory_load ->
           done()
 
+    it "armory load/valid guild/get", (done) ->
+      wf.info "load valid guild"
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+        wow.armory_load ->
+          wow.get "eu", "Darkspear", "guild", "Mean Girls", (doc)->
+            should.exist doc
+            done()
+
     it "armory load/invalid guild", (done) ->
       wf.info "load invalid guild"
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->

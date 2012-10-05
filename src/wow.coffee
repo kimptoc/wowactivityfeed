@@ -64,7 +64,7 @@ class wf.WoW
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered(region, realm, type, name)
-      store.load @get_coll_name(type, region, realm, name), name: name, {sort: ["lastModified", 1]}, (info) ->
+      store.load @get_coll_name(type, region, realm, name), name: name, {sort: {"lastModified": 1}}, (info) ->
         result_handler(info)
     else
       result_handler(null)

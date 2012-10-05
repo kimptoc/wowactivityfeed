@@ -44,6 +44,8 @@ compile coffee - same as above
 
 LINKS
 
+html2jade tool - https://github.com/donpark/html2jade
+
 heroku deploy
 http://shapeshed.com/creating-a-basic-site-with-node-and-express/
 

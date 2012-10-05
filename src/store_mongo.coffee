@@ -13,7 +13,6 @@ class wf.StoreMongo
 
   constructor: ->
     wf.info "StoreMongo.constructor"
-    mongo_server = new Mongodb.Server('127.0.0.1',27017)
 
   close: ->
     mongo_db?.close()
@@ -106,6 +105,7 @@ class wf.StoreMongo
     if wf.mongo_db
       worker(wf.mongo_db)
     else
+      mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)
       new Mongodb.Db('wowfeed', mongo_server).open (err, client) ->
         wf.error(err) if err
         throw err if err
