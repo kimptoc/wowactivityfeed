@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h2 Registered
-  hr
-  if reg
-    ul
-    each i in reg
-      li #{i.name} (#{i.type}, #{i.region}, #{i.realm})
-  else
-    h3 Nothing registered yet!
-  hr
-  #{JSON.stringify(reg)} 
+  .container
+    h3.bordered Registered
+    hr
+    if reg
+      ul
+      each i in reg
+        li #{i.name} (#{i.type}, #{i.region}, #{i.realm})
+    else
+      h3 Nothing registered yet!
+    hr
+    #{JSON.stringify(reg)} 

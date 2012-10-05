@@ -28,8 +28,8 @@ wf.app.configure ->
   # wf.app.use(express.logger('dev'))  
   wf.app.use(wf.expressLogger())
 
-  wf.app.use(require('stylus').middleware(__dirname + '\\..\\public'))  
-  wf.app.use(express.static(path.join(__dirname + '\\..\\', 'public')))
+  wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
+  wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.app.wow = new wf.WoW()
 
 
@@ -73,7 +73,7 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
       #wf.debug wowthing
       res.render req.params.type, p: req.params, w: wowthing
     else
-      res.send "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
+      res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"

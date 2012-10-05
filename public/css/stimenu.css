@@ -1,0 +1,40 @@
+/*Sliding Text and Icon Menu Style*/
+.sti-menu{
+	position:relative; overflow:hidden;
+}
+.sti-menu li{
+	float:left;
+}
+.sti-menu li a{
+	display:block;
+	overflow:hidden;
+	background:#4d4e4e;
+	text-align:center;
+	height:100%;
+	width:100%;
+	position:relative;
+}
+.sti-menu li a h2{
+	color:#2fc29e;
+	font-family: 'YanoneKaffeesatzRegular'; 
+	font-weight:normal;
+	text-transform:uppercase;
+	position:absolute;
+	text-align:center;
+	width:100%;
+	margin:0;
+}
+.sti-menu li a h3{	
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:12px;
+	text-align:left;
+	font-style:italic;
+	color: #2fc29e;
+	position:absolute;	
+}
+.sti-icon{
+	position:absolute;
+	background-position:top left;
+	background-repeat:no-repeat;
+	background-color:transparent;	
+}

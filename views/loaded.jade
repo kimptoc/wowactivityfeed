@@ -1,11 +1,12 @@
 extends layout
 
 block content
-  h2 Loaded
-  hr
-  if colls
-    ul
-    each c in colls
-      li #{c.name}
-  hr
-  #{JSON.stringify(colls)}
+  .container
+    h3.bordered Loaded
+    hr
+    if colls
+      ul
+      each c in colls
+        li #{c.name}
+    hr
+    #{JSON.stringify(colls)}

@@ -1,5 +1,63 @@
 extends layout
 
 block content
-  h1 Warcraft Activity Feed
-  See what your guild/character is doing...
+    // Start Header Slider
+    .top_slider
+      #top_slider.camera_wrap.camera_azure_skin
+        div(data-thumb='images/top_slider/slider_image1.jpg', data-src='images/top_slider/slider_image1.jpg')
+          .camera_caption.fadeFromBottom
+        div(data-thumb='images/top_slider/slider_image2.jpg', data-src='images/top_slider/slider_image2.jpg')
+          .camera_caption.fadeFromBottom
+        div(data-thumb='images/top_slider/slider_image3.jpg', data-src='images/top_slider/slider_image3.jpg')
+          .camera_caption.fadeFromBottom
+      // /sider
+      .clear
+        // ClearFix
+    // END Header Slider
+    // Start Container
+    .container
+      h3.bordered World of Warcraft Activity Feed
+      .columns.sixteen.arial_narrow16.txt_center.margin_bot20
+        | This site provides an RSS feed of activity for your character and/or guild.
+        br
+        | Still under construction...
+      .clear
+        // ClearFix
+      ul#sti-menu.sti-menu
+        li(data-hovercolor='#4d4e4e')
+          a(href='#')
+            h2.sti-item(data-type='mText') Web Design
+            h3.sti-item(data-type='sText')
+              | There are many variations of passages of Lorem Ipsum available, but the majority have
+            span.sti-icon.sti-icon-design.sti-item(data-type='icon')
+        li(data-hovercolor='#4d4e4e')
+          a(href='#')
+            h2.sti-item(data-type='mText') E-commerce
+            h3.sti-item(data-type='sText')
+              | There are many variations of passages of Lorem Ipsum available, but the majority have
+            span.sti-icon.sti-icon-commerce.sti-item(data-type='icon')
+        li(data-hovercolor='#4d4e4e')
+          a(href='#')
+            h2.sti-item(data-type='mText') Online Marketing
+            h3.sti-item(data-type='sText')
+              | There are many variations of passages of Lorem Ipsum available, but the majority have
+            span.sti-icon.sti-icon-marketing.sti-item(data-type='icon')
+        li(data-hovercolor='#4d4e4e')
+          a(href='#')
+            h2.sti-item(data-type='mText') Print & identity
+            h3.sti-item(data-type='sText')
+              | There are many variations of passages of Lorem Ipsum available, but the majority have
+            span.sti-icon.sti-icon-print.sti-item(data-type='icon')
+      h3.bordered What our clients say
+      .columns.sixteen.txt_center
+        p
+          | "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+          br
+          | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          br
+          | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        a(href='#') John Smith
+      .clear
+        // ClearFix
+    // End Container
+

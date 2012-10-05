@@ -1,0 +1,368 @@
+/*
+* Skeleton V1.1
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 8/17/2011
+*/
+
+
+/* Table of Content
+==================================================
+	#Reset & Basics
+	#Basic Styles
+	#Site Styles
+	#Typography
+	#Links
+	#Lists
+	#Images
+	#Buttons
+	#Tabs
+	#Forms
+	#Misc */
+
+
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline; }
+	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+		display: block; }
+	body {
+		line-height: 1; height:100% }
+	ol, ul {
+		list-style: none; }
+	blockquote, q {
+		quotes: none; }
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none; }
+	table {
+		border-collapse: collapse;
+		border-spacing: 0; }
+
+
+/* #Basic Styles
+================================================== */
+	body {
+		background:#fcfcf9 url(../images/bg_main.png) repeat;
+		font: 12px/21px Arial, Helvetica, sans-serif;
+		color: #ffffff;
+		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+		-webkit-text-size-adjust: 100%;
+ }
+	
+
+/* #Typography
+================================================== */
+	h1, h2, h3, h4, h5 {
+		color: #ffffff;
+		font-family: "YanoneKaffeesatzThin";
+		font-weight: normal; text-transform:uppercase}
+	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+	h1 { font-size: 46px; line-height: 50px; margin-bottom: 14px;}
+	h2 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
+	h3 { font-size: 26px; line-height: 34px; margin-bottom: 8px; }
+	h4 { font-size: 21px; line-height: 30px; margin: 0 0 15px 0;}
+	h5 { font-size: 18px; line-height: 20px; margin:0 0 15px 0}
+	h6 { font-size: 14px; line-height: 16px; font-family:Arial, Helvetica, sans-serif; font-weight:normal; margin-bottom:10px; color:#3d3c3c}
+	.subheader { color: #777; }
+	.aside h4 { color:#a8a8a8;}
+
+	p { margin: 0 0 18px 0; }
+	p img { margin: 0; }
+	p.lead { font-size: 21px; line-height: 27px; color: #777;  }
+
+	em { font-style: italic; }
+	strong { font-weight: bold;}
+	small { font-size: 80%; }
+	.txt_left { text-align:left}
+	.txt_center { text-align:center}
+	.txt_right { text-align:right}
+	.txt_justify { text-align:justify}
+	
+	h3.bordered { line-height:30px; padding:14px 0; font-size:26px; text-align:center; border-top:#2fc29e 3px double; border-bottom:#2fc29e 3px double; text-transform:uppercase; margin:0 10px 20px 10px}
+	.arial_narrow16 { font-family:'ArialNarrow', Arial, Helvetica, sans-serif; font-size:16px; line-height:26px}
+	
+/*	Blockquotes  */
+	blockquote, blockquote p { font-size: 17px; line-height: 24px; color: #777; font-style: italic; }
+	blockquote { margin: 0 0 20px; padding: 9px 20px 0 19px; border-left: 1px solid #ddd; }
+	blockquote cite { display: block; font-size: 12px; color: #555; }
+	blockquote cite:before { content: "\2014 \0020"; }
+	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
+
+	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
+
+
+/* #Links
+================================================== */
+	a, a:visited { color: #2fc29e; text-decoration: none; outline: 0; }
+	a:hover, a:focus { color: #2fc29e; text-decoration:underline }
+	p a, p a:visited { line-height: inherit; }
+
+	a.readmore_news { color:#68aebe; font-size:12px; line-height:14px; display: block; background:url(../images/arrow_readmore.png) no-repeat right center; height:16px; line-height:16px;text-decoration:none; margin:10px 0 10px 0; padding-right:30px; width:auto; float:left}
+	a.readmore_news:hover { text-decoration:underline}
+	
+	a.more_link { background:url(../images/bg_link_flag.png) right top no-repeat; padding:0 22px 0 0px; display:block; height:33px; overflow:hidden; float:left}
+	a.more_link span { color:#fefefe; font-size:20px; line-height:33px; background:#2fc29e; font-family:'YanoneKaffeesatzThin'; text-align:center; text-transform:uppercase; text-decoration:none; display:block; padding:0 20px}
+
+/* #Lists
+================================================== */
+	ul, ol { margin-bottom: 20px; }
+	ul { list-style: none outside; }
+	ol { list-style: decimal; }
+	ol, ul.square, ul.circle, ul.disc { margin-left: 30px; }
+	ul.square { list-style: square outside; }
+	ul.circle { list-style: circle outside; }
+	ul.disc { list-style: disc outside; }
+	ul ul, ul ol,
+	ol ol, ol ul { margin: 4px 0 5px 30px; font-size: 90%;  }
+	ul ul li, ul ol li,
+	ol ol li, ol ul li { margin-bottom: 6px; }
+	li { line-height: 18px; margin-bottom: 12px; }
+	ul.large li { line-height: 21px; }
+	li p { line-height: 21px; }
+
+	ul.featured_images { margin:0; padding:0; list-style:none; overflow:hidden}
+	ul.featured_images li { margin:0; padding:0px 0 0 20px; border:none; float:left}
+	ul.featured_images li:first-child { padding:0; border:none}
+	
+	ul.marked1 { list-style:none; margin:0; padding:0;}
+	ul.marked1 li { margin:0; padding:0 0 0 14px; background:url(../images/marker_arrow.png) no-repeat left 8px; line-height:21px;}
+	
+	ul.list_news { margin:0; padding:0; list-style:none;}
+	ul.list_news li { margin:0; padding:10px 0; border-top:#ebebeb 1px solid;}
+	ul.list_news li:first-child { padding-top:0; border:none}
+	ul.list_news li span { color:#000000; display:block; padding:0 0 5px 0}
+
+/* #Images
+================================================== */
+
+	img.scale-with-grid {
+		max-width: 100%;
+		height: auto; 
+		margin-bottom:15px
+		}
+	.aligned_left { margin:0 10px 5px 0; float:left}
+	.aligned_right { margin:0 0px 5px 10px;}
+	.aligned_center { margin:0 auto 10px auto; align:middle}
+	.pic_partner { margin-bottom:0px; border:#e5e5e5 3px solid;}
+
+/* #Buttons
+================================================== */
+
+	/*.button,
+	button,
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] {
+	  background: #68aebe;
+	  padding: 5px 10px;
+	  -moz-border-radius: 3px;
+	  -webkit-border-radius: 3px;
+	  border-radius: 3px;
+	  color: #ffffff;
+	  display: inline-block;
+	  font-size: 14px;
+	  line-height:18px;
+	  font-weight:normal;
+	  text-decoration: none;
+	  cursor: pointer;
+	  margin-bottom: 20px;
+	  font-family:Arial, Helvetica, sans-serif;
+	  border:none
+	  }
+	.btn_send { width:80px}
+	.button:hover,
+	button:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover,
+	input[type="button"]:hover {
+}
+
+	.button:active,
+	button:active,
+	input[type="submit"]:active,
+	input[type="reset"]:active,
+	input[type="button"]:active {
+	}
+
+	.button.full-width,
+	button.full-width,
+	input[type="submit"].full-width,
+	input[type="reset"].full-width,
+	input[type="button"].full-width {
+		width: 100%;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		text-align: center; }
+*/
+	/* Fix for odd Mozilla border & padding issues */
+	button::-moz-focus-inner,
+	input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+	}
+
+
+/* #Tabs (activate in tabs.js)
+================================================== */
+	ul.tabs {
+		display: block;
+		margin: 0 0 20px 0;
+		padding: 0;
+		border-bottom: solid 1px #ddd; }
+	ul.tabs li {
+		display: block;
+		width: auto;
+		height: 30px;
+		padding: 0;
+		float: left;
+		margin-bottom: 0; }
+	ul.tabs li a {
+		display: block;
+		text-decoration: none;
+		width: auto;
+		height: 29px;
+		padding: 0px 20px;
+		line-height: 30px;
+		border: solid 1px #ddd;
+		border-width: 1px 1px 0 0;
+		margin: 0;
+		background: #f5f5f5;
+		font-size: 13px; }
+	ul.tabs li a.active {
+		background: #fff;
+		height: 30px;
+		position: relative;
+		top: -4px;
+		padding-top: 4px;
+		border-left-width: 1px;
+		margin: 0 0 0 -1px;
+		color: #111;
+		-moz-border-radius-topleft: 2px;
+		-webkit-border-top-left-radius: 2px;
+		border-top-left-radius: 2px;
+		-moz-border-radius-topright: 2px;
+		-webkit-border-top-right-radius: 2px;
+		border-top-right-radius: 2px; }
+	ul.tabs li:first-child a.active {
+		margin-left: 0; }
+	ul.tabs li:first-child a {
+		border-width: 1px 1px 0 1px;
+		-moz-border-radius-topleft: 2px;
+		-webkit-border-top-left-radius: 2px;
+		border-top-left-radius: 2px; }
+	ul.tabs li:last-child a {
+		-moz-border-radius-topright: 2px;
+		-webkit-border-top-right-radius: 2px;
+		border-top-right-radius: 2px; }
+
+	ul.tabs-content { margin: 0; display: block; }
+	ul.tabs-content > li { display:none; }
+	ul.tabs-content > li.active { display: block; }
+
+	/* Clearfixing tabs for beautiful stacking */
+	ul.tabs:before,
+	ul.tabs:after {
+	  content: '\0020';
+	  display: block;
+	  overflow: hidden;
+	  visibility: hidden;
+	  width: 0;
+	  height: 0; }
+	ul.tabs:after {
+	  clear: both; }
+	ul.tabs {
+	  zoom: 1; }
+
+
+/* #Forms
+================================================== */
+
+	form {
+		/*margin-bottom: 20px;*/
+		}
+	fieldset {
+		margin-bottom: 20px; }
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea,
+	select {
+		display:block; 
+		background:#383838; border:#2c2c2c 1px solid; border-radius:1px;
+		 padding:7px 9px; margin:0; line-height:16px; color:#ffffff; font-size:12px; font-style:normal; width:90%; height:17px;
+		 margin:0 0 11px 0; font-family:Arial, Helvetica, sans-serif
+		}
+	select {
+		padding: 0; }
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
+		/*border: 1px solid #aaa;
+ 		color: #444;
+ 		-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
+		box-shadow:  0 0 3px rgba(0,0,0,.2); */
+	}
+	textarea {
+		height: 175px; width:90%; resize:none; font-family:Arial, Helvetica, sans-serif; margin-bottom:25px}
+	label,
+	legend {
+		display: block;
+		font-weight: bold;
+		font-size: 13px;  }
+	select {
+		width: 220px; }
+	input[type="checkbox"] {
+		display: inline; }
+	label span,
+	legend span {
+		font-weight: normal;
+		font-size: 13px;
+		color: #444; }
+	.btn_clear { background:url(../images/btn_clear.png) no-repeat; width:99px; height:33px; border:none; cursor:pointer; margin:0}
+	.btn_send { background:url(../images/btn_send.png) no-repeat; width:100px; height:33px; margin:0 0 0 21px; border:none; cursor:pointer}
+	
+/* #Misc
+================================================== */
+	.remove-bottom { margin-bottom: 0 !important; }
+	.half-bottom { margin-bottom: 10px !important; }
+	.add-bottom { margin-bottom: 20px !important; }
+	
+.fleft { float:left}
+.fright { float:right}
+
+.offset-one-divider { background:url(../images/sep_cont1.png) repeat-y 20px 0}
+
+.map { width:100%; margin-bottom:25px}
+
+.overflow { overflow:hidden}
+.margin_bot20 { margin-bottom:20px!important}
+
+
+/*Filter*/
+.d-filter { float:right; display:block; padding-bottom:5px}
+ul.filter_list { overflow:hidden; list-style:none; margin:0; padding:0 10px 0 0 }
+ul.filter_list li { float:left; margin:0; padding:0 0 10px 35px; }
+ul.filter_list li a { color:#ffffff; font-size:20px; line-height:22px; font-family:'YanoneKaffeesatzThin'; text-decoration:none}
+ul.filter_list li a:hover {text-decoration:underline}
+ul.filter_list li.act a {text-decoration:underline}
+
+ul.portfolio { list-style:none; margin:0; padding:0}
+ul.portfolio li { margin:0 10px 20px 10px; position:relative; width:220px; height:292px; overflow:hidden; float:left; padding:0}
+ul.portfolio li img { border:#ffffff 2px solid}
+ul.portfolio li .portfolio_overlay { background:url(../images/bg_hovered.png) repeat; width:216px; height:288px; position:absolute; left:2px; top:2px}
+ul.portfolio li .portfolio_overlay .zoom { background:url(../images/bg_zoom.png) no-repeat center; width:105px; height:105px; top:86px; left:58px; position:absolute}
+ul.portfolio li .portfolio_overlay .portfolio_bar { background:url(../images/bg_hovered_bar.png) repeat; height:26px; bottom:0px; left:0px; width:206px; position:absolute; padding:0 5px}
+ul.portfolio li .portfolio_overlay .portfolio_bar .visit { float:left; color:#fefefe; background:url(../images/bg_hover_arrow.png) no-repeat right center; display:block; padding:0 7px 0 0; margin:3px 0 0 0}
+ul.portfolio li .portfolio_overlay .portfolio_bar .details { float:right; color:#fefefe; background:url(../images/bg_hover_arrow.png) no-repeat right center; display:block; padding:0 7px 0 0; margin:3px 0 0 0}
