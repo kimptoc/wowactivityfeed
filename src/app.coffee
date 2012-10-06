@@ -40,7 +40,7 @@ wf.app.configure 'development', ->
       "username":""
       "password":""
       "name":""
-      "db":"db"
+      "db":"wowfeed"
   wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))   
   wf.app.wow = new wf.WoW()
   
@@ -80,11 +80,11 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   region = req.params.region
   realm = req.params.realm
   name = req.params.name
-  wf.app.wow.get region, realm, type, name, (wowthing) ->
+  wf.app.wow.get_history region, realm, type, name, (wowthings) ->
     # wf.debug JSON.stringify(wf.app.wow.get_registered())
-    if wowthing
+    if wowthings and wowthings.length > 0
       #wf.debug wowthing
-      res.render req.params.type, p: req.params, w: wowthing
+      res.render req.params.type, p: req.params, w: wowthings[0]
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 

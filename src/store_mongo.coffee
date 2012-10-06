@@ -106,7 +106,7 @@ class wf.StoreMongo
       worker(wf.mongo_db)
     else
       mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)
-      new Mongodb.Db('wowfeed', mongo_server).open (err, client) ->
+      new Mongodb.Db(wf.mongo_info.db, mongo_server).open (err, client) ->
         wf.error(err) if err
         throw err if err
         wf.mongo_db = client

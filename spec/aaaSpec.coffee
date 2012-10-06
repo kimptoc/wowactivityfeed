@@ -12,4 +12,4 @@ describe "Is this run first?", ->
       "username":""
       "password":""
       "name":""
-      "db":"db"
+      "db":"wowfeed-test"
