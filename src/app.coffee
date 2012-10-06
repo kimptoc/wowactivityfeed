@@ -71,6 +71,7 @@ wf.app.get '/registered', (req, res) ->
 wf.app.get '/loaded', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.get_collections (results) ->
+    #TODO - get latest entry in each, only feed collections
     res.render "loaded", colls: results
 
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->

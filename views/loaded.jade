@@ -7,6 +7,7 @@ block content
     if colls
       ul
       each c in colls
-        li #{c.name}
+        li
+          a(href='/view/#{c.type}/#{c.region}/#{c.realm}/#{c.name}') #{c.name} (#{c.type}, #{c.region}, #{c.realm})
     hr
     #{JSON.stringify(colls)}

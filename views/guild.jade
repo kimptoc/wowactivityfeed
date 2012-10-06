@@ -3,12 +3,13 @@ extends layout
 block content
   .container
     h3.bordered #{p.region} / #{p.realm} / guild: #{w.name}
-    hr
-    if w.members
-      each char in w.members
-        a(href='/view/member/#{p.region}/#{p.realm}/#{char.character.name}')= char.character.name
-        &nbsp;
-    else
-      h3 No members found
-    hr
-    #{JSON.stringify(w)} 
+    .columns.sixteen.arial_narrow16.txt_center.margin_bot20
+      if w.members
+        each char in w.members
+          span(style="float:left")
+            a(href='/view/member/#{p.region}/#{p.realm}/#{char.character.name}')= char.character.name
+            &nbsp;
+      else
+        h3 No members found
+      hr
+      #{JSON.stringify(w)} 

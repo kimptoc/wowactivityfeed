@@ -1,11 +1,19 @@
 TODO
-- load data from file option/cli
+- web view guild/member details/history
 - get latest/current
 - calculate diffs between char snapshots - store with latest image
 - webpage showing history for char, including details of each snapshot (or first 5...)
 - store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
 - diff db for tests versus web (-test/-dev)
 - rss feed showing level changes for a character
+
+- in armory load, union registered/loaded items and query armory for them
+- or just drive from registered... what about guild members, register them? or do extra loads?
+
+- uploads via node-cron
+  https://github.com/ncb000gt/node-cron/
+
+- load data from file option/cli ??
 
 LATER
 - count number of api calls per day, page to view them

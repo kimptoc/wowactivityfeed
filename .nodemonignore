@@ -3,3 +3,4 @@ src/*.coffee
 store/*
 logs/*
 tmp/*
+readme.txt
