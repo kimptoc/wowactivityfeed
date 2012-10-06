@@ -81,7 +81,7 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   realm = req.params.realm
   name = req.params.name
   wf.app.wow.get region, realm, type, name, (wowthing) ->
-    wf.debug JSON.stringify(wf.app.wow.get_registered())
+    # wf.debug JSON.stringify(wf.app.wow.get_registered())
     if wowthing
       #wf.debug wowthing
       res.render req.params.type, p: req.params, w: wowthing
