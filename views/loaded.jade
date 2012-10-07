@@ -8,6 +8,6 @@ block content
       ul
       each c in colls
         li
-          a(href='/view/#{c.type}/#{c.region}/#{c.realm}/#{c.name}') #{c.name} (#{c.type}, #{c.region}, #{c.realm})
+          a(href='/view_named/#{c}') #{c}
     hr
     #{JSON.stringify(colls)}

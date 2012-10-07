@@ -3,4 +3,5 @@ extends layout
 block content
   .container
     h3.bordered #{p.region} / #{p.realm} / member: #{w.name}, level: #{w.level}
+    div History available: #{h.length}
     #{JSON.stringify(w)} 

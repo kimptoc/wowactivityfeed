@@ -52,7 +52,12 @@ describe "wow wrapper:", ->
         wow.armory_load ->
           wow.get "eu", "Darkspear", "guild", "Mean Girls", (doc)->
             should.exist doc
-            done()
+            wow.get_named "wowitem-guild:eu:Darkspear:Mean Girls", (doc) ->
+              should.exist doc
+              wow.get_history_named "wowitem-guild:eu:Darkspear:Mean Girls", (docs) ->
+                should.exist docs
+                docs.length.should.equal 1
+                done()
 
     it "armory load/invalid guild", (done) ->
       wf.info "load invalid guild"

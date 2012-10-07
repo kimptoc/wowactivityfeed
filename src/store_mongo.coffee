@@ -34,6 +34,19 @@ class wf.StoreMongo
         throw err if err
         cleared_handler?(was_clear_done)
 
+  get_loaded: (loaded_handler) ->
+    @with_connection ->
+      wf.mongo_db.collectionNames namesOnly:true, (err, results) ->
+        wf.error(err) if err
+        throw err if err
+        wowthings = results.filter (thing) ->
+          wf.debug "thing:#{JSON.stringify(thing)}"
+          thing.indexOf("wowitem") >= 0
+        wowthings = wowthings.map (thing) ->
+          thing.substring(thing.indexOf(".")+1)
+        loaded_handler?(wowthings)
+
+
   get_collections: (collections_handler) ->
     @with_connection ->
       wf.mongo_db.collectionNames (err, results) ->
@@ -68,7 +81,7 @@ class wf.StoreMongo
       options = options or {}
       options["limit"] = -1
       options["batchSize"] = 1
-      wf.debug "options:#{JSON.stringify(options)}"
+      wf.debug "load:coll:#{collection_name}, key:#{JSON.stringify(document_key)}, options:#{JSON.stringify(options)}"
       coll.find document_key, options, (err, cur) ->
         wf.error(err) if err
         throw err if err

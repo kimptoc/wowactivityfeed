@@ -1,4 +1,5 @@
 TODO
+- get guild info with members (doesnt seem to come at the mo)
 - web view guild/member details/history
 - get latest/current
 - calculate diffs between char snapshots - store with latest image

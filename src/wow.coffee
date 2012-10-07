@@ -51,10 +51,12 @@ class wf.WoW
     store.load_all registered_collection, (results) ->
       registered_handler?(results)
 
+  get_loaded: (loaded_handler) ->
+    store.get_loaded(loaded_handler)
+
   get_collections: (collections_handler) ->
-    store.get_collections (results) ->
-      collections_handler(results)
-      
+    store.get_collections (collections_handler)
+
   clear_all: (cleared_handler) ->
     store.clear_all(cleared_handler)
 
@@ -68,6 +70,13 @@ class wf.WoW
         result_handler(info)
     else
       result_handler(null)
+
+  get_named: (coll_name, result_handler) ->
+    store.load coll_name, {}, {sort: {"lastModified": 1}}, (info) ->
+      result_handler(info)
+
+  get_history_named: (coll_name, result_handler) ->
+    store.load_all coll_name, result_handler
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
@@ -107,4 +116,4 @@ class wf.WoW
               stored_handler?()
 
   get_coll_name: (type, region_name, realm_name, item) ->
-    return "#{type}:#{region_name}:#{realm_name}:#{item}"
+    return "wowitem-#{type}:#{region_name}:#{realm_name}:#{item}"

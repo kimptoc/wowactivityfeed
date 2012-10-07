@@ -70,13 +70,25 @@ wf.app.get '/registered', (req, res) ->
 
 wf.app.get '/loaded', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
-  wf.app.wow.get_collections (results) ->
+  wf.app.wow.get_loaded (results) ->
     #TODO - get latest entry in each, only feed collections
     res.render "loaded", colls: results
 
-wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
+wf.app.get '/view_named/:coll_name', (req, res) ->
+  wf.info "get #{JSON.stringify(req.route)}"
+  wf.app.wow.get_history_named req.params.coll_name, (wowthings) ->
+    wf.debug JSON.stringify(wowthings)
+    type = req.params.coll_name.split('-')[1].split(':')[0]
+    if wowthings and wowthings.length > 0
+      #wf.debug wowthing
+      res.render type, p: req.params, w: wowthings[0], h: wowthings
+    else
+      res.render "message", msg: "Not found - #{req.params.coll_name}"
+
+handle_view = (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   type = req.params.type
+  type = 'member' if type = "character"
   region = req.params.region
   realm = req.params.realm
   name = req.params.name
@@ -84,9 +96,16 @@ wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
     # wf.debug JSON.stringify(wf.app.wow.get_registered())
     if wowthings and wowthings.length > 0
       #wf.debug wowthing
-      res.render req.params.type, p: req.params, w: wowthings[0]
+      res.render req.params.type, p: req.params, w: wowthings[0], h: wowthings
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
+
+wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
+  handle_view(req, res)
+  
+wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
+  handle_view(req, res)
+
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"

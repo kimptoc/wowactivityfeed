@@ -2,7 +2,8 @@ extends layout
 
 block content
   .container
-    h3.bordered #{p.region} / #{p.realm} / guild: #{w.name}
+    h3.bordered #{p.region} / #{p.realm} / guild: #{w.name} / members: #{w.members.length}
+    div History available: #{h.length}
     .columns.sixteen.arial_narrow16.txt_center.margin_bot20
       if w.members
         each char in w.members
