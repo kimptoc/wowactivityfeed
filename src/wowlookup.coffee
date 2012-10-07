@@ -24,7 +24,7 @@ class wf.WowLookup
           region: region
           realm: realm
           name: name
-          fields: ["members","achievements","news"]
+          fields: ["members","achievements","news","challenge"]
           (err,guild) ->
             if err
               wf.error(JSON.stringify(err))
@@ -45,7 +45,7 @@ class wf.WowLookup
           region: region
           realm: realm
           name: name
-          fields: ["achievements"]
+          fields: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
           (err,char) ->
             if err
               wf.error(JSON.stringify(err))

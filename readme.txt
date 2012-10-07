@@ -17,6 +17,8 @@ TODO
 - load data from file option/cli ??
 
 LATER
+- track realm status changes: eg
+  "http://us.battle.net/api/wow/realm/status?realms=Medivh,Blackrock"
 - count number of api calls per day, page to view them
 - store dateSaved on member/guild updates
 - update registered entry with date/time of last change (ie when an update had a diff)
@@ -27,6 +29,10 @@ LATER
 - feed for profession levels?
 
 NOTES
+
+- http://www.mongodb.org/display/DOCS/Admin+UIs
+- mongo db browser/osx - http://mongohub.todayclose.com/download
+- for test guild/members - http://www.guildox.com/go/g.asp
 
 member or char?
 one window to compile
