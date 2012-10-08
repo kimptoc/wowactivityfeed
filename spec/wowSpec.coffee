@@ -40,14 +40,17 @@ describe "wow wrapper:", ->
                 items.length.should.equal 2
                 done()
 
-    it "armory load/valid guild", (done) ->
+    it "armory load valid guild", (done) ->
       wf.info "load valid guild"
+      callbacks = 0
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
-          done()
+          callbacks += 1
+          done() if callbacks == 29
 
     it "armory load/valid guild/get", (done) ->
       wf.info "load valid guild"
+      first_pass = true
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
           wow.get "eu", "Darkspear", "guild", "Mean Girls", (doc)->
@@ -57,7 +60,9 @@ describe "wow wrapper:", ->
               wow.get_history_named "wowitem-guild:eu:Darkspear:Mean Girls", (docs) ->
                 should.exist docs
                 docs.length.should.equal 1
-                done()
+                if first_pass
+                  first_pass = false
+                  done()
 
     it "armory load/invalid guild", (done) ->
       wf.info "load invalid guild"
@@ -86,7 +91,8 @@ describe "wow wrapper:", ->
             wow.ensure_registered "eu", "Darkspear", "member", "Kimptonite444", ->
               wow.armory_load ->
                 callbacks += 1
-                done() if callbacks == 4
+                wf.debug "Got armory callback:#{callbacks}"
+                done() if callbacks == 29
 
     it "try store update 1", (done) ->
       item =
@@ -148,21 +154,25 @@ describe "wow wrapper:", ->
         done()
 
     it "save new update for valid item", (done) ->
+      callbacks = 0
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
           wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
             should.exist results
             results.length.should.equal 1
-            done()
+            callbacks += 1
+            done() if callbacks == 29
 
     it "save 2 updates, identical for valid item", (done)->
+      callbacks = 0
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
           wow.armory_load ->
             wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
               should.exist results
               results.length.should.equal 1
-              done()
+              callbacks += 1
+              done() if callbacks == 29
     
     it "save new update for invalid item", (done)->
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->

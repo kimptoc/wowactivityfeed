@@ -88,7 +88,7 @@ wf.app.get '/view_named/:coll_name', (req, res) ->
 handle_view = (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   type = req.params.type
-  type = 'member' if type = "character"
+  type = 'member' if type == "character"
   region = req.params.region
   realm = req.params.realm
   name = req.params.name
@@ -115,9 +115,10 @@ wf.app.get '/debug/clear_all', (req, res) ->
 wf.app.get '/debug/sample_data', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
+  wf.app.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
   wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
-  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptoc"
-  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptocii"
+  # wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptoc"
+  # wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptocii"
   wf.app.wow.get_history "us", "kaelthas", "member", "Feåtherz"
   res.render "message", msg: "Sample data registered"
 

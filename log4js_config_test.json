@@ -2,7 +2,7 @@
  "appenders": [
    { 
     "type": "file", 
-    "filename": "logs/test.log",
+    "filename": "logs/test.log"
      }
   ]
 }
