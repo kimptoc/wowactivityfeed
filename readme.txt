@@ -1,5 +1,5 @@
 TODO
-- calculate diffs between char snapshots - store with latest image
+- diff handling for members, achievements and other array based things
 - store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
 - rss feed showing level changes for a character
 

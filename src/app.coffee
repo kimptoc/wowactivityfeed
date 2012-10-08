@@ -112,6 +112,14 @@ wf.app.get '/debug/clear_all', (req, res) ->
   wf.app.wow.clear_all ->
     res.render "message", msg: "Database cleared!"
 
+wf.app.get '/debug/sample_data', (req, res) ->
+  wf.info "get #{JSON.stringify(req.route)}"
+  wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
+  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
+  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptoc"
+  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptocii"
+  wf.app.wow.get_history "us", "kaelthas", "member", "Feåtherz"
+  res.render "message", msg: "Sample data registered"
 
 #wf.app.listen(process.env.VCAP_APP_PORT || 3000)
 
