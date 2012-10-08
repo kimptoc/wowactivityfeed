@@ -1,12 +1,11 @@
 TODO
-- get guild info with members (doesnt seem to come at the mo)
-- web view guild/member details/history
-- get latest/current
 - calculate diffs between char snapshots - store with latest image
-- webpage showing history for char, including details of each snapshot (or first 5...)
 - store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
-- diff db for tests versus web (-test/-dev)
 - rss feed showing level changes for a character
+
+- webpage showing history for char, including details of each snapshot (or first 5...)
+
+- switch to mongolab db on appfog
 
 - in armory load, union registered/loaded items and query armory for them
 - or just drive from registered... what about guild members, register them? or do extra loads?
@@ -29,6 +28,13 @@ LATER
 - feed for profession levels?
 
 NOTES
+
+diff using jsondiffpatch / https://github.com/benjamine/JsonDiffPatch
+eg
+jsdiff = require("jsondiffpatch")
+a = {}
+b = {}
+jsdiff.diff(a,b)
 
 - http://www.mongodb.org/display/DOCS/Admin+UIs
 - mongo db browser/osx - http://mongohub.todayclose.com/download

@@ -23,7 +23,7 @@ class wf.StoreMongo
       coll.remove (err) ->
         wf.error(err) if err
         throw err if err
-        removed_handler()
+        removed_handler?()
 
   clear_all: (cleared_handler) ->
     @with_connection (client) ->
@@ -98,12 +98,18 @@ class wf.StoreMongo
           wf.error "No cursor returned for key:#{JSON.stringify(document_key)}"
           loaded_handler?(null)
 
-  load_all: (collection_name, loaded_handler) ->
+  load_all: (collection_name, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      coll.find().toArray (err, results) ->
+      wf.debug "load_all, got collection"
+      coll.find {}, options, (err, cur) ->
+        wf.debug "load_all, got collection contents"
         wf.error("load_all:#{err}") if err
         throw err if err
-        loaded_handler?(results)
+        cur.toArray (err, docs) ->
+          wf.debug "load_all, got collection contents, now as array"
+          wf.error(err) if err
+          throw err if err
+          loaded_handler?(docs)
   
   with_collection: (collection_name, worker) ->
     @with_connection ->

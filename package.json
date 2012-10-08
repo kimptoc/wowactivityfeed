@@ -13,6 +13,7 @@
         "nodemon":"",
         "rss":"",
         "mongodb":"",
-        "log4js":""
+        "log4js":"",
+        "jsondiffpatch":""
     }
 }

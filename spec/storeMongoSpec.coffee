@@ -71,7 +71,7 @@ describe "mongo backed store:", ->
               store.count "foo", someObj, (n) ->
                 n.should.equal 1
 
-                store.load_all "foo", (matching) ->
+                store.load_all "foo", {}, (matching) ->
                   wf.debug "matching.length:#{matching.length}"
                   matching.length.should.equal 1
                   done()

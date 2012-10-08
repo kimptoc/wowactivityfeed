@@ -4,6 +4,7 @@ require "./store_mongo"
 require "./wowlookup"
 
 require('./init_logger')
+require('./calc_changes')
 
 
 # this an in memory cache of the latest guild/char details
@@ -48,8 +49,7 @@ class wf.WoW
               registered_handler?()
 
   get_registered: (registered_handler)->
-    store.load_all registered_collection, (results) ->
-      registered_handler?(results)
+    store.load_all registered_collection, {}, registered_handler
 
   get_loaded: (loaded_handler) ->
     store.get_loaded(loaded_handler)
@@ -66,23 +66,21 @@ class wf.WoW
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered(region, realm, type, name)
-      store.load @get_coll_name(type, region, realm, name), name: name, {sort: {"lastModified": 1}}, (info) ->
+      store.load @get_coll_name(type, region, realm, name), name: name, {sort: {"lastModified": -1}}, (info) ->
         result_handler(info)
     else
       result_handler(null)
 
   get_named: (coll_name, result_handler) ->
-    store.load coll_name, {}, {sort: {"lastModified": 1}}, (info) ->
-      result_handler(info)
+    store.load coll_name, {}, {sort: {"lastModified": -1}}, result_handler
 
   get_history_named: (coll_name, result_handler) ->
-    store.load_all coll_name, result_handler
+    store.load_all coll_name, {}, result_handler
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered(region, realm, type, name)
-      store.load_all @get_coll_name(type, region, realm, name), (info) ->
-        result_handler(info)
+      store.load_all @get_coll_name(type, region, realm, name), {sort: {"lastModified": -1}}, result_handler
     else
       result_handler(null)
 
@@ -98,19 +96,24 @@ class wf.WoW
     "In progress..."
 
   store_update: (info, stored_handler) => 
+    # find prev entry
+    # is it same one, if so done- nowt to do
+    # if not same, calc diff, then save it
     coll_name = @get_coll_name(info.type, info.region, info.realm, info.name)
     store.load coll_name,
-      lastModified : info.lastModified
+      # lastModified : info.lastModified
       region : info.region
       realm : info.realm
       type : info.type
-      name : info.name, null, (doc) ->
-        wf.info "store_update:#{JSON.stringify(doc)}"
-        if doc?
+      name : info.name, {sort: {"lastModified": -1}}, (doc) ->
+        wf.debug "store_update:#{JSON.stringify(doc)}"
+        if doc? and doc.lastModified == info.lastModified
           wf.debug "Ignored as saved already: #{info.name}"
           stored_handler?()
         else
           wf.debug "Not saved #{info.name}"
+          whats_changed = wf.calc_changes(doc, info)
+          info.whats_changed = whats_changed
           store.add coll_name, info, ->
               wf.debug "Now saved #{info.name}"
               stored_handler?()

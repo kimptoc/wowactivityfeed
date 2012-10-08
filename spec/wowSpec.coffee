@@ -98,6 +98,8 @@ describe "wow wrapper:", ->
       wow.store_update item, ->
         wow.get_history item.region,item.realm,item.type,item.name, (results) ->
           results.length.should.equal 1 
+          should.exist results[0].whats_changed
+          results[0].whats_changed.overview.should.equal "NEW" 
           done()
 
     it "try store update 2diff", (done) ->
@@ -117,6 +119,12 @@ describe "wow wrapper:", ->
         wow.store_update item2, ->
           wow.get_history item.region,item.realm,item.type,item.name, (results) ->
             results.length.should.equal 2 
+            results[0].lastModified.should.equal 124
+            results[1].lastModified.should.equal 123
+            should.exist results[0].whats_changed
+            results[0].whats_changed.overview.should.equal "UPDATE" 
+            results[0].whats_changed.changes.should.eql 
+              lastModified : [123, 124]
             done()
 
     it "try store update 2same", (done) ->
@@ -130,6 +138,8 @@ describe "wow wrapper:", ->
         wow.store_update item, ->
           wow.get_history item.region,item.realm,item.type,item.name, (results) ->
             results.length.should.equal 1 
+            should.exist results[0].whats_changed
+            results[0].whats_changed.overview.should.equal "NEW" 
             done()
 
     it "should be no history initially", (done) ->
