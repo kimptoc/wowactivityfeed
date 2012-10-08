@@ -3,8 +3,6 @@
    { 
     "type": "file", 
     "filename": "logs/test.log",
-    "maxLogSize": 1024000,
-    "backups": 1
      }
   ]
 }
