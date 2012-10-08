@@ -1,5 +1,6 @@
 TODO
 - diff handling for members, achievements and other array based things
+- highlight members with updates, maybe list of most recent updates on front page
 - store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
 - rss feed showing level changes for a character
 

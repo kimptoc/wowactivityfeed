@@ -114,6 +114,7 @@ wf.app.get '/debug/clear_all', (req, res) ->
 
 wf.app.get '/debug/sample_data', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
+  wf.app.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"
   wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
   wf.app.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
   wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
