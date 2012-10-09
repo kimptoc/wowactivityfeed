@@ -13,20 +13,39 @@ describe "mongo backed store:", ->
 
     store = null
 
-    beforeEach ->
+    beforeEach (done) ->
       wf.info "Running beforeEach, create StoreMongo"
       store = new wf.StoreMongo()
+      # store.clear_all ->
+      store.remove_all "foo", ->
+        store.remove_all "bar", ->
+          done()
 
     # afterEach ->
       # wf.info "Running afterEach, close StoreMongo"
       # store?.close()
 
     it "just clear all", (done) ->
-      store.clear_all (was_clear_done)->
-        was_clear_done.should.equal true
+      someObj =
+        id: 123
+        name: "foo"
+      store.remove_all "foo", ->
+      # store.clear_all (was_clear_done)->
+        # was_clear_done.should.equal true
+        store.count "foo", someObj, (n) ->
+          n.should.equal 0
+          done()
+
+    it "add item then count", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+
+      store.add "foo",someObj, (counter)->
+        wf.debug "store complete, #{counter}"
+        counter.should.equal 1
         done()
 
-#TODO - why this is not working, it used to...
     it "add item then clear all", (done) ->
       someObj =
         id: 123
@@ -35,8 +54,10 @@ describe "mongo backed store:", ->
       store.add "foo",someObj, (counter)->
         wf.debug "store complete, #{counter}"
         counter.should.equal 1
-        store.clear_all (was_clear_done)->
-          was_clear_done.should.equal true
+#TODO - why this is not working, it used to...
+        # store.clear_all (was_clear_done)->
+        store.remove_all "foo", ->
+          # was_clear_done.should.equal true
           store.count "foo", someObj, (n) ->
             n.should.equal 0
             done()

@@ -13,85 +13,62 @@ class wf.WoW
   store = new wf.StoreMongo()
   wowlookup = new wf.WowLookup()
   registered_collection = "registered"
+  armory_collection = "armory_history"
 
   constructor: ->
     wf.info "WoW constructor"
 
-  get_hash: (h, key) ->
-    val = h[key]
-    if ! val
-      val = {}
-      h[key] = val
-    return val 
-
-  # close: ->
-    # store?.close()
-
   ensure_registered: (region, realm, type, name, registered_handler) ->
     wf.debug "Registering #{name}"
-    store.load registered_collection,
-      region : region
-      realm : realm
-      type : type
-      name : name, null, (doc) ->
-        wf.info "ensure_registered:#{JSON.stringify(doc)}"
-        if doc?
-          wf.debug "Registered already: #{name}"
+    store.load registered_collection, {region,realm,type,name}, null, (doc) ->
+      wf.info "ensure_registered:#{JSON.stringify(doc)}"
+      if doc?
+        wf.debug "Registered already: #{name}"
+        registered_handler?()
+      else
+        wf.debug "Not Registered #{name}"
+        store.add registered_collection,{region,realm,type,name}, ->
+          wf.debug "Now Registered #{name}"
           registered_handler?()
-        else
-          wf.debug "Not Registered #{name}"
-          store.add registered_collection,
-            region : region
-            realm : realm
-            type : type
-            name : name, ->
-              wf.debug "Now Registered #{name}"
-              registered_handler?()
 
   get_registered: (registered_handler)->
-    store.load_all registered_collection, {}, registered_handler
+    store.load_all registered_collection, {}, {}, registered_handler
 
   get_loaded: (loaded_handler) ->
-    store.get_loaded(loaded_handler)
+    store.load_all armory_collection, {}, {}, loaded_handler
 
   clear_all: (cleared_handler) ->
-    store.clear_all(cleared_handler)
+    store.remove_all registered_collection, ->
+      store.remove_all armory_collection, cleared_handler
 
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
 
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
-      @ensure_registered(region, realm, type, name)
-      store.load @get_coll_name(type, region, realm, name), name: name, {sort: {"lastModified": -1}}, (info) ->
-        result_handler(info)
+      @ensure_registered region, realm, type, name, ->
+        store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
-      result_handler(null)
+      result_handler?(null)
 
-  get_changes: (result_handler) ->
+  # get_changes: (result_handler) ->
     #todo - find out whats changed
     #get loaded here, for each collection, get history and build big list of changes
-    all_history = []
-    @get_loaded (collections) =>
-      for coll in collections
-        @get_history_named coll, (history) ->
-          for hist in history
-            all_history.push(hist)
+    # all_history = []
+    # @get_loaded (collections) =>
+      # for coll in collections
+        # @get_history_named coll, (history) ->
+          # for hist in history
+            # all_history.push(hist)
             #todo - how return results async... callback/stream?
 
 
-  get_named: (coll_name, result_handler) ->
-    store.load coll_name, {}, {sort: {"lastModified": -1}}, result_handler
-
-  get_history_named: (coll_name, result_handler) ->
-    store.load_all coll_name, {}, result_handler
-
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
-      @ensure_registered(region, realm, type, name)
-      store.load_all @get_coll_name(type, region, realm, name), {sort: {"lastModified": -1}}, result_handler
+      @ensure_registered region, realm, type, name, ->
+        store.load_all armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
-      result_handler(null)
+      result_handler?(null)
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
@@ -114,8 +91,7 @@ class wf.WoW
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
-    coll_name = @get_coll_name(info.type, info.region, info.realm, info.name)
-    store.load coll_name,
+    store.load armory_collection,
       # lastModified : info.lastModified
       region : info.region
       realm : info.realm
@@ -129,9 +105,7 @@ class wf.WoW
           wf.debug "Not saved #{info.name}"
           whats_changed = wf.calc_changes(doc, info)
           info.whats_changed = whats_changed
-          store.add coll_name, info, ->
+          store.add armory_collection, info, ->
               wf.debug "Now saved #{info.name}"
               stored_handler?()
 
-  get_coll_name: (type, region_name, realm_name, item) ->
-    return "wowitem-#{type}:#{region_name}:#{realm_name}:#{item}"

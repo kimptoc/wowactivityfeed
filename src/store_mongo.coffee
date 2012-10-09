@@ -25,14 +25,14 @@ class wf.StoreMongo
         throw err if err
         removed_handler?()
 
-  clear_all: (cleared_handler) ->
-    @with_connection (client) ->
-      wf.debug "clear_all about to drop db"
-      client.dropDatabase (err, was_clear_done) ->
-        wf.debug "clear_all completed:#{was_clear_done}"
-        wf.error(err) if err
-        throw err if err
-        cleared_handler?(was_clear_done)
+  # clear_all: (cleared_handler) ->
+  #   @with_connection (client) ->
+  #     wf.debug "clear_all about to drop db"
+  #     client.dropDatabase (err, was_clear_done) ->
+  #       wf.debug "clear_all completed:#{was_clear_done}"
+  #       wf.error(err) if err
+  #       throw err if err
+  #       cleared_handler?(was_clear_done)
 
   get_loaded: (loaded_handler) ->
     @with_connection ->
@@ -90,17 +90,18 @@ class wf.StoreMongo
           wf.error "No cursor returned for key:#{JSON.stringify(document_key)}"
           loaded_handler?(null)
 
-  load_all: (collection_name, options, loaded_handler) ->
+  load_all: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      wf.debug "load_all, got collection"
-      coll.find {}, options, (err, cur) ->
-        wf.debug "load_all, got collection contents"
+      wf.debug "load_all, got collection:#{collection_name}"
+      coll.find document_key, options, (err, cur) ->
+        wf.debug "load_all, got collection:#{collection_name} contents"
         wf.error("load_all:#{err}") if err
         throw err if err
         cur.toArray (err, docs) ->
-          wf.debug "load_all, got collection contents, now as array"
+          wf.debug "load_all, got collection:#{collection_name} contents, now as array, err:#{err}"
           wf.error(err) if err
           throw err if err
+          wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
           loaded_handler?(docs)
   
   with_collection: (collection_name, worker) ->

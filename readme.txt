@@ -17,6 +17,8 @@ TODO
 - load data from file option/cli ??
 
 LATER
+- if not found, put on a lastModified, so that its not re-done
+- put armory link in info - for errors and good entries
 - track realm status changes: eg
   "http://us.battle.net/api/wow/realm/status?realms=Medivh,Blackrock"
 - count number of api calls per day, page to view them
