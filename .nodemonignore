@@ -4,3 +4,6 @@ store/*
 logs/*
 tmp/*
 readme.txt
+.git/*
+.idea/*
+public/*

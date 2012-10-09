@@ -3,6 +3,7 @@ global.wf ||= {}
 express = require('express')
 http = require('http')
 path = require('path')
+rss = require('rss')
 
 require('./init_logger')
 require('./wow')
@@ -106,6 +107,26 @@ wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   handle_view(req, res)
 
+wf.app.get '/all/rss', (req, res) ->
+  test = [1,2,3]
+
+  feed = new rss
+    title: 'My Blog'
+    description: 'This is my blog'
+    feed_url: 'http://www.raymondcamden.com/rss.xml'
+    site_url: 'http://www.raymondcamden.com'
+    image_url: 'http://example.com/icon.png'
+    author: 'Raymond Camden'
+
+  test.forEach (i) ->
+    feed.item
+      title: "Entry:#{i}"
+      description: "Body - #{i}"
+      url: 'http://google.com/'
+      date: new Date() 
+
+  res.send(feed.xml())
+ 
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"

@@ -54,9 +54,6 @@ class wf.WoW
   get_loaded: (loaded_handler) ->
     store.get_loaded(loaded_handler)
 
-  get_collections: (collections_handler) ->
-    store.get_collections (collections_handler)
-
   clear_all: (cleared_handler) ->
     store.clear_all(cleared_handler)
 
@@ -70,6 +67,18 @@ class wf.WoW
         result_handler(info)
     else
       result_handler(null)
+
+  get_changes: (result_handler) ->
+    #todo - find out whats changed
+    #get loaded here, for each collection, get history and build big list of changes
+    all_history = []
+    @get_loaded (collections) =>
+      for coll in collections
+        @get_history_named coll, (history) ->
+          for hist in history
+            all_history.push(hist)
+            #todo - how return results async... callback/stream?
+
 
   get_named: (coll_name, result_handler) ->
     store.load coll_name, {}, {sort: {"lastModified": -1}}, result_handler

@@ -1,15 +1,15 @@
 TODO
 - diff handling for members, achievements and other array based things
 - highlight members with updates, maybe list of most recent updates on front page
-- store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ?
 - rss feed showing level changes for a character
+- rss, send correct content-type
+
+- store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ??
 
 - webpage showing history for char, including details of each snapshot (or first 5...)
 
 - switch to mongolab db on appfog
 
-- in armory load, union registered/loaded items and query armory for them
-- or just drive from registered... what about guild members, register them? or do extra loads?
 
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
