@@ -1,4 +1,6 @@
 should = require 'should'
+assert = require 'assert'
+
 require "./commonSpec"
 
 require "./store_mongo"
@@ -67,6 +69,9 @@ describe "mongo backed store:", ->
       store.remove_all "foo", ->
         done()
 
+    # it "basic load_all", (done) ->
+      # store.load_all ""
+
     it "test add/count db", (done) ->
 
       store.remove_all "foo", ->
@@ -85,14 +90,15 @@ describe "mongo backed store:", ->
             counter.should.equal 1
             store.load "foo", id: 123, {}, (obj) ->
               thatObj = obj
-              should.exist thatObj
+              # should.exist thatObj
+              assert thatObj
               thatObj.id.should.equal someObj.id
               thatObj.name.should.equal someObj.name
 
               store.count "foo", someObj, (n) ->
                 n.should.equal 1
 
-                store.load_all "foo", {}, (matching) ->
+                store.load_all "foo", {}, {}, (matching) ->
                   wf.debug "matching.length:#{matching.length}"
                   matching.length.should.equal 1
                   done()
@@ -111,10 +117,12 @@ describe "mongo backed store:", ->
             # todo - this should work...
             # counter.should.equal 2
             store.load "bar", id: 123,  {sort: {'name': 1} }, (doc)->
-              should.exist doc
+              # should.exist doc
+              assert doc
               doc.name.should.equal "one"
               store.load "bar", id: 123, {sort: {'name': -1} }, (doc)->
-                should.exist doc
+                # should.exist doc
+                assert doc
                 doc.name.should.equal "two"
                 done()
 

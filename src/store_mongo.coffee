@@ -19,7 +19,7 @@ class wf.StoreMongo
 
   remove_all: (collection_name, removed_handler) ->
     @with_collection collection_name, (coll) ->
-      wf.debug "now to remove all"
+      wf.debug "now to remove all '#{collection_name}'"
       coll.remove (err) ->
         wf.error(err) if err
         throw err if err

@@ -1,4 +1,8 @@
 TODO
+- index armory history collection, better perf?
+- when you click on view from loaded, it registers item... dont
+. should(not)exist dont give stack trace... alternative test?
+- some members not being found, but listed in history...
 - diff handling for members, achievements and other array based things
 - highlight members with updates, maybe list of most recent updates on front page
 - rss feed showing level changes for a character
