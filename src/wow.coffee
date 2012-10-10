@@ -14,6 +14,7 @@ class wf.WoW
   wowlookup = new wf.WowLookup()
   registered_collection = "registered"
   armory_collection = "armory_history"
+  armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
 
   constructor: ->
     wf.info "WoW constructor"
@@ -35,7 +36,8 @@ class wf.WoW
     store.load_all registered_collection, {}, {}, registered_handler
 
   get_loaded: (loaded_handler) ->
-    store.load_all armory_collection, {}, {limit:30,sort: {"lastModified": -1}}, loaded_handler
+    store.ensure_index armory_collection, armory_index_1, ->
+      store.load_all armory_collection, {}, {limit:30,sort: {"lastModified": -1}}, loaded_handler
 
   clear_all: (cleared_handler) ->
     store.remove_all registered_collection, ->
@@ -47,7 +49,7 @@ class wf.WoW
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, {type:1, region:1, realm:1, name:1, lastModified:1}, ->
+        store.ensure_index armory_collection, armory_index_1, ->
           store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
@@ -67,7 +69,7 @@ class wf.WoW
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, {type:1, region:1, realm:1, name:1, lastModified:1}, ->
+        store.ensure_index armory_collection, armory_index_1, ->
           store.load_all armory_collection, {type, region, realm, name}, {limit:30, sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
@@ -101,21 +103,22 @@ class wf.WoW
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
-    store.load armory_collection,
-      # lastModified : info.lastModified
-      region : info.region
-      realm : info.realm
-      type : info.type
-      name : info.name, {sort: {"lastModified": -1}}, (doc) ->
-        wf.debug "store_update:#{JSON.stringify(doc)}"
-        if doc? and doc.lastModified == info.lastModified
-          wf.debug "Ignored as saved already: #{info.name}"
-          stored_handler?()
-        else
-          wf.debug "Not saved #{info.name}"
-          whats_changed = wf.calc_changes(doc, info)
-          info.whats_changed = whats_changed
-          store.add armory_collection, info, ->
-              wf.debug "Now saved #{info.name}"
-              stored_handler?()
+    store.ensure_index armory_collection, armory_index_1, ->
+      store.load armory_collection,
+        # lastModified : info.lastModified
+        region : info.region
+        realm : info.realm
+        type : info.type
+        name : info.name, {sort: {"lastModified": -1}}, (doc) ->
+          wf.debug "store_update:#{JSON.stringify(doc)}"
+          if doc? and doc.lastModified == info.lastModified
+            wf.debug "Ignored as saved already: #{info.name}"
+            stored_handler?()
+          else
+            wf.debug "Not saved #{info.name}"
+            whats_changed = wf.calc_changes(doc, info)
+            info.whats_changed = whats_changed
+            store.add armory_collection, info, ->
+                wf.debug "Now saved #{info.name}"
+                stored_handler?()
 

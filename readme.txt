@@ -1,5 +1,4 @@
 TODO
-- reduce logging on prod ( ie info and above) - see whats wrong...
 
 - cron load - make all load requests go via this, eg armory_load_requested true/false
 - make sure tests pass with new single/done callback from armory load
@@ -16,7 +15,6 @@ TODO
 - some members not being found, but listed in history...
 
 - switch to mongolab db on appfog
-- log to console on prod, as that seems only thing available...
 
 - link from member to guild, if in guild
 

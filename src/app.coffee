@@ -22,7 +22,7 @@ wf.app = app
 
 wf.job_running_lock = false
 
-wf.job = new cronJob '15 * * * * *', (-> 
+wf.job = new cronJob '00 55 * * * *', (-> 
   wf.info "cronjob tick..."
   if ! wf.job_running_lock
     wf.info "time for armory_load..."
@@ -67,9 +67,9 @@ wf.app.configure 'development', ->
 wf.app.configure 'production', ->
   wf.info "Express app.configure/production"
   if process.env.VCAP_SERVICES?
-  env = JSON.parse(process.env.VCAP_SERVICES)
-  wf.mongo_info = env['mongodb-1.8'][0]['credentials']
-  wf.app.use(express.errorHandler())   
+    env = JSON.parse(process.env.VCAP_SERVICES)
+    wf.mongo_info = env['mongodb-1.8'][0]['credentials']
+    wf.app.use(express.errorHandler())   
 
 # Routes
 
