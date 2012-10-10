@@ -66,6 +66,7 @@ wf.app.configure 'development', ->
   
 wf.app.configure 'production', ->
   wf.info "Express app.configure/production"
+  if process.env.VCAP_SERVICES?
   env = JSON.parse(process.env.VCAP_SERVICES)
   wf.mongo_info = env['mongodb-1.8'][0]['credentials']
   wf.app.use(express.errorHandler())   

@@ -5,7 +5,7 @@ log4js = require "log4js"
 
 if process.env.NODE_ENV == "test"
   log4js.configure(path.join('config','log4js_config_test.json'))
-else if process.env.NODE_ENV == "prod"
+else if process.env.NODE_ENV == "production"
   log4js.configure(path.join('config','log4js_config_prod.json'))
 else
   log4js.configure(path.join('config','log4js_config.json'))
@@ -23,3 +23,5 @@ wf.debug = (x) ->
 
 wf.expressLogger = ->
   log4js.connectLogger(wf.logger)
+
+wf.info "Running in environment:#{process.env.NODE_ENV}"
