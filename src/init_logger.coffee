@@ -1,11 +1,14 @@
 global.wf ||= {}
 
+path = require "path"
 log4js = require "log4js"
 
 if process.env.NODE_ENV == "test"
-  log4js.configure('log4js_config_test.json')
+  log4js.configure(path.join('config','log4js_config_test.json'))
+else if process.env.NODE_ENV == "prod"
+  log4js.configure(path.join('config','log4js_config_prod.json'))
 else
-  log4js.configure('log4js_config.json')
+  log4js.configure(path.join('config','log4js_config.json'))
 
 wf.logger = log4js.getLogger()
 

@@ -1,0 +1,12 @@
+{
+ "appenders": [
+   { 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "logs/test.log"
+     }
+   }
+  ]
+}

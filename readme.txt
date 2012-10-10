@@ -1,6 +1,13 @@
 TODO
 - reduce logging on prod ( ie info and above) - see whats wrong...
 
+- cron load - make all load requests go via this, eg armory_load_requested true/false
+- make sure tests pass with new single/done callback from armory load
+- trigger load:
+-- hourly
+-- when manually requested
+-- when new char/guild registered
+
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
 
@@ -11,6 +18,7 @@ TODO
 - switch to mongolab db on appfog
 - log to console on prod, as that seems only thing available...
 
+- link from member to guild, if in guild
 
 LATER
 - use momentjs or similar to show age of update, eg 10 days ago, maybe actual time...
@@ -32,6 +40,12 @@ LATER
 - feed for profession levels?
 
 NOTES
+
+AppFog notes:
+    rvm use 1.8.7-p358@af-tool
+    af update waf1
+    af logs waf1
+    af crashlogs waf1
 
 diff using jsondiffpatch / https://github.com/benjamine/JsonDiffPatch
 eg

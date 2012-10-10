@@ -1,8 +1,0 @@
-{
- "appenders": [
-   { 
-    "type": "file", 
-    "filename": "logs/test.log"
-     }
-  ]
-}
