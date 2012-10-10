@@ -1,5 +1,6 @@
 TODO
 - index armory history collection, better perf?
+- get_loaded - do it in reverse date order...
 - when you click on view from loaded, it registers item... dont
 . should(not)exist dont give stack trace... alternative test?
 - some members not being found, but listed in history...

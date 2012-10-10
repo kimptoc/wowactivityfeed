@@ -7,8 +7,6 @@ require('./init_logger')
 wf.mongo_db = null
 
 class wf.StoreMongo
-  mongo_server = null
-  mongo_client = null
   collection_cache = {}
 
   constructor: ->
@@ -46,6 +44,10 @@ class wf.StoreMongo
           thing.substring(thing.indexOf(".")+1)
         loaded_handler?(wowthings)
 
+  ensure_index: (collection_name, fieldSpec, callback) ->
+    @with_collection collection_name, (coll) ->
+      coll.ensureIndex fieldSpec, callback
+      
   add: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
       coll.insert document_object, safe:true, (err, docs) ->

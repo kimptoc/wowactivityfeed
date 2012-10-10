@@ -27,7 +27,7 @@ describe "mongo backed store:", ->
       # wf.info "Running afterEach, close StoreMongo"
       # store?.close()
 
-    it "just clear all", (done) ->
+    it "just clear all and count", (done) ->
       someObj =
         id: 123
         name: "foo"
@@ -69,8 +69,14 @@ describe "mongo backed store:", ->
       store.remove_all "foo", ->
         done()
 
-    # it "basic load_all", (done) ->
-      # store.load_all ""
+    it "basic load_all", (done) ->
+      store.load_all "foo", {}, {}, (docs) ->
+        docs.length.should.equal 0
+        done()
+
+    it "ensure index basic", (done) ->
+      store.ensure_index "foo", {a:1}, ->
+        done()
 
     it "test add/count db", (done) ->
 
