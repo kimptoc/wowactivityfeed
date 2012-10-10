@@ -4,6 +4,7 @@ express = require('express')
 http = require('http')
 path = require('path')
 rss = require('rss')
+cronJob = require('cron').CronJob
 
 require './init_logger'
 require './wow'
@@ -18,6 +19,20 @@ app = module.exports = express()
 wf.app = app
 
 # Configuration
+
+wf.job_running_lock = false
+
+wf.job = new cronJob '15 * * * * *', (-> 
+  wf.info "cronjob tick..."
+  if ! wf.job_running_lock
+    wf.info "time for armory_load..."
+    wf.job_running_lock = true
+    wf.app.wow.armory_load ->
+      wf.job_running_lock = true
+  ),
+  null, 
+  true, #/* Start the job right now */,
+  "Europe/London" #/* Time zone of this job. */
 
 wf.app.configure ->
   wf.info "App Startup/Express configure:env=#{app.get('env')},dirname=#{__dirname}"

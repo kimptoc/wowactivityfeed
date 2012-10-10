@@ -75,18 +75,26 @@ class wf.WoW
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     @get_registered (results_array) =>
+      expected_responses = results_array.length
       for item in results_array
         wf.info "About to do Armory lookup for:#{JSON.stringify(item)}"
         wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
+          expected_responses -= 1
           wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
           @store_update info, =>
-            loaded_callback?(info)
+            # loaded_callback?(info)
+            if expected_responses == 1
+              loaded_callback?(info)
             if info.type == "guild" and info?.members?
+              expected_responses += info.members.length
               for member in info.members
                 wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
+                  expected_responses -= 1
                   wf.info "Info back for guild #{item.name} member #{member.character.name}"
                   @store_update member_info, ->
-                    loaded_callback?(member_info)
+                      # loaded_callback?(member_info)
+                    if expected_responses == 1
+                      loaded_callback?(member_info)
     "In progress..."
 
   store_update: (info, stored_handler) => 

@@ -1,24 +1,22 @@
 TODO
-- when you click on view from loaded, it registers item... dont
-- some members not being found, but listed in history...
-- diff handling for members, achievements and other array based things
-- highlight members with updates, maybe list of most recent updates on front page
-- rss feed showing level changes for a character
-- rss, send correct content-type
-
-- store diffs ready for rss somewhere, one collection of all changes... filterable by char/guild/etc ??
-
-- webpage showing history for char, including details of each snapshot (or first 5...)
-
-- switch to mongolab db on appfog
-
+- reduce logging on prod ( ie info and above) - see whats wrong...
 
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
 
-- load data from file option/cli ??
+- only one callback from armory load - when all received and saved... - re-run tests
+- diff handling of changes for members, achievements and other array based things
+- some members not being found, but listed in history...
+
+- switch to mongolab db on appfog
+- log to console on prod, as that seems only thing available...
+
 
 LATER
+- use momentjs or similar to show age of update, eg 10 days ago, maybe actual time...
+- rss, send correct content-type
+- highlight members with updates, maybe list of most recent updates on front page
+- when you click on view from loaded, it registers item... dont
 - should(not)exist dont give stack trace... alternative test?
 - if not found, put on a lastModified, so that its not re-done
 - put armory link in info - for errors and good entries
