@@ -68,7 +68,7 @@ class wf.WoW
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
         store.ensure_index armory_collection, {type:1, region:1, realm:1, name:1, lastModified:1}, ->
-          store.load_all armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
+          store.load_all armory_collection, {type, region, realm, name}, {limit:30, sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
 

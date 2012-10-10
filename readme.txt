@@ -1,8 +1,5 @@
 TODO
-- index armory history collection, better perf?
-- get_loaded - do it in reverse date order...
 - when you click on view from loaded, it registers item... dont
-. should(not)exist dont give stack trace... alternative test?
 - some members not being found, but listed in history...
 - diff handling for members, achievements and other array based things
 - highlight members with updates, maybe list of most recent updates on front page
@@ -22,6 +19,7 @@ TODO
 - load data from file option/cli ??
 
 LATER
+- should(not)exist dont give stack trace... alternative test?
 - if not found, put on a lastModified, so that its not re-done
 - put armory link in info - for errors and good entries
 - track realm status changes: eg

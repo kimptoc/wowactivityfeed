@@ -5,10 +5,13 @@ http = require('http')
 path = require('path')
 rss = require('rss')
 
-require('./init_logger')
-require('./wow')
+require './init_logger'
+require './wow'
+require './feed_item_formatter'
 
 #wf.app = express()
+
+wf.SITE_URL = "http://localhost:3000"
 
 app = module.exports = express()
 
@@ -31,6 +34,8 @@ wf.app.configure ->
 
   wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
+  wf.app.wow = new wf.WoW()
+  wf.app.feed_formatter = new wf.FeedItemFormatter()
 
 
 wf.app.configure 'development', ->
@@ -43,14 +48,12 @@ wf.app.configure 'development', ->
       "name":""
       "db":"wowfeed"
   wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))   
-  wf.app.wow = new wf.WoW()
   
 wf.app.configure 'production', ->
   wf.info "Express app.configure/production"
   env = JSON.parse(process.env.VCAP_SERVICES)
   wf.mongo_info = env['mongodb-1.8'][0]['credentials']
   wf.app.use(express.errorHandler())   
-  wf.app.wow = new wf.WoW()
 
 # Routes
 
@@ -96,25 +99,43 @@ wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   handle_view(req, res)
 
-wf.app.get '/all/rss', (req, res) ->
-  test = [1,2,3]
+wf.app.get '/feed/all.rss', (req, res) ->
 
   feed = new rss
-    title: 'My Blog'
-    description: 'This is my blog'
-    feed_url: 'http://www.raymondcamden.com/rss.xml'
-    site_url: 'http://www.raymondcamden.com'
-    image_url: 'http://example.com/icon.png'
-    author: 'Raymond Camden'
+    title: 'WoW Activity Feed'
+    description: 'Test all changes feed'
+    feed_url: "#{wf.SITE_URL}/feed/all.rss"
+    site_url: "#{wf.SITE_URL}"
+    image_url: 'http://www.google.com/icon.png'
+    author: 'Chris Kimpton'
 
-  test.forEach (i) ->
-    feed.item
-      title: "Entry:#{i}"
-      description: "Body - #{i}"
-      url: 'http://google.com/'
-      date: new Date() 
+  wf.app.wow.get_loaded (items) ->
+    for item in items
+      feed.item wf.app.feed_formatter.process(item)
 
-  res.send(feed.xml())
+    res.send(feed.xml())
+ 
+wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
+
+  type = req.params.type
+  type = 'member' if type == "character"
+  region = req.params.region
+  realm = req.params.realm
+  name = req.params.name
+
+  feed = new rss
+    title: "WoW Activity Feed for #{name}"
+    description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
+    feed_url: "#{wf.SITE_URL}/feed/#{type}/#{region}/#{realm}/#{name}.rss"
+    site_url: "#{wf.SITE_URL}/view/#{type}/#{region}/#{realm}/#{name}"
+    image_url: 'http://www.google.com/icon.png'
+    author: 'Chris Kimpton'
+
+  wf.app.wow.get_history region, realm, type, name, (items)->
+    for item in items
+      feed.item wf.app.feed_formatter.process(item)
+
+    res.send(feed.xml())
  
 
 wf.app.get '/debug/clear_all', (req, res) ->
