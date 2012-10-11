@@ -1,4 +1,6 @@
 TODO
+- changes to level not showing as such
+- changes rss links to public site when in 'production'
 
 - cron load - make all load requests go via this, eg armory_load_requested true/false
 - make sure tests pass with new single/done callback from armory load
@@ -17,8 +19,12 @@ TODO
 - switch to mongolab db on appfog
 
 - link from member to guild, if in guild
+- link from member or guild to Armory version of site
+- link from member/guild to rss version of page
+- log when armory requested
 
 LATER
+- stats post armory load, number loaded, number changed, number not changed, number with errors??
 - use momentjs or similar to show age of update, eg 10 days ago, maybe actual time...
 - rss, send correct content-type
 - highlight members with updates, maybe list of most recent updates on front page

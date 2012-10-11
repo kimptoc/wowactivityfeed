@@ -3,7 +3,7 @@
    { 
     "type": "file", 
     "filename": "logs/server.log",
-    "maxLogSize": 1024000,
+    "maxLogSize": 10240000,
     "backups": 1
      }
   ]

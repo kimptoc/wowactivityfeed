@@ -20,19 +20,26 @@ wf.app = app
 
 # Configuration
 
-wf.job_running_lock = false
+wf.armory_load_requested = false
 
-wf.job = new cronJob '00 55 * * * *', (-> 
-  wf.info "cronjob tick..."
-  if ! wf.job_running_lock
-    wf.info "time for armory_load..."
-    wf.job_running_lock = true
-    wf.app.wow.armory_load ->
-      wf.job_running_lock = true
+wf.hourlyjob = new cronJob '00 55 * * * *', (-> 
+  wf.info "cronjob tick...hourly load"
+  wf.armory_load_requested = true
   ),
   null, 
   true, #/* Start the job right now */,
-  "Europe/London" #/* Time zone of this job. */
+  null #/* Time zone of this job. */
+
+wf.loadjob = new cronJob '*/10 * * * * *', (-> 
+  wf.info "cronjob tick...check if armory load requested"
+  if wf.armory_load_requested
+    wf.armory_load_requested = false
+    wf.info "time for armory_load..."
+    wf.app.wow.armory_load()
+  ),
+  null, 
+  true, #/* Start the job right now */,
+  null #/* Time zone of this job. */
 
 wf.app.configure ->
   wf.info "App Startup/Express configure:env=#{app.get('env')},dirname=#{__dirname}"
@@ -80,8 +87,9 @@ wf.app.get '/', (req, res) ->
 
 wf.app.get '/armory_load', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
-  wf.app.wow.armory_load()
-  res.render "armory_load", res: "Processing ? items"
+  wf.armory_load_requested = true
+  wf.app.wow.get_registered (regs) ->
+    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
 
 wf.app.get '/registered', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"

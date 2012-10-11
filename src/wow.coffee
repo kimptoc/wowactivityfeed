@@ -15,6 +15,7 @@ class wf.WoW
   registered_collection = "registered"
   armory_collection = "armory_history"
   armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
+  job_running_lock = false
 
   constructor: ->
     wf.info "WoW constructor"
@@ -28,6 +29,7 @@ class wf.WoW
         registered_handler?()
       else
         wf.debug "Not Registered #{name}"
+        wf.armory_load_requested = true # new item/guild, so do an armory load soon
         store.add registered_collection,{region,realm,type,name}, ->
           wf.debug "Now Registered #{name}"
           registered_handler?()
@@ -76,6 +78,8 @@ class wf.WoW
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
+    return if job_running_lock # only run one at a time....
+    job_running_lock = true
     @get_registered (results_array) =>
       expected_responses = results_array.length
       for item in results_array
@@ -86,6 +90,7 @@ class wf.WoW
           @store_update info, =>
             # loaded_callback?(info)
             if expected_responses == 1
+              job_running_lock = false
               loaded_callback?(info)
             if info.type == "guild" and info?.members?
               expected_responses += info.members.length
@@ -96,6 +101,7 @@ class wf.WoW
                   @store_update member_info, ->
                       # loaded_callback?(member_info)
                     if expected_responses == 1
+                      job_running_lock = false
                       loaded_callback?(member_info)
     "In progress..."
 
