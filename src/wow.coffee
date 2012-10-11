@@ -37,10 +37,6 @@ class wf.WoW
   get_registered: (registered_handler)->
     store.load_all registered_collection, {}, {}, registered_handler
 
-  get_loaded: (loaded_handler) ->
-    store.ensure_index armory_collection, armory_index_1, ->
-      store.load_all armory_collection, {}, {limit:30,sort: {"lastModified": -1}}, loaded_handler
-
   clear_all: (cleared_handler) ->
     store.remove_all registered_collection, ->
       store.remove_all armory_collection, cleared_handler
@@ -56,17 +52,9 @@ class wf.WoW
     else
       result_handler?(null)
 
-  # get_changes: (result_handler) ->
-    #todo - find out whats changed
-    #get loaded here, for each collection, get history and build big list of changes
-    # all_history = []
-    # @get_loaded (collections) =>
-      # for coll in collections
-        # @get_history_named coll, (history) ->
-          # for hist in history
-            # all_history.push(hist)
-            #todo - how return results async... callback/stream?
-
+  get_loaded: (loaded_handler) ->
+    store.ensure_index armory_collection, armory_index_1, ->
+      store.load_all armory_collection, {}, {limit:30,sort: {"lastModified": -1}}, loaded_handler
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
