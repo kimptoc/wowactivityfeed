@@ -13,6 +13,7 @@ require './feed_item_formatter'
 #wf.app = express()
 
 wf.SITE_URL = "http://localhost:3000"
+wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
 
 app = module.exports = express()
 
@@ -73,6 +74,7 @@ wf.app.configure 'development', ->
   
 wf.app.configure 'production', ->
   wf.info "Express app.configure/production"
+  wf.SITE_URL = wf.SITE_URL_PROD
   if process.env.VCAP_SERVICES?
     env = JSON.parse(process.env.VCAP_SERVICES)
     wf.mongo_info = env['mongodb-1.8'][0]['credentials']

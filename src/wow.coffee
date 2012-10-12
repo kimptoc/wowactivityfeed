@@ -26,13 +26,13 @@ class wf.WoW
       wf.info "ensure_registered:#{JSON.stringify(doc)}"
       if doc?
         wf.debug "Registered already: #{name}"
-        registered_handler?()
+        registered_handler?(true)
       else
         wf.debug "Not Registered #{name}"
         wf.armory_load_requested = true # new item/guild, so do an armory load soon
         store.add registered_collection,{region,realm,type,name}, ->
           wf.debug "Now Registered #{name}"
-          registered_handler?()
+          registered_handler?(false)
 
   get_registered: (registered_handler)->
     store.load_all registered_collection, {}, {}, registered_handler
@@ -77,7 +77,7 @@ class wf.WoW
           wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
           @store_update info, =>
             # loaded_callback?(info)
-            if expected_responses == 1
+            if expected_responses == 0
               job_running_lock = false
               loaded_callback?(info)
             if info.type == "guild" and info?.members?
@@ -88,7 +88,7 @@ class wf.WoW
                   wf.info "Info back for guild #{item.name} member #{member.character.name}"
                   @store_update member_info, ->
                       # loaded_callback?(member_info)
-                    if expected_responses == 1
+                    if expected_responses == 0
                       job_running_lock = false
                       loaded_callback?(member_info)
     "In progress..."

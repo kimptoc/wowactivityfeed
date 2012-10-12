@@ -42,11 +42,9 @@ describe "wow wrapper:", ->
 
     it "armory load valid guild", (done) ->
       wf.info "load valid guild"
-      callbacks = 0
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
-          callbacks += 1
-          done() if callbacks == 29
+          done()
 
     it "armory load/valid guild/get", (done) ->
       wf.info "load valid guild"
@@ -87,15 +85,13 @@ describe "wow wrapper:", ->
 
     it "armory load several valid/invalid", (done) ->
       wf.info "load several valid/invalid"
-      callbacks = 0
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.ensure_registered "eu", "Darkspear", "guild", "Mean GirlsQQQ", ->
           wow.ensure_registered "eu", "Darkspear", "member", "Kimptonite", ->
             wow.ensure_registered "eu", "Darkspear", "member", "Kimptonite444", ->
               wow.armory_load ->
-                callbacks += 1
-                wf.debug "Got armory callback:#{callbacks}"
-                done() if callbacks == 29
+                wf.debug "Got armory callback"
+                done()
 
     it "basic get when none", (done) ->
       item =
