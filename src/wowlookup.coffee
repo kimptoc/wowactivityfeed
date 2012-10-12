@@ -34,6 +34,7 @@ class wf.WowLookup
                 realm: realm
                 name: name
                 error: err.message
+                lastModified: 0
                 info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
               wf.debug "wowlookup result:#{JSON.stringify(guild)}"
@@ -55,6 +56,7 @@ class wf.WowLookup
                 realm: realm
                 name: name
                 error: err.message
+                lastModified: 0
                 info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
               wf.debug "wowlookup result:#{JSON.stringify(char)}"

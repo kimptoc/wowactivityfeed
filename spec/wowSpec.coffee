@@ -1,4 +1,6 @@
 should = require 'should'
+sinon = require 'sinon'
+
 require "./commonSpec"
 
 require "./wow"
@@ -7,6 +9,8 @@ describe "wow wrapper:", ->
   describe "register:", ->
 
     wow = null
+    mock_store = null
+    mock_lookup = null
 
     beforeEach (done)->
       wf.info "wowSpec:beforeEach"
@@ -14,17 +18,41 @@ describe "wow wrapper:", ->
       wow.clear_all ->
         done()
 
-    # afterEach ->
+    afterEach ->
+      mock_store.verify() if mock_store?
+      mock_lookup.verify() if mock_lookup?
       # wf.info "wowSpec:afterEach"
       # wow?.close()
 
+    it "mock sample", (done)->
+      test_thing_api = { go: -> }
+      mock_thing = sinon.mock(test_thing_api)
+      mock_thing.expects("go").once().yields()
+      test_thing_api.go ->
+        done()
+
+
+    it "mock store, clear reg", (done) ->
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("remove_all").once().yields()
+      wow.clear_registered ->
+        done()
+
+
     it "clear wow", (done) ->
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("remove_all").once().yields()
+      mock_store.expects("load_all").once().yields([])
       wow.clear_registered ->
         wow.get_registered (items) ->
           items.length.should.equal 0
           done()
 
     it "add/check register", (done)->
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load").once().yields()
+      mock_store.expects("add").once().yields()
+      mock_store.expects("load_all").once().yields([{}])
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.get_registered (items) ->
           items.length.should.equal 1
@@ -40,58 +68,110 @@ describe "wow wrapper:", ->
                 items.length.should.equal 2
                 done()
 
-    it "armory load valid guild", (done) ->
-      wf.info "load valid guild"
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.armory_load ->
-          done()
+    it "armory load/valid guild/new", (done) ->
+      mock_lookup = sinon.mock(wow.get_wowlookup())
+      mock_lookup.expects("get").twice().yields
+        region:"eu"
+        realm:"Darkspear"
+        type:"guild"
+        name:"Mean Girls"
+        members:
+          [character:
+            region:"eu"
+            realm:"Darkspear"
+            type:"member"
+            name:"Kimptoc" ]
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
+      mock_store.expects("ensure_index").twice().yields()
+      mock_store.expects("load").twice().yields()
+      mock_store.expects("add").twice().yields() # guild and members
 
-    it "armory load/valid guild/get", (done) ->
-      wf.info "load valid guild"
-      first_pass = true
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.armory_load ->
-          wow.get "eu", "Darkspear", "guild", "Mean Girls", (doc)->
-            # should.exist doc
-            doc.type.should.equal "guild"
-            if first_pass
-              first_pass = false
-              done()
+      wow.armory_load ->
+        done()
 
-#TODO - why is this failing?
-    # it "armory load/invalid guild", (done) ->
-    #   wf.info "load invalid guild"
-    #   wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->
-    #     wow.armory_load ->
-    #       done()
+    it "armory load/valid guild/update, no change", (done) ->
+      mock_lookup = sinon.mock(wow.get_wowlookup())
+      mock_lookup.expects("get").twice().yields
+        region:"eu"
+        realm:"Darkspear"
+        type:"guild"
+        name:"Mean Girls"
+        lastModified:123
+        members:
+          [character:
+            region:"eu"
+            realm:"Darkspear"
+            type:"member"
+            name:"Kimptoc" 
+            lastModified:123
+          ]
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
+      mock_store.expects("ensure_index").twice().yields()
+      mock_store.expects("load").twice().yields({lastModified:123})
+      mock_store.expects("add").never()
 
-    it "armory load/valid member2", (done) ->
-      wf.info "load valid member2"
-      wow.ensure_registered "eu", "Darkspear", "member", "Malien", ->
-        wow.armory_load ->
-          done()
+      wow.armory_load ->
+        done()
+
+    it "armory load/valid guild/update, with change", (done) ->
+      mock_lookup = sinon.mock(wow.get_wowlookup())
+      mock_lookup.expects("get").twice().yields
+        region:"eu"
+        realm:"Darkspear"
+        type:"guild"
+        name:"Mean Girls"
+        lastModified:123
+        members:
+          [character:
+            region:"eu"
+            realm:"Darkspear"
+            type:"member"
+            name:"Kimptoc" 
+            lastModified:123
+          ]
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
+      mock_store.expects("ensure_index").twice().yields()
+      mock_store.expects("load").twice().yields({lastModified:122})
+      mock_store.expects("add").twice()
+
+      wow.armory_load ->
+        done()
+
+    it "armory load/invalid guild/new", (done) ->
+      mock_lookup = sinon.mock(wow.get_wowlookup())
+      mock_lookup.expects("get").once().yields
+        region:"eu"
+        realm:"Darkspear"
+        type:"guild"
+        name:"Mean Girls"
+        error: "not found"
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
+      mock_store.expects("ensure_index").once().yields()
+      mock_store.expects("load").once().yields()
+      mock_store.expects("add").once().yields() # guild
+
+      wow.armory_load ->
+        done()
 
     it "armory load/valid member", (done) ->
-      wf.info "load valid member"
-      wow.ensure_registered "eu", "Darkspear", "member", "Kimptocii", ->
-        wow.armory_load ->
-          done()
+      mock_lookup = sinon.mock(wow.get_wowlookup())
+      mock_lookup.expects("get").once().yields
+        region:"eu"
+        realm:"Darkspear"
+        type:"member"
+        name:"Mean Girls"
+      mock_store = sinon.mock(wow.get_store())
+      mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"member", name:"Mean Girls"}])
+      mock_store.expects("ensure_index").once().yields()
+      mock_store.expects("load").once().yields()
+      mock_store.expects("add").once().yields() # member
 
-    it "armory load/invalid member", (done) ->
-      wf.info "load invalid member"
-      wow.ensure_registered "eu", "Darkspear", "member", "Kimptocii555", ->
-        wow.armory_load ->
-          done()
-
-    it "armory load several valid/invalid", (done) ->
-      wf.info "load several valid/invalid"
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.ensure_registered "eu", "Darkspear", "guild", "Mean GirlsQQQ", ->
-          wow.ensure_registered "eu", "Darkspear", "member", "Kimptonite", ->
-            wow.ensure_registered "eu", "Darkspear", "member", "Kimptonite444", ->
-              wow.armory_load ->
-                wf.debug "Got armory callback"
-                done()
+      wow.armory_load ->
+        done()
 
     it "basic get when none", (done) ->
       item =
@@ -179,42 +259,5 @@ describe "wow wrapper:", ->
         results.length.should.equal 0
         done()
 
-    it "save new update for valid item", (done) ->
-      callbacks = 0
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.armory_load ->
-          wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
-            # should.exist results
-            results.length.should.equal 1
-            callbacks += 1
-            done() if callbacks == 29
-
-    it "save 2 updates, identical for valid item", (done)->
-      callbacks = 0
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.armory_load ->
-          wow.armory_load ->
-            wow.get_history "eu", "Darkspear", "guild", "Mean Girls", (results) ->
-              # should.exist results
-              results.length.should.equal 1
-              callbacks += 1
-              done() if callbacks == 29
-    
-    it "save new update for invalid item", (done)->
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->
-        wow.armory_load ->
-          wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
-            # should.exist results
-            results.length.should.equal 1
-            done()
-
-    it "save 2 updates, identical for invalid item", (done)->
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls321", ->
-        wow.armory_load ->
-          wow.armory_load ->
-            wow.get_history "eu", "Darkspear", "guild", "Mean Girls321", (results) ->
-              # should.exist results
-              results.length.should.equal 1
-              done()
 
     

@@ -15,6 +15,7 @@
         "mongodb":"",
         "log4js":"",
         "jsondiffpatch":"",
-        "cron":""
+        "cron":"",
+        "sinon":""
     }
 }

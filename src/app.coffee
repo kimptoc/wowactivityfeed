@@ -115,7 +115,11 @@ handle_view = (req, res) ->
     # wf.debug JSON.stringify(wf.app.wow.get_registered())
     if wowthings and wowthings.length > 0
       #wf.debug wowthing
-      res.render req.params.type, p: req.params, w: wowthings[0], h: wowthings
+      feed = []
+      for item in wowthings
+        fmt = wf.app.feed_formatter.process(item)
+        feed.push(fmt)
+      res.render req.params.type, p: req.params, w: wowthings[0], h: wowthings, f: feed
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 

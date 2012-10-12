@@ -23,15 +23,6 @@ class wf.StoreMongo
         throw err if err
         removed_handler?()
 
-  # clear_all: (cleared_handler) ->
-  #   @with_connection (client) ->
-  #     wf.debug "clear_all about to drop db"
-  #     client.dropDatabase (err, was_clear_done) ->
-  #       wf.debug "clear_all completed:#{was_clear_done}"
-  #       wf.error(err) if err
-  #       throw err if err
-  #       cleared_handler?(was_clear_done)
-
   get_loaded: (loaded_handler) ->
     @with_connection ->
       wf.mongo_db.collectionNames namesOnly:true, (err, results) ->

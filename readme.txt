@@ -1,36 +1,38 @@
 TODO
-- changes to level not showing as such
-- changes rss links to public site when in 'production'
-
-- cron load - make all load requests go via this, eg armory_load_requested true/false
-- make sure tests pass with new single/done callback from armory load
-- trigger load:
--- hourly
--- when manually requested
--- when new char/guild registered
-
-- uploads via node-cron
-  https://github.com/ncb000gt/node-cron/
-
 - only one callback from armory load - when all received and saved... - re-run tests
-- diff handling of changes for members, achievements and other array based things
-- some members not being found, but listed in history...
 
-- switch to mongolab db on appfog
+- able to armory load specific guilds/members - speed up showing info when new items added
 
-- link from member to guild, if in guild
-- link from member or guild to Armory version of site
-- link from member/guild to rss version of page
-- log when armory requested
+- diff handling of changes for guild members, guild/member achievements and other array based things
+- some members not being found, but listed in history... perhaps where not been played for a while...
+
+- log to db when armory requested
+
+- home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
+
+- not handling the totally new entry bit - showing undefined in feed...
+
+- for guild rss, include/merge guildies with guild updates
+
+- only store delta for history (uses much less space!)
+
+PENDING TEST
+- changes rss links to public site when in 'production'
+- if not found, put on a lastModified, so that its not re-done
 
 LATER
+- when registering differentiate first register with registered but not loaded
+- switch to mongolab/hq db on appfog
+- page to enter region/realm/type/name and get feed page... maybe...
+- chrome extension to give feed url for a specific battle net page, when on it
+- limits... how to restrict use?? needed?
+- make localisable, ie public lang strings in sep file(s)
 - stats post armory load, number loaded, number changed, number not changed, number with errors??
 - use momentjs or similar to show age of update, eg 10 days ago, maybe actual time...
 - rss, send correct content-type
 - highlight members with updates, maybe list of most recent updates on front page
 - when you click on view from loaded, it registers item... dont
 - should(not)exist dont give stack trace... alternative test?
-- if not found, put on a lastModified, so that its not re-done
 - put armory link in info - for errors and good entries
 - track realm status changes: eg
   "http://us.battle.net/api/wow/realm/status?realms=Medivh,Blackrock"
@@ -50,6 +52,10 @@ AppFog notes:
     af update waf1
     af logs waf1
     af crashlogs waf1
+    af env-add waf1 NODE_ENV=production
+
+- uploads via node-cron
+  https://github.com/ncb000gt/node-cron/
 
 diff using jsondiffpatch / https://github.com/benjamine/JsonDiffPatch
 eg
