@@ -128,6 +128,6 @@ class wf.WoW
             whats_changed = wf.calc_changes(doc, info)
             info.whats_changed = whats_changed
             store.add armory_collection, info, ->
-                wf.debug "Now saved #{info.name}"
-                stored_handler?()
+              wf.debug "Now saved #{info.name}"
+              stored_handler?()
 

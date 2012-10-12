@@ -18,4 +18,11 @@ block content
       else
         h3 No members found
       hr
-      #{JSON.stringify(w)} 
+      each item in f
+        h5 #{item.title}
+        div #{item.description}
+        div #{item.date}
+        div 
+          a(href='#{item.url}') link
+
+      // #{JSON.stringify(w)} 
