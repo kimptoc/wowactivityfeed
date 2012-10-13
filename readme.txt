@@ -1,7 +1,9 @@
 TODO
-- only one callback from armory load - when all received and saved... - re-run tests
+- only save latest armory info just keep deltas for old versions
 
-- able to armory load specific guilds/members - speed up showing info when new items added
+- one broken test :(
+
+- able to do armory load for specific guilds/members - speed up showing info when new items added
 
 - diff handling of changes for guild members, guild/member achievements and other array based things
 - some members not being found, but listed in history... perhaps where not been played for a while...
