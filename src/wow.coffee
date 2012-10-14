@@ -120,14 +120,21 @@ class wf.WoW
             wf.debug "Ignored as saved already: #{name}"
             stored_handler?()
           else
-            wf.debug "New or updated: #{info.name}/#{name}"
-            new_item = {region, realm, type, name}
-            new_item.lastModified = info.lastModified
-            new_item.armory = info
-            whats_changed = wf.calc_changes(doc?.armory, info)
-            new_item.whats_changed = whats_changed
-            wf.debug "pre add"
-            store.add armory_collection, new_item, ->
-              wf.debug "Now saved #{info.name}/#{name}"
-              stored_handler?()
+            # only save errors for new updates (assume others are transient)
+            unless doc? and info.error?
+              wf.debug "New or updated: #{info.name}/#{name}"
+              new_item = {region, realm, type, name}
+              new_item.lastModified = info.lastModified
+              new_item.armory = info
+              whats_changed = wf.calc_changes(doc?.armory, info)
+              new_item.whats_changed = whats_changed
+              wf.debug "pre add"
+              store.add armory_collection, new_item, ->
+                if doc?
+                  store.update armory_collection, doc, {$unset:{armory:1}}, ->
+                    wf.debug "Now saved #{info.name}/#{name}, updated old one"
+                    stored_handler?()
+                else
+                  wf.debug "Now saved #{info.name}/#{name}, no old one"
+                  stored_handler?()
 

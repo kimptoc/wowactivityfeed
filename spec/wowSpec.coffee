@@ -86,6 +86,7 @@ describe "wow wrapper:", ->
       mock_store.expects("ensure_index").twice().yields()
       mock_store.expects("load").twice().yields()
       mock_store.expects("add").twice().yields() # guild and members
+      mock_store.expects("update").never()
 
       wow.armory_load ->
         done()
@@ -122,6 +123,7 @@ describe "wow wrapper:", ->
       mock_store.expects("ensure_index").twice().yields()
       mock_store.expects("load").twice().yields({lastModified:123})
       mock_store.expects("add").never()
+      mock_store.expects("update").never()
 
       wow.armory_load ->
         done()
@@ -147,6 +149,7 @@ describe "wow wrapper:", ->
       mock_store.expects("ensure_index").twice().yields()
       mock_store.expects("load").twice().yields({lastModified:122})
       mock_store.expects("add").twice().yields()
+      mock_store.expects("update").twice().yields()
 
       wow.armory_load ->
         done()

@@ -1,8 +1,4 @@
 TODO
-- move armory data into "armory" property
--- tests pass, but not storing guild now...
-
-- only save latest armory info just keep deltas for old versions
 
 - able to do armory load for specific guilds/members - speed up showing info when new items added
 
@@ -17,12 +13,18 @@ TODO
 
 - for guild rss, include/merge guildies with guild updates
 
+- if you get "internal error" from armory, saves changes from that - should ignore.
 
 PENDING TEST
 - changes rss links to public site when in 'production'
 - if not found, put on a lastModified, so that its not re-done
 
 LATER
+- use lastModified from DB to tell armory when we want an update (?)
+- normalise names, eg query this 
+--- http://localhost:3000/view/member/us/kaelthas/Fe%C3%A5therz
+-- and get this
+--- http://localhost:3000/view/member/us/Kael'thas/Fe%C3%A5therz
 - when registering differentiate first register with registered but not loaded
 - switch to mongolab/hq db on appfog
 - page to enter region/realm/type/name and get feed page... maybe...
