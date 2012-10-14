@@ -53,6 +53,14 @@ class wf.StoreMongo
             throw err if err
             stored_handler?(count)
 
+  update: (collection_name, document_key, new_document, update_handler) ->
+    @with_collection collection_name, (coll) ->
+      coll.update document_key, new_document, safe:true, (err, docs) ->
+        wf.error(err) if err
+        throw err if err
+        wf.debug "updated:#{document_key}"
+        update_handler?()
+
   count: (collection_name, document_key, count_handler) ->
     @with_collection (collection_name), (coll) ->
       coll.find document_key, (err, cur) ->

@@ -48,6 +48,23 @@ describe "mongo backed store:", ->
         counter.should.equal 1
         done()
 
+    it "add then update", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+        colours:
+          one:"blue"
+          two:"red"
+
+      store.add "foo",someObj, (counter)->
+        wf.debug "store complete, #{counter}"
+        should.exist someObj.colours
+        counter.should.equal 1
+        store.update "foo", id: 123, { $unset: {"colours",1} }, ->
+          store.load "foo", id: 123, {}, (obj) ->
+            should.not.exist obj.colours
+            done()
+
     it "add item then clear all", (done) ->
       someObj =
         id: 123
@@ -56,10 +73,7 @@ describe "mongo backed store:", ->
       store.add "foo",someObj, (counter)->
         wf.debug "store complete, #{counter}"
         counter.should.equal 1
-#TODO - why this is not working, it used to...
-        # store.clear_all (was_clear_done)->
         store.remove_all "foo", ->
-          # was_clear_done.should.equal true
           store.count "foo", someObj, (n) ->
             n.should.equal 0
             done()

@@ -77,25 +77,25 @@ class wf.WoW
     job_running_lock = true
     @get_registered (results_array) =>
       expected_responses = results_array.length
-      wf.debug "expected_responses:#{expected_responses}"
+      wf.debug "0/expected_responses:#{expected_responses}"
       callback_done = false
       for item in results_array
         wf.debug "About to do Armory lookup for:#{JSON.stringify(item)}"
         wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
           expected_responses -= 1
-          wf.debug "expected_responses:#{expected_responses}"
+          wf.debug "1/expected_responses:#{expected_responses}"
           wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
-          @store_update info, =>
+          @store_update item.type, item.region, item.realm, item.name, info, =>
             # loaded_callback?(info)
             if info.type == "guild" and info?.members?
               expected_responses += info.members.length
-              wf.debug "expected_responses:#{expected_responses}"
+              wf.debug "g/expected_responses:#{expected_responses}"
               for member in info.members
                 wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
                   expected_responses -= 1
-                  wf.debug "expected_responses:#{expected_responses}"
+                  wf.debug "m/expected_responses:#{expected_responses}"
                   wf.info "Info back for guild #{item.name} member #{member.character.name}"
-                  @store_update member_info, ->
+                  @store_update "member", info.region, info.realm, member.character.name,member_info, ->
                       # loaded_callback?(member_info)
                     if expected_responses == 0 and ! callback_done
                       callback_done = true
@@ -109,25 +109,25 @@ class wf.WoW
               loaded_callback?(info)
     "In progress..."
 
-  store_update: (info, stored_handler) => 
+  store_update: (type, region, realm, name, info, stored_handler) => 
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
     store.ensure_index armory_collection, armory_index_1, ->
-      store.load armory_collection,
-        region : info.region
-        realm : info.realm
-        type : info.type
-        name : info.name, {sort: {"lastModified": -1}}, (doc) ->
+      store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) ->
           wf.debug "store_update:#{JSON.stringify(doc)}"
           if doc? and doc.lastModified == info.lastModified
-            wf.debug "Ignored as saved already: #{info.name}"
+            wf.debug "Ignored as saved already: #{name}"
             stored_handler?()
           else
-            wf.debug "Not saved #{info.name}"
-            whats_changed = wf.calc_changes(doc, info)
-            info.whats_changed = whats_changed
-            store.add armory_collection, info, ->
+            wf.debug "New or updated: #{info.name}"
+            new_item = {region, realm, type, name}
+            new_item.lastModified = info.lastModified
+            new_item.armory = info
+            whats_changed = wf.calc_changes(doc?.armory, info)
+            new_item.whats_changed = whats_changed
+            wf.debug "pre add"
+            store.add armory_collection, new_item, ->
               wf.debug "Now saved #{info.name}"
               stored_handler?()
 

@@ -122,20 +122,20 @@ describe "wow wrapper:", ->
         realm:"Darkspear"
         type:"guild"
         name:"Mean Girls"
-        lastModified:123
+        lastModified:124
         members:
           [character:
             region:"eu"
             realm:"Darkspear"
             type:"member"
             name:"Kimptoc" 
-            lastModified:123
+            lastModified:125
           ]
       mock_store = sinon.mock(wow.get_store())
       mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
       mock_store.expects("ensure_index").twice().yields()
       mock_store.expects("load").twice().yields({lastModified:122})
-      mock_store.expects("add").twice()
+      mock_store.expects("add").twice().yields()
 
       wow.armory_load ->
         done()
@@ -182,7 +182,7 @@ describe "wow wrapper:", ->
         lastModified: 123
       wow.get item.region,item.realm,item.type,item.name, (result) ->
         wf.debug "back from get"
-        # should.not.exist result
+        # todo - should.not.exist result
         done()
 
     it "basic get_history when none", (done) ->
@@ -204,13 +204,14 @@ describe "wow wrapper:", ->
         realm: "wwewe"
         name: "test"
         lastModified: 123
-      wow.store_update item, ->
+      wow.store_update item.type, item.region, item.realm, item.name, item, ->
         wow.get_history item.region,item.realm,item.type,item.name, (results) ->
           results.length.should.equal 1 
           # should.exist results[0].whats_changed
           results[0].whats_changed.overview.should.equal "NEW"
           wow.get item.region,item.realm,item.type,item.name, (result) ->
             # should.exist result
+            wf.debug "result:#{JSON.stringify(result)}"
             result.name.should.equal "test"
             done()
 
@@ -227,8 +228,8 @@ describe "wow wrapper:", ->
         realm: "wwewe"
         name: "test"
         lastModified: 124
-      wow.store_update item, ->
-        wow.store_update item2, ->
+      wow.store_update item.type, item.region, item.realm, item.name, item, ->
+        wow.store_update item2.type, item2.region, item2.realm, item2.name, item2, ->
           wow.get_history item.region,item.realm,item.type,item.name, (results) ->
             results.length.should.equal 2 
             results[0].lastModified.should.equal 124
@@ -246,8 +247,8 @@ describe "wow wrapper:", ->
         realm: "wwewe"
         name: "test"
         lastModified: 123
-      wow.store_update item, ->
-        wow.store_update item, ->
+      wow.store_update item.type, item.region, item.realm, item.name, item, ->
+        wow.store_update item.type, item.region, item.realm, item.name, item, ->
           wow.get_history item.region,item.realm,item.type,item.name, (results) ->
             results.length.should.equal 1 
             # should.exist results[0].whats_changed
