@@ -88,6 +88,7 @@ ON OSX
 start mongo - sudo port load mongodb
 and maybe sudo rm /opt/local/var/db/mongodb/mongod.lock
 run tests - bash ./node_modules/.bin/mocha js/*Spec.js
+or node ./node_modules/mocha/bin/mocha 
 run app - node node_modules/nodemon/nodemon js/app.js
 compile coffee - same as above
 

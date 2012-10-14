@@ -9,6 +9,7 @@ describe "wow armory lookup:", ->
       wow = new wf.WowLookup()
       wow.get "guild", "eu", "Darkspear", "Mean Girls", (result) ->
         should.exist result
+        should.not.exist result.error
         result.name.should.equal "Mean Girls"
         should.not.exist result.error
         done()
