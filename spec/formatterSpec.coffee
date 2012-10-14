@@ -35,7 +35,8 @@ describe "feed item formatter", ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
-        level : 5
+        armory :
+          level : 5
         whats_changed :
           overview : "UPDATE"
           changes :

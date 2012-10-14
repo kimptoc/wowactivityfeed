@@ -1,6 +1,6 @@
 TODO
 - move armory data into "armory" property
--- tests pass, but not loading members... also some pages have errors.. 
+-- tests pass, but not storing guild now...
 
 - only save latest armory info just keep deltas for old versions
 
