@@ -94,8 +94,8 @@ class wf.WoW
                 wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
                   expected_responses -= 1
                   wf.debug "m/expected_responses:#{expected_responses}"
-                  wf.info "Info back for guild #{item.name} member #{member.character.name}"
-                  @store_update "member", info.region, info.realm, member.character.name,member_info, ->
+                  wf.info "Info back for guild #{item.name} member #{member_info.name}"
+                  @store_update "member", info.region, info.realm, member_info.name,member_info, ->
                       # loaded_callback?(member_info)
                     if expected_responses == 0 and ! callback_done
                       callback_done = true
@@ -120,7 +120,7 @@ class wf.WoW
             wf.debug "Ignored as saved already: #{name}"
             stored_handler?()
           else
-            wf.debug "New or updated: #{info.name}"
+            wf.debug "New or updated: #{info.name}/#{name}"
             new_item = {region, realm, type, name}
             new_item.lastModified = info.lastModified
             new_item.armory = info
@@ -128,6 +128,6 @@ class wf.WoW
             new_item.whats_changed = whats_changed
             wf.debug "pre add"
             store.add armory_collection, new_item, ->
-              wf.debug "Now saved #{info.name}"
+              wf.debug "Now saved #{info.name}/#{name}"
               stored_handler?()
 

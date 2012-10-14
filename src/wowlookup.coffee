@@ -34,7 +34,7 @@ class wf.WowLookup
                 lastModified: 0
                 info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
-              wf.debug "wowlookup result:#{JSON.stringify(guild)}"
+              wf.debug "wowlookup #{name}/#{guild.name} result:#{JSON.stringify(guild)}"
               guild.type = type
               guild.region = region
               result_handler?(guild)
@@ -56,7 +56,7 @@ class wf.WowLookup
                 lastModified: 0
                 info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
             else
-              wf.debug "wowlookup result:#{JSON.stringify(char)}"
+              wf.debug "wowlookup #{name}/#{char.name} result:#{JSON.stringify(char)}"
               char.type = type
               char.region = region
               result_handler?(char)

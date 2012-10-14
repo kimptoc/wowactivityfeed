@@ -11,9 +11,9 @@ class wf.FeedItemFormatter
         change_description = "And as if by magic, #{item.name} appeared!"
       else
         if item.whats_changed.changes.level?
-          change_description += "#{item.name} is now level #{item.level}! "
+          change_description += "#{item.name} is now level #{item.armory.level}! "
         if item.whats_changed.changes.achievementPoints?
-          change_description += "Yay, more achievement points - now at #{item.achievementPoints}. "
+          change_description += "Yay, more achievement points - now at #{item.armory.achievementPoints}. "
     if change_description == ""
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
     result = 

@@ -68,7 +68,7 @@ describe "wow wrapper:", ->
                 items.length.should.equal 2
                 done()
 
-    it "armory load/valid guild/new", (done) ->
+    it "armory load/valid guild/new/mock", (done) ->
       mock_lookup = sinon.mock(wow.get_wowlookup())
       mock_lookup.expects("get").twice().yields
         region:"eu"
@@ -89,6 +89,17 @@ describe "wow wrapper:", ->
 
       wow.armory_load ->
         done()
+
+    it "armory load/valid guild/new/real", (done) ->
+      this.timeout(60000);
+      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+        wow.armory_load ->
+          wow.get_loaded (docs) ->
+            should.exist docs
+            docs.length.should.equal 29
+            for doc in docs
+              doc.name.should.equal doc.armory.name
+            done()
 
     it "armory load/valid guild/update, no change", (done) ->
       mock_lookup = sinon.mock(wow.get_wowlookup())

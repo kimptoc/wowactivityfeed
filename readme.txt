@@ -1,7 +1,8 @@
 TODO
-- only save latest armory info just keep deltas for old versions
+- move armory data into "armory" property
+-- tests pass, but not loading members... also some pages have errors.. 
 
-- one broken test :(
+- only save latest armory info just keep deltas for old versions
 
 - able to do armory load for specific guilds/members - speed up showing info when new items added
 
@@ -16,7 +17,6 @@ TODO
 
 - for guild rss, include/merge guildies with guild updates
 
-- only store delta for history (uses much less space!)
 
 PENDING TEST
 - changes rss links to public site when in 'production'

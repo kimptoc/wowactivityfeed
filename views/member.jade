@@ -2,11 +2,11 @@ extends layout
 
 block content
   .container
-    h3.bordered #{p.region} / #{p.realm} / member: #{w.name}, level: #{w.level}
+    h3.bordered #{p.region} / #{p.realm} / member: #{w.name}, level: #{w.armory.level}
     div History available: #{h.length}
     if w.guild 
       div 
-        Guild: a(href='/view/guild/#{w.region}/#{w.realm}/#{w.guild.name}')= w.guild.name 
+        Guild: a(href='/view/guild/#{w.region}/#{w.realm}/#{w.armory.guild.name}')= w.armory.guild.name 
     div 
       a(href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple') View in Armory
     div
