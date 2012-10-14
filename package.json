@@ -16,6 +16,7 @@
         "log4js":"",
         "jsondiffpatch":"",
         "cron":"",
-        "sinon":""
+        "sinon":"",
+        "portchecker":""
     }
 }

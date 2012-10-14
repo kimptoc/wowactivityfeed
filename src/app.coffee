@@ -32,7 +32,7 @@ wf.hourlyjob = new cronJob '00 55 * * * *', (->
   null #/* Time zone of this job. */
 
 wf.loadjob = new cronJob '*/10 * * * * *', (-> 
-  wf.info "cronjob tick...check if armory load requested"
+  wf.debug "cronjob tick...check if armory load requested"
   if wf.armory_load_requested
     wf.armory_load_requested = false
     wf.info "time for armory_load..."

@@ -1,25 +1,33 @@
 TODO
 
-- able to do armory load for specific guilds/members - speed up showing info when new items added
+- diff handling of changes for member achievements 
 
-- diff handling of changes for guild members, guild/member achievements and other array based things
-- some members not being found, but listed in history... perhaps where not been played for a while...
-
-- log to db when armory requested
-
-- home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
-
-- not handling the totally new entry bit - showing undefined in feed...
+- guild news feed ?
 
 - for guild rss, include/merge guildies with guild updates
 
-- if you get "internal error" from armory, saves changes from that - should ignore.
 
-PENDING TEST
-- changes rss links to public site when in 'production'
-- if not found, put on a lastModified, so that its not re-done
+- diff handling of changes for guild members, guild achievements and other array based things
+
+- able to do armory load for specific guilds/members - speed up showing info when new items added
+
+- log to db when armory requested/stats of armory calls made
+
+- home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
+-- and number of armory calls made
+
+- not handling the totally new entry bit - showing undefined in feed...
+
+
+- some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
+
+- make proxy use dependant on whether its running... 
+
+PENDING BEING TESTED
+
 
 LATER
+- put savedTime onto db 
 - use lastModified from DB to tell armory when we want an update (?)
 - normalise names, eg query this 
 --- http://localhost:3000/view/member/us/kaelthas/Fe%C3%A5therz
@@ -97,6 +105,12 @@ compile coffee - same as above
 
 
 LINKS
+
+jade - view templates - https://github.com/visionmedia/jade#readme
+
+sinon - mocks for testing - http://sinonjs.org/docs/#mocks
+mocha - for testing - http://visionmedia.github.com/mocha/
+should - for testing - https://github.com/visionmedia/should.js
 
 html2jade tool - https://github.com/donpark/html2jade
 
