@@ -1,6 +1,11 @@
 global.wf ||= {}
 
-armory = require('armory')
+armory = null
+
+if process.env.NODE_ENV == "production"
+  armory = require('armory')
+else
+  armory = require('armory').defaults(request:{proxy:"http://localhost:8888"})
 
 require "./store"
 require('./init_logger')
