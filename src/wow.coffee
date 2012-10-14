@@ -85,7 +85,7 @@ class wf.WoW
           expected_responses -= 1
           wf.debug "1/expected_responses:#{expected_responses}"
           wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
-          @store_update item.type, item.region, item.realm, item.name, info, =>
+          @store_update info.type, info.region, info.realm, info.name, info, =>
             # loaded_callback?(info)
             if info.type == "guild" and info?.members?
               expected_responses += info.members.length
@@ -94,8 +94,8 @@ class wf.WoW
                 wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
                   expected_responses -= 1
                   wf.debug "m/expected_responses:#{expected_responses}"
-                  wf.info "Info back for guild #{item.name} member #{member_info.name}"
-                  @store_update "member", info.region, info.realm, member_info.name,member_info, ->
+                  wf.info "Info back for guild #{member_info.name} member #{member_info.name}"
+                  @store_update member_info.type, member_info.region, member_info.realm, member_info.name,member_info, ->
                       # loaded_callback?(member_info)
                     if expected_responses == 0 and ! callback_done
                       callback_done = true
