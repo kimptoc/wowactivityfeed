@@ -10,6 +10,15 @@ store = new wf.Store()
 class wf.WowLookup
 
   armory_instance = null
+  armory_calls = 
+    guild: "guild"
+    member: "character"
+    character: "character"
+
+  armory_fields = 
+    guild: ["members","achievements","news","challenge"]
+    member: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
+    character: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
 
   constructor: ->
     wf.info "WowLookup constructor"
@@ -47,48 +56,35 @@ class wf.WowLookup
   get: (type, region, realm, name, result_handler) ->
     wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}"
     @with_armory (armory) ->
-      switch type
-        when "guild"
-          armory.guild
-            region: region
-            realm: realm
-            name: name
-            fields: ["members","achievements","news","challenge"]
-            (err,guild) ->
-              if err
-                wf.error("wowlookup error:#{err.message} : #{JSON.stringify(err)}")
-                result_handler?(
-                  type: type
-                  region: region
-                  realm: realm
-                  name: name
-                  error: err.message
-                  lastModified: 0
-                  info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
-              else
-                wf.debug "wowlookup #{name}/#{guild.name} result:#{JSON.stringify(guild)}"
-                guild.type = type
-                guild.region = region
-                result_handler?(guild)
-        when "member"
-          armory.character
-            region: region
-            realm: realm
-            name: name
-            fields: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
-            (err,char) ->
-              if err
-                wf.error("wowlookup error:#{err.message} : #{JSON.stringify(err)}")
-                result_handler?(
-                  type: type
-                  region: region
-                  realm: realm
-                  name: name
-                  error: err.message
-                  lastModified: 0
-                  info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
-              else
-                wf.debug "wowlookup #{name}/#{char.name} result:#{JSON.stringify(char)}"
-                char.type = type
-                char.region = region
-                result_handler?(char)
+      armory[armory_calls[type]]
+        region: region
+        realm: realm
+        name: name
+        fields: armory_fields[type]
+        (err,thing) ->
+          if err
+            wf.error("wowlookup error:#{err.message} : #{JSON.stringify(err)}")
+            result_handler?(
+              type: type
+              region: region
+              realm: realm
+              name: name
+              error: err.message
+              lastModified: 0
+              info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
+          else
+            wf.debug "wowlookup #{name}/#{thing.name} result:#{JSON.stringify(thing)}"
+            thing.type = type
+            thing.region = region
+            result_handler?(thing)
+
+  get_static: (static_load_method, region = "eu", callback) ->
+    @with_armory (armory) ->
+      armory[static_load_method] {region}, (err, things) ->
+        if err
+          wf.error("wowlookup get_static(#{static_load_method}) error:#{err.message} : #{JSON.stringify(err)}")
+          callback?(null)
+        else
+          wf.debug "wowlookup get_static(#{static_load_method}) result:[#{things.length}]#{JSON.stringify(things)}"
+          callback?(things)
+

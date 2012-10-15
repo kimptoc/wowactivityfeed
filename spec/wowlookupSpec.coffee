@@ -37,3 +37,20 @@ describe "wow armory lookup:", ->
         should.exist result.error
         should.exist result.name
         done()
+
+    it "get all char achievements static", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_static "characterAchievements", "eu", (results) ->
+        should.exist results
+        results.length.should.equal 11 # char achievement categories ...
+        wow.get_static "characterAchievements", "us", (results) ->
+          should.exist results
+          results.length.should.equal 11 # char achievement categories ...
+          done()
+
+    it "get all guild achievements static", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_static "guildAchievements", "eu", (results) ->
+        should.exist results
+        results.length.should.equal 7 # guild achievement categories ...
+        done()
