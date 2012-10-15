@@ -110,6 +110,8 @@ compile coffee - same as above
 
 LINKS
 
+date format via moment - http://momentjs.com/docs/
+
 jade - view templates - https://github.com/visionmedia/jade#readme
 
 sinon - mocks for testing - http://sinonjs.org/docs/#mocks

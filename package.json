@@ -17,6 +17,7 @@
         "jsondiffpatch":"",
         "cron":"",
         "sinon":"",
-        "portchecker":""
+        "portchecker":"",
+        "moment":""
     }
 }

@@ -1,5 +1,7 @@
 global.wf ||= {}
 
+moment = require 'moment'
+
 require('./init_logger')
 
 class wf.FeedItemFormatter
@@ -22,9 +24,11 @@ class wf.FeedItemFormatter
           change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
     if change_description == ""
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
+    dateMoment = moment(item?.lastModified)
     result = 
       title: "#{item?.name}:"
       description: change_description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
       date: item?.lastModified 
+      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
     return result
