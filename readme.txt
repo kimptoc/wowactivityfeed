@@ -1,10 +1,8 @@
 TODO
 - storing dupes of items, alternating last modified...
 
-- static info, unique key!
-
 - diff handling of changes for member achievements 
-
+- member feed - what is it - latest achievements?
 - guild news feed ?
 
 - for guild rss, include/merge guildies with guild updates

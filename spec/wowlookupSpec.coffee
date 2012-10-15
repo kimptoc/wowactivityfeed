@@ -41,9 +41,14 @@ describe "wow armory lookup:", ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Kimptoc"
+        should.exist result.achievements
+        result.achievements.achievementsCompleted.length.should.equal result.achievements.achievementsCompletedTimestamp.length
+        result.achievements.criteria.length.should.equal result.achievements.criteriaCreated.length
+        result.achievements.criteria.length.should.equal result.achievements.criteriaQuantity.length
+        result.achievements.criteria.length.should.equal result.achievements.criteriaTimestamp.length
         done()
 
-    it "invalid member armory lookup", (done) ->
+    it "invalid  member armory lookup", (done) ->
       wow = new wf.WowLookup()
       wow.get "member", "eu", "Darkspear", "Kimptocaaa", (result) ->
         should.exist result

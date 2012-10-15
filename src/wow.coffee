@@ -153,12 +153,34 @@ class wf.WoW
       job_running_lock = false
     "In progress..."
 
+  format_armory_info: (type, region, realm, name, info, doc) ->
+    new_item = {region, realm, type, name}
+    new_item.lastModified = info.lastModified
+    # remap achievements as a map for ease of diff/use
+    if info.achievements?
+      achievements_map = {}
+      for i in [0..info.achievements.achievementsCompleted.length-1]
+        achievements_map[info.achievements.achievementsCompleted[i]] = info.achievements.achievementsCompletedTimestamp[i]
+      info.achievements_map = achievements_map
+      achievements_criteria_map = {}
+      for i in [0..info.achievements.criteria.length-1]
+        achievements_criteria_map[info.achievements.criteria[i]] = 
+          created: info.achievements.criteriaCreated[i]
+          quantity: info.achievements.criteriaQuantity[i]
+          timestamp: info.achievements.criteriaTimestamp[i]
+      info.achievements_criteria_map = achievements_criteria_map
+    # todo, remove orig achievements entry, maybe
+    new_item.armory = info
+    whats_changed = wf.calc_changes(doc?.armory, info)
+    new_item.whats_changed = whats_changed
+    return new_item
+
   store_update: (type, region, realm, name, info, stored_handler) => 
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
-    store.ensure_index armory_collection, armory_index_1, ->
-      store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) ->
+    store.ensure_index armory_collection, armory_index_1, =>
+      store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
           wf.debug "store_update:#{JSON.stringify(doc)}"
           if doc? and doc.lastModified == info.lastModified
             wf.debug "Ignored as saved already: #{name}"
@@ -167,11 +189,7 @@ class wf.WoW
             # only save errors for new updates (assume others are transient)
             unless doc? and info.error?
               wf.debug "New or updated: #{info.name}/#{name}"
-              new_item = {region, realm, type, name}
-              new_item.lastModified = info.lastModified
-              new_item.armory = info
-              whats_changed = wf.calc_changes(doc?.armory, info)
-              new_item.whats_changed = whats_changed
+              new_item = @format_armory_info(type, region, realm, name, info, doc)
               wf.debug "pre add"
               store.add armory_collection, new_item, ->
                 if doc?
