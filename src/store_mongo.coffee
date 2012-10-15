@@ -8,6 +8,7 @@ wf.mongo_db = null
 
 class wf.StoreMongo
   collection_cache = {}
+  mongo_connecting = false
 
   constructor: ->
     wf.info "StoreMongo.constructor"
@@ -37,7 +38,7 @@ class wf.StoreMongo
 
   ensure_index: (collection_name, fieldSpec, callback) ->
     @with_collection collection_name, (coll) ->
-      coll.ensureIndex fieldSpec, callback
+      coll.ensureIndex fieldSpec, {unique: true, safe: true}, callback
       
   add: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
@@ -46,6 +47,20 @@ class wf.StoreMongo
         throw err if err
         wf.debug "saved:#{document_object}"
         coll.find document_object, (err, cur) ->
+          wf.error(err) if err
+          throw err if err
+          cur.count (err, count) ->
+            wf.error(err) if err
+            throw err if err
+            stored_handler?(count)
+
+  upsert: (collection_name, document_key, document_object, stored_handler) ->
+    @with_collection collection_name, (coll) ->
+      coll.update document_key, document_object, {safe:true, upsert:true}, (err, docs) ->
+        wf.error(err) if err
+        throw err if err
+        wf.debug "saved:#{document_object}"
+        coll.find document_key, (err, cur) ->
           wf.error(err) if err
           throw err if err
           cur.count (err, count) ->
@@ -118,11 +133,18 @@ class wf.StoreMongo
     if wf.mongo_db
       worker(wf.mongo_db)
     else
+      if mongo_connecting
+        # todo - handle this properly... probably some async tool
+        wf.error("already opening connecting, try again later...")
+        setTimeout (=> @with_connection(worker)), 5000
+        return
+      mongo_connecting = true
       mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)
       new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
         wf.error(err) if err
         throw err if err
         wf.mongo_db = client
         wf.info "Connected to MongoDB:#{client}"
-        worker(client)
+        mongo_connecting = false
+        worker?(client)
 

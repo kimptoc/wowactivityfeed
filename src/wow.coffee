@@ -14,7 +14,10 @@ class wf.WoW
   wowlookup = new wf.WowLookup()
   registered_collection = "registered"
   armory_collection = "armory_history"
+  static_collection = "armory_static"
+
   armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
+  armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
 
   constructor: ->
@@ -71,42 +74,83 @@ class wf.WoW
     else
       result_handler?(null)
 
+  static_load: =>
+    # load achievements
+    try 
+      @save_achievements("characterAchievements")
+      @save_achievements("guildAchievements")
+    catch e
+      wf.error "static_load:#{e}"
+
+  save_achievements: (name) ->
+    wowlookup.get_static name, "eu", (achievements) ->
+      # data returned is quite structured - so flatten it out to save it
+      # go through all groups
+      for achievementGroup in achievements
+        # get groups categories
+        if achievementGroup.achievements?
+          for groupAchievement in achievementGroup.achievements
+            groupAchievement.static_type = name
+            groupAchievement.group_name = achievementGroup.name
+            groupAchievement.group_id = achievementGroup.id
+            store.ensure_index static_collection, armory_static_index_1, ->
+              store.upsert static_collection, {static_type:name, id:groupAchievement.id}, groupAchievement
+        # get categories and their achievements
+        if achievementGroup.categories?
+          for groupCategory in achievementGroup.categories
+            for categoryAchievement in groupCategory.achievements
+              categoryAchievement.static_type = name
+              categoryAchievement.category_name = groupCategory.name
+              categoryAchievement.category_id = groupCategory.id
+              categoryAchievement.group_name = achievementGroup.name
+              categoryAchievement.group_id = achievementGroup.id
+              store.upsert static_collection, {static_type:name, id:categoryAchievement.id}, categoryAchievement
+
+      # for each, go through its categories/achievements and achievements, store in db
+      # 
+
+
+  # this probably could do with a bit of refactoring- esp. expected_responses probably needs re-doing
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     return if job_running_lock # only run one at a time....
     job_running_lock = true
-    @get_registered (results_array) =>
-      expected_responses = results_array.length
-      wf.debug "0/expected_responses:#{expected_responses}"
-      callback_done = false
-      for item in results_array
-        wf.debug "About to do Armory lookup for:#{JSON.stringify(item)}"
-        wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
-          expected_responses -= 1
-          wf.debug "1/expected_responses:#{expected_responses}"
-          wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
-          @store_update info.type, info.region, info.realm, info.name, info, =>
-            # loaded_callback?(info)
-            if info.type == "guild" and info?.members?
-              expected_responses += info.members.length
-              wf.debug "g/expected_responses:#{expected_responses}"
-              for member in info.members
-                wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
-                  expected_responses -= 1
-                  wf.debug "m/expected_responses:#{expected_responses}"
-                  wf.info "Info back for guild #{member_info.name} member #{member_info.name}"
-                  @store_update member_info.type, member_info.region, member_info.realm, member_info.name,member_info, ->
-                      # loaded_callback?(member_info)
-                    if expected_responses == 0 and ! callback_done
-                      callback_done = true
-                      wf.debug "Got all responses (members), callback time"
-                      job_running_lock = false
-                      loaded_callback?(member_info)
-            if expected_responses == 0 and ! callback_done
-              callback_done = true
-              wf.debug "Got all responses (guild), callback time"
-              job_running_lock = false
-              loaded_callback?(info)
+    try
+      @get_registered (results_array) =>
+        expected_responses = results_array.length
+        wf.debug "0/expected_responses:#{expected_responses}"
+        callback_done = false
+        for item in results_array
+          wf.debug "About to do Armory lookup for:#{JSON.stringify(item)}"
+          wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
+            expected_responses -= 1
+            wf.debug "1/expected_responses:#{expected_responses}"
+            wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
+            @store_update info.type, info.region, info.realm, info.name, info, =>
+              # loaded_callback?(info)
+              if info.type == "guild" and info?.members?
+                expected_responses += info.members.length
+                wf.debug "g/expected_responses:#{expected_responses}"
+                for member in info.members
+                  wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
+                    expected_responses -= 1
+                    wf.debug "m/expected_responses:#{expected_responses}"
+                    wf.info "Info back for guild #{member_info.name} member #{member_info.name}"
+                    @store_update member_info.type, member_info.region, member_info.realm, member_info.name,member_info, ->
+                        # loaded_callback?(member_info)
+                      if expected_responses == 0 and ! callback_done
+                        callback_done = true
+                        wf.debug "Got all responses (members), callback time"
+                        job_running_lock = false
+                        loaded_callback?(member_info)
+              if expected_responses == 0 and ! callback_done
+                callback_done = true
+                wf.debug "Got all responses (guild), callback time"
+                job_running_lock = false
+                loaded_callback?(info)
+    catch e
+      wf.error "armory_load error:#{e}"
+      job_running_lock = false
     "In progress..."
 
   store_update: (type, region, realm, name, info, stored_handler) => 

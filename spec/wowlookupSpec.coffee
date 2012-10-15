@@ -3,6 +3,19 @@ require "./commonSpec"
 
 require "./wowlookup"
 
+checkAchievements = (docs) ->
+  achievements = {}
+  for achievementGroup in docs
+    for achievement in achievementGroup.achievements
+      should.not.exist achievements[achievement.id]
+      achievements[achievement.id] = true
+    if achievementGroup.categories?
+      for category in achievementGroup.categories
+        for achievement in category.achievements
+          should.not.exist achievements[achievement.id]
+          achievements[achievement.id] = true
+  return achievements
+
 describe "wow armory lookup:", ->
   describe "get:", ->
     it "valid guild armory lookup", (done) ->
@@ -43,9 +56,16 @@ describe "wow armory lookup:", ->
       wow.get_static "characterAchievements", "eu", (results) ->
         should.exist results
         results.length.should.equal 11 # char achievement categories ...
-        wow.get_static "characterAchievements", "us", (results) ->
-          should.exist results
-          results.length.should.equal 11 # char achievement categories ...
+        # validate that achievement ids are unique
+        achievements = checkAchievements(results)
+        achievment_length = Object.keys(achievements).length
+        achievment_length.should.be.above(2200)
+
+        wow.get_static "characterAchievements", "us", (results2) ->
+          should.exist results2
+          results2.length.should.equal 11 # char achievement categories ...
+          achievements = checkAchievements(results2)
+          Object.keys(achievements).length.should.equal achievment_length
           done()
 
     it "get all guild achievements static", (done) ->
@@ -53,4 +73,7 @@ describe "wow armory lookup:", ->
       wow.get_static "guildAchievements", "eu", (results) ->
         should.exist results
         results.length.should.equal 7 # guild achievement categories ...
+        achievements = checkAchievements(results)
+        achievment_length = Object.keys(achievements).length
+        achievment_length.should.be.above(250)
         done()

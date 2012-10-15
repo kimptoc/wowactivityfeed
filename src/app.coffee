@@ -42,6 +42,14 @@ wf.loadjob = new cronJob '*/10 * * * * *', (->
   true, #/* Start the job right now */,
   null #/* Time zone of this job. */
 
+wf.staticjob = new cronJob '00 00 00 * * *', (-> 
+  wf.debug "cronjob tick...load armory static"
+  wf.app.wow.static_load()
+  ),
+  null, 
+  true, #/* Start the job right now */,
+  null #/* Time zone of this job. */
+
 wf.app.configure ->
   wf.info "App Startup/Express configure:env=#{app.get('env')},dirname=#{__dirname}"
   wf.app.set('views', __dirname + '/../views')  
@@ -59,6 +67,7 @@ wf.app.configure ->
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.app.wow = new wf.WoW()
   wf.app.feed_formatter = new wf.FeedItemFormatter()
+  wf.app.wow.static_load()
 
 
 wf.app.configure 'development', ->

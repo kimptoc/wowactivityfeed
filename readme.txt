@@ -1,6 +1,8 @@
 TODO
 - storing dupes of items, alternating last modified...
 
+- static info, unique key!
+
 - diff handling of changes for member achievements 
 
 - guild news feed ?
@@ -29,6 +31,8 @@ PENDING BEING TESTED
 
 
 LATER
+- run app at tagadab, also try heroku - any more stable...?
+- save log messages to db with a TTL (1 day?)
 - put savedTime onto db 
 - use lastModified from DB to tell armory when we want an update (?)
 - normalise names, eg query this 
