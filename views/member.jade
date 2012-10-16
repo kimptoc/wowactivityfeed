@@ -4,7 +4,7 @@ block content
   .container
     h3.bordered #{p.region} / #{p.realm} / member: #{w.name}, level: #{w.armory.level}
     div History available: #{h.length}
-    if w.guild 
+    if w.armory.guild 
       div 
         Guild: a(href='/view/guild/#{w.region}/#{w.realm}/#{w.armory.guild.name}')= w.armory.guild.name 
     div 
@@ -18,6 +18,13 @@ block content
       div #{item.date_formatted}
       div 
         a(href='#{item.url}') link
+    hr
+    each fd in w.armory.feed
+      if fd.type == 'ACHIEVEMENT'
+        h5 #{fd.achievement.description}
+        div #{fd.type} - #{new Date(fd.timestamp)}
+        br
+      // #{JSON.stringify(fd)}
     hr
     each hist in h
       div CHANGE: #{hist.lastModified} : #{JSON.stringify(hist.whats_changed)}

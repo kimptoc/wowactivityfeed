@@ -113,6 +113,18 @@ wf.app.get '/loaded', (req, res) ->
     #TODO - get latest entry in each, only feed collections
     res.render "loaded", colls: results
 
+build_feed = (items, feed) ->
+  items_to_publish = []
+  for item in items
+    formatted_items = wf.app.feed_formatter.process(item)
+    for fi in formatted_items
+      items_to_publish.push(fi)
+  items_to_publish.sort (a,b) ->
+    return b.date - a.date
+  for item in items_to_publish
+    feed.item item
+  return feed.xml()
+
 handle_view = (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   type = req.params.type
@@ -126,8 +138,10 @@ handle_view = (req, res) ->
       #wf.debug wowthing
       feed = []
       for item in wowthings
-        fmt = wf.app.feed_formatter.process(item)
-        feed.push(fmt)
+        fmt_items = wf.app.feed_formatter.process(item)
+        for fi in fmt_items
+          feed.push(fi)
+      # todo - sort feed
       res.render req.params.type, p: req.params, w: wowthings[0], h: wowthings, f: feed
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
@@ -149,10 +163,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
     author: 'Chris Kimpton'
 
   wf.app.wow.get_loaded (items) ->
-    for item in items
-      feed.item wf.app.feed_formatter.process(item)
-
-    res.send(feed.xml())
+    res.send build_feed(items, feed)
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 
@@ -171,10 +182,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
     author: 'Chris Kimpton'
 
   wf.app.wow.get_history region, realm, type, name, (items)->
-    for item in items
-      feed.item wf.app.feed_formatter.process(item)
-
-    res.send(feed.xml())
+    res.send build_feed(items, feed)
  
 
 wf.app.get '/debug/clear_all', (req, res) ->

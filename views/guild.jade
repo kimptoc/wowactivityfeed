@@ -24,5 +24,8 @@ block content
         div #{item.date_formatted}
         div 
           a(href='#{item.url}') link
+      hr
+      each hist in h
+        div CHANGE: #{hist.lastModified} : #{JSON.stringify(hist.whats_changed)}
 
       // #{JSON.stringify(w)} 

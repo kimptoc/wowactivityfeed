@@ -1,5 +1,8 @@
 TODO
-- storing dupes of items, alternating last modified...
+
+- feed has loot, bosskills and criteria - report these?
+
+- whats in the changes for achievements map 
 
 - diff handling of changes for member achievements 
 - member feed - what is it - latest achievements?
@@ -24,6 +27,12 @@ TODO
 - some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
 
 - make proxy use dependant on whether its running... 
+
+BUGS
+
+- storing dupes of items, alternating last modified... not seen it again...
+
+
 
 PENDING BEING TESTED
 

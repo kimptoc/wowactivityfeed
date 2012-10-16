@@ -49,7 +49,9 @@ class wf.WoW
   clear_all: (cleared_handler) ->
     wf.debug "clear_all called"
     store.remove_all registered_collection, ->
-      store.remove_all armory_collection, cleared_handler
+      store.remove_all armory_collection, ->
+        store.remove_all static_collection, cleared_handler
+
 
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
@@ -86,6 +88,7 @@ class wf.WoW
     wowlookup.get_static name, "eu", (achievements) ->
       # data returned is quite structured - so flatten it out to save it
       # go through all groups
+      return unless achievements?
       for achievementGroup in achievements
         # get groups categories
         if achievementGroup.achievements?
