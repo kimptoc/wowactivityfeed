@@ -1,0 +1,6 @@
+logs/*
+store/*
+tmp/*
+src/*
+.*
+readme.txt

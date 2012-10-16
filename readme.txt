@@ -1,17 +1,7 @@
 TODO
-
-- feed has loot, bosskills and criteria - report these?
-
-- whats in the changes for achievements map 
-
-- diff handling of changes for member achievements 
-- member feed - what is it - latest achievements?
-- guild news feed ?
+- better format char/guild feed/news items
 
 - for guild rss, include/merge guildies with guild updates
-
-
-- diff handling of changes for guild members, guild achievements and other array based things
 
 - able to do armory load for specific guilds/members - speed up showing info when new items added
 
@@ -21,16 +11,13 @@ TODO
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
 
-- not handling the totally new entry bit - showing undefined in feed...
 
-
-- some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
-
-- make proxy use dependant on whether its running... 
 
 BUGS
-
+maybe....
 - storing dupes of items, alternating last modified... not seen it again...
+- not handling the totally new entry bit - showing undefined in feed...
+- some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
 
 
 
@@ -38,6 +25,8 @@ PENDING BEING TESTED
 
 
 LATER
+- do a guild achievements map - maybe
+- whats in the changes for achievements map - useful or just use feeds/news?
 - run app at tagadab, also try heroku - any more stable...?
 - save log messages to db with a TTL (1 day?)
 - put savedTime onto db 
@@ -74,6 +63,7 @@ NOTES
 
 AppFog notes:
     rvm use 1.8.7-p358@af-tool
+    rvm use ruby-1.9.2-p320@af-tool
     af update waf1
     af logs waf1
     af crashlogs waf1
