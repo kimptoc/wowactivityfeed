@@ -29,6 +29,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
 - do a guild achievements map - maybe

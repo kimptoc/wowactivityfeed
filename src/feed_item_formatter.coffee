@@ -99,6 +99,10 @@ class wf.FeedItemFormatter
       title = "#{item?.name} - '#{feed_item.criteria.description}'"
       description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
 
+    if feed_item.type == "LOOT"
+      title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
+      description = "*** Must find a way to get item names..."
+
     result = 
       title: title
       description: description

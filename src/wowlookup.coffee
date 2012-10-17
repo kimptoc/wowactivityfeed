@@ -17,8 +17,8 @@ class wf.WowLookup
 
   armory_fields = 
     guild: ["members","achievements","news","challenge"]
-    member: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
-    character: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles"]
+    member: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles","items"]
+    character: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles","items"]
 
   constructor: ->
     wf.info "WowLookup constructor"
