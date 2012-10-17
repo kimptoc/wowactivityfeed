@@ -28,6 +28,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- ability to have a single feed for several chars (non guilded, eg all my toons)
 - get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions

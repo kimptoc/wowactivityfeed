@@ -77,6 +77,10 @@ class wf.FeedItemFormatter
       title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
 
+    if news_item.type == "itemCraft"
+      title = "#{news_item.character} made an item! Item id:#{news_item.itemId}"
+      description = "*** Must find a way to get item names..."
+
     result = 
       title: title
       description: description
