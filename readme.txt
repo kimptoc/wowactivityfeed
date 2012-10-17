@@ -1,5 +1,4 @@
 TODO
-- better format char/guild feed/news items
 
 - for guild rss, include/merge guildies with guild updates
 
@@ -29,7 +28,7 @@ PENDING BEING TESTED
 -
 
 LATER
-- get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead
+- get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
 - do a guild achievements map - maybe

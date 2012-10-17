@@ -14,12 +14,14 @@ class wf.FeedItemFormatter
 
   process: (item) ->
     results = []
+    change_title = "#{item?.name}:"
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
         change_description = "And as if by magic, #{item.name} appeared!"
       else
         if item.whats_changed.changes.level?
+          change_title = "#{item?.name} - level #{@get('level',item)}!"
           change_description += "#{item.name} is now level #{@get('level',item)}! "
         if item.whats_changed.changes.achievementPoints?
           change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
@@ -27,7 +29,7 @@ class wf.FeedItemFormatter
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
     dateMoment = moment(item?.lastModified)
     result = 
-      title: "#{item?.name}:"
+      title: change_title
       description: change_description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
       date: item?.lastModified 
