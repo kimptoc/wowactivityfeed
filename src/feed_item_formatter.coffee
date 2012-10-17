@@ -52,8 +52,10 @@ class wf.FeedItemFormatter
     title = "#{item?.name}:#{news_item.type}"
     description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
 
-    if news_item.type == "playerAchievement"
-      title = "#{item.name} - #{news_item.character} gained the achievement '#{news_item.achievement.title}'"
+    if news_item.type == "playerAchievement" or news_item.type == "guildAchievement"
+      mentionGuild = ""
+      mentionGuild = "guild " if news_item.type == "guildAchievement"
+      title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
       description = "#{news_item.achievement.description}"
       if news_item.achievement.criteria and news_item.achievement.criteria.length >0
         description += " ["
@@ -64,6 +66,14 @@ class wf.FeedItemFormatter
           done_first = true
         description += "]"
       description += " (#{news_item.achievement.points}pts)"
+
+    if news_item.type == "itemPurchase"
+      title = "#{news_item.character} bought some gear! Item id:#{news_item.itemId}"
+      description = "*** Must find a way to get item names..."
+
+    if news_item.type == "itemLoot"
+      title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
+      description = "*** Must find a way to get item names..."
 
     result = 
       title: title
