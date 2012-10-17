@@ -91,6 +91,10 @@ class wf.FeedItemFormatter
         description += "]"
       description += " (#{feed_item.achievement.points}pts)"
 
+    if feed_item.type == "CRITERIA"
+      title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
+      description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
+
     result = 
       title: title
       description: description
