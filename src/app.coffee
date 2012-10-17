@@ -121,7 +121,7 @@ build_feed = (items, feed) ->
       items_to_publish.push(fi)
   items_to_publish.sort (a,b) ->
     return b.date - a.date
-  for item in items_to_publish
+  for item in items_to_publish[0...30]
     feed.item item
   return feed.xml()
 

@@ -8,6 +8,9 @@ TODO
 - log to db when armory requested/stats of armory calls made
 - display whether armory load is still running...
 
+- remove clear data/load sample links
+- make site url a environment property
+
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
 
@@ -15,16 +18,18 @@ TODO
 
 BUGS
 maybe....
-- storing dupes of items, alternating last modified... not seen it again...
+- storing dupes of items, alternating last modified... seems to be problem with feathers, maybe due to realm name returned different from that given...  there are 2 entries for them, using other spelling, so might be clash of updates - add does not handle that nicely.
 - not handling the totally new entry bit - showing undefined in feed...
 - some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
 
 
 
 PENDING BEING TESTED
-
+-
 
 LATER
+- make 30 limit on history a param
+- display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
 - do a guild achievements map - maybe
 - whats in the changes for achievements map - useful or just use feeds/news?
 - run app at tagadab, also try heroku - any more stable...?

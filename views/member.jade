@@ -19,12 +19,13 @@ block content
       div 
         a(href='#{item.url}') link
     hr
-    each fd in w.armory.feed
-      if fd.type == 'ACHIEVEMENT'
-        h5 #{fd.achievement.description}
-        div #{fd.type} - #{new Date(fd.timestamp)}
-        br
-      // #{JSON.stringify(fd)}
+    if w.armory.feed
+      each fd in w.armory.feed
+        if fd.type == 'ACHIEVEMENT'
+          h5 #{fd.achievement.description}
+          div #{fd.type} - #{new Date(fd.timestamp)}
+          br
+        // #{JSON.stringify(fd)}
     hr
     each hist in h
       div CHANGE: #{hist.lastModified} : #{JSON.stringify(hist.whats_changed)}

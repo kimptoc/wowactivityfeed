@@ -113,7 +113,7 @@ class wf.WoW
       # 
 
 
-  # this probably could do with a bit of refactoring- esp. expected_responses probably needs re-doing
+  # todo - redo with async queue/this probably could do with a bit of refactoring- esp. expected_responses probably needs re-doing
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     return if job_running_lock # only run one at a time....

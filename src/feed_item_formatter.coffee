@@ -36,13 +36,7 @@ class wf.FeedItemFormatter
     if item?.armory?.feed?
       wf.debug "there is a feed, so add that info - items:#{item.armory.feed.length}"
       for feed_item in item.armory.feed
-        result = 
-          title: "#{item?.name}:#{feed_item.achievement?.description}"
-          description: "#{item?.name}:#{feed_item.type}:#{feed_item.achievement?.description}"
-          url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
-          date: feed_item.timestamp
-          date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
-        results.push result
+        results.push @format_feed_item(feed_item, item)
     else
       wf.debug "no feed for char:#{item?.name}"
     if item?.armory?.news?
@@ -58,3 +52,29 @@ class wf.FeedItemFormatter
     else
       wf.debug "no news for char:#{item?.name}"
     return results
+
+  format_feed_item: (feed_item, item) ->
+    dateMoment = moment(feed_item.timestamp)
+
+    title = "#{item?.name}:#{feed_item.achievement?.title}"
+    description = "#{item?.name}:#{feed_item.type}:#{feed_item.achievement?.description}"
+    if feed_item.type == "ACHIEVEMENT"
+      title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
+      description = "#{feed_item.achievement?.description}"
+      if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
+        description += " ["
+        done_first = false
+        for crit in feed_item.achievement.criteria
+          description += "," if done_first
+          description += " #{crit.description}"
+          done_first = true
+        description += "]"
+      description += " (#{feed_item.achievement.points}pts)"
+
+    result = 
+      title: title
+      description: description
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
+      date: feed_item.timestamp
+      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+    return result
