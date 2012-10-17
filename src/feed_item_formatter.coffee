@@ -42,16 +42,36 @@ class wf.FeedItemFormatter
     if item?.armory?.news?
       wf.debug "there is news, so add that info - items:#{item.armory.news.length}"
       for news_item in item.armory.news
-        result = 
-          title: "#{item?.name}:#{news_item.type}"
-          description: "#{item?.name}:#{news_item.type}:#{news_item.character}:#{news_item.achievement?.description}"
-          url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
-          date: news_item.timestamp
-          date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
-        results.push result
+        results.push @format_news_item(news_item, item)
     else
       wf.debug "no news for char:#{item?.name}"
     return results
+
+  format_news_item: (news_item, item) ->
+    dateMoment = moment(news_item.timestamp)
+    title = "#{item?.name}:#{news_item.type}"
+    description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
+
+    if news_item.type == "playerAchievement"
+      title = "#{item.name} - #{news_item.character} gained the achievement '#{news_item.achievement.title}'"
+      description = "#{news_item.achievement.description}"
+      if news_item.achievement.criteria and news_item.achievement.criteria.length >0
+        description += " ["
+        done_first = false
+        for crit in news_item.achievement.criteria
+          description += "," if done_first
+          description += " #{crit.description}"
+          done_first = true
+        description += "]"
+      description += " (#{news_item.achievement.points}pts)"
+
+    result = 
+      title: title
+      description: description
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
+      date: news_item.timestamp
+      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+    return result
 
   format_feed_item: (feed_item, item) ->
     dateMoment = moment(feed_item.timestamp)

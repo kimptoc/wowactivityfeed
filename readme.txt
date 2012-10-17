@@ -19,6 +19,7 @@ TODO
 BUGS
 maybe....
 - storing dupes of items, alternating last modified... seems to be problem with feathers, maybe due to realm name returned different from that given...  there are 2 entries for them, using other spelling, so might be clash of updates - add does not handle that nicely.
+- kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - not handling the totally new entry bit - showing undefined in feed...
 - some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
 
