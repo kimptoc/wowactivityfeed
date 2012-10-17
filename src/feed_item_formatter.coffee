@@ -77,7 +77,7 @@ class wf.FeedItemFormatter
     dateMoment = moment(feed_item.timestamp)
 
     title = "#{item?.name}:#{feed_item.achievement?.title}"
-    description = "#{item?.name}:#{feed_item.type}:#{feed_item.achievement?.description}"
+    description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
     if feed_item.type == "ACHIEVEMENT"
       title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
       description = "#{feed_item.achievement?.description}"
@@ -94,6 +94,10 @@ class wf.FeedItemFormatter
     if feed_item.type == "CRITERIA"
       title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
       description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
+
+    if feed_item.type == "BOSSKILL"
+      title = "#{item?.name} - '#{feed_item.criteria.description}'"
+      description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
 
     result = 
       title: title
