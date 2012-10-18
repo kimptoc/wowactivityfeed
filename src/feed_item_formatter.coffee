@@ -34,6 +34,8 @@ class wf.FeedItemFormatter
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
       date: item?.lastModified 
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      author: item?.name
+      guid: "#{item?.lastModified}-#{change_title}"
     results.push result
     if item?.armory?.feed?
       wf.debug "there is a feed, so add that info - items:#{item.armory.feed.length}"
@@ -51,13 +53,13 @@ class wf.FeedItemFormatter
 
   format_news_item: (news_item, item) ->
     dateMoment = moment(news_item.timestamp)
-    title = "#{item?.name}:#{news_item.type}"
+    change_title = "#{item?.name}:#{news_item.type}"
     description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
 
     if news_item.type == "playerAchievement" or news_item.type == "guildAchievement"
       mentionGuild = ""
       mentionGuild = "guild " if news_item.type == "guildAchievement"
-      title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
+      change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
       description = "#{news_item.achievement.description}"
       if news_item.achievement.criteria and news_item.achievement.criteria.length >0
         description += " ["
@@ -70,32 +72,34 @@ class wf.FeedItemFormatter
       description += " (#{news_item.achievement.points}pts)"
 
     if news_item.type == "itemPurchase"
-      title = "#{news_item.character} bought some gear! Item id:#{news_item.itemId}"
+      change_title = "#{news_item.character} bought some gear! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
 
     if news_item.type == "itemLoot"
-      title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
+      change_title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
 
     if news_item.type == "itemCraft"
-      title = "#{news_item.character} made an item! Item id:#{news_item.itemId}"
+      change_title = "#{news_item.character} made an item! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
 
     result = 
-      title: title
+      title: change_title
       description: description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
       date: news_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      author: item?.name
+      guid: "#{news_item.timestamp}-#{change_title}"
     return result
 
   format_feed_item: (feed_item, item) ->
     dateMoment = moment(feed_item.timestamp)
 
-    title = "#{item?.name}:#{feed_item.achievement?.title}"
+    change_title = "#{item?.name}:#{feed_item.achievement?.title}"
     description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
     if feed_item.type == "ACHIEVEMENT"
-      title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
+      change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
       description = "#{feed_item.achievement?.description}"
       if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
         description += " ["
@@ -108,21 +112,23 @@ class wf.FeedItemFormatter
       description += " (#{feed_item.achievement.points}pts)"
 
     if feed_item.type == "CRITERIA"
-      title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
+      change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
       description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
 
     if feed_item.type == "BOSSKILL"
-      title = "#{item?.name} - '#{feed_item.criteria.description}'"
+      change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
       description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
 
     if feed_item.type == "LOOT"
-      title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
+      change_title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
       description = "*** Must find a way to get item names..."
 
     result = 
-      title: title
+      title: change_title
       description: description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
       date: feed_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      author: item?.name
+      guid: "#{feed_item.timestamp}-#{change_title}"
     return result
