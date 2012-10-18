@@ -1,7 +1,4 @@
 TODO
-- storing dupes of items, alternating last modified... seems to be problem with feathers, maybe due to realm name returned different from that given...  there are 2 entries for them, using other spelling, so might be clash of updates - add does not handle that nicely.
-- if update would result in dupes, delete one!
-- update registered entry with time of last good update, last update and error, if error
 
 - for guild rss, include/merge guildies with guild updates
 
@@ -33,6 +30,8 @@ PENDING BEING TESTED
 -
 
 LATER
+- update registered entry with time of last good update, last update and error, if error, count of updates
+- if criteria name matches description, only show 1. eg 100 mounts for 100 mounts...
 - ability to have a single feed for several chars (non guilded, eg all my toons)
 - get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param

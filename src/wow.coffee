@@ -122,7 +122,7 @@ class wf.WoW
       # todo if item name/realm differ then update registered entry!
       @store_update info.type, info.region, info.realm, info.name, info, ->
         wf.info "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}"
-        if item.registered != false and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+        if item.registered != false and info.error == null and (item.name != info.name or item.realm != info.realm or item.region != info.region)
           wf.info "Registered entry is different, updated registered"
           item_key = 
             type: item.type
