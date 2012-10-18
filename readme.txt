@@ -1,6 +1,11 @@
 TODO
+- storing dupes of items, alternating last modified... seems to be problem with feathers, maybe due to realm name returned different from that given...  there are 2 entries for them, using other spelling, so might be clash of updates - add does not handle that nicely.
+- if update would result in dupes, delete one!
+- update registered entry with time of last good update, last update and error, if error
 
 - for guild rss, include/merge guildies with guild updates
+
+- better links in rss feed, image/wowhead/armory/mysite etc
 
 - able to do armory load for specific guilds/members - speed up showing info when new items added
 
@@ -17,14 +22,14 @@ TODO
 
 BUGS
 maybe....
-- storing dupes of items, alternating last modified... seems to be problem with feathers, maybe due to realm name returned different from that given...  there are 2 entries for them, using other spelling, so might be clash of updates - add does not handle that nicely.
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - not handling the totally new entry bit - showing undefined in feed...
 - some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
-
+- if using charles/no network, app crashes on startup...
 
 
 PENDING BEING TESTED
+- rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
 -
 
 LATER

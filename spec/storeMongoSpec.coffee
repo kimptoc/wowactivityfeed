@@ -61,7 +61,7 @@ describe "mongo backed store:", ->
           counter.should.equal 1
           done()
 
-    it "add then update", (done) ->
+    it "add then update via $unset", (done) ->
       someObj =
         id: 123
         name: "foo"
@@ -77,6 +77,41 @@ describe "mongo backed store:", ->
           store.load "foo", id: 123, {}, (obj) ->
             should.not.exist obj.colours
             done()
+
+    it "add then remove", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+        colours:
+          one:"blue"
+          two:"red"
+
+      store.add "foo",someObj, (counter)->
+        wf.debug "store complete, #{counter}"
+        counter.should.equal 1
+        store.remove "foo", id: 123, ->
+          store.load "foo", id: 123, {}, (obj) ->
+            should.not.exist obj
+            done()
+
+    it "add then update whole object by key", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+        colours:
+          one:"blue"
+          two:"red"
+
+      store.ensure_index "foo", {name: 1}, ->
+        store.add "foo",someObj, (counter)->
+          wf.debug "store complete, #{counter}"
+          counter.should.equal 1
+          someObj.name = "foo2"
+          someObj.id = 234
+          store.update "foo", id: 123, someObj, ->
+            store.load "foo", id: 234, {}, (obj) ->
+              obj.name.should.equal "foo2"
+              done()
 
     it "add item then clear all", (done) ->
       someObj =

@@ -11,7 +11,8 @@ describe "feed item formatter", ->
     it "handle null", ->
       f = new wf.FeedItemFormatter()
       d = f.process(null)
-      d.description.should.match /^Something.*/
+      d.length.should.equal 1
+      d[0].description.should.match /^Something.*/
 
     it "basic item, new", ->
       f = new wf.FeedItemFormatter()
@@ -20,16 +21,16 @@ describe "feed item formatter", ->
           overview : "NEW"
         lastModified : 0
       d = f.process(item)
-      d.description.should.match /^And as if by magic.*/
-      d.date.should.equal 0
+      d[0].description.should.match /^And as if by magic.*/
+      d[0].date.should.equal 0
 
     it "basic item, new, no whats_changed", ->
       f = new wf.FeedItemFormatter()
       item = 
         lastModified : 0
       d = f.process(item)
-      d.description.should.match /^Something.*/
-      d.date.should.equal 0
+      d[0].description.should.match /^Something.*/
+      d[0].date.should.equal 0
 
     it "basic item, update", ->
       f = new wf.FeedItemFormatter()
@@ -43,5 +44,5 @@ describe "feed item formatter", ->
             level : [4,5]
         lastModified : 1
       d = f.process(item)
-      d.description.should.match /is now level 5/
-      d.date.should.equal 1
+      d[0].description.should.match /is now level 5/
+      d[0].date.should.equal 1

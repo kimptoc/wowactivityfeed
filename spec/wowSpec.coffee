@@ -92,17 +92,15 @@ describe "wow wrapper:", ->
         done()
 
     it "armory load/valid guild/new/real", (done) ->
-      this.timeout(60000);
+      this.timeout(20000);
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.armory_load ->
-          setTimeout (->
-            wow.get_loaded (docs) ->
-              should.exist docs
-              docs.length.should.equal 29
-              for doc in docs
-                doc.name.should.equal doc.armory.name
-              done()
-          ), 10000
+          wow.get_loaded (docs) ->
+            should.exist docs
+            docs.length.should.equal 29
+            for doc in docs
+              doc.name.should.equal doc.armory.name
+            done()
 
     it "armory load/valid guild/update, no change", (done) ->
       mock_lookup = sinon.mock(wow.get_wowlookup())
@@ -276,10 +274,11 @@ describe "wow wrapper:", ->
         results.length.should.equal 0
         done()
 
-    it "load static/real", (done) ->
-      this.timeout(20000);
-      wow.static_load()
-      setTimeout done, 18000
+    # static disabled at the moment, takes up space and not used....
+    # it "load static/real", (done) ->
+    #   this.timeout(20000);
+    #   wow.static_load()
+    #   setTimeout done, 18000
 
 
     

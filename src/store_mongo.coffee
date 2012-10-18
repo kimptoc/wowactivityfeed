@@ -68,12 +68,20 @@ class wf.StoreMongo
             throw err if err
             stored_handler?(count)
 
+  remove: (collection_name, document_key, callback) ->
+    @with_collection collection_name, (coll) ->
+      coll.remove document_key, safe:true, (err, docs) ->
+        wf.error(err) if err
+        throw err if err
+        wf.debug "removed:#{JSON.stringify(document_key)}"
+        callback?()
+
   update: (collection_name, document_key, new_document, update_handler) ->
     @with_collection collection_name, (coll) ->
       coll.update document_key, new_document, safe:true, (err, docs) ->
         wf.error(err) if err
         throw err if err
-        wf.debug "updated:#{document_key}"
+        wf.debug "updated:#{JSON.stringify(new_document)}"
         update_handler?()
 
   count: (collection_name, document_key, count_handler) ->
@@ -100,10 +108,10 @@ class wf.StoreMongo
             if docs.length >= 1
               loaded_handler?(docs[0])
             else
-              wf.error "Did not find any matching documents for key:#{JSON.stringify(document_key)}"
+              wf.error "In collection #{collection_name} did not find any matching for key:#{JSON.stringify(document_key)}"
               loaded_handler?(null)
         else
-          wf.error "No cursor returned for key:#{JSON.stringify(document_key)}"
+          wf.error "No cursor returned for coll: #{collection_name} key:#{JSON.stringify(document_key)}"
           loaded_handler?(null)
 
   load_all: (collection_name, document_key, options, loaded_handler) ->

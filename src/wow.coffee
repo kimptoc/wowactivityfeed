@@ -1,5 +1,7 @@
 global.wf ||= {}
 
+async = require "async"
+
 require "./store_mongo"
 require "./wowlookup"
 
@@ -16,6 +18,7 @@ class wf.WoW
   armory_collection = "armory_history"
   static_collection = "armory_static"
 
+  registered_index_1 = {type:1, region:1, realm:1, name:1}
   armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
@@ -44,7 +47,8 @@ class wf.WoW
     wowlookup
 
   get_registered: (registered_handler)->
-    store.load_all registered_collection, {}, {}, registered_handler
+    store.ensure_index registered_collection, registered_index_1, ->
+      store.load_all registered_collection, {}, {}, registered_handler
 
   clear_all: (cleared_handler) ->
     wf.debug "clear_all called"
@@ -112,9 +116,59 @@ class wf.WoW
       # for each, go through its categories/achievements and achievements, store in db
       # 
 
+  armory_item_loader: (item, callback) =>
+    wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
+      wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
+      # todo if item name/realm differ then update registered entry!
+      @store_update info.type, info.region, info.realm, info.name, info, ->
+        wf.info "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}"
+        if item.registered != false and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+          wf.info "Registered entry is different, updated registered"
+          item_key = 
+            type: item.type
+            region: item.region
+            name: item.name
+            realm: item.realm
+          new_item_key = 
+            type: info.type
+            region: info.region
+            name: info.name
+            realm: info.realm
+          item.realm = info.realm
+          item.region = info.region
+          item.name = info.name
+          store.load registered_collection, new_item_key, null, (new_key_item)->
+            if new_key_item?
+              # new key exists already, so delete old one
+              store.remove registered_collection, item_key, ->
+                callback?(info)
+            else
+              store.upsert registered_collection, item_key, item, ->
+                callback?(info)
+        else
+          callback?(info)
+
+  armory_load: (loaded_callback) =>
+    wf.info "armory_load..."
+    return if job_running_lock # only run one at a time....
+    job_running_lock = true
+    try 
+      loader_queue = async.queue(@armory_item_loader, 8) # 8 max threads 
+      loader_queue.drain = ->
+        job_running_lock = false
+        loaded_callback?()
+      @get_registered (results_array) =>
+        loader_queue.push results_array, (info) ->
+          if info.type == "guild" and info?.members?
+            for member in info.members
+              loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
+
+
+
+
 
   # todo - redo with async queue/this probably could do with a bit of refactoring- esp. expected_responses probably needs re-doing
-  armory_load: (loaded_callback) =>
+  armory_load_1: (loaded_callback) =>
     wf.info "armory_load..."
     return if job_running_lock # only run one at a time....
     job_running_lock = true

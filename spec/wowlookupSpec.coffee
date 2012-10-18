@@ -57,6 +57,7 @@ describe "wow armory lookup:", ->
         done()
 
     it "get all char achievements static", (done) ->
+      this.timeout(15000)
       wow = new wf.WowLookup()
       wow.get_static "characterAchievements", "eu", (results) ->
         should.exist results
