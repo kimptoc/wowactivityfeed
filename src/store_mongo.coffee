@@ -116,7 +116,7 @@ class wf.StoreMongo
 
   load_all: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      wf.debug "load_all, got collection:#{collection_name}"
+      wf.debug "load_all, got collection:#{collection_name}, now query by key:#{JSON.stringify(document_key)}"
       coll.find document_key, options, (err, cur) ->
         wf.debug "load_all, got collection:#{collection_name} contents"
         wf.error("load_all:#{err}") if err

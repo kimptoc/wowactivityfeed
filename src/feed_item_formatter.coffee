@@ -31,7 +31,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: change_description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
       date: item?.lastModified 
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
       author: item?.name
@@ -86,7 +86,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
       date: news_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
       author: item?.name
@@ -126,7 +126,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
       date: feed_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
       author: item?.name

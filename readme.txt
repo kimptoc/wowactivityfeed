@@ -1,4 +1,5 @@
 TODO
+- rss still not feeding twitterfeed - make link/url unique too
 
 - for guild rss, include/merge guildies with guild updates
 

@@ -76,7 +76,11 @@ class wf.WoW
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
         store.ensure_index armory_collection, armory_index_1, ->
-          store.load_all armory_collection, {type, region, realm, name}, {limit:30, sort: {"lastModified": -1}}, result_handler
+          selector = {type, region, realm, name}
+          if type == "guild" # if its a guild, also query for guild members
+            wf.debug "Got a guild, so also query for members..."
+            selector = {$or:[selector, {type:"member", region, realm, "armory.guild.name":name}]}
+          store.load_all armory_collection, selector, {limit:30, sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
 
