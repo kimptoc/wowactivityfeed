@@ -2,9 +2,10 @@ extends layout
 
 block content
   .container
-    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name} / members: #{w.armory.members.length}
-    div 
-      History available: #{h.length}
+    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name} / members: #{w.armory.members?w.armory.members.length:'?'}
+    if h
+      div 
+        History available: #{h.length}
     div
       a(href='http://#{w.region}.battle.net/wow/en/guild/#{w.realm}/#{w.name.replace(/ /,"_")}/') View in Armory
     div
@@ -20,7 +21,7 @@ block content
       hr
       each item in f
         h5 #{item.title}
-        div #{item.description}
+        div !{item.description}
         div #{item.date_formatted}
         div 
           a(href='#{item.url}') link

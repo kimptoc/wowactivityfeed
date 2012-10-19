@@ -1,10 +1,16 @@
 TODO
 
-- local jquery-ui.min.js, jquery-1.7.1.min.js
+- webpage history still not in correct order
 
 - better links in rss feed, image/wowhead/armory/mysite etc
 
+- guild news item, guildLevel - gained a level, I guess...
+
 - log to db when armory requested/stats of armory calls made
+-- save count of calls per load, with date saved
+
+- save log messages to db with a TTL (1 day?)
+
 - display whether armory load is still running...
 
 - remove clear data/load sample links
@@ -16,6 +22,8 @@ TODO
 - are we doing the achievements rejig for guilds?
 
 BUGS
+- seem to have stability issues on appfog... review error logs
+
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - not handling the totally new entry bit - showing undefined in feed...
@@ -28,6 +36,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
 - limit history shown on webpage...
 - update registered entry with time of last good update, last update and error, if error, count of updates
@@ -39,7 +48,6 @@ LATER
 - do a guild achievements map - maybe
 - whats in the changes for achievements map - useful or just use feeds/news?
 - run app at tagadab, also try heroku - any more stable...?
-- save log messages to db with a TTL (1 day?)
 - put savedTime onto db 
 - use lastModified from DB to tell armory when we want an update (?)
 - normalise names, eg query this 
