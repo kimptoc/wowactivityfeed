@@ -84,20 +84,28 @@ class wf.FeedItemFormatter
         description += "]"
       description += " (#{news_item.achievement.points}pts)"
 
-    if news_item.type == "itemPurchase"
+    else if news_item.type == "itemPurchase"
       change_title = "#{news_item.character} bought some gear! Item id:#{news_item.itemId}"
       description = "#{@item_link(news_item.itemId)} *** Must find a way to get item names..."
       thingId = news_item.itemId
 
-    if news_item.type == "itemLoot"
+    else if news_item.type == "itemLoot"
       change_title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
       description = "#{@item_link(news_item.itemId)} *** Must find a way to get item names..."
       thingId = news_item.itemId
 
-    if news_item.type == "itemCraft"
+    else if news_item.type == "itemCraft"
       change_title = "#{news_item.character} made an item! Item id:#{news_item.itemId}"
       description = "#{@item_link(news_item.itemId)} *** Must find a way to get item names..."
       thingId = news_item.itemId
+
+    else if news_item.type == "guildLevel"
+      change_title = "#{item.name} is now level #{news_item.levelUp}!"
+      description = "Guild #{item.name} is now at guild level #{news_item.levelUp}!"
+      thingId = news_item.itemId
+
+    else
+      description += " #{JSON.stringify(news_item)}"
 
     result = 
       title: change_title
@@ -129,20 +137,23 @@ class wf.FeedItemFormatter
         description += "]"
       description += " (#{feed_item.achievement.points}pts)"
 
-    if feed_item.type == "CRITERIA"
+    else if feed_item.type == "CRITERIA"
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
       description = "#{@char_link(item)} - Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
       thingId = feed_item.criteria.id
 
-    if feed_item.type == "BOSSKILL"
+    else if feed_item.type == "BOSSKILL"
       change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
       description = "#{@char_link(item)} - Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
       thingId = feed_item.criteria.id
 
-    if feed_item.type == "LOOT"
+    else if feed_item.type == "LOOT"
       change_title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
       description = "#{@char_link(item)} - #{@item_link(feed_item.itemId)} *** Must find a way to get item names..."
       thingId = feed_item.itemId
+
+    else
+      description += " #{JSON.stringify(feed_item)}"
 
     result = 
       title: change_title

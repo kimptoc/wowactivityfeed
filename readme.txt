@@ -2,8 +2,6 @@ TODO
 
 - webpage history still not in correct order
 
-- better links in rss feed, image/wowhead/armory/mysite etc
-
 - guild news item, guildLevel - gained a level, I guess...
 
 - log to db when armory requested/stats of armory calls made
@@ -36,6 +34,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- show item image in feed (need item info, cache in memory?)
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
 - limit history shown on webpage...
