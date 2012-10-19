@@ -151,8 +151,18 @@ class wf.StoreMongo
       new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
         wf.error(err) if err
         throw err if err
-        wf.mongo_db = client
-        wf.info "Connected to MongoDB:#{client}"
-        mongo_connecting = false
-        worker?(client)
+        if wf.mongo_info.username?
+          wf.info "Have username, so calling authenticate...."
+          client.authenticate wf.mongo_info.username,wf.mongo_info.password, (err, reply) ->
+            wf.error(err) if err
+            throw err if err
+            wf.mongo_db = client
+            wf.info "Connected and logged in to MongoDB:#{client}"
+            mongo_connecting = false
+            worker?(client)
+        else
+          wf.mongo_db = client
+          wf.info "Connected to MongoDB:#{client}"
+          mongo_connecting = false
+          worker?(client)
 

@@ -85,7 +85,17 @@ wf.app.configure 'development', ->
 wf.app.configure 'production', ->
   wf.info "Express app.configure/production"
   wf.SITE_URL = wf.SITE_URL_PROD
-  if process.env.VCAP_SERVICES?
+  wf.SITE_URL = process.env.SITE_URL if process.env.SITE_URL?
+  if process.env.MONGO_HOST?
+    wf.info "Found MONGO_HOST, using that"
+    wf.mongo_info = {}
+    wf.mongo_info.hostname = process.env.MONGO_HOST
+    wf.mongo_info.port = parseInt(process.env.MONGO_PORT)
+    wf.mongo_info.username = process.env.MONGO_USER
+    wf.mongo_info.password = process.env.MONGO_PW
+    wf.mongo_info.db = process.env.MONGO_DB
+  else if process.env.VCAP_SERVICES?
+    wf.info "No MONGO_HOST, using #{process.env.VCAP_SERVICES}"
     env = JSON.parse(process.env.VCAP_SERVICES)
     wf.mongo_info = env['mongodb-1.8'][0]['credentials']
     wf.app.use(express.errorHandler())   

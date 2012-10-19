@@ -1,6 +1,6 @@
 TODO
 
-- webpage history still not in correct order
+- guild member list is empty??? perhaps assuming its first item in history result...
 
 - guild news item, guildLevel - gained a level, I guess...
 

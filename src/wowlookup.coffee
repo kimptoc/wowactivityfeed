@@ -63,7 +63,7 @@ class wf.WowLookup
         fields: armory_fields[type]
         (err,thing) ->
           if err
-            wf.error("wowlookup error:#{err.message} : #{JSON.stringify(err)}")
+            wf.error("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
             result_handler?(
               type: type
               region: region

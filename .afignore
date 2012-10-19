@@ -1,6 +1,6 @@
-logs/*
-store/*
-tmp/*
-src/*
-.*
-readme.txt
+/logs/*
+/store/*
+/tmp/*
+/src/*
+/.*
+/readme.txt
