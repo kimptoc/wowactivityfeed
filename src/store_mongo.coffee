@@ -151,7 +151,7 @@ class wf.StoreMongo
       new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
         wf.error(err) if err
         throw err if err
-        if wf.mongo_info.username?
+        if wf.mongo_info.username? and wf.mongo_info.username.length >0
           wf.info "Have username, so calling authenticate...."
           client.authenticate wf.mongo_info.username,wf.mongo_info.password, (err, reply) ->
             wf.error(err) if err
