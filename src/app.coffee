@@ -14,6 +14,7 @@ require './feed_item_formatter'
 
 wf.SITE_URL = "http://localhost:3000"
 wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
+wf.HISTORY_LIMIT = 60
 
 app = module.exports = express()
 
@@ -121,7 +122,7 @@ build_feed = (items, feed) ->
       items_to_publish.push(fi)
   items_to_publish.sort (a,b) ->
     return b.date - a.date
-  for item in items_to_publish[0...30]
+  for item in items_to_publish[0...wf.HISTORY_LIMIT]
     feed.item item
   return feed.xml()
 

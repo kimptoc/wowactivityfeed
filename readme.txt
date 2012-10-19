@@ -1,7 +1,5 @@
 TODO
-- rss still not feeding twitterfeed - make link/url unique too
 
-- for guild rss, include/merge guildies with guild updates
 
 - better links in rss feed, image/wowhead/armory/mysite etc
 
@@ -31,6 +29,8 @@ PENDING BEING TESTED
 -
 
 LATER
+- options include/exclude guildies on guild feed
+- limit history shown on webpage...
 - update registered entry with time of last good update, last update and error, if error, count of updates
 - if criteria name matches description, only show 1. eg 100 mounts for 100 mounts...
 - ability to have a single feed for several chars (non guilded, eg all my toons)

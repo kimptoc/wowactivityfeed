@@ -61,6 +61,7 @@ class wf.FeedItemFormatter
       mentionGuild = "guild " if news_item.type == "guildAchievement"
       change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
       description = "#{news_item.achievement.description}"
+      thingId = news_item.achievement.id
       if news_item.achievement.criteria and news_item.achievement.criteria.length >0
         description += " ["
         done_first = false
@@ -68,25 +69,29 @@ class wf.FeedItemFormatter
           description += "," if done_first
           description += " #{crit.description}"
           done_first = true
+          thingId += "-#{crit.id}"
         description += "]"
       description += " (#{news_item.achievement.points}pts)"
 
     if news_item.type == "itemPurchase"
       change_title = "#{news_item.character} bought some gear! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
+      thingId = news_item.itemId
 
     if news_item.type == "itemLoot"
       change_title = "#{news_item.character} got some loot! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
+      thingId = news_item.itemId
 
     if news_item.type == "itemCraft"
       change_title = "#{news_item.character} made an item! Item id:#{news_item.itemId}"
       description = "*** Must find a way to get item names..."
+      thingId = news_item.itemId
 
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}&id=#{thingId}"
       date: news_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
       author: item?.name
@@ -101,6 +106,7 @@ class wf.FeedItemFormatter
     if feed_item.type == "ACHIEVEMENT"
       change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
       description = "#{feed_item.achievement?.description}"
+      thingId = feed_item.achievement.id
       if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
         description += " ["
         done_first = false
@@ -108,25 +114,29 @@ class wf.FeedItemFormatter
           description += "," if done_first
           description += " #{crit.description}"
           done_first = true
+          thingId += "-#{crit.id}"
         description += "]"
       description += " (#{feed_item.achievement.points}pts)"
 
     if feed_item.type == "CRITERIA"
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
       description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
+      thingId = feed_item.criteria.id
 
     if feed_item.type == "BOSSKILL"
       change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
       description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
+      thingId = feed_item.criteria.id
 
     if feed_item.type == "LOOT"
       change_title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
       description = "*** Must find a way to get item names..."
+      thingId = feed_item.itemId
 
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}&id=#{thingId}"
       date: feed_item.timestamp
       date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
       author: item?.name
