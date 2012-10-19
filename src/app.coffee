@@ -135,16 +135,16 @@ handle_view = (req, res) ->
   name = req.params.name
   wf.app.wow.get_history region, realm, type, name, (wowthings) ->
     # wf.debug JSON.stringify(wf.app.wow.get_registered())
-    if wowthings and wowthings.length > 0
+    if wowthings? and wowthings.length > 0
       #wf.debug wowthing
       feed = []
-      wowthings.sort (a,b) ->
-        return b.date - a.date
-      wowthings = wowthings[0..wf.HISTORY_LIMIT]
       for item in wowthings
         fmt_items = wf.app.feed_formatter.process(item)
         for fi in fmt_items
           feed.push(fi)
+      feed.sort (a,b) ->
+        return b.date - a.date
+      feed = feed[0..wf.HISTORY_LIMIT]
       # todo - sort feed
       res.render req.params.type, p: req.params, w: wowthings[0], h: wowthings, f: feed
     else
