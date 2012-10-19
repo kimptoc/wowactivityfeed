@@ -1,5 +1,6 @@
 TODO
 
+- local jquery-ui.min.js, jquery-1.7.1.min.js
 
 - better links in rss feed, image/wowhead/armory/mysite etc
 
