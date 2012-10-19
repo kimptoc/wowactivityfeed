@@ -3,8 +3,6 @@ TODO
 
 - better links in rss feed, image/wowhead/armory/mysite etc
 
-- able to do armory load for specific guilds/members - speed up showing info when new items added
-
 - log to db when armory requested/stats of armory calls made
 - display whether armory load is still running...
 
@@ -14,7 +12,7 @@ TODO
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
 
-
+- are we doing the achievements rejig for guilds?
 
 BUGS
 maybe....

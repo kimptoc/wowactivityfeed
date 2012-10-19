@@ -22,6 +22,7 @@ class wf.WoW
   armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
+  armory_pending_queue = []
 
   constructor: ->
     wf.info "WoW constructor"
@@ -35,6 +36,7 @@ class wf.WoW
         registered_handler?(true)
       else
         wf.debug "Not Registered #{name}"
+        armory_pending_queue.push {region, realm, type, name}
         wf.armory_load_requested = true # new item/guild, so do an armory load soon
         store.add registered_collection,{region,realm,type,name}, ->
           wf.debug "Now Registered #{name}"
@@ -152,6 +154,12 @@ class wf.WoW
         else
           callback?(info)
 
+  armory_results_loader: (loader_queue, results_array) ->
+    loader_queue.push results_array, (info) ->
+      if info.type == "guild" and info?.members?
+        for member in info.members
+          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
+
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
     return if job_running_lock # only run one at a time....
@@ -161,58 +169,16 @@ class wf.WoW
       loader_queue.drain = ->
         job_running_lock = false
         loaded_callback?()
-      @get_registered (results_array) =>
-        loader_queue.push results_array, (info) ->
-          if info.type == "guild" and info?.members?
-            for member in info.members
-              loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
+      if armory_pending_queue? and armory_pending_queue.length >0
+        wf.info "Loading from armory_pending_queue, length:#{armory_pending_queue.length}"
+        temp_pending_queue = armory_pending_queue[..]
+        armory_pending_queue = []
+        @armory_results_loader(loader_queue, temp_pending_queue)
+      else
+        @get_registered (results_array) =>
+          @armory_results_loader(loader_queue, results_array)
 
 
-
-
-
-  # todo - redo with async queue/this probably could do with a bit of refactoring- esp. expected_responses probably needs re-doing
-  armory_load_1: (loaded_callback) =>
-    wf.info "armory_load..."
-    return if job_running_lock # only run one at a time....
-    job_running_lock = true
-    try
-      @get_registered (results_array) =>
-        expected_responses = results_array.length
-        wf.debug "0/expected_responses:#{expected_responses}"
-        callback_done = false
-        for item in results_array
-          wf.debug "About to do Armory lookup for:#{JSON.stringify(item)}"
-          wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
-            expected_responses -= 1
-            wf.debug "1/expected_responses:#{expected_responses}"
-            wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
-            @store_update info.type, info.region, info.realm, info.name, info, =>
-              # loaded_callback?(info)
-              if info.type == "guild" and info?.members?
-                expected_responses += info.members.length
-                wf.debug "g/expected_responses:#{expected_responses}"
-                for member in info.members
-                  wowlookup.get "member", info.region, info.realm, member.character.name, (member_info) =>
-                    expected_responses -= 1
-                    wf.debug "m/expected_responses:#{expected_responses}"
-                    wf.info "Info back for guild #{member_info.name} member #{member_info.name}"
-                    @store_update member_info.type, member_info.region, member_info.realm, member_info.name,member_info, ->
-                        # loaded_callback?(member_info)
-                      if expected_responses == 0 and ! callback_done
-                        callback_done = true
-                        wf.debug "Got all responses (members), callback time"
-                        job_running_lock = false
-                        loaded_callback?(member_info)
-              if expected_responses == 0 and ! callback_done
-                callback_done = true
-                wf.debug "Got all responses (guild), callback time"
-                job_running_lock = false
-                loaded_callback?(info)
-    catch e
-      wf.error "armory_load error:#{e}"
-      job_running_lock = false
-    "In progress..."
 
   format_armory_info: (type, region, realm, name, info, doc) ->
     new_item = {region, realm, type, name}

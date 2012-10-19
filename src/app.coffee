@@ -138,6 +138,9 @@ handle_view = (req, res) ->
     if wowthings and wowthings.length > 0
       #wf.debug wowthing
       feed = []
+      wowthings.sort (a,b) ->
+        return b.date - a.date
+      wowthings = wowthings[0..wf.HISTORY_LIMIT]
       for item in wowthings
         fmt_items = wf.app.feed_formatter.process(item)
         for fi in fmt_items
