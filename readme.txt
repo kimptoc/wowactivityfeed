@@ -1,9 +1,7 @@
 TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
-- put char image on the end for rss readers that dont do align tags :)
 
-- guild member list is empty??? perhaps assuming its first item in history result...
 
 - log to db when armory requested/stats of armory calls made
 -- save count of calls per load, with date saved

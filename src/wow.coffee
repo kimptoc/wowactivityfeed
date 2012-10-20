@@ -1,6 +1,7 @@
 global.wf ||= {}
 
 async = require "async"
+moment = require "moment"
 
 require "./store_mongo"
 require "./wowlookup"
@@ -72,6 +73,21 @@ class wf.WoW
           store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
+
+  armory_calls: (callback)->
+    store.load_all calls_collection, {}, {}, (entries) ->
+      info = 
+        total_calls: 0
+        total_errors: 0
+        todays_calls: 0
+        todays_errors: 0
+      for call in entries
+        info.total_calls += 1
+        info.total_errors += 1 if call.had_error
+        if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
+          info.todays_calls += 1
+          info.todays_errors += 1 if call.had_error
+      callback?(info)
 
   get_loaded: (loaded_handler) ->
     store.ensure_index armory_collection, armory_index_1, ->
@@ -179,7 +195,7 @@ class wf.WoW
     return if job_running_lock # only run one at a time....
     job_running_lock = true
     try 
-      loader_queue = async.queue(@armory_item_loader, 8) # 8 max threads 
+      loader_queue = async.queue(@armory_item_loader, 5) # 5 max threads 
       loader_queue.drain = ->
         job_running_lock = false
         loaded_callback?()

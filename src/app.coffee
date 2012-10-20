@@ -205,6 +205,10 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
   wf.app.wow.get_history region, realm, type, name, (items)->
     res.send build_feed(items, feed)
  
+wf.app.get '/debug/stats', (req, res) ->
+  wf.info "get #{JSON.stringify(req.route)}"
+  wf.app.wow.armory_calls (result) ->
+    res.render "message", msg: JSON.stringify(result)
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
