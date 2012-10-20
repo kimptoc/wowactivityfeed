@@ -51,16 +51,17 @@ wf.loadjob = new cronJob '*/10 * * * * *', (->
 #   true, #/* Start the job right now */,
 #   null #/* Time zone of this job. */
 
+wf.mongo_info = 
+    "hostname":"localhost"
+    "port":27017
+    "username":""
+    "password":""
+    "name":""
+    "db":"wowfeed"
+
 
 wf.app.configure 'development', ->
   wf.info "Express app.configure/development"
-  wf.mongo_info = 
-      "hostname":"localhost"
-      "port":27017
-      "username":""
-      "password":""
-      "name":""
-      "db":"wowfeed"
   wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))   
   
 wf.app.configure 'production', ->
