@@ -1,8 +1,9 @@
 TODO
+- twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
+- fb to twitter, ok?
+- put char image on the end for rss readers that dont do align tags :)
 
 - guild member list is empty??? perhaps assuming its first item in history result...
-
-- guild news item, guildLevel - gained a level, I guess...
 
 - log to db when armory requested/stats of armory calls made
 -- save count of calls per load, with date saved
@@ -34,6 +35,9 @@ PENDING BEING TESTED
 -
 
 LATER
+- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
+- thanks page - for all tools used :)
+- pet battle related feed, levels, achievements
 - show item image in feed (need item info, cache in memory?)
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
@@ -127,6 +131,7 @@ compile coffee - same as above
 
 LINKS
 
+wowhead tooltips - http://www.wowhead.com/tooltips#related-xml-feeds
 date format via moment - http://momentjs.com/docs/
 
 jade - view templates - https://github.com/visionmedia/jade#readme

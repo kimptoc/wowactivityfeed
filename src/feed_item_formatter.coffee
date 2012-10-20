@@ -28,7 +28,7 @@ class wf.FeedItemFormatter
     if change_description == ""
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
     if item?.type == "member" and item.armory?.thumbnail?
-      change_description = "#{@char_link(item)} #{change_description}"
+      change_description = "#{change_description} #{@char_link(item)}"
     dateMoment = moment(item?.lastModified)
     result = 
       title: change_title
@@ -124,7 +124,7 @@ class wf.FeedItemFormatter
     description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
     if feed_item.type == "ACHIEVEMENT"
       change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
-      description = "#{@char_link(item)} - #{@achievement_link(feed_item.achievement)}: #{feed_item.achievement.description}"
+      description = "#{@achievement_link(feed_item.achievement)}: #{feed_item.achievement.description} #{@char_link(item)}"
       thingId = feed_item.achievement.id
       if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
         description += " ["
@@ -139,17 +139,17 @@ class wf.FeedItemFormatter
 
     else if feed_item.type == "CRITERIA"
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
-      description = "#{@char_link(item)} - Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
+      description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description} #{@char_link(item)}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
       change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
-      description = "#{@char_link(item)} - Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
+      description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description} #{@char_link(item)}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
       change_title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
-      description = "#{@char_link(item)} - #{@item_link(feed_item.itemId)} *** Must find a way to get item names..."
+      description = "#{@item_link(feed_item.itemId)} *** Must find a way to get item names... #{@char_link(item)}"
       thingId = feed_item.itemId
 
     else
