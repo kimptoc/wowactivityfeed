@@ -41,18 +41,26 @@ class wf.StoreMongo
       coll.ensureIndex fieldSpec, {unique: true, safe: true}, callback
       
   add: (collection_name, document_object, stored_handler) ->
+    @insert collection_name, document_object, (coll)->
+      coll.find document_object, (err, cur) ->
+        wf.error(err) if err
+        throw err if err
+        cur.count (err, count) ->
+          wf.error(err) if err
+          throw err if err
+          stored_handler?(count)
+
+  insert: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
       coll.insert document_object, safe:true, (err, docs) ->
         wf.error(err) if err
         throw err if err
         wf.debug "saved:#{document_object}"
-        coll.find document_object, (err, cur) ->
-          wf.error(err) if err
-          throw err if err
-          cur.count (err, count) ->
-            wf.error(err) if err
-            throw err if err
-            stored_handler?(count)
+        stored_handler?(coll)
+
+  create_collection: (collection_name, options, callback) ->
+    @with_connection ->
+      wf.mongo_db.createCollection(collection_name, options, callback)
 
   upsert: (collection_name, document_key, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->

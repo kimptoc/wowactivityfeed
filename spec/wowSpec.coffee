@@ -53,6 +53,7 @@ describe "wow wrapper:", ->
       mock_store.expects("load").once().yields()
       mock_store.expects("add").once().yields()
       mock_store.expects("load_all").once().yields([{}])
+      mock_store.expects("ensure_index").once().yields()
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.get_registered (items) ->
           items.length.should.equal 1
