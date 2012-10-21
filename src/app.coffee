@@ -4,76 +4,15 @@ express = require('express')
 http = require('http')
 path = require('path')
 rss = require('rss')
-cronJob = require('cron').CronJob
 
 require './init_logger'
 require './wow'
 require './feed_item_formatter'
+require './prettify_json'
+require './cron'
+require './defaults'
 
-#wf.app = express()
-
-wf.SITE_URL = "http://localhost:3000"
-wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
-wf.HISTORY_LIMIT = 60
-
-app = module.exports = express()
-
-wf.app = app
-
-syntaxHighlight = (json) ->
-  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  return json.replace /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) ->
-    cls = 'number'
-    if (/^"/.test(match)) 
-      if (/:$/.test(match)) 
-          cls = 'key'
-      else
-          cls = 'string'
-    else if (/true|false/.test(match)) 
-      cls = 'boolean'
-    else if (/null/.test(match)) 
-      cls = 'null'
-    return '<span class="' + cls + '">' + match + '</span>'
-
-
-# Configuration
-
-wf.armory_load_requested = false
-
-wf.hourlyjob = new cronJob '00 55 */3 * * *', (-> 
-  wf.info "cronjob tick...hourly load"
-  wf.armory_load_requested = true
-  ),
-  null, 
-  true, #/* Start the job right now */,
-  null #/* Time zone of this job. */
-
-wf.loadjob = new cronJob '*/10 * * * * *', (-> 
-  wf.debug "cronjob tick...check if armory load requested"
-  if wf.armory_load_requested
-    wf.armory_load_requested = false
-    wf.info "time for armory_load..."
-    wf.app.wow.armory_load()
-  ),
-  null, 
-  true, #/* Start the job right now */,
-  null #/* Time zone of this job. */
-
-# wf.staticjob = new cronJob '00 00 00 * * *', (-> 
-#   wf.debug "cronjob tick...load armory static"
-#   wf.app.wow.static_load()
-#   ),
-#   null, 
-#   true, #/* Start the job right now */,
-#   null #/* Time zone of this job. */
-
-wf.mongo_info = 
-    "hostname":"localhost"
-    "port":27017
-    "username":""
-    "password":""
-    "name":""
-    "db":"wowfeed"
+wf.app = express()
 
 
 wf.app.configure 'development', ->
@@ -99,7 +38,7 @@ wf.app.configure 'production', ->
     wf.app.use(express.errorHandler())   
 
 wf.app.configure ->
-  wf.info "App Startup/Express configure:env=#{app.get('env')},dirname=#{__dirname}"
+  wf.info "App Startup/Express configure:env=#{wf.app.get('env')},dirname=#{__dirname}"
   wf.app.set('views', __dirname + '/../views')  
   wf.app.set('view engine', 'jade')  
   wf.app.engine('jade', require('jade').__express)
@@ -225,7 +164,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 wf.app.get '/debug/stats', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.armory_calls (result) ->
-    res.render "message", msg: "<pre>"+syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
+    res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
@@ -238,12 +177,9 @@ wf.app.get '/debug/sample_data', (req, res) ->
   wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
   wf.app.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
   wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
-  # wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptoc"
-  # wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptocii"
   wf.app.wow.get_history "us", "kaelthas", "member", "Feåtherz"
   res.render "message", msg: "Sample data registered"
 
-#wf.app.listen(process.env.VCAP_APP_PORT || 3000)
 
-http.createServer(app).listen(app.get('port'), ->
-  wf.info("Express server listening on port " + app.get('port')))
+http.createServer(wf.app).listen(wf.app.get('port'), ->
+  wf.info("Express server listening on port " + wf.app.get('port')))

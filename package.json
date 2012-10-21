@@ -19,6 +19,7 @@
         "sinon":"",
         "portchecker":"",
         "moment":"",
-        "async":""
+        "async":"",
+        "nodetime":""
     }
 }

@@ -2,20 +2,17 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
+- performance, load/feed/all pages seem slow  - indexes?
 
-- stats of numbers of each error kind
 - number of registered, number in armory history
 - db stats/size
 - numbers for last hour
-- oldest entry (was it yesterday?)
-- number of nonmodified results vs number of actual/real results
+- number of actual/real results (is it calls less errors and non-mod?)
+- time of most real update
 
-- log to db when armory requested/stats of armory calls made
--- save count of calls per load, with date saved
+- save count of calls per load, with date saved
 
-- save log messages to db with a TTL (1 day?)
-
-- display whether armory load is still running...
+- save log messages to db in capped collection
 
 - remove clear data/load sample links
 - make site url a environment property
@@ -40,6 +37,8 @@ PENDING BEING TESTED
 -
 
 LATER
+- licence for code?
+- redirect load/data pages to other pages - stats/registered
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 - thanks page - for all tools used :)
 - pet battle related feed, levels, achievements
@@ -134,6 +133,8 @@ compile coffee - same as above
 
 
 LINKS
+
+perf tool - http://www.nodetime.com
 
 wowhead tooltips - http://www.wowhead.com/tooltips#related-xml-feeds
 date format via moment - http://momentjs.com/docs/

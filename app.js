@@ -1,1 +1,2 @@
-require("./js/app.js")
+//require('nodetime').profile();
+require("./js/app.js");
