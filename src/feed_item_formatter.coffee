@@ -40,17 +40,17 @@ class wf.FeedItemFormatter
       guid: "#{item?.lastModified}-#{change_title}"
     results.push result
     if item?.armory?.feed?
-      wf.debug "there is a feed, so add that info - items:#{item.armory.feed.length}"
+      # wf.debug "there is a feed, so add that info - items:#{item.armory.feed.length}"
       for feed_item in item.armory.feed
         results.push @format_feed_item(feed_item, item)
-    else
-      wf.debug "no feed for char:#{item?.name}"
+    # else
+      # wf.debug "no feed for char:#{item?.name}"
     if item?.armory?.news?
-      wf.debug "there is news, so add that info - items:#{item.armory.news.length}"
+      # wf.debug "there is news, so add that info - items:#{item.armory.news.length}"
       for news_item in item.armory.news
         results.push @format_news_item(news_item, item)
-    else
-      wf.debug "no news for char:#{item?.name}"
+    # else
+      # wf.debug "no news for char:#{item?.name}"
     return results
 
   item_link: (itemId) ->

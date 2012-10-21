@@ -2,7 +2,7 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
-- performance, load/feed/all pages seem slow  - indexes?
+- performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 
 - number of registered, number in armory history
 - db stats/size
@@ -37,6 +37,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- caching? only rebuild feed once a min or so...
 - licence for code?
 - redirect load/data pages to other pages - stats/registered
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
