@@ -88,6 +88,7 @@ class wf.WoW
         earliest: Infinity
         latest: 0
         error_summary :{}
+        armory_load_running: job_running_lock
       for call in entries
         info.earliest = call.start_time if call.start_time < info.earliest
         info.latest = call.start_time if call.start_time > info.latest
@@ -201,7 +202,8 @@ class wf.WoW
               else
                 callback?(info)
           else
-              callback?(info)
+            # send old info back, needed for guilds so we can query the members
+            callback?(doc?.armory) 
 
   armory_results_loader: (loader_queue, results_array) ->
     loader_queue.push results_array, (info) ->
