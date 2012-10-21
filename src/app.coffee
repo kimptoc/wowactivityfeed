@@ -11,6 +11,7 @@ require './feed_item_formatter'
 require './prettify_json'
 require './cron'
 require './defaults'
+require './timing'
 
 wf.app = express()
 
@@ -59,24 +60,23 @@ wf.app.configure ->
 
 # Routes
 
+wf.app.all '*', (req, res, next) ->
+  wf.info "ALL:get #{JSON.stringify(req.route)}"
+  next()
+
 wf.app.get '/', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   res.render 'index', title: 'Home'
-#    res.send 'Hello from WoW Feed2'
 
 wf.app.get '/armory_load', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.armory_load_requested = true
   wf.app.wow.get_registered (regs) ->
     res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
 
 wf.app.get '/registered', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.get_registered (results) ->
     res.render "registered", reg: results
 
 wf.app.get '/loaded', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.get_loaded (results) ->
     #TODO - get latest entry in each, only feed collections
     res.render "loaded", colls: results
@@ -94,7 +94,6 @@ build_feed = (items, feed) ->
   return feed.xml()
 
 handle_view = (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   type = req.params.type
   type = 'member' if type == "character"
   region = req.params.region
@@ -144,6 +143,8 @@ wf.app.get '/feed/all.rss', (req, res) ->
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 
+  wf.timing_on("/feed/#{req.params.name}")
+
   type = req.params.type
   type = 'member' if type == "character"
   region = req.params.region
@@ -159,20 +160,18 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
     author: 'Chris Kimpton'
 
   wf.app.wow.get_history region, realm, type, name, (items)->
+    wf.timing_off("/feed/#{name}")
     res.send build_feed(items, feed)
  
 wf.app.get '/debug/stats', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.armory_calls (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/clear_all', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.clear_all ->
     res.render "message", msg: "Database cleared!"
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"
   wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
   wf.app.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"

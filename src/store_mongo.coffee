@@ -2,7 +2,8 @@ global.wf ||= {}
 
 Mongodb = require "mongodb"
 
-require('./init_logger')
+require './init_logger'
+require './timing'
 
 wf.mongo_db = null
 
@@ -127,6 +128,7 @@ class wf.StoreMongo
           loaded_handler?(null)
 
   load_all: (collection_name, document_key, options, loaded_handler) ->
+    wf.timing_on("load_all-#{collection_name}")
     @with_collection collection_name, (coll) ->
       wf.debug "load_all, got collection:#{collection_name}, now query by key:#{JSON.stringify(document_key)}"
       coll.find document_key, options, (err, cur) ->
@@ -134,6 +136,7 @@ class wf.StoreMongo
         wf.error("load_all:#{err}") if err
         throw err if err
         cur.toArray (err, docs) ->
+          wf.timing_off("load_all-#{collection_name}")
           wf.debug "load_all, got collection:#{collection_name} contents, now as array, err:#{err}"
           wf.error(err) if err
           throw err if err
