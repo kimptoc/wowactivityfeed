@@ -53,30 +53,28 @@ class wf.WowLookup
         armory_instance = armory
         armory_handler?(armory_instance)
 
-  get: (type, region, realm, name, result_handler) ->
-    wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}"
+  get: (type, region, realm, name, lastModified, result_handler) ->
+    wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}, last mod:#{new Date(lastModified)}"
     @with_armory (armory) ->
-      armory[armory_calls[type]]
-        region: region
-        realm: realm
-        name: name
-        fields: armory_fields[type]
-        (err,thing) ->
-          if err
-            wf.error("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
-            result_handler?(
-              type: type
-              region: region
-              realm: realm
-              name: name
-              error: err.message
-              lastModified: 0
-              info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
-          else
-            wf.debug "wowlookup #{name}/#{thing.name} result:#{JSON.stringify(thing)}"
-            thing.type = type
-            thing.region = region
-            result_handler?(thing)
+      armory[armory_calls[type]] {region, realm, name, fields: armory_fields[type], lastModified}, (err,thing) ->
+        if err is null and thing is undefined # no changes
+          wf.debug "wowlookup #{name} - not modified"
+          result_handler?(undefined)          
+        else if err
+          wf.error("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
+          result_handler?(
+            type: type
+            region: region
+            realm: realm
+            name: name
+            error: err.message
+            lastModified: 0
+            info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
+        else
+          wf.debug "wowlookup #{name}/#{thing?.name}, err:#{JSON.stringify(err)}, result:#{JSON.stringify(thing)}"
+          thing?.type = type
+          thing?.region = region
+          result_handler?(thing)
 
   get_static: (static_load_method, region = "eu", callback) ->
     @with_armory (armory) ->

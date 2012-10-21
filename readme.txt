@@ -2,14 +2,13 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
-- use lastModified from DB to tell armory when we want an update (?)
-
 
 - stats of numbers of each error kind
 - number of registered, number in armory history
 - db stats/size
 - numbers for last hour
 - oldest entry (was it yesterday?)
+- number of nonmodified results vs number of actual/real results
 
 - log to db when armory requested/stats of armory calls made
 -- save count of calls per load, with date saved

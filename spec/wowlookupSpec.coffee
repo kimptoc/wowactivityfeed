@@ -20,7 +20,7 @@ describe "wow armory lookup:", ->
   describe "get:", ->
     it "valid guild armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "guild", "eu", "Darkspear", "Mean Girls", (result) ->
+      wow.get "guild", "eu", "Darkspear", "Mean Girls", 0, (result) ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Mean Girls"
@@ -29,7 +29,7 @@ describe "wow armory lookup:", ->
 
     it "invalid guild armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "guild", "eu", "Darkspear", "Mean Girlsaaa", (result) ->
+      wow.get "guild", "eu", "Darkspear", "Mean Girlsaaa", 0, (result) ->
         should.exist result
         should.exist result.error
         should.exist result.name
@@ -37,7 +37,7 @@ describe "wow armory lookup:", ->
 
     it "valid member armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptoc", (result) ->
+      wow.get "member", "eu", "Darkspear", "Kimptoc", 0, (result) ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Kimptoc"
@@ -50,10 +50,30 @@ describe "wow armory lookup:", ->
 
     it "invalid  member armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptocaaa", (result) ->
+      wow.get "member", "eu", "Darkspear", "Kimptocaaa", 0, (result) ->
         should.exist result
         should.exist result.error
         should.exist result.name
+        done()
+
+    it "valid member armory lookup, no mods", (done) ->
+      wow = new wf.WowLookup()
+      wow.get "member", "eu", "Darkspear", "Kimptoc", 0, (result) ->
+        should.exist result
+        should.not.exist result.error
+        result.name.should.equal "Kimptoc"
+        should.exist result.achievements
+        wow.get "member", "eu", "Darkspear", "Kimptoc", result.lastModified, (result) ->
+          should.strictEqual(undefined, result)
+          done()
+
+    it "valid member armory lookup, default null lastMod", (done) ->
+      wow = new wf.WowLookup()
+      wow.get "member", "eu", "Darkspear", "Kimptoc", undefined, (result) ->
+        should.exist result
+        should.not.exist result.error
+        result.name.should.equal "Kimptoc"
+        should.exist result.achievements
         done()
 
     it "get all char achievements static", (done) ->

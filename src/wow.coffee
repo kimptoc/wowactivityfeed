@@ -26,10 +26,11 @@ class wf.WoW
   job_running_lock = false
   armory_pending_queue = []
 
-  constructor: ->
+  constructor: (callback)->
     wf.info "WoW constructor"
-    store.create_collection calls_collection, capped:true, size: 2000000, (err, result)->
+    store.create_collection calls_collection, capped:true, size: 2000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
+      callback?(this)
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
     wf.debug "Registering #{name}"
@@ -60,7 +61,8 @@ class wf.WoW
     wf.debug "clear_all called"
     store.remove_all registered_collection, ->
       store.remove_all armory_collection, ->
-        store.remove_all static_collection, cleared_handler
+        store.remove_all calls_collection, ->
+          store.remove_all static_collection, cleared_handler
 
 
   clear_registered: (cleared_handler) ->
@@ -154,45 +156,48 @@ class wf.WoW
       name: item.name
       realm: item.realm
       start_time: new Date().getTime()
-    wowlookup.get item.type, item.region, item.realm, item.name, (info) =>
-      armory_stats.end_time = new Date().getTime()
-      armory_stats.error = info?.error
-      armory_stats.not_modified = (info is null)
-      armory_stats.had_error = info?.error?
-      store.insert calls_collection, armory_stats, =>
-        wf.info "Info back for #{info.name}, members:#{info?.members?.length}"
-        # todo if item name/realm differ then update registered entry!
-        @store_update info.type, info.region, info.realm, info.name, info, ->
-          wf.info "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-          if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
-            wf.info "Registered entry is different, updated registered"
-            item_key = 
-              type: item.type
-              region: item.region
-              name: item.name
-              realm: item.realm
-            new_item_key = 
-              type: info.type
-              region: info.region
-              name: info.name
-              realm: info.realm
-            item.realm = info.realm
-            item.region = info.region
-            item.name = info.name
-            store.load registered_collection, new_item_key, null, (new_key_item)->
-              if new_key_item?
-                # new key exists already, so delete old one
-                store.remove registered_collection, item_key, ->
-                  callback?(info)
+    store.load armory_collection, {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
+      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
+        armory_stats.end_time = new Date().getTime()
+        armory_stats.error = info?.error
+        armory_stats.not_modified = (info is undefined)
+        armory_stats.had_error = info?.error?
+        store.insert calls_collection, armory_stats, =>
+          wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+          if info?
+            @store_update info.type, info.region, info.realm, info.name, info, ->
+              wf.info "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+              if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+                wf.info "Registered entry is different, updated registered"
+                item_key = 
+                  type: item.type
+                  region: item.region
+                  name: item.name
+                  realm: item.realm
+                new_item_key = 
+                  type: info.type
+                  region: info.region
+                  name: info.name
+                  realm: info.realm
+                item.realm = info.realm
+                item.region = info.region
+                item.name = info.name
+                store.load registered_collection, new_item_key, null, (new_key_item)->
+                  if new_key_item?
+                    # new key exists already, so delete old one
+                    store.remove registered_collection, item_key, ->
+                      callback?(info)
+                  else
+                    store.upsert registered_collection, item_key, item, ->
+                      callback?(info)
               else
-                store.upsert registered_collection, item_key, item, ->
-                  callback?(info)
+                callback?(info)
           else
-            callback?(info)
+              callback?(info)
 
   armory_results_loader: (loader_queue, results_array) ->
     loader_queue.push results_array, (info) ->
-      if info.type == "guild" and info?.members?
+      if info?.type == "guild" and info?.members?
         for member in info.members
           loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
 

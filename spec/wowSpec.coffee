@@ -14,9 +14,9 @@ describe "wow wrapper:", ->
 
     beforeEach (done)->
       wf.info "wowSpec:beforeEach"
-      wow = new wf.WoW()
-      wow.clear_all ->
-        done()
+      wow = new wf.WoW (wow)->
+        wow.clear_all ->
+          done()
 
     afterEach ->
       mock_store.verify() if mock_store?
