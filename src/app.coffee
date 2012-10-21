@@ -20,11 +20,27 @@ app = module.exports = express()
 
 wf.app = app
 
+syntaxHighlight = (json) ->
+  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  return json.replace /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) ->
+    cls = 'number'
+    if (/^"/.test(match)) 
+      if (/:$/.test(match)) 
+          cls = 'key'
+      else
+          cls = 'string'
+    else if (/true|false/.test(match)) 
+      cls = 'boolean'
+    else if (/null/.test(match)) 
+      cls = 'null'
+    return '<span class="' + cls + '">' + match + '</span>'
+
+
 # Configuration
 
 wf.armory_load_requested = false
 
-wf.hourlyjob = new cronJob '00 55 * * * *', (-> 
+wf.hourlyjob = new cronJob '00 55 */6 * * *', (-> 
   wf.info "cronjob tick...hourly load"
   wf.armory_load_requested = true
   ),
@@ -209,7 +225,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 wf.app.get '/debug/stats', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"
   wf.app.wow.armory_calls (result) ->
-    res.render "message", msg: JSON.stringify(result)
+    res.render "message", msg: "<pre>"+syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.info "get #{JSON.stringify(req.route)}"

@@ -81,12 +81,18 @@ class wf.WoW
         total_errors: 0
         todays_calls: 0
         todays_errors: 0
+        earliest: Infinity
+        latest: 0
       for call in entries
+        info.earliest = call.start_time if call.start_time < info.earliest
+        info.latest = call.start_time if call.start_time > info.latest
         info.total_calls += 1
         info.total_errors += 1 if call.had_error
         if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
           info.todays_calls += 1
           info.todays_errors += 1 if call.had_error
+      info.earliest = moment(info.earliest).format('H:mm:ss ddd')
+      info.latest = moment(info.latest).format('H:mm:ss ddd')
       callback?(info)
 
   get_loaded: (loaded_handler) ->

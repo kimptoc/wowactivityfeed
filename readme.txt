@@ -2,6 +2,14 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
+- use lastModified from DB to tell armory when we want an update (?)
+
+
+- stats of numbers of each error kind
+- number of registered, number in armory history
+- db stats/size
+- numbers for last hour
+- oldest entry (was it yesterday?)
 
 - log to db when armory requested/stats of armory calls made
 -- save count of calls per load, with date saved
@@ -50,7 +58,6 @@ LATER
 - whats in the changes for achievements map - useful or just use feeds/news?
 - run app at tagadab, also try heroku - any more stable...?
 - put savedTime onto db 
-- use lastModified from DB to tell armory when we want an update (?)
 - normalise names, eg query this 
 --- http://localhost:3000/view/member/us/kaelthas/Fe%C3%A5therz
 -- and get this
