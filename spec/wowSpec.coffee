@@ -21,8 +21,6 @@ describe "wow wrapper:", ->
     afterEach ->
       mock_store.verify() if mock_store?
       mock_lookup.verify() if mock_lookup?
-      # wf.info "wowSpec:afterEach"
-      # wow?.close()
 
     it "mock sample", (done)->
       test_thing_api = { go: -> }
@@ -85,7 +83,7 @@ describe "wow wrapper:", ->
       mock_store = sinon.mock(wow.get_store())
       mock_store.expects("load_all").once().yields([{region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}])
       mock_store.expects("ensure_index").thrice().yields()
-      mock_store.expects("load").twice().yields()
+      mock_store.expects("load").exactly(4).yields()
       mock_store.expects("add").twice().yields() # guild and members
       mock_store.expects("update").never()
 

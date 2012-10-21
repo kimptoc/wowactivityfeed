@@ -40,7 +40,7 @@ syntaxHighlight = (json) ->
 
 wf.armory_load_requested = false
 
-wf.hourlyjob = new cronJob '00 55 */6 * * *', (-> 
+wf.hourlyjob = new cronJob '00 55 */3 * * *', (-> 
   wf.info "cronjob tick...hourly load"
   wf.armory_load_requested = true
   ),

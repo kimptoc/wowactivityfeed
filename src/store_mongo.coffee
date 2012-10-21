@@ -62,6 +62,10 @@ class wf.StoreMongo
     @with_connection ->
       wf.mongo_db.createCollection(collection_name, options, callback)
 
+  drop_collection: (collection_name, callback) ->
+    @with_connection ->
+      wf.mongo_db.dropCollection(collection_name, callback)
+
   upsert: (collection_name, document_key, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->
       coll.update document_key, document_object, {safe:true, upsert:true}, (err, docs) ->

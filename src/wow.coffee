@@ -28,7 +28,7 @@ class wf.WoW
 
   constructor: (callback)->
     wf.info "WoW constructor"
-    store.create_collection calls_collection, capped:true, size: 2000000, (err, result)=>
+    store.create_collection calls_collection, capped:true, autoIndexId:false, size: 2000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
       callback?(this)
 
@@ -61,7 +61,7 @@ class wf.WoW
     wf.debug "clear_all called"
     store.remove_all registered_collection, ->
       store.remove_all armory_collection, ->
-        store.remove_all calls_collection, ->
+        store.drop_collection calls_collection, ->
           store.remove_all static_collection, cleared_handler
 
 
@@ -81,18 +81,26 @@ class wf.WoW
       info = 
         total_calls: 0
         total_errors: 0
+        total_not_modified: 0
         todays_calls: 0
         todays_errors: 0
+        todays_not_modified: 0
         earliest: Infinity
         latest: 0
+        error_summary :{}
       for call in entries
         info.earliest = call.start_time if call.start_time < info.earliest
         info.latest = call.start_time if call.start_time > info.latest
         info.total_calls += 1
-        info.total_errors += 1 if call.had_error
+        if call.had_error
+          info.total_errors += 1 
+          info["error_summary"][call.error] ?= 0 
+          info["error_summary"][call.error] += 1
+        info.total_not_modified += 1 if call.not_modified
         if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
           info.todays_calls += 1
           info.todays_errors += 1 if call.had_error
+          info.todays_not_modified += 1 if call.not_modified
       info.earliest = moment(info.earliest).format('H:mm:ss ddd')
       info.latest = moment(info.latest).format('H:mm:ss ddd')
       callback?(info)
@@ -251,7 +259,7 @@ class wf.WoW
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
           wf.debug "store_update:#{JSON.stringify(doc)}"
           if doc? and doc.lastModified == info.lastModified
-            wf.debug "Ignored as saved already: #{name}"
+            wf.error "Ignored as saved already: #{name} - BUT THEN ISNT THIS TRAPPED EARLIER..."
             stored_handler?()
           else
             # only save errors for new updates (assume others are transient)
