@@ -95,6 +95,9 @@ AppFog notes:
     af crashlogs waf1
     af env-add waf1 NODE_ENV=production
 
+- run on ubuntu for forever via npm forever
+   forever start -l logs/forever.log -o logs/out.log -e logs/err.log app.js
+
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
 
