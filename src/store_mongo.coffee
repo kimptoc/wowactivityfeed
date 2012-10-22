@@ -146,6 +146,13 @@ class wf.StoreMongo
           wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
           loaded_handler?(docs)
   
+  dbstats: (callback) ->
+    @with_connection (db) ->
+      db.stats {scale:1000000},(err,stats) ->
+        wf.error(err) if err
+        throw err if err
+        callback?(stats)
+
   with_collection: (collection_name, worker) ->
     @with_connection ->
       return worker?(collection_cache[collection_name]) if collection_cache[collection_name]

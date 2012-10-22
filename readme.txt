@@ -5,6 +5,11 @@ TODO
 - how to config prod node/restart itself?
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 
+- do all in memory?  only persist registered?
+- option to run for one guild only, no ability to register more people
+
+- Waf/normalise regions too
+
 - number of registered, number in armory history
 - db stats/size
 - numbers for last hour
@@ -38,6 +43,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- mention trademarks, all are blizzards
 - caching? only rebuild feed once a min or so...
 - licence for code?
 - redirect load/data pages to other pages - stats/registered

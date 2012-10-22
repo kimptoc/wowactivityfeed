@@ -77,34 +77,36 @@ class wf.WoW
       result_handler?(null)
 
   armory_calls: (callback)->
-    store.load_all calls_collection, {}, {}, (entries) ->
-      info = 
-        total_calls: 0
-        total_errors: 0
-        total_not_modified: 0
-        todays_calls: 0
-        todays_errors: 0
-        todays_not_modified: 0
-        earliest: Infinity
-        latest: 0
-        error_summary :{}
-        armory_load_running: job_running_lock
-      for call in entries
-        info.earliest = call.start_time if call.start_time < info.earliest
-        info.latest = call.start_time if call.start_time > info.latest
-        info.total_calls += 1
-        if call.had_error
-          info.total_errors += 1 
-          info["error_summary"][call.error] ?= 0 
-          info["error_summary"][call.error] += 1
-        info.total_not_modified += 1 if call.not_modified
-        if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
-          info.todays_calls += 1
-          info.todays_errors += 1 if call.had_error
-          info.todays_not_modified += 1 if call.not_modified
-      info.earliest = moment(info.earliest).format('H:mm:ss ddd')
-      info.latest = moment(info.latest).format('H:mm:ss ddd')
-      callback?(info)
+    info = 
+      total_calls: 0
+      total_errors: 0
+      total_not_modified: 0
+      todays_calls: 0
+      todays_errors: 0
+      todays_not_modified: 0
+      earliest: Infinity
+      latest: 0
+      error_summary :{}
+      armory_load_running: job_running_lock
+    store.dbstats (stats) ->
+      info.dbstats = stats      
+      store.load_all calls_collection, {}, {}, (entries) ->
+        for call in entries
+          info.earliest = call.start_time if call.start_time < info.earliest
+          info.latest = call.start_time if call.start_time > info.latest
+          info.total_calls += 1
+          if call.had_error
+            info.total_errors += 1 
+            info["error_summary"][call.error] ?= 0 
+            info["error_summary"][call.error] += 1
+          info.total_not_modified += 1 if call.not_modified
+          if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
+            info.todays_calls += 1
+            info.todays_errors += 1 if call.had_error
+            info.todays_not_modified += 1 if call.not_modified
+        info.earliest = moment(info.earliest).format('H:mm:ss ddd')
+        info.latest = moment(info.latest).format('H:mm:ss ddd')
+        callback?(info)
 
   get_loaded: (loaded_handler) ->
     store.ensure_index armory_collection, armory_index_1, ->
