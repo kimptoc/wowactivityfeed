@@ -4,11 +4,15 @@ block content
   .container
     h3.bordered Loaded
     hr
-    if colls
-      ul
-      each c in colls
-        li
-          a(href='/view/#{c.type}/#{c.region}/#{c.realm}/#{c.name}') #{c.name} (#{c.type} - #{c.region}/#{c.realm})
+    if f
+      each item in f
+        .clear
+        div
+          h5 #{item.title}
+          div !{item.description}
+          span #{item.date_formatted}
+          span 
+            a(href='#{item.url}') link
 
 //    hr
 //    #{JSON.stringify(colls)}

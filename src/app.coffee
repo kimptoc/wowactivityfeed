@@ -77,9 +77,18 @@ wf.app.get '/registered', (req, res) ->
     res.render "registered", reg: results
 
 wf.app.get '/loaded', (req, res) ->
-  wf.app.wow.get_loaded (results) ->
-    #TODO - get latest entry in each, only feed collections
-    res.render "loaded", colls: results
+  wf.app.wow.get_loaded (wowthings) ->
+    if wowthings? and wowthings.length > 0
+      #wf.debug wowthing
+      feed = []
+      for item in wowthings
+        fmt_items = wf.app.feed_formatter.process(item)
+        for fi in fmt_items
+          feed.push(fi)
+      feed.sort (a,b) ->
+        return b.date - a.date
+      feed = feed[0..wf.HISTORY_LIMIT]
+      res.render "loaded", f: feed
 
 build_feed = (items, feed) ->
   items_to_publish = []

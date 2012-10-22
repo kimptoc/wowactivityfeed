@@ -20,8 +20,8 @@ class wf.WoW
   static_collection = "armory_static"
   calls_collection = "armory_calls"
 
-  registered_index_1 = {type:1, region:1, realm:1, name:1}
-  armory_index_1 = {lastModified:1, type:1, region:1, realm:1, name:1}
+  registered_index_1 = {name:1, realm:1, region:1, type:1}
+  armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
   armory_pending_queue = []
@@ -108,7 +108,10 @@ class wf.WoW
 
   get_loaded: (loaded_handler) ->
     store.ensure_index armory_collection, armory_index_1, ->
-      store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
+      # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
+      store.load_all_with_fields armory_collection, {}, 
+        {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.news":1, "armory.feed":1, "armory.thumbnail":1},  
+        {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"

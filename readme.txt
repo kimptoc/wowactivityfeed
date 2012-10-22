@@ -2,6 +2,7 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
+- how to config prod node/restart itself?
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 
 - number of registered, number in armory history
@@ -122,7 +123,7 @@ mocha -t 3000 js/*Spec.js
 
 and another to run express under nodemon, so its restarted when code changes
 
-node_modules/.bin/nodemon js/app.js
+node_modules/.bin/nodemon app.js
 
 
 ON OSX
@@ -131,10 +132,12 @@ start mongo - sudo port load mongodb
 and maybe sudo rm /opt/local/var/db/mongodb/mongod.lock
 run tests - bash ./node_modules/.bin/mocha js/*Spec.js
 or node ./node_modules/mocha/bin/mocha 
-run app - node node_modules/nodemon/nodemon js/app.js
+run app - 
+node node_modules/nodemon/nodemon app.js
 compile coffee - same as above
 
-
+dex:
+dex -w -f /opt/local/var/log/mongodb/mongodb.log mongodb://localhost
 
 LINKS
 
