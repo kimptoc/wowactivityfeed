@@ -116,9 +116,11 @@ class wf.StoreMongo
         throw err if err
         if cur
           cur.toArray (err, docs) ->
-            wf.error(err) if err
-            throw err if err
-            if docs.length >= 1
+            if err
+              wf.error(err) if err
+            # throw err if err
+              loaded_handler?(null)
+            else if docs.length >= 1
               loaded_handler?(docs[0])
             else
               wf.error "In collection #{collection_name} did not find any matching for key:#{JSON.stringify(document_key)}"
@@ -140,14 +142,16 @@ class wf.StoreMongo
           wf.error("load_all:#{err}")
           # throw err
           loaded_handler?(null)
-          return
-        cur.toArray (err, docs) ->
-          wf.timing_off("load_all-#{collection_name}")
-          wf.debug "load_all, got collection:#{collection_name} contents, now as array, err:#{err}"
-          wf.error(err) if err
-          throw err if err
-          wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
-          loaded_handler?(docs)
+        else
+          cur.toArray (err, docs) ->
+            wf.timing_off("load_all-#{collection_name}")
+            wf.debug "load_all, got collection:#{collection_name} contents, now as array, err:#{err}"
+            if err
+              wf.error(err)
+              loaded_handler?(null)
+            else
+              wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
+              loaded_handler?(docs)
   
   dbstats: (coll1, coll2, coll3, callback) ->
     results = {}
