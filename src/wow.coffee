@@ -88,8 +88,8 @@ class wf.WoW
       latest: 0
       error_summary :{}
       armory_load_running: job_running_lock
-    store.dbstats (stats) ->
-      info.dbstats = stats      
+    store.dbstats armory_collection, calls_collection, registered_collection, (stats) ->
+      info.db = stats      
       store.load_all calls_collection, {}, {}, (entries) ->
         for call in entries
           info.earliest = call.start_time if call.start_time < info.earliest

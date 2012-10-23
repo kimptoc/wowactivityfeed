@@ -25,17 +25,17 @@ class wf.StoreMongo
         throw err if err
         removed_handler?()
 
-  get_loaded: (loaded_handler) ->
-    @with_connection ->
-      wf.mongo_db.collectionNames namesOnly:true, (err, results) ->
-        wf.error(err) if err
-        throw err if err
-        wowthings = results.filter (thing) ->
-          wf.debug "thing:#{JSON.stringify(thing)}"
-          thing.indexOf("wowitem") >= 0
-        wowthings = wowthings.map (thing) ->
-          thing.substring(thing.indexOf(".")+1)
-        loaded_handler?(wowthings)
+  # get_loaded: (loaded_handler) ->
+  #   @with_connection ->
+  #     wf.mongo_db.collectionNames namesOnly:true, (err, results) ->
+  #       wf.error(err) if err
+  #       throw err if err
+  #       wowthings = results.filter (thing) ->
+  #         wf.debug "thing:#{JSON.stringify(thing)}"
+  #         thing.indexOf("wowitem") >= 0
+  #       wowthings = wowthings.map (thing) ->
+  #         thing.substring(thing.indexOf(".")+1)
+  #       loaded_handler?(wowthings)
 
   ensure_index: (collection_name, fieldSpec, callback) ->
     @with_collection collection_name, (coll) ->
@@ -146,12 +146,38 @@ class wf.StoreMongo
           wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
           loaded_handler?(docs)
   
-  dbstats: (callback) ->
-    @with_connection (db) ->
-      db.stats {scale:1000000},(err,stats) ->
+  dbstats: (coll1, coll2, coll3, callback) ->
+    results = {}
+    @with_connection (db) =>
+      db.stats {scale:1000000},(err,stats) =>
         wf.error(err) if err
         throw err if err
-        callback?(stats)
+        results.dbstats = stats
+        if coll1?
+          @with_collection coll1, (coll) =>
+            coll.stats {scale:1000000}, (err,cstats1) =>
+              wf.error(err) if err
+              throw err if err
+              results[coll1] = cstats1
+              if coll2?
+                @with_collection coll2, (coll) =>
+                  coll.stats {scale:1000000}, (err,cstats2) =>
+                    wf.error(err) if err
+                    throw err if err
+                    results[coll2] = cstats2
+                    if coll3?
+                      @with_collection coll3, (coll) ->
+                        coll.stats {scale:1000000}, (err,cstats3) ->
+                          wf.error(err) if err
+                          throw err if err
+                          results[coll3] = cstats3
+                          callback?(results)
+                    else
+                      callback?(results)
+              else
+                callback?(results)
+        else
+          callback?(results)
 
   with_collection: (collection_name, worker) ->
     @with_connection ->
