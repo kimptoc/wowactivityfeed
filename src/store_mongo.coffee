@@ -131,9 +131,9 @@ class wf.StoreMongo
     @load_all_with_fields collection_name, document_key, undefined, options, loaded_handler
 
   load_all_with_fields: (collection_name, document_key, fields, options, loaded_handler) ->
-    wf.timing_on("load_all-#{collection_name}, options:#{JSON.stringify(options)}")
+    wf.timing_on("load_all-#{collection_name}")
     @with_collection collection_name, (coll) ->
-      wf.debug "load_all, got collection:#{collection_name}, now query by key:#{JSON.stringify(document_key)}"
+      wf.info "load_all, got collection:#{collection_name}, options:#{JSON.stringify(options)}, now query by key:#{JSON.stringify(document_key)}"
       coll.find document_key, fields, options, (err, cur) ->
         wf.debug "load_all, got collection:#{collection_name} contents"
         wf.error("load_all:#{err}") if err
