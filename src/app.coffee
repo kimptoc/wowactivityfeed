@@ -92,10 +92,11 @@ wf.app.get '/loaded', (req, res) ->
 
 build_feed = (items, feed) ->
   items_to_publish = []
-  for item in items
-    formatted_items = wf.app.feed_formatter.process(item)
-    for fi in formatted_items
-      items_to_publish.push(fi)
+  if items?
+    for item in items
+      formatted_items = wf.app.feed_formatter.process(item)
+      for fi in formatted_items
+        items_to_publish.push(fi)
   items_to_publish.sort (a,b) ->
     return b.date - a.date
   for item in items_to_publish[0...wf.HISTORY_LIMIT]

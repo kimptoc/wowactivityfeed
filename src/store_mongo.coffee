@@ -136,8 +136,11 @@ class wf.StoreMongo
       wf.info "load_all, got collection:#{collection_name}, options:#{JSON.stringify(options)}, now query by key:#{JSON.stringify(document_key)}"
       coll.find document_key, fields, options, (err, cur) ->
         wf.debug "load_all, got collection:#{collection_name} contents"
-        wf.error("load_all:#{err}") if err
-        throw err if err
+        if err
+          wf.error("load_all:#{err}")
+          # throw err
+          loaded_handler?(null)
+          return
         cur.toArray (err, docs) ->
           wf.timing_off("load_all-#{collection_name}")
           wf.debug "load_all, got collection:#{collection_name} contents, now as array, err:#{err}"
