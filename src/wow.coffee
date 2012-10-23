@@ -1,5 +1,7 @@
 global.wf ||= {}
 
+startup_time = new Date().getTime()
+
 async = require "async"
 moment = require "moment"
 
@@ -78,6 +80,7 @@ class wf.WoW
 
   armory_calls: (callback)->
     info = 
+      startup_time: moment(startup_time).format('H:mm:ss ddd')
       total_calls: 0
       total_errors: 0
       total_not_modified: 0
