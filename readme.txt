@@ -2,11 +2,8 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
-- how to config prod node/restart itself?
-- performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 
-- do all in memory?  only persist registered?
-- option to run for one guild only, no ability to register more people
+- do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
 - Waf/normalise regions too
 
@@ -40,9 +37,12 @@ maybe....
 
 PENDING BEING TESTED
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
+- how to config prod node/restart itself? forever?
 -
 
 LATER
+- performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
+- option to run for one guild only, no ability to register more people, load guilds/members from config file
 - mention trademarks, all are blizzards
 - caching? only rebuild feed once a min or so...
 - licence for code?

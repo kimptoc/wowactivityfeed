@@ -105,7 +105,7 @@ build_feed = (items, feed) ->
 handle_view = (req, res) ->
   type = req.params.type
   type = 'member' if type == "character"
-  region = req.params.region
+  region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
   wf.app.wow.get_history region, realm, type, name, (wowthings) ->
@@ -156,7 +156,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 
   type = req.params.type
   type = 'member' if type == "character"
-  region = req.params.region
+  region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
 
