@@ -180,10 +180,10 @@ class wf.WoW
         armory_stats.not_modified = (info is undefined)
         armory_stats.had_error = info?.error?
         store.insert calls_collection, armory_stats, =>
-          wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+          # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
           if info?
             @store_update info.type, info.region, info.realm, info.name, info, ->
-              wf.info "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+              wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
               if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
                 wf.info "Registered entry is different, update registered"
                 item_key = 
@@ -269,7 +269,7 @@ class wf.WoW
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
           wf.debug "store_update:#{JSON.stringify(doc)}"
           if doc? and doc.lastModified == info.lastModified
-            wf.error "Ignored as saved already: #{name} - BUT THEN ISNT THIS TRAPPED EARLIER..."
+            wf.debug "Ignored as saved already: #{name}"
             stored_handler?()
           else
             # only save errors for new updates (assume others are transient)
