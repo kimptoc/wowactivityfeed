@@ -1,5 +1,8 @@
 TODO
-- return less from history query
+- save log messages to db in capped collection
+- dont throw errors, pass them onto the callback!
+
+- cron seems to fallover sometimes - thrown error?
 - limit history saved
 - cache latest info in memory
 
@@ -8,31 +11,19 @@ TODO
 
 - limited results are missing guild object...
 
-- for some guilds... crashing on new server "Error: connection closed due to parseError", but ok on old server??? data issue, reducing limit helped
-
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
-- Waf/normalise regions too
-
-- number of registered, number in armory history
-- db stats/size
 - numbers for last hour
 - number of actual/real results (is it calls less errors and non-mod?)
 - time of most real update
+- mongo db version
 
 - save count of calls per load, with date saved
 
-- save log messages to db in capped collection
-
-- remove clear data/load sample links
-- make site url a environment property
 
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
 
-- are we doing the achievements rejig for guilds?
-
-- dont throw errors, pass them onto the callback!
 
 BUGS
 - seem to have stability issues on appfog... review error logs
@@ -50,6 +41,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- show guild name, if there is one on title/descript of feed
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 - option to run for one guild only, no ability to register more people, load guilds/members from config file
 - mention trademarks, all are blizzards

@@ -232,7 +232,7 @@ class wf.WoW
     return if job_running_lock # only run one at a time....
     job_running_lock = true
     try 
-      loader_queue = async.queue(@armory_item_loader, 5) # 5 max threads 
+      loader_queue = async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads 
       loader_queue.drain = ->
         job_running_lock = false
         loaded_callback?()
