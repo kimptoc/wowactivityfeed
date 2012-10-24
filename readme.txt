@@ -1,6 +1,5 @@
 TODO
-- load guild then members - so we always load the guild
-- dont persist achievement info, as its in the news/feed stuff
+- return less from history query
 - limit history saved
 - cache latest info in memory
 

@@ -249,19 +249,23 @@ class wf.WoW
     new_item = {region, realm, type, name}
     new_item.lastModified = info.lastModified
     # remap achievements as a map for ease of diff/use
-    if info.achievements?
-      achievements_map = {}
-      for i in [0..info.achievements.achievementsCompleted.length-1]
-        achievements_map[info.achievements.achievementsCompleted[i]] = info.achievements.achievementsCompletedTimestamp[i]
-      info.achievements_map = achievements_map
-      achievements_criteria_map = {}
-      for i in [0..info.achievements.criteria.length-1]
-        achievements_criteria_map[info.achievements.criteria[i]] = 
-          created: info.achievements.criteriaCreated[i]
-          quantity: info.achievements.criteriaQuantity[i]
-          timestamp: info.achievements.criteriaTimestamp[i]
-      info.achievements_criteria_map = achievements_criteria_map
+    # if info.achievements?
+    #   achievements_map = {}
+    #   for i in [0..info.achievements.achievementsCompleted.length-1]
+    #     achievements_map[info.achievements.achievementsCompleted[i]] = info.achievements.achievementsCompletedTimestamp[i]
+    #   info.achievements_map = achievements_map
+    #   achievements_criteria_map = {}
+    #   for i in [0..info.achievements.criteria.length-1]
+    #     achievements_criteria_map[info.achievements.criteria[i]] = 
+    #       created: info.achievements.criteriaCreated[i]
+    #       quantity: info.achievements.criteriaQuantity[i]
+    #       timestamp: info.achievements.criteriaTimestamp[i]
+    #   info.achievements_criteria_map = achievements_criteria_map
     # todo, remove orig achievements entry, maybe
+
+    # strip achievements as they are in the news/feeds items
+    delete info.achievements
+
     new_item.armory = info
     whats_changed = wf.calc_changes(doc?.armory, info)
     new_item.whats_changed = whats_changed
