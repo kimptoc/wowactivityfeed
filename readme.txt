@@ -1,6 +1,7 @@
 TODO
-- save log messages to db in capped collection
 - dont throw errors, pass them onto the callback!
+- save log messages to db in capped collection
+- fix tests, wowSpec failing too much, refactor wow.coffee
 
 - cron seems to fallover sometimes - thrown error?
 - limit history saved

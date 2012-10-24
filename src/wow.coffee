@@ -185,7 +185,7 @@ class wf.WoW
       wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error
-        armory_stats.not_modified = (info is undefined)
+        armory_stats.not_modified = (info is undefined and armory_stats.error is false)
         armory_stats.had_error = info?.error?
         store.insert calls_collection, armory_stats, =>
           # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
