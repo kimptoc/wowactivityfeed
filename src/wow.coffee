@@ -22,6 +22,8 @@ class wf.WoW
   static_collection = "armory_static"
   calls_collection = "armory_calls"
 
+  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
+
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
   armory_static_index_1 = {static_type:1, id:1}
@@ -115,7 +117,7 @@ class wf.WoW
     store.ensure_index armory_collection, armory_index_1, ->
       # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
       store.load_all_with_fields armory_collection, {}, 
-        {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.news":1, "armory.feed":1, "armory.thumbnail":1},  
+        fields_to_select,  
         {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, loaded_handler
 
   get_history: (region, realm, type, name, result_handler) =>
@@ -123,11 +125,11 @@ class wf.WoW
       @ensure_registered region, realm, type, name, ->
         store.ensure_index armory_collection, armory_index_1, ->
           selector = {type, region, realm, name}
-          store.load_all armory_collection, selector, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
+          store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
             if type == "guild" # if its a guild, also query for guild members
               wf.debug "Got a guild, so also query for members..."
               selector = {type:"member", region, realm, "armory.guild.name":name}
-              store.load_all armory_collection, selector, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
+              store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
                 for m in members
                   results.push m
                 result_handler?(results)

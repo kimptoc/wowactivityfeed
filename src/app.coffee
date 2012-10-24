@@ -87,7 +87,7 @@ wf.app.get '/loaded', (req, res) ->
           feed.push(fi)
       feed.sort (a,b) ->
         return b.date - a.date
-      feed = feed[0..wf.HISTORY_LIMIT]
+      feed = feed[0..wf.HISTORY_LIMIT*3]
       res.render "loaded", f: feed
 
 build_feed = (items, feed) ->
@@ -99,7 +99,7 @@ build_feed = (items, feed) ->
         items_to_publish.push(fi)
   items_to_publish.sort (a,b) ->
     return b.date - a.date
-  for item in items_to_publish[0...wf.HISTORY_LIMIT]
+  for item in items_to_publish[0...wf.HISTORY_LIMIT*3]
     feed.item item
   return feed.xml()
 
@@ -120,7 +120,7 @@ handle_view = (req, res) ->
           feed.push(fi)
       feed.sort (a,b) ->
         return b.date - a.date
-      feed = feed[0..wf.HISTORY_LIMIT]
+      feed = feed[0..wf.HISTORY_LIMIT*3]
       guild_item = null
       if type == "guild"
         for item in wowthings
