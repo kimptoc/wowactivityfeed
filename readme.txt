@@ -2,7 +2,9 @@ TODO
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
-- for some guilds... crashing on new server "Error: connection closed due to parseError", but ok on old server???
+- limited results are missing guild object...
+
+- for some guilds... crashing on new server "Error: connection closed due to parseError", but ok on old server??? data issue, reducing limit helped
 
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 

@@ -116,7 +116,7 @@ class wf.WoW
       # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
       store.load_all_with_fields armory_collection, {}, 
         {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.news":1, "armory.feed":1, "armory.thumbnail":1},  
-        {limit:parseInt(wf.HISTORY_LIMIT/3),sort: {"lastModified": -1}}, loaded_handler
+        {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, loaded_handler
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
