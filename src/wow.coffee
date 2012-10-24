@@ -22,7 +22,7 @@ class wf.WoW
   static_collection = "armory_static"
   calls_collection = "armory_calls"
 
-  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
+  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
 
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
