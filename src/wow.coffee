@@ -123,10 +123,16 @@ class wf.WoW
       @ensure_registered region, realm, type, name, ->
         store.ensure_index armory_collection, armory_index_1, ->
           selector = {type, region, realm, name}
-          if type == "guild" # if its a guild, also query for guild members
-            wf.debug "Got a guild, so also query for members..."
-            selector = {$or:[selector, {type:"member", region, realm, "armory.guild.name":name}]}
-          store.load_all armory_collection, selector, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, result_handler
+          store.load_all armory_collection, selector, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
+            if type == "guild" # if its a guild, also query for guild members
+              wf.debug "Got a guild, so also query for members..."
+              selector = {type:"member", region, realm, "armory.guild.name":name}
+              store.load_all armory_collection, selector, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
+                for m in members
+                  results.push m
+                result_handler?(results)
+            else
+              result_handler?(results)
     else
       result_handler?(null)
 

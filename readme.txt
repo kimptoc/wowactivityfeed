@@ -1,4 +1,9 @@
 TODO
+- load guild then members - so we always load the guild
+- dont persist achievement info, as its in the news/feed stuff
+- limit history saved
+- cache latest info in memory
+
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
