@@ -30,17 +30,20 @@ class wf.StoreMongo
       
   add: (collection_name, document_object, stored_handler) ->
     @insert collection_name, document_object, (coll)->
-      coll.find document_object, (err, cur) ->
-        if err
-          wf.error(err)
-          stored_handler?(null)
-        else
-          cur.count (err, count) ->
-            if err
-              wf.error(err)
-              stored_handler?(null)
-            else 
-              stored_handler?(count)
+      if coll?
+        coll.find document_object, (err, cur) ->
+          if err
+            wf.error(err)
+            stored_handler?(null)
+          else
+            cur.count (err, count) ->
+              if err
+                wf.error(err)
+                stored_handler?(null)
+              else 
+                stored_handler?(count)
+      else
+        stored_handler?(null)
 
   insert: (collection_name, document_object, stored_handler) ->
     @with_collection collection_name, (coll) ->

@@ -1,11 +1,12 @@
 TODO
-- dont throw errors, pass them onto the callback!
 - save log messages to db in capped collection
 - fix tests, wowSpec failing too much, refactor wow.coffee
 
-- cron seems to fallover sometimes - thrown error?
 - limit history saved
 - cache latest info in memory
+
+- cron seems to fallover sometimes - thrown error?
+
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
@@ -27,7 +28,7 @@ TODO
 
 
 BUGS
-- seem to have stability issues on appfog... review error logs
+-
 
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
@@ -42,6 +43,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- on guild web page, sort members by descending rank?
 - show guild name, if there is one on title/descript of feed
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 - option to run for one guild only, no ability to register more people, load guilds/members from config file

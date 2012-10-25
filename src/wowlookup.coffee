@@ -73,7 +73,7 @@ class wf.WowLookup
         else
           wf.debug "wowlookup #{name}/#{thing?.name}, err:#{JSON.stringify(err)}, result:#{JSON.stringify(thing)}"
           thing?.type = type
-          thing?.region = region.toLowerCase()
+          thing?.region = region?.toLowerCase()
           result_handler?(thing)
 
   get_static: (static_load_method, region = "eu", callback) ->
