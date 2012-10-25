@@ -28,6 +28,7 @@ class wf.WoW
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
+  loader_queue = null
   armory_pending_queue = []
 
   constructor: (callback)->
@@ -92,7 +93,10 @@ class wf.WoW
       earliest: Infinity
       latest: 0
       error_summary :{}
-      armory_load_running: job_running_lock
+      armory_load:
+        armory_load_running: job_running_lock
+        number_running: loader_queue?.running() 
+        number_queued: loader_queue?.length()
     store.dbstats armory_collection, calls_collection, registered_collection, (stats) ->
       info.db = stats      
       store.load_all calls_collection, {}, {}, (entries) ->
@@ -235,6 +239,7 @@ class wf.WoW
       loader_queue = async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads 
       loader_queue.drain = ->
         job_running_lock = false
+        loader_queue = null
         loaded_callback?()
       if armory_pending_queue? and armory_pending_queue.length >0
         wf.info "Loading from armory_pending_queue, length:#{armory_pending_queue.length}"

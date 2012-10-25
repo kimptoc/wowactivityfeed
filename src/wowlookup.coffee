@@ -24,9 +24,12 @@ class wf.WowLookup
     wf.info "WowLookup constructor"
 
   get_armory: (callback) ->
+    request_defaults = 
+      timeout: 30000
+
     if process.env.NODE_ENV == "production"
       wf.info "Its production - dont use a proxy to the armory"
-      armory = require('armory')
+      armory = require('armory').defaults(request:request_defaults)
       callback(armory)
     else
       try
@@ -34,15 +37,16 @@ class wf.WowLookup
           wf.info "Port is open? #{is_open}"
           if is_open
             wf.info "Found the proxy, so use it:#{is_open}"
-            armory = require('armory').defaults(request:{proxy:"http://localhost:8888"})
+            request_defaults.proxy = "http://localhost:8888"
+            armory = require('armory').defaults(request:request_defaults)
             callback(armory)
           else
             wf.info "Proxy not found, so connecting to armory direct"
-            armory = require('armory')
+            armory = require('armory').defaults(request:request_defaults)
             callback(armory)
       catch e
         wf.info "Proxy not found, so connecting to armory direct:#{e}"
-        armory = require('armory')
+        armory = require('armory').defaults(request:request_defaults)
         callback(armory)
 
   with_armory: (armory_handler) ->
