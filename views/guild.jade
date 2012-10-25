@@ -2,7 +2,7 @@ extends layout
 
 block content
   .container
-    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name} / members: #{w.armory.members?w.armory.members.length:'?'}
+    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name}, level: #{w.armory.level} / members: #{w.armory.members?w.armory.members.length:'?'}
     if h
       div History available: #{h.length}
     div
