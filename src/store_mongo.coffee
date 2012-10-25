@@ -85,10 +85,10 @@ class wf.StoreMongo
 
   remove: (collection_name, document_key, callback) ->
     @with_collection collection_name, (coll) ->
-      coll.remove document_key, safe:true, (err, docs) ->
+      coll.remove document_key, safe:true, (err, count) ->
         wf.error(err) if err
         wf.debug "removed:#{JSON.stringify(document_key)}, ok:#{!err?}"
-        callback?()
+        callback?(count)
 
   update: (collection_name, document_key, new_document, update_handler) ->
     @with_collection collection_name, (coll) ->
@@ -107,9 +107,9 @@ class wf.StoreMongo
 
   load: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      options = options or {}
-      options["limit"] = -1
-      options["batchSize"] = 1
+      options ||= {}
+      options["limit"] ||= -1
+      options["batchSize"] ||= 1
       wf.debug "load:coll:#{collection_name}, key:#{JSON.stringify(document_key)}, options:#{JSON.stringify(options)}"
       coll.find document_key, options, (err, cur) ->
         if err

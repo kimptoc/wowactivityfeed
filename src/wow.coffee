@@ -93,6 +93,8 @@ class wf.WoW
       earliest: Infinity
       latest: 0
       error_summary :{}
+      memory_usage: process.memoryUsage()
+      node_uptime: process.uptime()
       armory_load:
         armory_load_running: job_running_lock
         number_running: loader_queue?.running() 
@@ -178,7 +180,7 @@ class wf.WoW
       # for each, go through its categories/achievements and achievements, store in db
       # 
 
-  armory_item_loader: (item, callback) =>
+  armory_item_logged_call: (item, callback) =>
     armory_stats = 
       type: item.type
       region: item.region
@@ -189,41 +191,45 @@ class wf.WoW
       wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error
-        armory_stats.not_modified = (info is undefined and armory_stats.error is false)
+        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
         armory_stats.had_error = info?.error?
         store.insert calls_collection, armory_stats, =>
-          # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
-          if info?
-            @store_update info.type, info.region, info.realm, info.name, info, ->
-              wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-              if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
-                wf.info "Registered entry is different, update registered"
-                item_key = 
-                  type: item.type
-                  region: item.region
-                  name: item.name
-                  realm: item.realm
-                new_item_key = 
-                  type: info.type
-                  region: info.region
-                  name: info.name
-                  realm: info.realm
-                item.realm = info.realm
-                item.region = info.region
-                item.name = info.name
-                store.load registered_collection, new_item_key, null, (new_key_item)->
-                  if new_key_item?
-                    # new key exists already, so delete old one
-                    store.remove registered_collection, item_key, ->
-                      callback?(info)
-                  else
-                    store.upsert registered_collection, item_key, item, ->
-                      callback?(info)
+          callback?(doc, info)
+    
+  armory_item_loader: (item, callback) =>
+    @armory_item_logged_call item, (doc, info) =>
+      # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+      if info?
+        @store_update info.type, info.region, info.realm, info.name, info, ->
+          wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+          if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+            wf.info "Registered entry is different, update registered"
+            item_key = 
+              type: item.type
+              region: item.region
+              name: item.name
+              realm: item.realm
+            new_item_key = 
+              type: info.type
+              region: info.region
+              name: info.name
+              realm: info.realm
+            item.realm = info.realm
+            item.region = info.region
+            item.name = info.name
+            store.load registered_collection, new_item_key, null, (new_key_item)->
+              if new_key_item?
+                # new key exists already, so delete old one
+                store.remove registered_collection, item_key, ->
+                  callback?(info)
               else
-                callback?(info)
+                store.upsert registered_collection, item_key, item, ->
+                  callback?(info)
           else
-            # send old info back, needed for guilds so we can query the members
-            callback?(doc?.armory) 
+            callback?(info)
+      else
+        # send old info back, needed for guilds so we can query the members
+        callback?(doc?.armory) 
 
   armory_results_loader: (loader_queue, results_array) ->
     loader_queue.push results_array, (info) ->
@@ -284,22 +290,31 @@ class wf.WoW
     # if not same, calc diff, then save it
     store.ensure_index armory_collection, armory_index_1, =>
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
-          wf.debug "store_update:#{JSON.stringify(doc)}"
-          if doc? and doc.lastModified == info.lastModified
-            wf.debug "Ignored as saved already: #{name}"
-            stored_handler?()
+        wf.debug "store_update:#{JSON.stringify(doc)}"
+        if doc? and doc.lastModified == info.lastModified
+          wf.debug "Ignored as saved already: #{name}"
+          stored_handler?()
+        else
+          # only save errors for new updates (assume others are transient)
+          unless doc? and info.error?
+            wf.debug "New or updated: #{info.name}/#{name}"
+            new_item = @format_armory_info(type, region, realm, name, info, doc)
+            wf.debug "pre add"
+            store.add armory_collection, new_item, ->
+              if doc?
+                store.update armory_collection, doc, {$unset:{armory:1}}, ->
+                  wf.debug "Now saved #{info.name}/#{name}, updated old one"
+                  store.load_all_with_fields armory_collection,  {region, realm, type, name}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
+                    # get last last mod date
+                    wf.debug "Current history - count:#{docs.length}"
+                    last_doc_last_modified = docs[-1...-1].lastModified
+                    # delete all entries with last mod date before date (less than)
+                    store.remove armory_collection, {region, realm, type, name, lastModified : { $lt : last_doc_last_modified } }, (count)->
+                      wf.debug "Delete old history - count:#{count}"
+                      stored_handler?()
+              else
+                wf.debug "Now saved #{info.name}/#{name}, no old one"
+                stored_handler?()
           else
-            # only save errors for new updates (assume others are transient)
-            unless doc? and info.error?
-              wf.debug "New or updated: #{info.name}/#{name}"
-              new_item = @format_armory_info(type, region, realm, name, info, doc)
-              wf.debug "pre add"
-              store.add armory_collection, new_item, ->
-                if doc?
-                  store.update armory_collection, doc, {$unset:{armory:1}}, ->
-                    wf.debug "Now saved #{info.name}/#{name}, updated old one"
-                    stored_handler?()
-                else
-                  wf.debug "Now saved #{info.name}/#{name}, no old one"
-                  stored_handler?()
+            stored_handler?()
 

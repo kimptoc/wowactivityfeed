@@ -2,14 +2,16 @@ TODO
 
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
-
-- twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
-- fb to twitter, ok?
-
-
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
 
+
+
+- twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
+- fb to twitter, ok? using Twitter -> fb link working better, get text, no images (and twitterfeed to twitter)
+
+- track feed/view usage, for last few days
+-- use this to purge unused data
 
 - save log messages to db in capped collection
 - fix tests, wowSpec failing too much, refactor wow.coffee
@@ -29,6 +31,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- perhaps provide facebook/twitter integration/authentication so we get full control of posts... 
 - numbers for last hour
 - number of actual/real results (is it calls less errors and non-mod?)
 - time of most real update
