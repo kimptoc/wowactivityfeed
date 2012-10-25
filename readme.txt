@@ -1,30 +1,19 @@
 TODO
-- save log messages to db in capped collection
-- fix tests, wowSpec failing too much, refactor wow.coffee
 
-- limit history saved
-- cache latest info in memory
-
-- cron seems to fallover sometimes - thrown error?
+- do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok?
 
-- limited results are missing guild object...
-
-- do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
-
-- numbers for last hour
-- number of actual/real results (is it calls less errors and non-mod?)
-- time of most real update
-- mongo db version
-
-- save count of calls per load, with date saved
-
 
 - home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
 -- and number of armory calls made
+
+
+- save log messages to db in capped collection
+- fix tests, wowSpec failing too much, refactor wow.coffee
+- cache latest info in memory
 
 
 BUGS
@@ -32,17 +21,20 @@ BUGS
 
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
-- not handling the totally new entry bit - showing undefined in feed...
-- some members not being found, but listed in history... perhaps where not been played for a while... or maybe 500 errors?
-- if using charles/no network, app crashes on startup...
 
 
 PENDING BEING TESTED
+- armory job seems to lockup sometimes... added a timeout, see if it helps...
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
-- how to config prod node/restart itself? forever?
 -
 
 LATER
+- numbers for last hour
+- number of actual/real results (is it calls less errors and non-mod?)
+- time of most real update
+- mongo db version
+- save count of calls per load, with date saved
+
 - on guild web page, sort members by descending rank?
 - show guild name, if there is one on title/descript of feed
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
