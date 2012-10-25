@@ -5,6 +5,7 @@ wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
 wf.HISTORY_LIMIT = 10
 wf.HISTORY_SAVE_LIMIT = 5
 wf.ARMORY_CALL_THREADS = 6
+wf.ARMORY_CALL_TIMEOUT = 30000
 
 wf.mongo_info = 
     "hostname":"localhost"

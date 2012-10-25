@@ -4,6 +4,7 @@ express = require('express')
 http = require('http')
 path = require('path')
 rss = require('rss')
+moment = require('moment')
 
 require './init_logger'
 require './wow'
@@ -128,7 +129,7 @@ handle_view = (req, res) ->
           guild_item = item if item.type == "guild" and guild_item == null
       guild_item = wowthings[0] unless guild_item?
       # todo - sort feed
-      res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed
+      res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 

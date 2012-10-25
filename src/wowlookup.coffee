@@ -1,5 +1,6 @@
 global.wf ||= {}
 
+require "./defaults"
 require "./store"
 require './init_logger'
 portcheck = require 'portchecker'
@@ -25,7 +26,7 @@ class wf.WowLookup
 
   get_armory: (callback) ->
     request_defaults = 
-      timeout: 30000
+      timeout: wf.ARMORY_CALL_TIMEOUT
 
     if process.env.NODE_ENV == "production"
       wf.info "Its production - dont use a proxy to the armory"
