@@ -5,6 +5,7 @@ http = require('http')
 path = require('path')
 rss = require('rss')
 moment = require('moment')
+_ = require('underscore')
 
 require './init_logger'
 require './wow'
@@ -60,6 +61,11 @@ wf.app.configure ->
 
 
 # Routes
+sample = (a, n) ->
+    return _.take(_.shuffle(a), n)
+
+Array.prototype.sample = (n) -> sample(this, n)
+
 
 wf.app.all '*', (req, res, next) ->
   wf.info "ALL:get #{JSON.stringify(req.route)}"
@@ -68,7 +74,7 @@ wf.app.all '*', (req, res, next) ->
 wf.app.get '/', (req, res) ->
   wf.app.wow.get_registered (results) ->
     get_feed_all (feed)->
-      res.render "index", title: 'Home', reg: results[-9...], f: feed[0..3]
+      res.render "index", title: 'Home', reg: results[-50..].sample(7), f: feed.sample(4)
 
 wf.app.get '/armory_load', (req, res) ->
   wf.armory_load_requested = true

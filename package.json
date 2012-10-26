@@ -20,6 +20,7 @@
         "portchecker":"",
         "moment":"",
         "async":"",
-        "nodetime":""
+        "nodetime":"",
+        "underscore":""
     }
 }

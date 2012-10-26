@@ -4,7 +4,8 @@
 
 .item_update {
   float: left;
-  width: 49%;
+  width: 48%;
   height: 150px;
-  /*border: black dotted 1px;*/
+  border: gray solid 1px;
+  padding: 5px;
 }
