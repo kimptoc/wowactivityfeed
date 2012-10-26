@@ -31,6 +31,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- use alternate rss lib that provides other link types...
 - perhaps provide facebook/twitter integration/authentication so we get full control of posts... 
 - numbers for last hour
 - number of actual/real results (is it calls less errors and non-mod?)
