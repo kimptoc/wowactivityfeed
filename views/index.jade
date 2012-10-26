@@ -1,53 +1,43 @@
 extends layout
 
 block content
-    // Start Header Slider
-    .top_slider
-      #top_slider.camera_wrap.camera_azure_skin
-        div(data-thumb='images/top_slider/slider_image1.jpg', data-src='images/top_slider/slider_image1.jpg')
-          .camera_caption.fadeFromBottom
-        div(data-thumb='images/top_slider/slider_image2.jpg', data-src='images/top_slider/slider_image2.jpg')
-          .camera_caption.fadeFromBottom
-        div(data-thumb='images/top_slider/slider_image3.jpg', data-src='images/top_slider/slider_image3.jpg')
-          .camera_caption.fadeFromBottom
-      // /sider
-      .clear
-        // ClearFix
-    // END Header Slider
     // Start Container
     .container
-      h3.bordered World of Warcraft Activity Feed
-      .columns.sixteen.arial_narrow16.txt_center.margin_bot20
-        | This site provides an RSS feed of activity for your character and/or guild.
-        br
-        | Still under construction...
+      //h3.bordered World of Warcraft Activity Feed
+      .divider40.block_mar40.divider
+        .columns.eleven
+          h5 Recent Updates
+          p
+            if f
+              each item in f
+                .item_update
+                  h5 
+                    a(href='#{item.url}') #{item.title} - 
+                    small #{item.date_formatted}
+                  span &nbsp; !{item.description}
+          .clear
+          a.more_link(href='/loaded')
+            span More
+          .columns.sixteen.arial_narrow16.txt_center
+        .columns.five
+          h5 Recently Registered Guilds/Characters
+          p
+            if reg
+              ul
+              each i in reg
+                li 
+                  a(href='/view/#{i.type}/#{i.region}/#{i.realm}/#{i.name}') #{i.name} - #{i.realm} (#{i.region})
+            else
+              h3 Nothing registered yet!
+          a.more_link(href='/registered')
+            span More
       .clear
         // ClearFix
-      ul#sti-menu.sti-menu
-        li(data-hovercolor='#4d4e4e')
-          a(href='#')
-            h2.sti-item(data-type='mText') Web Design
-            h3.sti-item(data-type='sText')
-              | There are many variations of passages of Lorem Ipsum available, but the majority have
-            span.sti-icon.sti-icon-design.sti-item(data-type='icon')
-        li(data-hovercolor='#4d4e4e')
-          a(href='#')
-            h2.sti-item(data-type='mText') E-commerce
-            h3.sti-item(data-type='sText')
-              | There are many variations of passages of Lorem Ipsum available, but the majority have
-            span.sti-icon.sti-icon-commerce.sti-item(data-type='icon')
-        li(data-hovercolor='#4d4e4e')
-          a(href='#')
-            h2.sti-item(data-type='mText') Online Marketing
-            h3.sti-item(data-type='sText')
-              | There are many variations of passages of Lorem Ipsum available, but the majority have
-            span.sti-icon.sti-icon-marketing.sti-item(data-type='icon')
-        li(data-hovercolor='#4d4e4e')
-          a(href='#')
-            h2.sti-item(data-type='mText') Print & identity
-            h3.sti-item(data-type='sText')
-              | There are many variations of passages of Lorem Ipsum available, but the majority have
-            span.sti-icon.sti-icon-print.sti-item(data-type='icon')
+      p
+        strong
+          | This site provides an RSS feed of activity for your WoW character and/or guild.
+      .clear
+        // ClearFix
       h3.bordered What our clients say
       .columns.sixteen.txt_center
         p

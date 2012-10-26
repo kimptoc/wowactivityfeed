@@ -29,6 +29,7 @@ html(lang='en')
     link(rel='stylesheet', href='/css/camera.css')
     link(rel='stylesheet', href='/fonts/stylesheet.css')
     link(rel='stylesheet', href='/css/stimenu.css')
+    link(rel='stylesheet', href='/css/app.css')
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
     //
@@ -105,6 +106,15 @@ html(lang='en')
       jQuery('#sti-menu').iconmenu();
       });
     script(type='text/javascript', src='http://static.wowhead.com/widgets/power.js')
+
+    script(type="text/javascript")
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/tbwBbSzRSEjRkS4ewsd04g.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
+
     //
     //   End Document
     //  ================================================== 

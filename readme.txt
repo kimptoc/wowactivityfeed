@@ -2,8 +2,15 @@ TODO
 
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
-- home page - show all (?) registered and last 20 (?) changes across all. page background of faded (random) warcraft poster
--- and number of armory calls made
+- home page ,page background of faded (random) warcraft poster
+-- whats site for, rss
+-- show latest/random registered , rss link, more
+-- last 20 (?) changes across all. 
+-- and number of armory calls made today, last modified, load running
+-- search/find my char/guild?
+-- last viewed? popular?
+-- use lib to pack in update boxes
+
 
 
 

@@ -66,7 +66,9 @@ wf.app.all '*', (req, res, next) ->
   next()
 
 wf.app.get '/', (req, res) ->
-  res.render 'index', title: 'Home'
+  wf.app.wow.get_registered (results) ->
+    get_feed_all (feed)->
+      res.render "index", title: 'Home', reg: results[-9...], f: feed[0..3]
 
 wf.app.get '/armory_load', (req, res) ->
   wf.armory_load_requested = true
@@ -77,7 +79,14 @@ wf.app.get '/registered', (req, res) ->
   wf.app.wow.get_registered (results) ->
     res.render "registered", reg: results
 
+wf.app.get '/about', (req, res) ->
+  res.render "about"
+
 wf.app.get '/loaded', (req, res) ->
+  get_feed_all (feed) ->
+    res.render "loaded", f: feed
+
+get_feed_all = (callback) ->    
   wf.app.wow.get_loaded (wowthings) ->
     if wowthings? and wowthings.length > 0
       #wf.debug wowthing
@@ -89,7 +98,7 @@ wf.app.get '/loaded', (req, res) ->
       feed.sort (a,b) ->
         return b.date - a.date
       feed = feed[0..wf.HISTORY_LIMIT*3]
-      res.render "loaded", f: feed
+      callback?(feed)
 
 build_feed = (items, feed) ->
   items_to_publish = []

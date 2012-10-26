@@ -1,0 +1,10 @@
+.char_image {
+  /*float: left;*/
+}
+
+.item_update {
+  float: left;
+  width: 49%;
+  height: 150px;
+  /*border: black dotted 1px;*/
+}

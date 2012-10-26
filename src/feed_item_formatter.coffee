@@ -12,6 +12,10 @@ class wf.FeedItemFormatter
     else # its an update
       item?.whats_changed?.changes?[key][1]
 
+  format_date: (dt) ->
+    dateMoment = moment(dt)
+    "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
+
   process: (item) ->
     results = []
     change_title = "#{item?.name}:"
@@ -28,14 +32,13 @@ class wf.FeedItemFormatter
     if change_description == ""
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
     if item?.type == "member" and item.armory?.thumbnail?
-      change_description = "#{change_description} #{@char_link(item)}"
-    dateMoment = moment(item?.lastModified)
+      change_description = "#{@char_link(item)} #{change_description}"
     result = 
       title: change_title
       description: change_description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}"
       date: item?.lastModified 
-      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      date_formatted: @format_date(item?.lastModified)
       author: item?.name
       guid: "#{item?.lastModified}-#{change_title}"
     results.push result
@@ -57,13 +60,12 @@ class wf.FeedItemFormatter
     "<a href='http://www.wowhead.com/item=#{itemId}'>item</a>"
 
   achievement_link: (achievement) ->
-    "<a href='http://www.wowhead.com/achievement=#{achievement.id}' alt='#{achievement.title}' title='#{achievement.title}'><img src='http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg' align='left' style='border:solid yellow 1px;'></a>"
+    "<a href='http://www.wowhead.com/achievement=#{achievement.id}' alt='#{achievement.title}' title='#{achievement.title}'><img src='http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg' align='right' style='border:solid yellow 1px;'></a>"
 
   char_link: (p) ->
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{p.name}' title='#{p.name}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='right' style='border:solid black 1px;'></a>"
+    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{p.name}' title='#{p.name}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   format_news_item: (news_item, item) ->
-    dateMoment = moment(news_item.timestamp)
     change_title = "#{item?.name}:#{news_item.type}"
     description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
 
@@ -112,19 +114,18 @@ class wf.FeedItemFormatter
       description: description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}&id=#{thingId}"
       date: news_item.timestamp
-      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      date_formatted: @format_date(news_item.timestamp)
       author: item?.name
       guid: "#{news_item.timestamp}-#{change_title}"
     return result
 
   format_feed_item: (feed_item, item) ->
-    dateMoment = moment(feed_item.timestamp)
 
     change_title = "#{item?.name}:#{feed_item.achievement?.title}"
     description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
     if feed_item.type == "ACHIEVEMENT"
       change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
-      description = "#{@achievement_link(feed_item.achievement)}: #{feed_item.achievement.description} #{@char_link(item)}"
+      description = "#{@char_link(item)} #{@achievement_link(feed_item.achievement)}: #{feed_item.achievement.description}"
       thingId = feed_item.achievement.id
       if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
         description += " ["
@@ -139,17 +140,17 @@ class wf.FeedItemFormatter
 
     else if feed_item.type == "CRITERIA"
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
-      description = "Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description} #{@char_link(item)}"
+      description = "#{@char_link(item)} Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
       change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
-      description = "Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description} #{@char_link(item)}"
+      description = "#{@char_link(item)} Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
       change_title = "#{item?.name} - got some loot! Item id:#{feed_item.itemId}"
-      description = "#{@item_link(feed_item.itemId)} *** Must find a way to get item names... #{@char_link(item)}"
+      description = "#{@char_link(item)} #{@item_link(feed_item.itemId)} *** Must find a way to get item names..."
       thingId = feed_item.itemId
 
     else
@@ -160,7 +161,7 @@ class wf.FeedItemFormatter
       description: description
       url: "#{wf.SITE_URL}/view/#{item?.type}/#{item?.region}/#{item?.realm}/#{item?.name}?ts=#{item?.lastModified}&id=#{thingId}"
       date: feed_item.timestamp
-      date_formatted: "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
+      date_formatted: @format_date(feed_item.timestamp)
       author: item?.name
       guid: "#{feed_item.timestamp}-#{change_title}"
     return result
