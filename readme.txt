@@ -4,12 +4,8 @@ TODO
 
 - home page ,page background of faded (random) warcraft poster
 -- whats site for, rss
--- show latest/random registered , rss link, more
--- last 20 (?) changes across all. 
--- and number of armory calls made today, last modified, load running
 -- search/find my char/guild?
--- last viewed? popular?
--- use lib to pack in update boxes
+-- and number of armory calls made today, last modified, load running
 
 
 
@@ -38,6 +34,8 @@ PENDING BEING TESTED
 -
 
 LATER
+- home page/last viewed? popular?
+- home page/use lib to pack in update boxes
 - use alternate rss lib that provides other link types...
 - perhaps provide facebook/twitter integration/authentication so we get full control of posts... 
 - numbers for last hour
