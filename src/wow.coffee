@@ -5,6 +5,7 @@ startup_time = new Date().getTime()
 async = require "async"
 moment = require "moment"
 
+require "./defaults"
 require "./store_mongo"
 require "./wowlookup"
 
@@ -25,6 +26,7 @@ class wf.WoW
   fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
 
   registered_index_1 = {name:1, realm:1, region:1, type:1}
+  registered_ttl_index_2 = { updated_at: 1 } 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
@@ -33,24 +35,33 @@ class wf.WoW
 
   constructor: (callback)->
     wf.info "WoW constructor"
-    store.create_collection calls_collection, capped:true, autoIndexId:false, size: 2000000, (err, result)=>
+    store.create_collection calls_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
-      callback?(this)
+      # todo - this is temporary - ensures all the updated_at fields are set.
+      @get_registered (docs) =>
+        for doc in docs
+          unless doc.updated_at?
+            @ensure_registered doc.region, doc.realm, doc.type, doc.name
+        callback?(this)
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
     wf.debug "Registering #{name}"
-    store.load registered_collection, {region,realm,type,name}, null, (doc) ->
-      wf.info "ensure_registered:#{JSON.stringify(doc)}"
-      if doc?
-        wf.debug "Registered already: #{name}"
-        registered_handler?(true)
-      else
-        wf.debug "Not Registered #{name}"
-        armory_pending_queue.push {region, realm, type, name}
-        wf.armory_load_requested = true # new item/guild, so do an armory load soon
-        store.add registered_collection,{region,realm,type,name}, ->
-          wf.debug "Now Registered #{name}"
-          registered_handler?(false)
+    store.ensure_index registered_collection, registered_index_1, null, ->
+      store.ensure_index registered_collection, registered_ttl_index_2, { unique: false, expireAfterSeconds: wf.REGISTERED_ITEM_TIMEOUT }, ->
+        store.load registered_collection, {region,realm,type,name}, null, (doc) ->
+          wf.info "ensure_registered:#{JSON.stringify(doc)}"
+          if doc?
+            wf.debug "Registered already: #{name}"
+            store.update registered_collection, {region,realm,type,name}, $set: {updated_at:new Date()}, ->
+              wf.debug "Registered #{name}, updated timestamp"
+              registered_handler?(true)
+          else
+            wf.debug "Not Registered #{name}"
+            armory_pending_queue.push {region, realm, type, name}
+            wf.armory_load_requested = true # new item/guild, so do an armory load soon
+            store.add registered_collection,{region,realm,type,name, updated_at:new Date()}, ->
+              wf.debug "Now Registered #{name}"
+              registered_handler?(false)
 
   get_store: ->
     store
@@ -59,8 +70,7 @@ class wf.WoW
     wowlookup
 
   get_registered: (registered_handler)->
-    store.ensure_index registered_collection, registered_index_1, ->
-      store.load_all registered_collection, {}, {}, registered_handler
+    store.load_all registered_collection, {}, {}, registered_handler
 
   clear_all: (cleared_handler) ->
     wf.debug "clear_all called"
@@ -76,7 +86,7 @@ class wf.WoW
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, armory_index_1, ->
+        store.ensure_index armory_collection, armory_index_1, null, ->
           store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
@@ -120,7 +130,7 @@ class wf.WoW
         callback?(info)
 
   get_loaded: (loaded_handler) ->
-    store.ensure_index armory_collection, armory_index_1, ->
+    store.ensure_index armory_collection, armory_index_1, null, ->
       # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
       store.load_all_with_fields armory_collection, {}, 
         fields_to_select,  
@@ -129,7 +139,7 @@ class wf.WoW
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, armory_index_1, ->
+        store.ensure_index armory_collection, armory_index_1, null, ->
           selector = {type, region, realm, name}
           store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
             if type == "guild" # if its a guild, also query for guild members
@@ -164,7 +174,7 @@ class wf.WoW
             groupAchievement.static_type = name
             groupAchievement.group_name = achievementGroup.name
             groupAchievement.group_id = achievementGroup.id
-            store.ensure_index static_collection, armory_static_index_1, ->
+            store.ensure_index static_collection, armory_static_index_1, null, ->
               store.upsert static_collection, {static_type:name, id:groupAchievement.id}, groupAchievement
         # get categories and their achievements
         if achievementGroup.categories?
@@ -196,37 +206,41 @@ class wf.WoW
         store.insert calls_collection, armory_stats, =>
           callback?(doc, info)
     
+  ensure_registered_correct: (item, info, callback) =>
+    if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+      wf.info "Registered entry is different, update registered"
+      item_key = 
+        type: item.type
+        region: item.region
+        name: item.name
+        realm: item.realm
+      new_item_key = 
+        type: info.type
+        region: info.region
+        name: info.name
+        realm: info.realm
+      item.realm = info.realm
+      item.region = info.region
+      item.name = info.name
+      item.updated_at = new Date()
+      store.load registered_collection, new_item_key, null, (new_key_item)->
+        if new_key_item?
+          # new key exists already, so delete old one
+          store.remove registered_collection, item_key, ->
+            callback?(info)
+        else
+          store.upsert registered_collection, item_key, item, ->
+            callback?(info)
+    else
+      callback?(info)
+
   armory_item_loader: (item, callback) =>
     @armory_item_logged_call item, (doc, info) =>
       # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
       if info?
-        @store_update info.type, info.region, info.realm, info.name, info, ->
+        @store_update info.type, info.region, info.realm, info.name, info, =>
           wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-          if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
-            wf.info "Registered entry is different, update registered"
-            item_key = 
-              type: item.type
-              region: item.region
-              name: item.name
-              realm: item.realm
-            new_item_key = 
-              type: info.type
-              region: info.region
-              name: info.name
-              realm: info.realm
-            item.realm = info.realm
-            item.region = info.region
-            item.name = info.name
-            store.load registered_collection, new_item_key, null, (new_key_item)->
-              if new_key_item?
-                # new key exists already, so delete old one
-                store.remove registered_collection, item_key, ->
-                  callback?(info)
-              else
-                store.upsert registered_collection, item_key, item, ->
-                  callback?(info)
-          else
-            callback?(info)
+          @ensure_registered_correct item, info, callback
       else
         # send old info back, needed for guilds so we can query the members
         callback?(doc?.armory) 
@@ -274,7 +288,6 @@ class wf.WoW
     #       quantity: info.achievements.criteriaQuantity[i]
     #       timestamp: info.achievements.criteriaTimestamp[i]
     #   info.achievements_criteria_map = achievements_criteria_map
-    # todo, remove orig achievements entry, maybe
 
     # strip achievements as they are in the news/feeds items
     delete info.achievements
@@ -288,7 +301,7 @@ class wf.WoW
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
-    store.ensure_index armory_collection, armory_index_1, =>
+    store.ensure_index armory_collection, armory_index_1, null, =>
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
         wf.debug "store_update:#{JSON.stringify(doc)}"
         if doc? and doc.lastModified == info.lastModified

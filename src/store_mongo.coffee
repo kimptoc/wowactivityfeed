@@ -24,9 +24,12 @@ class wf.StoreMongo
         wf.error(err) if err
         removed_handler?()
 
-  ensure_index: (collection_name, fieldSpec, callback) ->
+  ensure_index: (collection_name, fieldSpec, options, callback) ->
     @with_collection collection_name, (coll) ->
-      coll.ensureIndex fieldSpec, {unique: true, safe: true}, callback
+      options ||= {}
+      options["unique"] ||= true
+      options["safe"] ||= true
+      coll.ensureIndex fieldSpec, options, callback
       
   add: (collection_name, document_object, stored_handler) ->
     @insert collection_name, document_object, (coll)->

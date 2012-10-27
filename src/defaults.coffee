@@ -6,6 +6,8 @@ wf.HISTORY_LIMIT = 10
 wf.HISTORY_SAVE_LIMIT = 5
 wf.ARMORY_CALL_THREADS = 6
 wf.ARMORY_CALL_TIMEOUT = 30000
+# wf.REGISTERED_ITEM_TIMEOUT = 60*1  # 1 mins
+wf.REGISTERED_ITEM_TIMEOUT = 60*60*24*7   # 7 days
 
 wf.mongo_info = 
     "hostname":"localhost"
