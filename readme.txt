@@ -1,7 +1,7 @@
 TODO
 
 - track calls to website - where are they coming from (ip, referring site, browser, ...)
--- is google crawling the site? triggering items to reload...
+-- is google crawling the site? triggering items to reload... getting googlebot calls - how to ignore (robots file... guess from req params?)
 
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 
