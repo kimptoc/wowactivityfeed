@@ -5,7 +5,7 @@ block content
     .container
       //h3.bordered World of Warcraft Activity Feed
       .divider40.block_mar40.divider
-        .columns.eleven
+        .columns.sixteen
           h5 Recent Updates
           p
             if f
@@ -19,18 +19,6 @@ block content
           a.more_link(href='/loaded')
             span More
           .columns.sixteen.arial_narrow16.txt_center
-        .columns.five
-          h5 Recently Registered Guilds/Characters
-          p
-            if reg
-              ul
-              each i in reg
-                li 
-                  a(href='/view/#{i.type}/#{i.region}/#{i.realm}/#{i.name}') #{i.name} - #{i.realm} (#{i.region})
-            else
-              h3 Nothing registered yet!
-          a.more_link(href='/registered')
-            span More
       .clear
         // ClearFix
       p

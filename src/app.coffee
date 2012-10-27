@@ -74,7 +74,7 @@ wf.app.all '*', (req, res, next) ->
 wf.app.get '/', (req, res) ->
   wf.app.wow.get_registered (results) ->
     get_feed_all (feed)->
-      res.render "index", title: 'Home', reg: results[-50..].sample(7), f: feed.sample(4)
+      res.render "index", title: 'Home', reg: results[-50..].sample(7), f: feed.sample(9)
 
 wf.app.get '/armory_load', (req, res) ->
   wf.armory_load_requested = true
