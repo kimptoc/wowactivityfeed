@@ -1,5 +1,10 @@
 TODO
 
+- Make registered collection have 1 week ttl and get it reset by view/feed calls  - so if not viewed, it gets dropped
+
+- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
+
+
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 
 - home page ,page background of faded (random) warcraft poster
@@ -34,6 +39,7 @@ PENDING BEING TESTED
 -
 
 LATER
+- Ttl on history Coll - 1 week?
 - home page/last viewed? popular?
 - home page/use lib to pack in update boxes
 - use alternate rss lib that provides other link types...

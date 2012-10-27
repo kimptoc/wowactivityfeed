@@ -2,20 +2,27 @@
   /*float: left;*/
 }
 
+.recent_updates {
+  /*margin-bottom: 100px;*/
+  display: inline-block;
+}
+
 .item_update {
   float: left;
-  width: 32%;
-  height: 150px;
+  width: 300px;
+  /*width: 32%;*/
+  /*height: 150px;*/
+  /*min-height: 150px;*/
   border: gray solid 1px;
   padding: 5px;
+  display: inline-block;
 }
 
   /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
   @media only screen and (min-width: 480px) and (max-width: 767px) {
     /*header { background:#0000ff; height:100px}*/
     .item_update {
-      width: 47%;
-      height: 200px;
+      width: 345px;
     }
   }
 
@@ -23,6 +30,6 @@
   @media only screen and (max-width: 479px) {
     /*header { background:#ff0000; height:100px}*/
     .item_update {
-      width: 100%;
+      width: 345;
     }
   }

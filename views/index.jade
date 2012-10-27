@@ -7,35 +7,30 @@ block content
       .divider40.block_mar40.divider
         .columns.sixteen
           h5 Recent Updates
-          p
+          #recent_updates_id.recent_updates
             if f
               each item in f
                 .item_update
                   h5 
                     a(href='#{item.url}') #{item.title} - 
-                    small #{item.date_formatted}
                   span &nbsp; !{item.description}
+                    small &nbsp; - #{item.date_formatted}
           .clear
           a.more_link(href='/loaded')
             span More
           .columns.sixteen.arial_narrow16.txt_center
       .clear
         // ClearFix
-      p
-        strong
-          | This site provides an RSS feed of activity for your WoW character and/or guild.
-      .clear
-        // ClearFix
-      h3.bordered What our clients say
+      h3.bordered What's it all about ...
       .columns.sixteen.txt_center
         p
-          | "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          br
-          | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          br
-          | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        a(href='#') John Smith
+          | This site provides an RSS feed of activity for your WoW character and/or guild.
+          | The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in 
+          | an RSS reader, like Google Reader.
       .clear
         // ClearFix
     // End Container
 
+block content_footer
+    script(type='text/javascript')
+      jQuery('#recent_updates_id').masonry({itemSelector : '.item_update'});
