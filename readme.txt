@@ -1,29 +1,20 @@
 TODO
 
-- Make registered collection have 1 week ttl and get it reset by view/feed calls  - so if not viewed, it gets dropped
+- track calls to website - where are they coming from (ip, referring site, browser, ...)
+-- is google crawling the site? triggering items to reload...
 
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 
+- search/find my char/guild?
+- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 
-- do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
-
-- home page ,page background of faded (random) warcraft poster
--- whats site for, rss
--- search/find my char/guild?
--- and number of armory calls made today, last modified, load running
-
-
+- mention copyright/trademarks, all are blizzards
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, ok? using Twitter -> fb link working better, get text, no images (and twitterfeed to twitter)
 
-- track feed/view usage, for last few days
--- use this to purge unused data
-
-- save log messages to db in capped collection
 - fix tests, wowSpec failing too much, refactor wow.coffee
-- cache latest info in memory
 
 
 BUGS
@@ -34,16 +25,22 @@ maybe....
 
 
 PENDING BEING TESTED
+- do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 - armory job seems to lockup sometimes... added a timeout, see if it helps...
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
 -
 
 LATER
+- review masonry/isotope usage - is it best option?
+- save log messages to db in capped collection
+- cache latest info in memory
+- home page ,page background of faded (random) warcraft poster
+-- whats site for, rss
+-- and number of armory calls made today, last modified, load running
 - Ttl on history Coll - 1 week?
 - home page/last viewed? popular?
 - home page/use lib to pack in update boxes
 - use alternate rss lib that provides other link types...
-- perhaps provide facebook/twitter integration/authentication so we get full control of posts... 
 - numbers for last hour
 - number of actual/real results (is it calls less errors and non-mod?)
 - time of most real update
@@ -54,42 +51,24 @@ LATER
 - show guild name, if there is one on title/descript of feed
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 - option to run for one guild only, no ability to register more people, load guilds/members from config file
-- mention trademarks, all are blizzards
 - caching? only rebuild feed once a min or so...
 - licence for code?
 - redirect load/data pages to other pages - stats/registered
-- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 - thanks page - for all tools used :)
 - pet battle related feed, levels, achievements
 - show item image in feed (need item info, cache in memory?)
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
-- limit history shown on webpage...
 - update registered entry with time of last good update, last update and error, if error, count of updates
 - if criteria name matches description, only show 1. eg 100 mounts for 100 mounts...
-- ability to have a single feed for several chars (non guilded, eg all my toons)
 - get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
-- do a guild achievements map - maybe
-- whats in the changes for achievements map - useful or just use feeds/news?
-- run app at tagadab, also try heroku - any more stable...?
-- put savedTime onto db 
-- normalise names, eg query this 
---- http://localhost:3000/view/member/us/kaelthas/Fe%C3%A5therz
--- and get this
---- http://localhost:3000/view/member/us/Kael'thas/Fe%C3%A5therz
-- when registering differentiate first register with registered but not loaded
-- switch to mongolab/hq db on appfog
-- page to enter region/realm/type/name and get feed page... maybe...
 - chrome extension to give feed url for a specific battle net page, when on it
 - limits... how to restrict use?? needed?
 - make localisable, ie public lang strings in sep file(s)
-- stats post armory load, number loaded, number changed, number not changed, number with errors??
-- use momentjs or similar to show age of update, eg 10 days ago, maybe actual time...
-- rss, send correct content-type
+- rss, send correct content-type??
 - highlight members with updates, maybe list of most recent updates on front page
-- when you click on view from loaded, it registers item... dont
 - should(not)exist dont give stack trace... alternative test?
 - put armory link in info - for errors and good entries
 - track realm status changes: eg
