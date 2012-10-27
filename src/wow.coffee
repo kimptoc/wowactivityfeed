@@ -37,12 +37,7 @@ class wf.WoW
     wf.info "WoW constructor"
     store.create_collection calls_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
-      # todo - this is temporary - ensures all the updated_at fields are set.
-      @get_registered (docs) =>
-        for doc in docs
-          unless doc.updated_at?
-            @ensure_registered doc.region, doc.realm, doc.type, doc.name
-        callback?(this)
+      callback?(this)
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
     wf.debug "Registering #{name}"
