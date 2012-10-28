@@ -75,11 +75,6 @@ wf.app.get '/', (req, res) ->
   get_feed_all (feed)->
     res.render "index", title: 'Home', f: feed.sample(12)
 
-wf.app.get '/armory_load', (req, res) ->
-  wf.armory_load_requested = true
-  wf.app.wow.get_registered (regs) ->
-    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
-
 wf.app.get '/registered', (req, res) ->
   wf.app.wow.get_registered (results) ->
     res.render "registered", reg: results
@@ -187,7 +182,13 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
   wf.app.wow.get_history region, realm, type, name, (items)->
     wf.timing_off("/feed/#{name}")
     res.send build_feed(items, feed)
+
  
+wf.app.get '/debug/armory_load', (req, res) ->
+  wf.armory_load_requested = true
+  wf.app.wow.get_registered (regs) ->
+    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
+
 wf.app.get '/debug/stats', (req, res) ->
   wf.app.wow.armory_calls (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"

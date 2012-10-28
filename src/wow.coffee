@@ -65,7 +65,7 @@ class wf.WoW
     wowlookup
 
   get_registered: (registered_handler)->
-    store.load_all registered_collection, {}, {}, registered_handler
+    store.load_all registered_collection, {},  {sort: {"updated_at": -1}}, registered_handler
 
   clear_all: (cleared_handler) ->
     wf.debug "clear_all called"

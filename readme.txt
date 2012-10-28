@@ -1,12 +1,13 @@
 TODO
 
-- track calls to website - where are they coming from (ip, referring site, browser, ...)
--- is google crawling the site? triggering items to reload... getting googlebot calls - how to ignore (robots file... guess from req params?)
-
-- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
-
 - search/find my char/guild?
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
+
+- do a "live" load of the char ?
+
+- track calls to website - where are they coming from (ip, referring site, browser, ...)
+
+- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 
 - mention copyright/trademarks, all are blizzards
 
@@ -31,6 +32,8 @@ PENDING BEING TESTED
 -
 
 LATER
+- sort registered page by desc updated_at
+- make a fb page to promote this site, eg http://www.staynalive.com/2012/02/how-to-replace-your-rss-feed.html / http://ogp.me/
 - review masonry/isotope usage - is it best option?
 - save log messages to db in capped collection
 - cache latest info in memory
@@ -41,12 +44,12 @@ LATER
 - home page/last viewed? popular?
 - home page/use lib to pack in update boxes
 - use alternate rss lib that provides other link types...
-- numbers for last hour
-- number of actual/real results (is it calls less errors and non-mod?)
-- time of most real update
-- mongo db version
-- save count of calls per load, with date saved
-
+- stats/numbers for last hour
+- stats/oldest/newest registered updated date
+- stats/number of actual/real results (is it calls less errors and non-mod?)
+- stats/time of most real update
+- stats/mongo db version
+- stats/save count of calls per load, with date saved
 - on guild web page, sort members by descending rank?
 - show guild name, if there is one on title/descript of feed
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
