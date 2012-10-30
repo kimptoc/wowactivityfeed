@@ -1,5 +1,6 @@
 global.wf ||= {}
 
+async = require "async"
 Mongodb = require "mongodb"
 
 require './init_logger'
@@ -155,33 +156,19 @@ class wf.StoreMongo
               wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
               loaded_handler?(docs)
   
-  dbstats: (coll1, coll2, coll3, callback) ->
+  dbstats: (coll_array, callback) ->
     results = {}
     @with_connection (db) =>
       db.stats {scale:1000000},(err,stats) =>
         wf.error(err) if err
         results.dbstats = stats
-        if coll1?
-          @with_collection coll1, (coll) =>
-            coll.stats {scale:1000000}, (err,cstats1) =>
+        get_coll_stats = (name, coll_callback) =>
+          @with_collection name, (coll) ->
+            coll.stats {scale:1000000}, (err,cstats) =>
               wf.error(err) if err
-              results[coll1] = cstats1
-              if coll2?
-                @with_collection coll2, (coll) =>
-                  coll.stats {scale:1000000}, (err,cstats2) =>
-                    wf.error(err) if err
-                    results[coll2] = cstats2
-                    if coll3?
-                      @with_collection coll3, (coll) ->
-                        coll.stats {scale:1000000}, (err,cstats3) ->
-                          wf.error(err) if err
-                          results[coll3] = cstats3
-                          callback?(results)
-                    else
-                      callback?(results)
-              else
-                callback?(results)
-        else
+              results[name] = cstats
+              coll_callback?()
+        async.forEach coll_array, get_coll_stats, ->
           callback?(results)
 
   with_collection: (collection_name, worker) ->
