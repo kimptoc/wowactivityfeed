@@ -17,7 +17,7 @@ wf.loadjob = new cronJob '*/10 * * * * *', (->
   if wf.armory_load_requested
     wf.armory_load_requested = false
     wf.info "time for armory_load..."
-    wf.app.wow.armory_load()
+    wf.wow.armory_load()
   ),
   null, 
   true, #/* Start the job right now */,
@@ -25,7 +25,7 @@ wf.loadjob = new cronJob '*/10 * * * * *', (->
 
 # wf.staticjob = new cronJob '00 00 00 * * *', (-> 
 #   wf.debug "cronjob tick...load armory static"
-#   wf.app.wow.static_load()
+#   wf.wow.static_load()
 #   ),
 #   null, 
 #   true, #/* Start the job right now */,

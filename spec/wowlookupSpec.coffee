@@ -76,6 +76,12 @@ describe "wow armory lookup:", ->
         should.exist result.achievements
         done()
 
+    it "get item info", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_item 87417, null, (info) ->
+        info.id.should.equal 87417
+        done()
+
     it "get all char achievements static", (done) ->
       this.timeout(15000)
       wow = new wf.WowLookup()

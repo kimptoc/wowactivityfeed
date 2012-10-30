@@ -188,6 +188,16 @@ describe "wow wrapper:", ->
       wow.armory_load ->
         done()
 
+    it "ensure item calls logged", (done) ->
+      wow.armory_item_logged_call 87417, (item) ->
+        should.exist item
+        item.id.should.equal 87417
+        done()
+
+    it "try item_loader", (done) ->
+      wow.item_loader 87417, ->
+        done()
+
     it "basic get when none", (done) ->
       item =
         type: "guild"

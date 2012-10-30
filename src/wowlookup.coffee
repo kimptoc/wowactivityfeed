@@ -81,6 +81,15 @@ class wf.WowLookup
           thing?.region = region?.toLowerCase()
           result_handler?(thing)
 
+  get_item: (item_id, region = "eu", callback) ->
+    @with_armory (armory) ->
+      armory.item {id:item_id, region}, (err, item) ->
+        if err
+          wf.error "Problem finding item id:#{item_id} error:#{err.message} : #{JSON.stringify(err)}"
+          callback?(null)
+        else
+          callback?(item)
+
   get_static: (static_load_method, region = "eu", callback) ->
     @with_armory (armory) ->
       armory[static_load_method] {region}, (err, things) ->

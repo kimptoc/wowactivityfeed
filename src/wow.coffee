@@ -8,6 +8,7 @@ moment = require "moment"
 require "./defaults"
 require "./store_mongo"
 require "./wowlookup"
+require './feed_item_formatter'
 
 require('./init_logger')
 require('./calc_changes')
@@ -22,6 +23,7 @@ class wf.WoW
   armory_collection = "armory_history"
   static_collection = "armory_static"
   calls_collection = "armory_calls"
+  items_collection = "armory_items"
 
   fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
 
@@ -32,11 +34,16 @@ class wf.WoW
   job_running_lock = false
   loader_queue = null
   armory_pending_queue = []
+  item_loader_queue = null
+  feed_formatter = null
 
   constructor: (callback)->
     wf.info "WoW constructor"
+    feed_formatter = new wf.FeedItemFormatter()
+    item_loader_queue = async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
     store.create_collection calls_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
+      wf.wow ||= this
       callback?(this)
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
@@ -72,7 +79,8 @@ class wf.WoW
     store.remove_all registered_collection, ->
       store.remove_all armory_collection, ->
         store.drop_collection calls_collection, ->
-          store.remove_all static_collection, cleared_handler
+          store.remove_all items_collection, ->
+            store.remove_all static_collection, cleared_handler
 
 
   clear_registered: (cleared_handler) ->
@@ -104,6 +112,7 @@ class wf.WoW
         armory_load_running: job_running_lock
         number_running: loader_queue?.running() 
         number_queued: loader_queue?.length()
+    # todo also pass items_collection
     store.dbstats armory_collection, calls_collection, registered_collection, (stats) ->
       info.db = stats      
       store.load_all calls_collection, {}, {}, (entries) ->
@@ -185,7 +194,7 @@ class wf.WoW
       # for each, go through its categories/achievements and achievements, store in db
       # 
 
-  armory_item_logged_call: (item, callback) =>
+  armory_get_logged_call: (item, callback) =>
     armory_stats = 
       type: item.type
       region: item.region
@@ -200,6 +209,21 @@ class wf.WoW
         armory_stats.had_error = info?.error?
         store.insert calls_collection, armory_stats, =>
           callback?(doc, info)
+    
+  armory_item_logged_call: (item_id, callback) =>
+    armory_stats = 
+      type: "item"
+      region: "eu"
+      name: item_id
+      realm: "na"
+      start_time: new Date().getTime()
+    wowlookup.get_item item_id, null, (info) ->
+      armory_stats.end_time = new Date().getTime()
+      armory_stats.error = info?.error
+      armory_stats.not_modified = (info is undefined and !armory_stats.error?)
+      armory_stats.had_error = info?.error?
+      store.insert calls_collection, armory_stats, =>
+        callback?(info)
     
   ensure_registered_correct: (item, info, callback) =>
     if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
@@ -230,7 +254,7 @@ class wf.WoW
       callback?(info)
 
   armory_item_loader: (item, callback) =>
-    @armory_item_logged_call item, (doc, info) =>
+    @armory_get_logged_call item, (doc, info) =>
       # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
       if info?
         @store_update info.type, info.region, info.realm, info.name, info, =>
@@ -309,6 +333,10 @@ class wf.WoW
             new_item = @format_armory_info(type, region, realm, name, info, doc)
             wf.debug "pre add"
             store.add armory_collection, new_item, ->
+              items_to_get = feed_formatter.get_items new_item
+              wf.debug "Loading char items:#{items_to_get.length}"
+              for item_id in items_to_get
+                item_loader_queue.push item_id
               if doc?
                 store.update armory_collection, doc, {$unset:{armory:1}}, ->
                   wf.debug "Now saved #{info.name}/#{name}, updated old one"
@@ -326,3 +354,27 @@ class wf.WoW
           else
             stored_handler?()
 
+  load_items: (item_id_array, callback) ->
+    if item_id_array? and item_id_array.length >0
+      store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
+        items_hash = {}
+        for i in items
+          items_hash[i.item_id] = i
+        callback?(items_hash)
+    else
+      callback?({})
+
+  item_loader: (item_id, callback) =>
+    # see if we have it already
+    # if not, go to armory
+    # persist
+    store.load items_collection, {item_id}, null, (doc) =>
+      unless doc?
+        @armory_item_logged_call item_id, (item)->
+          if item?
+            item.item_id = item_id
+            store.add items_collection, item, callback
+          else
+            callback?()
+      else
+        callback?()

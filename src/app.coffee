@@ -6,6 +6,8 @@ path = require('path')
 rss = require('rss')
 moment = require('moment')
 _ = require('underscore')
+async = require "async"
+
 
 require './init_logger'
 require './wow'
@@ -55,9 +57,10 @@ wf.app.configure ->
 
   wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
-  wf.app.wow = new wf.WoW()
-  wf.app.feed_formatter = new wf.FeedItemFormatter()
-  # wf.app.wow.static_load()
+  wf.wow ||= new wf.WoW()
+  # todo - push this into wow object
+  wf.feed_formatter = new wf.FeedItemFormatter()
+  # wf.wow.static_load()
 
 
 # Routes
@@ -76,7 +79,7 @@ wf.app.get '/', (req, res) ->
     res.render "index", title: 'Home', f: feed.sample(12)
 
 wf.app.get '/registered', (req, res) ->
-  wf.app.wow.get_registered (results) ->
+  wf.wow.get_registered (results) ->
     res.render "registered", reg: results
 
 wf.app.get '/about', (req, res) ->
@@ -87,31 +90,35 @@ wf.app.get '/loaded', (req, res) ->
     res.render "loaded", f: feed
 
 get_feed_all = (callback) ->    
-  wf.app.wow.get_loaded (wowthings) ->
-    if wowthings? and wowthings.length > 0
-      #wf.debug wowthing
-      feed = []
-      for item in wowthings
-        fmt_items = wf.app.feed_formatter.process(item)
+  wf.wow.get_loaded (wowthings) ->
+    get_feed wowthings, callback
+
+get_feed = (wowthings, callback) ->
+  if wowthings? and wowthings.length > 0
+    #wf.debug wowthing
+    feed = []
+    feed_worker = (item, callback) ->
+      wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
+      wf.feed_formatter.process item, (fmt_items) ->
         for fi in fmt_items
           feed.push(fi)
+        callback?()
+    wf.debug "about to do async queue for formatting"
+    feed_queue = async.queue feed_worker, 5
+    feed_queue.drain = ->
+      wf.debug "feed_queue drain called!"
       feed.sort (a,b) ->
         return b.date - a.date
       feed = feed[0..wf.HISTORY_LIMIT*3]
       callback?(feed)
+    for item in wowthings
+      feed_queue.push item
 
-build_feed = (items, feed) ->
-  items_to_publish = []
-  if items?
-    for item in items
-      formatted_items = wf.app.feed_formatter.process(item)
-      for fi in formatted_items
-        items_to_publish.push(fi)
-  items_to_publish.sort (a,b) ->
-    return b.date - a.date
-  for item in items_to_publish[0...wf.HISTORY_LIMIT*3]
-    feed.item item
-  return feed.xml()
+build_feed = (items, feed, callback) ->
+  get_feed items, (items_to_publish) ->
+    for item in items_to_publish[0...wf.HISTORY_LIMIT*3]
+      feed.item item
+    callback? feed.xml()
 
 handle_view = (req, res) ->
   type = req.params.type
@@ -119,26 +126,16 @@ handle_view = (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
-  wf.app.wow.get_history region, realm, type, name, (wowthings) ->
-    # wf.debug JSON.stringify(wf.app.wow.get_registered())
+  wf.wow.get_history region, realm, type, name, (wowthings) ->
     if wowthings? and wowthings.length > 0
-      #wf.debug wowthing
-      feed = []
-      for item in wowthings
-        fmt_items = wf.app.feed_formatter.process(item)
-        for fi in fmt_items
-          feed.push(fi)
-      feed.sort (a,b) ->
-        return b.date - a.date
-      feed = feed[0..wf.HISTORY_LIMIT*3]
-      guild_item = null
-      if type == "guild"
-        for item in wowthings
-          wf.debug "Checking type:#{item.type}/#{JSON.stringify(item)}"
-          guild_item = item if item.type == "guild" and guild_item == null
-      guild_item = wowthings[0] unless guild_item?
-      # todo - sort feed
-      res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
+      get_feed wowthings, (feed) ->
+        guild_item = null
+        if type == "guild"
+          for item in wowthings
+            wf.debug "Checking type:#{item.type}/#{JSON.stringify(item)}"
+            guild_item = item if item.type == "guild" and guild_item == null
+        guild_item = wowthings[0] unless guild_item?
+        res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
 
@@ -158,8 +155,9 @@ wf.app.get '/feed/all.rss', (req, res) ->
     image_url: 'http://www.google.com/icon.png'
     author: 'Chris Kimpton'
 
-  wf.app.wow.get_loaded (items) ->
-    res.send build_feed(items, feed)
+  wf.wow.get_loaded (items) ->
+    build_feed items, feed, (xml) ->
+      res.send xml
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 
@@ -179,30 +177,31 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
     image_url: 'http://www.google.com/icon.png'
     author: 'Chris Kimpton'
 
-  wf.app.wow.get_history region, realm, type, name, (items)->
+  wf.wow.get_history region, realm, type, name, (items)->
     wf.timing_off("/feed/#{name}")
-    res.send build_feed(items, feed)
+    build_feed items, feed, (xml) ->
+      res.send xml
 
  
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
-  wf.app.wow.get_registered (regs) ->
+  wf.wow.get_registered (regs) ->
     res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
 
 wf.app.get '/debug/stats', (req, res) ->
-  wf.app.wow.armory_calls (result) ->
+  wf.wow.armory_calls (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/clear_all', (req, res) ->
-  wf.app.wow.clear_all ->
+  wf.wow.clear_all ->
     res.render "message", msg: "Database cleared!"
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.app.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"
-  wf.app.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
-  wf.app.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
-  wf.app.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
-  wf.app.wow.get_history "us", "kaelthas", "member", "Feåtherz"
+  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"
+  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
+  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
+  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
+  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz"
   res.render "message", msg: "Sample data registered"
 
 
