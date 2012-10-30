@@ -100,9 +100,11 @@ class wf.WoW
       total_calls: 0
       total_errors: 0
       total_not_modified: 0
+      total_by_type: {}
       todays_calls: 0
       todays_errors: 0
       todays_not_modified: 0
+      todays_by_type: {}
       earliest: Infinity
       latest: 0
       error_summary :{}
@@ -125,10 +127,14 @@ class wf.WoW
             info["error_summary"][call.error] ?= 0 
             info["error_summary"][call.error] += 1
           info.total_not_modified += 1 if call.not_modified
+          info.total_by_type[call.type] ||= 0
+          info.total_by_type[call.type] += 1
           if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
             info.todays_calls += 1
             info.todays_errors += 1 if call.had_error
             info.todays_not_modified += 1 if call.not_modified
+            info.todays_by_type[call.type] ||= 0
+            info.todays_by_type[call.type] += 1
         info.earliest = moment(info.earliest).format('H:mm:ss ddd')
         info.latest = moment(info.latest).format('H:mm:ss ddd')
         callback?(info)
