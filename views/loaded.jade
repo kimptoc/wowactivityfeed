@@ -6,13 +6,12 @@ block content
     hr
     if f
       each item in f
-        .clear
-        div
-          h5 #{item.title}
-          div !{item.description}
-          span #{item.date_formatted}
-          span 
-            a(href='#{item.url}') link
+        .item_update
+          h5 
+            a(href='#{item.url}') !{item.title}
+          span &nbsp; !{item.description}
+            small &nbsp; - #{item.date_formatted}
+
 
 //    hr
 //    #{JSON.stringify(colls)}
