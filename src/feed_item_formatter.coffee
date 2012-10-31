@@ -165,7 +165,9 @@ class wf.FeedItemFormatter
 
     else if feed_item.type == "CRITERIA"
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
-      description = "#{@char_link(item)} #{@char_name(item)} - Step:#{feed_item.criteria.description} for #{feed_item.achievement?.description}"
+      achievement_description = "#{feed_item.achievement?.description} Progressing towards achievement #{feed_item.achievement.title}"
+      achievement_description = feed_item.achievement?.title if achievement_description.indexOf(feed_item.criteria.description) >= 0
+      description = "#{@char_link(item)} #{@char_name(item)} - Step:#{feed_item.criteria.description} for #{achievement_description}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
