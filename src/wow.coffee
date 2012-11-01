@@ -114,6 +114,9 @@ class wf.WoW
         armory_load_running: job_running_lock
         number_running: loader_queue?.running() 
         number_queued: loader_queue?.length()
+      item_loader_queue:
+        number_running: item_loader_queue?.running()
+        number_queued: item_loader_queue?.length()
     # todo also pass items_collection
     store.dbstats [armory_collection, calls_collection, registered_collection, items_collection], (stats) ->
       info.db = stats      
@@ -314,12 +317,50 @@ class wf.WoW
     #       timestamp: info.achievements.criteriaTimestamp[i]
     #   info.achievements_criteria_map = achievements_criteria_map
 
+    # remap members as a map for ease of diff/use
+    if info.members?
+      members_map = {}
+      for m in info.members
+        members_map[m.character.name] = m
+      info.members_map = members_map
+
+    # remap professions
+    if info.professions?
+      professions_map = {}
+      for own category, profs of info.professions
+        for prof in profs
+          professions_map[prof.name] = prof
+      info.professions_map = professions_map
+
+    # remap reputation
+    if info.reputation?
+      reputation_map = {}
+      for rep in info.reputation
+        reputation_map[rep.name] = rep
+      info.reputation_map = reputation_map
+
     # strip achievements as they are in the news/feeds items
     delete info.achievements
 
     new_item.armory = info
+    saved_stuff_old = {}
+    saved_stuff_new = {}
+    items_to_save = ['feed','news','members','reputation','professions']
+    for item in items_to_save
+      if info[item]?
+        saved_stuff_new[item] = info[item]
+        info[item] = null
+      if doc?.armory[item]?
+        saved_stuff_old[item] = doc.armory[item]
+        doc.armory[item] = null
     whats_changed = wf.calc_changes(doc?.armory, info)
+    for item in items_to_save
+      if saved_stuff_new[item]?
+        info[item] = saved_stuff_new[item]
+      if saved_stuff_old[item]?
+        doc.armory[item] = saved_stuff_old[item]
     new_item.whats_changed = whats_changed
+    new_item.added_date = new Date()
     return new_item
 
   store_update: (type, region, realm, name, info, stored_handler) => 

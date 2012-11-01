@@ -19,10 +19,16 @@ class wf.FeedItemFormatter
     return item_ids
 
   get: (key, item) ->
-    if item?.whats_changed?.changes?[key]?.length == 1 # new items have a one element array
-      item?.whats_changed?.changes?[key][0]
-    else # its an update
-      item?.whats_changed?.changes?[key][1]
+    @get_new_one item?.whats_changed?.changes?[key]
+
+  get_new_one: (diffs) ->
+    if diffs?
+      if diffs.length == 1 # new items have a one element array
+        diffs[0]
+      else
+        diffs[1]
+    else
+      "???"
 
   format_date: (dt) ->
     dateMoment = moment(dt)
@@ -66,6 +72,8 @@ class wf.FeedItemFormatter
 
   format_item: (item, items) ->
     change_title = "#{item?.name}:"
+    change_title = "Guild:#{change_title}" if item.type == "guild"
+    change_title = "#{item.armory.guild.name}/#{change_title}" if item?.armory?.guild?.name?
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
@@ -76,6 +84,24 @@ class wf.FeedItemFormatter
           change_description += "#{item.name} is now level #{@get('level',item)}! "
         if item.whats_changed.changes.achievementPoints?
           change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
+        if item.whats_changed.changes.items?
+          # wf.debug "items change...#{JSON.stringify(item.whats_changed.changes.items)}"
+          gear_change = ""
+          for own name, gear of item.whats_changed.changes.items
+            # wf.debug "items change...#{name}"
+            if ! /averageItemLevel/.test(name) and gear.name?
+              # wf.debug "items change:#{name}: #{@get_new_one(gear.name)} "
+              gear_change += ", " if gear_change.length >0
+              gear_change += "#{name}: #{@get_new_one(gear.name)}"
+          if gear_change.length > 0
+            change_description += "Gear change: #{gear_change}. "
+        if item.whats_changed.changes.reputation_map?
+          rep_change = ""
+          for own name, values of item.whats_changed.changes.reputation_map
+            rep_change += ", " if rep_change.length >0
+            rep_change += "#{name}:#{@get_new_one(values.value)}"
+          change_description += "Rep change(s): #{rep_change}. "
+
     if change_description == ""
       change_description = "Something about #{item?.name} has changed, not quite sure what, its a mystery..."
     if item?.type == "member" and item.armory?.thumbnail?
@@ -98,7 +124,7 @@ class wf.FeedItemFormatter
       mentionGuild = ""
       mentionGuild = "guild " if news_item.type == "guildAchievement"
       change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
-      description = "#{@achievement_link(news_item.achievement)}: #{news_item.achievement.description}"
+      description = "#{@achievement_link(news_item.achievement)} Achieved #{news_item.achievement.title}: #{news_item.achievement.description}"
       thingId = news_item.achievement.id
       if news_item.achievement.criteria and news_item.achievement.criteria.length >0
         description += " ["
@@ -150,7 +176,7 @@ class wf.FeedItemFormatter
     description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
     if feed_item.type == "ACHIEVEMENT"
       change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
-      description = "#{@char_link(item)} #{@char_name(item)} - #{@achievement_link(feed_item.achievement)}: #{feed_item.achievement.description}"
+      description = "#{@char_link(item)} #{@char_name(item)} - #{@achievement_link(feed_item.achievement)} #{feed_item.achievement.title}: #{feed_item.achievement.description}"
       thingId = feed_item.achievement.id
       if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
         description += " ["
