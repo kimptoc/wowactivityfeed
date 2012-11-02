@@ -99,7 +99,7 @@ class wf.FeedItemFormatter
               gear_change += "#{name}: #{@get_new_one(gear.name)}"
           if gear_change.length > 0
             change_description += "Gear change: #{gear_change}. "
-        if item.whats_changed.changes.reputation_map?
+        if item.whats_changed.changes.reputation_map? and item.whats_changed.changes.reputation_map instanceof Object
           rep_change = ""
           for own name, values of item.whats_changed.changes.reputation_map
             rep_change += ", " if rep_change.length >0
