@@ -44,10 +44,12 @@ class wf.FeedItemFormatter
       results.push @format_item(item, items)
       if item?.armory?.feed?
         for feed_item in item.armory.feed
-          results.push @format_feed_item(feed_item, item, items)
+          update_obj = @format_feed_item(feed_item, item, items)
+          results.push update_obj if update_obj?
       if item?.armory?.news?
         for news_item in item.armory.news
-          results.push @format_news_item(news_item, item, items)
+          update_obj = @format_news_item(news_item, item, items)
+          results.push update_obj if update_obj?
       callback?(results)
 
   achievement_link: (achievement) ->
@@ -73,6 +75,19 @@ class wf.FeedItemFormatter
     #todo - handle not found, img link, wowhead link/hover...
     name = items?[item_id]?.name
     name ||= "Unknown...."
+
+  add_criteria: (description, criteria) ->
+    if criteria? and criteria.length >0
+      criteria_description = ""
+      done_first = false
+      for crit in criteria
+        if crit.description.length >0
+          criteria_description += ", " if done_first
+          criteria_description += "#{crit.description}"
+          done_first = true
+      wf.debug "criteria_description=#{criteria_description}."
+      description = "#{description} [#{criteria_description}]" if criteria_description.length >0
+    return description
 
   format_item: (item, items) ->
     change_title = "#{item?.name}"
@@ -120,24 +135,14 @@ class wf.FeedItemFormatter
       guid: "#{item?.lastModified}-#{change_title}"
     return result
 
-  add_criteria: (description, criteria) ->
-    if criteria? and criteria.length >0
-      criteria_description = ""
-      done_first = false
-      for crit in criteria
-        if crit.description.length >0
-          criteria_description += ", " if done_first
-          criteria_description += "#{crit.description}"
-          done_first = true
-      wf.debug "criteria_description=#{criteria_description}."
-      description = "#{description} [#{criteria_description}]" if criteria_description.length >0
-    return description
-
   format_news_item: (news_item, item, items) ->
     change_title = "#{item?.name}:#{news_item.type}"
     description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
 
-    if news_item.type == "playerAchievement" or news_item.type == "guildAchievement"
+    if news_item.type == "playerAchievement"
+      return null # ignore these, assume covered by the player news feed
+
+    if news_item.type == "guildAchievement"
       mentionGuild = ""
       mentionGuild = "guild " if news_item.type == "guildAchievement"
       change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
@@ -148,17 +153,17 @@ class wf.FeedItemFormatter
 
     else if news_item.type == "itemPurchase"
       change_title = "#{news_item.character} bought #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} bought a #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      description = "#{news_item.character} bought #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
       thingId = news_item.itemId
 
     else if news_item.type == "itemLoot"
       change_title = "#{news_item.character} got some loot - #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} got a #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      description = "#{news_item.character} got #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
       thingId = news_item.itemId
 
     else if news_item.type == "itemCraft"
       change_title = "#{news_item.character} made #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} made a #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      description = "#{news_item.character} made #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
       thingId = news_item.itemId
 
     else if news_item.type == "guildLevel"
@@ -194,12 +199,12 @@ class wf.FeedItemFormatter
       change_title = "#{item?.name} progressed towards achievement '#{feed_item.achievement.title}'"
       achievement_description = "#{feed_item.achievement?.description} Progressing towards achievement #{feed_item.achievement.title}"
       achievement_description = feed_item.achievement?.title if achievement_description.indexOf(feed_item.criteria.description) >= 0
-      description = "#{@char_link(item)} #{@char_name(item)} - Step:#{feed_item.criteria.description} for #{achievement_description}"
+      description = "#{@char_link(item)} #{@char_name(item)} - Step:'#{feed_item.criteria.description}' for '#{achievement_description}'"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
       change_title = "#{item?.name} - '#{feed_item.criteria.description}'"
-      description = "#{@char_link(item)} #{@char_name(item)} Did:#{feed_item.criteria.description} for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
+      description = "#{@char_link(item)} #{@char_name(item)} Did:'#{feed_item.criteria.description}' for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
