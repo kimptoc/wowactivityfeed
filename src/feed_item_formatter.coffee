@@ -54,10 +54,14 @@ class wf.FeedItemFormatter
     "<a href='http://www.wowhead.com/achievement=#{achievement.id}' alt='#{achievement.title}' title='#{achievement.title}'><img src='http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg' align='right' style='border:solid yellow 1px;'></a>"
 
   char_link: (p) ->
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{p.name}' title='#{p.name}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
+    alt_text = "#{p.name}"
+    alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
+    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{alt_text}' title='#{alt_text}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   char_name: (p) ->
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{p.name}' title='#{p.name}'>#{p.name}</a>"
+    alt_text = "#{p.name}"
+    alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
+    "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
 
   item_link: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
@@ -71,9 +75,9 @@ class wf.FeedItemFormatter
     name ||= "Unknown...."
 
   format_item: (item, items) ->
-    change_title = "#{item?.name}:"
+    change_title = "#{item?.name}"
     change_title = "Guild:#{change_title}" if item.type == "guild"
-    change_title = "#{item.armory.guild.name}/#{change_title}" if item?.armory?.guild?.name?
+    change_title = "#{change_title} (#{item.armory.guild.name})" if item?.armory?.guild?.name?
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
@@ -116,6 +120,19 @@ class wf.FeedItemFormatter
       guid: "#{item?.lastModified}-#{change_title}"
     return result
 
+  add_criteria: (description, criteria) ->
+    if criteria? and criteria.length >0
+      criteria_description = ""
+      done_first = false
+      for crit in criteria
+        if crit.description.length >0
+          criteria_description += ", " if done_first
+          criteria_description += "#{crit.description}"
+          done_first = true
+      wf.debug "criteria_description=#{criteria_description}."
+      description = "#{description} [#{criteria_description}]" if criteria_description.length >0
+    return description
+
   format_news_item: (news_item, item, items) ->
     change_title = "#{item?.name}:#{news_item.type}"
     description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
@@ -126,15 +143,7 @@ class wf.FeedItemFormatter
       change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
       description = "#{@achievement_link(news_item.achievement)} Achieved #{news_item.achievement.title}: #{news_item.achievement.description}"
       thingId = news_item.achievement.id
-      if news_item.achievement.criteria and news_item.achievement.criteria.length >0
-        description += " ["
-        done_first = false
-        for crit in news_item.achievement.criteria
-          description += "," if done_first
-          description += " #{crit.description}"
-          done_first = true
-          thingId += "-#{crit.id}"
-        description += "]"
+      description = @add_criteria description, news_item.achievement.criteria
       description += " (#{news_item.achievement.points}pts)"
 
     else if news_item.type == "itemPurchase"
@@ -178,15 +187,7 @@ class wf.FeedItemFormatter
       change_title = "#{item?.name} gained the achievement '#{feed_item.achievement.title}'"
       description = "#{@char_link(item)} #{@char_name(item)} - #{@achievement_link(feed_item.achievement)} #{feed_item.achievement.title}: #{feed_item.achievement.description}"
       thingId = feed_item.achievement.id
-      if feed_item.achievement.criteria and feed_item.achievement.criteria.length >0
-        description += " ["
-        done_first = false
-        for crit in feed_item.achievement.criteria
-          description += "," if done_first
-          description += " #{crit.description}"
-          done_first = true
-          thingId += "-#{crit.id}"
-        description += "]"
+      description = @add_criteria description, feed_item.achievement.criteria
       description += " (#{feed_item.achievement.points}pts)"
 
     else if feed_item.type == "CRITERIA"
