@@ -135,9 +135,9 @@ handle_view = (req, res) ->
             wf.debug "Checking type:#{item.type}/#{JSON.stringify(item)}"
             guild_item = item if item.type == "guild" and guild_item == null
         guild_item = wowthings[0] unless guild_item?
-        delete guild_item.whats_changed.changes.news if guild_item.whats_changed.changes.news?
-        delete guild_item.whats_changed.changes.lastModified if guild_item.whats_changed.changes.lastModified?
-        delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
+        # delete guild_item.whats_changed.changes.news if guild_item.whats_changed.changes.news?
+        # delete guild_item.whats_changed.changes.lastModified if guild_item.whats_changed.changes.lastModified?
+        # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
     else
       res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"

@@ -339,6 +339,19 @@ class wf.WoW
         reputation_map[rep.name] = rep
       info.reputation_map = reputation_map
 
+    # remap mounts
+    if info.mounts?
+      mounts_collected_map = {}
+      for m in info.mounts.collected
+        mounts_collected_map[m.name] = m
+      info.mounts_collected_map = mounts_collected_map
+
+    if info.pets?
+      pets_collected_map = {}
+      for p in info.pets.collected
+        pets_collected_map[p.name] = p
+      info.pets_collected_map = pets_collected_map
+
     # strip achievements as they are in the news/feeds items
     delete info.achievements
 
