@@ -393,6 +393,42 @@ if (typeof require === "function" && typeof module === "object") {
                 } catch (e) {
                     assert.same(e, err);
                 }
+            },
+
+            "retains function length 0": function () {
+                var spy = sinon.spy.create(function () {});
+
+                assert.equals(spy.length, 0);
+            },
+
+            "retains function length 1": function () {
+                var spy = sinon.spy.create(function (a) {});
+
+                assert.equals(spy.length, 1);
+            },
+
+            "retains function length 2": function () {
+                var spy = sinon.spy.create(function (a, b) {});
+
+                assert.equals(spy.length, 2);
+            },
+
+            "retains function length 3": function () {
+                var spy = sinon.spy.create(function (a, b, c) {});
+
+                assert.equals(spy.length, 3);
+            },
+
+            "retains function length 4": function () {
+                var spy = sinon.spy.create(function (a, b, c, d) {});
+
+                assert.equals(spy.length, 4);
+            },
+
+            "retains function length 12": function () {
+                var spy = sinon.spy.create(function (a, b, c, d, e, f, g, h, i, j,k,l) {});
+
+                assert.equals(spy.length, 12);
             }
         },
 
@@ -591,6 +627,32 @@ if (typeof require === "function" && typeof module === "object") {
                 this.spy();
 
                 assert.isFalse(this.spy.calledOn({}));
+            },
+
+            "is true if called with matcher that returns true": function () {
+                var matcher = sinon.match(function () { return true; });
+                this.spy();
+
+                assert(this.spy.calledOn(matcher));
+            },
+
+            "is false if called with matcher that returns false": function () {
+                var matcher = sinon.match(function () { return false; });
+                this.spy();
+
+                assert.isFalse(this.spy.calledOn(matcher));
+            },
+
+            "invokes matcher.test with given object": function () {
+                var expected = {};
+                var actual;
+                this.spy.call(expected);
+
+                this.spy.calledOn(sinon.match(function (value) {
+                    actual = value;
+                }));
+
+                assert.same(actual, expected);
             }
         },
 
@@ -2046,6 +2108,16 @@ if (typeof require === "function" && typeof module === "object") {
                     call.yield();
                 });
             }
+        },
+
+        "call.invokeCallback": {
+
+            "is alias for yield": function () {
+                var call = sinon.spy.spyCall.create(function () {});
+
+                assert.same(call.yield, call.invokeCallback);
+            }
+
         },
 
         "call.yieldTo": {
