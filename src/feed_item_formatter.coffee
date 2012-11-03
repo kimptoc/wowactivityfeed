@@ -5,6 +5,8 @@ moment = require 'moment'
 require('./init_logger')
 require('./wow')
 
+# RELIES ON FIELDS BEING SELECTED IN wow.coffee - SO IF NOT SHOWING CHECK THERE
+
 class wf.FeedItemFormatter
 
   get_items: (item) ->

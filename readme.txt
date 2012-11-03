@@ -1,19 +1,38 @@
 TODO
 
+- double check feed updates vs battle.net - showing correct item?
+
+- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
+
+- prefix guild name with "Guild" in feed title
+- tidy feed more
+-- something changed???
+-- guild member joins/leaves
+-- profession changes
+-- progression/raids changes?
+-- pvp/battleground changes?
+-- talents/glyphs
+-- pets
+-- hunter pets, levels?
+-- titles changes?
+
+-- some criteria cases come up blank?
+
+
+- if after removing above, no changes, then dont report them
+
 - search/find my char/guild?
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 
 - do a "live" load of the char ?
 
-- track calls to website - where are they coming from (ip, referring site, browser, ...)
 
-- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 
 - mention copyright/trademarks, all are blizzards
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
-- fb to twitter, ok? using Twitter -> fb link working better, get text, no images (and twitterfeed to twitter)
+- fb to twitter, not working? using Twitter -> fb link working better, get text, no images (will twitter stop that...) (and twitterfeed to twitter)
 
 - fix tests, wowSpec failing too much, refactor wow.coffee
 
@@ -32,7 +51,17 @@ PENDING BEING TESTED
 -
 
 LATER
-- sort registered page by desc updated_at
+- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
+- track calls to website - where are they coming from (ip, referring site, browser, ...)
+- make home/loaded pages work when no history present - maybe???
+- cache class/race static for display (eg mage/orc ...)
+- hiding player achievements!
+- about page, http://www.sitepoint.com/css3-starwars-scrolling-text/?utm_source=hackernewsletter&utm_medium=email ...
+- guild feed has char achievements, so show or ignore... probably will get dupes...
+- on guild feed, rely on member feed for their updates
+- on member feed, only show guild changes, if not being used on the guild feed...
+- install notes/make this a markdown doc
+- armory_history - make disappear after a time, TTL, 1 month?
 - make a fb page to promote this site, eg http://www.staynalive.com/2012/02/how-to-replace-your-rss-feed.html / http://ogp.me/
 - review masonry/isotope usage - is it best option?
 - save log messages to db in capped collection
@@ -59,7 +88,6 @@ LATER
 - redirect load/data pages to other pages - stats/registered
 - thanks page - for all tools used :)
 - pet battle related feed, levels, achievements
-- show item image in feed (need item info, cache in memory?)
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
 - update registered entry with time of last good update, last update and error, if error, count of updates
@@ -146,6 +174,7 @@ wowhead tooltips - http://www.wowhead.com/tooltips#related-xml-feeds
 date format via moment - http://momentjs.com/docs/
 
 jade - view templates - https://github.com/visionmedia/jade#readme
+underscore - http://underscorejs.org/
 
 sinon - mocks for testing - http://sinonjs.org/docs/#mocks
 mocha - for testing - http://visionmedia.github.com/mocha/
