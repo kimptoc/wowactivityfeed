@@ -25,7 +25,7 @@ class wf.WoW
   calls_collection = "armory_calls"
   items_collection = "armory_items"
 
-  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1}
+  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
 
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   registered_ttl_index_2 = { updated_at: 1 } 
@@ -363,7 +363,7 @@ class wf.WoW
       if info[item]?
         saved_stuff_new[item] = info[item]
         info[item] = null
-      if doc?.armory[item]?
+      if doc?.armory?[item]?
         saved_stuff_old[item] = doc.armory[item]
         doc.armory[item] = null
     whats_changed = wf.calc_changes(doc?.armory, info)
