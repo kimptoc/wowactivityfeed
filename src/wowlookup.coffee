@@ -1,12 +1,8 @@
 global.wf ||= {}
 
 require "./defaults"
-require "./store"
 require './init_logger'
 portcheck = require 'portchecker'
-
-
-store = new wf.Store()
 
 class wf.WowLookup
 
