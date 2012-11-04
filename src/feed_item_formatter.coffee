@@ -106,7 +106,7 @@ class wf.FeedItemFormatter
 
   format_item: (item, items) ->
     change_title = "#{@get_formal_name(item)}"
-    change_title = "Guild:#{change_title}" if item?.type == "guild"
+    change_title = "#{change_title} - " if item?.type == "guild"
     change_title = "#{change_title} (#{item.armory.guild.name})" if item?.armory?.guild?.name?
     change_description = ""
     if item? and item.whats_changed?
@@ -135,12 +135,31 @@ class wf.FeedItemFormatter
             rep_change += ", " if rep_change.length >0
             rep_change += "#{name}:#{@get_new_one(values.value)}"
           change_description += "Rep change(s): #{rep_change}. "
+        if item.whats_changed.changes.members_map?
+          member_title = ""
+          member_desc = ""
+          for own name, member_info of item.whats_changed.changes.members_map
+            if member_info instanceof Array
+              if member_info.length == 1
+                member_title += ", " if member_title.length >0
+                member_title += "#{member_info[0].character.name} joined"
+                member_desc += ", " if member_desc.length >0
+                member_desc += "#{member_info[0].character.name} has joined"
+              else if member_info.length == 3
+                member_title += ", " if member_title.length >0
+                member_title += "#{member_info[0].character.name} left "
+                member_desc += ", " if member_desc.length >0
+                member_desc += "#{member_info[0].character.name} has left"
+          change_title += "member change(s): #{member_title}" if member_title.length >0
+          change_description += "Guild membership has changed: #{member_desc} " if member_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""
       return null
     if item?.type == "member" and item.armory?.thumbnail?
       change_description = "#{@char_link(item)} #{@char_name(item)} #{change_description}"
+    else if item?.type == "guild"
+      change_description = "#{@char_name(item)} #{change_description}"
     result = 
       title: change_title
       description: change_description
