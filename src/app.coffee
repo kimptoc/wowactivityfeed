@@ -195,10 +195,10 @@ wf.app.get '/debug/stats', (req, res) ->
   wf.wow.armory_calls (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
-wf.app.get '/debug/logs', (req, res) ->
-  wf.get_logs (logs) ->
+wf.app.get '/debug/logs/:type', (req, res) ->
+  wf.get_logs req.params.type, (logs) ->
     res.render "logs", {logs}
-    
+
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.wow.clear_all ->
     res.render "message", msg: "Database cleared!"

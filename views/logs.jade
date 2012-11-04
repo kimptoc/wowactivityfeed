@@ -8,9 +8,9 @@ block content
       ul
       each log in logs
         li 
-          div #{log.type}: #{log.message}
-            | - 
-            small= log.timestamp
+          div #{log.type}: #{log.message} - 
+            div= log.stack
+            small - #{log.timestamp}
     else
       h3 No logs yet!
     hr
