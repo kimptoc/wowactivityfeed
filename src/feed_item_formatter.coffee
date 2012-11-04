@@ -64,14 +64,14 @@ class wf.FeedItemFormatter
     "<a href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple' alt='#{alt_text}' title='#{alt_text}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   get_formal_name: (p) ->
-    wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
+    # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
     alt_text = "#{p.name}"
     if p.armory?.titles?
-      wf.debug "titles - found"
+      # wf.debug "titles - found"
       for t in p.armory.titles
-        wf.debug "titles - this one? #{JSON.stringify(t)}"
+        # wf.debug "titles - this one? #{JSON.stringify(t)}"
         if t.selected?
-          wf.debug "titles - yes!"
+          # wf.debug "titles - yes!"
           alt_text = t.name.replace /%s/, p.name
     return alt_text
 
@@ -176,6 +176,18 @@ class wf.FeedItemFormatter
                 pets_desc += "#{pet_info[0].name}"
           change_title += "New pet(s): #{pets_title}" if pets_title.length >0
           change_description += "Gained some pet(s): #{pets_desc} " if pets_desc.length >0
+        if item.whats_changed.changes.titles_map?
+          titles_title = ""
+          titles_desc = ""
+          for own name, title_info of item.whats_changed.changes.titles_map
+            if title_info instanceof Array
+              if title_info.length == 1
+                titles_title += ", " if titles_title.length >0
+                titles_title += "'#{title_info[0].name}'"
+                titles_desc += ", " if titles_desc.length >0
+                titles_desc += "'#{title_info[0].name}'"
+          change_title += "New title(s): #{titles_title}" if titles_title.length >0
+          change_description += "Gained some title(s): #{titles_desc} " if titles_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""

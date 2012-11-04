@@ -352,6 +352,13 @@ class wf.WoW
         pets_collected_map[p.name.replace(/\./g,"")] = p
       info.pets_collected_map = pets_collected_map
 
+    if info.titles?
+      titles_map = {}
+      for t in info.titles
+        base_name = t.name.replace /%s/,""
+        titles_map[base_name] = t
+      info.titles_map = titles_map
+
     # strip achievements as they are in the news/feeds items
     delete info.achievements
 
@@ -377,6 +384,10 @@ class wf.WoW
     return new_item
 
   store_update: (type, region, realm, name, info, stored_handler) => 
+    if info.error? 
+      stored_handler?()
+      return # dont save if we had an error
+
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
@@ -384,35 +395,31 @@ class wf.WoW
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
         wf.debug "store_update:#{JSON.stringify(doc)}"
         if doc? and doc.lastModified == info.lastModified
-          wf.debug "Ignored as saved already: #{name}"
+          wf.debug "Ignored as no changes and saved already: #{name}"
           stored_handler?()
         else
-          # only save errors for new updates (assume others are transient)
-          unless doc? and info.error?
-            wf.debug "New or updated: #{info.name}/#{name}"
-            new_item = @format_armory_info(type, region, realm, name, info, doc)
-            wf.debug "pre add"
-            store.add armory_collection, new_item, ->
-              items_to_get = feed_formatter.get_items new_item
-              wf.debug "Loading char items:#{items_to_get.length}"
-              for item_id in items_to_get
-                item_loader_queue.push item_id
-              if doc?
-                store.update armory_collection, doc, {$unset:{armory:1}}, ->
-                  wf.debug "Now saved #{info.name}/#{name}, updated old one"
-                  store.load_all_with_fields armory_collection,  {region, realm, type, name}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
-                    # get last last mod date
-                    wf.debug "Current history - count:#{docs.length}"
-                    last_doc_last_modified = docs[-1...-1].lastModified
-                    # delete all entries with last mod date before date (less than)
-                    store.remove armory_collection, {region, realm, type, name, lastModified : { $lt : last_doc_last_modified } }, (count)->
-                      wf.debug "Delete old history - count:#{count}"
-                      stored_handler?()
-              else
-                wf.debug "Now saved #{info.name}/#{name}, no old one"
-                stored_handler?()
-          else
-            stored_handler?()
+          wf.debug "New or updated: #{info.name}/#{name}"
+          new_item = @format_armory_info(type, region, realm, name, info, doc)
+          wf.debug "pre add"
+          store.add armory_collection, new_item, ->
+            items_to_get = feed_formatter.get_items new_item
+            wf.debug "Loading char items:#{items_to_get.length}"
+            for item_id in items_to_get
+              item_loader_queue.push item_id
+            if doc?
+              store.update armory_collection, doc, {$unset:{armory:1}}, ->
+                wf.debug "Now saved #{info.name}/#{name}, updated old one"
+                store.load_all_with_fields armory_collection,  {region, realm, type, name}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
+                  # get last last mod date
+                  wf.debug "Current history - count:#{docs.length}"
+                  last_doc_last_modified = docs[-1...-1].lastModified
+                  # delete all entries with last mod date before date (less than)
+                  store.remove armory_collection, {region, realm, type, name, lastModified : { $lt : last_doc_last_modified } }, (count)->
+                    wf.debug "Deleted old history - count:#{count}"
+                    stored_handler?()
+            else
+              wf.debug "Now saved #{info.name}/#{name}, no old one"
+              stored_handler?()
 
   load_items: (item_id_array, callback) ->
     if item_id_array? and item_id_array.length >0

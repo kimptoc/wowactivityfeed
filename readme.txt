@@ -1,20 +1,22 @@
 TODO
+- view not found item gives err (if hist present, but no armory)
 
-- double check feed updates vs battle.net - showing correct item?
+- expired (?) registered things not going... index not present
+
+- print out errors when doing ensure index
+
+
+- not deleting old history... fix or put in TTL 
+
 
 - cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
 
-- prefix guild name with "Guild" in feed title
 - tidy feed more
--- something changed???
--- guild member joins/leaves
 -- profession changes
 -- progression/raids changes?
 -- pvp/battleground changes?
 -- talents/glyphs
--- pets
 -- hunter pets, levels?
--- titles changes?
 
 -- some criteria cases come up blank?
 
@@ -42,13 +44,15 @@ BUGS
 
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
+- double check feed updates vs battle.net - showing correct item?
 
 
 PENDING BEING TESTED
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 - armory job seems to lockup sometimes... added a timeout, see if it helps...
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
--
+-- titles changes?
+
 
 LATER
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
@@ -91,7 +95,6 @@ LATER
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
 - update registered entry with time of last good update, last update and error, if error, count of updates
-- if criteria name matches description, only show 1. eg 100 mounts for 100 mounts...
 - get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
