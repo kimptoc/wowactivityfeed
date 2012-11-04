@@ -105,16 +105,16 @@ class wf.FeedItemFormatter
     return description
 
   format_item: (item, items) ->
-    change_title = "#{@get_formal_name(item)} "
+    change_title = " #{@get_formal_name(item)} "
     change_title = "#{change_title} - " if item?.type == "guild"
     change_title = "#{change_title} (#{item.armory.guild.name}) " if item?.armory?.guild?.name?
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
-        change_description = "And as if by magic, #{item.name} appeared!"
+        change_description = " And as if by magic, #{item.name} appeared!"
       else
         if item.whats_changed.changes.level?
-          change_title = "#{@get_formal_name(item)} - level #{@get('level',item)}! "
+          change_title = " #{@get_formal_name(item)} - level #{@get('level',item)}! "
           change_description += "Now at level #{@get('level',item)}! "
         if item.whats_changed.changes.achievementPoints?
           change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
@@ -183,9 +183,9 @@ class wf.FeedItemFormatter
             if title_info instanceof Array
               if title_info.length == 1
                 titles_title += ", " if titles_title.length >0
-                titles_title += "'#{title_info[0].name}'"
+                titles_title += "'#{name}'"
                 titles_desc += ", " if titles_desc.length >0
-                titles_desc += "'#{title_info[0].name}'"
+                titles_desc += "'#{name}'"
           change_title += "New title(s): #{titles_title} " if titles_title.length >0
           change_description += "Gained some title(s): #{titles_desc} " if titles_desc.length >0
 
