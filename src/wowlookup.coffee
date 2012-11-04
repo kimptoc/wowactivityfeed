@@ -62,7 +62,7 @@ class wf.WowLookup
           wf.debug "wowlookup #{name} - not modified"
           result_handler?(undefined)          
         else if err
-          wf.error("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
+          wf.warn("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
           result_handler?(
             type: type
             region: region

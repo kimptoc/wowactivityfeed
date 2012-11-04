@@ -118,7 +118,7 @@ class wf.WoW
         number_running: item_loader_queue?.running()
         number_queued: item_loader_queue?.length()
     # todo also pass items_collection
-    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection], (stats) ->
+    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
       info.db = stats      
       store.load_all calls_collection, {}, {}, (entries) ->
         for call in entries

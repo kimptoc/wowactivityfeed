@@ -14,6 +14,7 @@ class wf.StoreMongo
 
   constructor: ->
     wf.info "StoreMongo.constructor"
+    wf.logging_init(this)
 
   # close: ->
   #   mongo_db?.close()
@@ -53,7 +54,7 @@ class wf.StoreMongo
     @with_collection collection_name, (coll) ->
       coll.insert document_object, safe:true, (err, docs) ->
         if err
-          wf.error(err)
+          wf.error_no_store(err)
           stored_handler?(null)
         else
           wf.debug "saved:#{document_object}"
@@ -127,7 +128,7 @@ class wf.StoreMongo
             else if docs.length >= 1
               loaded_handler?(docs[0])
             else
-              wf.error "In collection #{collection_name} did not find any matching for key:#{JSON.stringify(document_key)}"
+              wf.info "In collection #{collection_name} did not find any matching for key:#{JSON.stringify(document_key)}"
               loaded_handler?(null)
         else
           wf.error "No cursor returned for coll: #{collection_name} key:#{JSON.stringify(document_key)}"
@@ -176,7 +177,7 @@ class wf.StoreMongo
       return worker?(collection_cache[collection_name]) if collection_cache[collection_name]
       wf.mongo_db.collection collection_name, (err, coll) ->
         if err
-          wf.error(err)
+          wf.error_no_store(err)
           worker?(null)
         else
           collection_cache[collection_name] ?= coll
@@ -188,20 +189,20 @@ class wf.StoreMongo
     else
       if mongo_connecting
         # todo - handle this properly... probably some async tool
-        wf.error("already opening connecting, try again later...")
+        wf.error_no_store("already opening connecting, try again later...")
         setTimeout (=> @with_connection(worker)), 5000
         return
       mongo_connecting = true
       mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)
       new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
         if err
-          wf.error(err)
+          wf.error_no_store(err)
           worker?(null)
         else if wf.mongo_info.username? and wf.mongo_info.username.length >0
           wf.info "Have username, so calling authenticate...."
           client.authenticate wf.mongo_info.username,wf.mongo_info.password, (err, reply) ->
             if err
-              wf.error(err)
+              wf.error_no_store(err)
               worker?(null)
             else
               wf.mongo_db = client

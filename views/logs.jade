@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container
+    h3.bordered Logs
+    hr
+    if logs
+      ul
+      each log in logs
+        li 
+          div #{log.type}: #{log.message}
+            | - 
+            small= log.timestamp
+    else
+      h3 No logs yet!
+    hr

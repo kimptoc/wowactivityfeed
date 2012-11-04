@@ -114,7 +114,7 @@ class wf.FeedItemFormatter
         change_description = "And as if by magic, #{item.name} appeared!"
       else
         if item.whats_changed.changes.level?
-          change_title = "#{@get_formal_name(item)} - level #{@get('level',item)}!"
+          change_title = "#{@get_formal_name(item)} - level #{@get('level',item)}! "
           change_description += "Now at level #{@get('level',item)}! "
         if item.whats_changed.changes.achievementPoints?
           change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
@@ -150,7 +150,7 @@ class wf.FeedItemFormatter
                 member_title += "#{member_info[0].character.name} left "
                 member_desc += ", " if member_desc.length >0
                 member_desc += "#{member_info[0].character.name} has left"
-          change_title += "member change(s): #{member_title}" if member_title.length >0
+          change_title += "member change(s): #{member_title} " if member_title.length >0
           change_description += "Guild membership has changed: #{member_desc} " if member_desc.length >0
         if item.whats_changed.changes.mounts_collected_map?
           mounts_title = ""
@@ -162,7 +162,7 @@ class wf.FeedItemFormatter
                 mounts_title += "#{mount_info[0].name}"
                 mounts_desc += ", " if mounts_desc.length >0
                 mounts_desc += "#{mount_info[0].name}"
-          change_title += "New mount(s): #{mounts_title}" if mounts_title.length >0
+          change_title += "New mount(s): #{mounts_title} " if mounts_title.length >0
           change_description += "Gained some mount(s): #{mounts_desc} " if mounts_desc.length >0
         if item.whats_changed.changes.pets_collected_map?
           pets_title = ""
@@ -174,7 +174,7 @@ class wf.FeedItemFormatter
                 pets_title += "#{pet_info[0].name}"
                 pets_desc += ", " if pets_desc.length >0
                 pets_desc += "#{pet_info[0].name}"
-          change_title += "New pet(s): #{pets_title}" if pets_title.length >0
+          change_title += "New pet(s): #{pets_title} " if pets_title.length >0
           change_description += "Gained some pet(s): #{pets_desc} " if pets_desc.length >0
         if item.whats_changed.changes.titles_map?
           titles_title = ""
@@ -186,7 +186,7 @@ class wf.FeedItemFormatter
                 titles_title += "'#{title_info[0].name}'"
                 titles_desc += ", " if titles_desc.length >0
                 titles_desc += "'#{title_info[0].name}'"
-          change_title += "New title(s): #{titles_title}" if titles_title.length >0
+          change_title += "New title(s): #{titles_title} " if titles_title.length >0
           change_description += "Gained some title(s): #{titles_desc} " if titles_desc.length >0
 
     # if we dont identify a change above, then assume none
@@ -280,7 +280,7 @@ class wf.FeedItemFormatter
 
     else if feed_item.type == "LOOT"
       change_title = "#{@get_formal_name(item)} - got some loot - #{@item_name(feed_item.itemId, items)}!"
-      description = "#{@char_link(item)} #{@char_name(item)} now has a #{@item_name(feed_item.itemId, items)}! #{@item_link(feed_item.itemId, items)}"
+      description = "#{@char_link(item)} #{@char_name(item)} now has #{@item_name(feed_item.itemId, items)}! #{@item_link(feed_item.itemId, items)}"
       thingId = feed_item.itemId
 
     else
