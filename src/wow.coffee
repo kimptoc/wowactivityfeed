@@ -336,20 +336,20 @@ class wf.WoW
     if info.reputation?
       reputation_map = {}
       for rep in info.reputation
-        reputation_map[rep.name] = rep
+        reputation_map[rep.name.replace(/\./g,"")] = rep
       info.reputation_map = reputation_map
 
     # remap mounts
     if info.mounts?
       mounts_collected_map = {}
       for m in info.mounts.collected
-        mounts_collected_map[m.name] = m
+        mounts_collected_map[m.name.replace(/\./g,"")] = m
       info.mounts_collected_map = mounts_collected_map
 
     if info.pets?
       pets_collected_map = {}
       for p in info.pets.collected
-        pets_collected_map[p.name] = p
+        pets_collected_map[p.name.replace(/\./g,"")] = p
       info.pets_collected_map = pets_collected_map
 
     # strip achievements as they are in the news/feeds items

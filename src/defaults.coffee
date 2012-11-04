@@ -2,8 +2,8 @@ global.wf ||= {}
 
 wf.SITE_URL = "http://localhost:3000"
 wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
-wf.HISTORY_LIMIT = 15
-wf.HISTORY_SAVE_LIMIT = 5
+wf.HISTORY_LIMIT = 12
+wf.HISTORY_SAVE_LIMIT = 4
 wf.ARMORY_CALL_THREADS = 6
 wf.ITEM_LOADER_THREADS = 6
 wf.ARMORY_CALL_TIMEOUT = 30000
