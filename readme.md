@@ -1,12 +1,14 @@
 TODO
 - view not found item gives err (if hist present, but no armory)
 
-- expired (?) registered things not going... index not present
-
-- print out errors when doing ensure index
-
-
 - not deleting old history... fix or put in TTL 
+
+history 
+- 1 week TTL for main/latest char entry, done, accessed_at
+- 1 day TTL for history items, done, archived_at
+- refresh everytime its viewed via get_history, done
+- so if not viewed or becomes history, it gets deleted
+- if char updates regularly, it will have lot of history...for 1 day
 
 
 - cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff

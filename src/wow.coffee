@@ -30,6 +30,8 @@ class wf.WoW
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
+  armory_archived_ttl_index_2 = {archived_at:1}
+  armory_accessed_ttl_index_3 = {accessed_at:1}
   armory_static_index_1 = {static_type:1, id:1}
   job_running_lock = false
   loader_queue = null
@@ -89,7 +91,7 @@ class wf.WoW
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, armory_index_1, null, ->
+        @ensure_armory_indexes ->
           store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
       result_handler?(null)
@@ -143,25 +145,37 @@ class wf.WoW
         callback?(info)
 
   get_loaded: (loaded_handler) ->
-    store.ensure_index armory_collection, armory_index_1, null, ->
+    @ensure_armory_indexes ->
       # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
       store.load_all_with_fields armory_collection, {}, 
         fields_to_select,  
         {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, loaded_handler
 
+  ensure_armory_indexes: (callback)->
+    store.ensure_index armory_collection, armory_index_1, null, ->
+      store.ensure_index armory_collection, armory_archived_ttl_index_2, { unique: false, expireAfterSeconds: wf.ARCHIVED_ITEM_TIMEOUT }, ->
+        store.ensure_index armory_collection, armory_accessed_ttl_index_3, { unique: false, expireAfterSeconds: wf.ACCESSED_ITEM_TIMEOUT }, callback
+
+
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
-      @ensure_registered region, realm, type, name, ->
-        store.ensure_index armory_collection, armory_index_1, null, ->
+      @ensure_registered region, realm, type, name, =>
+        @ensure_armory_indexes ->
           selector = {type, region, realm, name}
           store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
-            if type == "guild" # if its a guild, also query for guild members
-              wf.debug "Got a guild, so also query for members..."
-              selector = {type:"member", region, realm, "armory.guild.name":name}
-              store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
-                for m in members
-                  results.push m
-                result_handler?(results)
+            if results? and results.length >0
+              selector.lastModified = results[0].lastModified
+              store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, ->
+                if type == "guild" # if its a guild, also query for guild members
+                  wf.debug "Got a guild, so also query for members..."
+                  selector = {type:"member", region, realm, "armory.guild.name":name}
+                  store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
+                    store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, ->
+                      for m in members
+                        results.push m
+                      result_handler?(results)
+                else
+                  result_handler?(results)
             else
               result_handler?(results)
     else
@@ -381,6 +395,7 @@ class wf.WoW
         doc.armory[item] = saved_stuff_old[item]
     new_item.whats_changed = whats_changed
     new_item.added_date = new Date()
+    new_item.accessed_at = new Date()
     return new_item
 
   store_update: (type, region, realm, name, info, stored_handler) => 
@@ -391,7 +406,7 @@ class wf.WoW
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
-    store.ensure_index armory_collection, armory_index_1, null, =>
+    @ensure_armory_indexes =>
       store.load armory_collection, {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
         wf.debug "store_update:#{JSON.stringify(doc)}"
         if doc? and doc.lastModified == info.lastModified
@@ -407,15 +422,15 @@ class wf.WoW
             for item_id in items_to_get
               item_loader_queue.push item_id
             if doc?
-              store.update armory_collection, doc, {$unset:{armory:1}}, ->
+              store.update armory_collection, doc, {$unset:{armory:1}, $set:{archived_at:new Date()}}, ->
                 wf.debug "Now saved #{info.name}/#{name}, updated old one"
                 store.load_all_with_fields armory_collection,  {region, realm, type, name}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
                   # get last last mod date
-                  wf.debug "Current history - count:#{docs.length}"
+                  wf.info "Current history - count:#{docs.length}"
                   last_doc_last_modified = docs[-1...-1].lastModified
                   # delete all entries with last mod date before date (less than)
                   store.remove armory_collection, {region, realm, type, name, lastModified : { $lt : last_doc_last_modified } }, (count)->
-                    wf.debug "Deleted old history - count:#{count}"
+                    wf.info "Deleted old history - count:#{count}"
                     stored_handler?()
             else
               wf.debug "Now saved #{info.name}/#{name}, no old one"

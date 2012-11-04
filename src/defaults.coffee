@@ -9,6 +9,8 @@ wf.ITEM_LOADER_THREADS = 6
 wf.ARMORY_CALL_TIMEOUT = 30000
 # wf.REGISTERED_ITEM_TIMEOUT = 60*1  # 1 mins
 wf.REGISTERED_ITEM_TIMEOUT = 60*60*24*7   # 7 days
+wf.ARCHIVED_ITEM_TIMEOUT = 60*60*24 # 1 day
+wf.ACCESSED_ITEM_TIMEOUT = 60*60*24*7   # 7 days
 
 wf.mongo_info = 
     "hostname":"localhost"
