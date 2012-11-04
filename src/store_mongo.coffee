@@ -1,4 +1,4 @@
-global.wf ||= {}
+global.wf ?= {}
 
 async = require "async"
 Mongodb = require "mongodb"
@@ -28,9 +28,9 @@ class wf.StoreMongo
 
   ensure_index: (collection_name, fieldSpec, options, callback) ->
     @with_collection collection_name, (coll) ->
-      options ||= {}
-      options["unique"] ||= true
-      options["safe"] ||= true
+      options ?= {}
+      options["unique"] ?= true
+      options["safe"] ?= true
       coll.ensureIndex fieldSpec, options, (err, index_name) ->
         wf.error(err) if err
         wf.debug "Trying to create index on #{collection_name} - maybe did it:#{index_name}"
@@ -115,9 +115,9 @@ class wf.StoreMongo
 
   load: (collection_name, document_key, options, loaded_handler) ->
     @with_collection collection_name, (coll) ->
-      options ||= {}
-      options["limit"] ||= -1
-      options["batchSize"] ||= 1
+      options ?= {}
+      options["limit"] ?= -1
+      options["batchSize"] ?= 1
       wf.debug "load:coll:#{collection_name}, key:#{JSON.stringify(document_key)}, options:#{JSON.stringify(options)}"
       coll.find document_key, options, (err, cur) ->
         if err

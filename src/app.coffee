@@ -1,4 +1,4 @@
-global.wf ||= {}
+global.wf ?= {}
 
 express = require('express')
 http = require('http')
@@ -57,7 +57,7 @@ wf.app.configure ->
 
   wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
-  wf.wow ||= new wf.WoW()
+  wf.wow ?= new wf.WoW()
   # todo - push this into wow object
   wf.feed_formatter = new wf.FeedItemFormatter()
   # wf.wow.static_load()
