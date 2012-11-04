@@ -152,6 +152,18 @@ class wf.FeedItemFormatter
                 member_desc += "#{member_info[0].character.name} has left"
           change_title += "member change(s): #{member_title}" if member_title.length >0
           change_description += "Guild membership has changed: #{member_desc} " if member_desc.length >0
+        if item.whats_changed.changes.mounts_collected_map?
+          mounts_title = ""
+          mounts_desc = ""
+          for own name, mount_info of item.whats_changed.changes.mounts_collected_map
+            if mount_info instanceof Array
+              if mount_info.length == 1
+                mounts_title += ", " if mounts_title.length >0
+                mounts_title += "#{mount_info[0].name}"
+                mounts_desc += ", " if mounts_desc.length >0
+                mounts_desc += "#{mount_info[0].name}"
+          change_title += "New mount(s): #{mounts_title}" if mounts_title.length >0
+          change_description += "Gained some mount(s): #{mounts_desc} " if mounts_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""
