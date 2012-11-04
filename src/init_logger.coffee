@@ -16,23 +16,23 @@ else
 
 wf.logger = log4js.getLogger()
 
-wf.error = (x) ->
-  wf.logger.error(x)
+store_error = (x, type) ->
+  message = x
+  message = x.message if x?.message?
   if wf.log_store?
     log_entry =
       timestamp: new Date()
-      message: x
-      type: "ERROR"
+      message: message
+      type: type
     wf.log_store?.insert wf.logs_collection, log_entry
+
+wf.error = (x) ->
+  wf.logger.error(x)
+  store_error(x, "ERROR")
 
 wf.warn = (x) ->
   wf.logger.warn(x)
-  if wf.log_store?
-    log_entry =
-      timestamp: new Date()
-      message: x
-      type: "WARN"
-    wf.log_store?.insert wf.logs_collection, log_entry
+  store_error(x, "WARN")
 
 wf.error_no_store = (x) ->
   wf.logger.error(x)
@@ -55,4 +55,4 @@ wf.logging_init = (store) ->
     wf.info "Created logs collection:#{wf.logs_collection}. #{err}, #{result}"
 
 wf.get_logs = (callback) ->
-  wf.log_store?.load_all wf.logs_collection, {}, {limit:50, sort: {timestamp:-1}}, callback
+  wf.log_store?.load_all wf.logs_collection, {type:"ERROR"}, {limit:50, sort: {timestamp:-1}}, callback
