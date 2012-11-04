@@ -31,7 +31,10 @@ class wf.StoreMongo
       options ||= {}
       options["unique"] ||= true
       options["safe"] ||= true
-      coll.ensureIndex fieldSpec, options, callback
+      coll.ensureIndex fieldSpec, options, (err, index_name) ->
+        wf.error(err) if err
+        wf.debug "Trying to create index on #{collection_name} - maybe did it:#{index_name}"
+        callback?(index_name)
       
   add: (collection_name, document_object, stored_handler) ->
     @insert collection_name, document_object, (coll)->
