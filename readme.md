@@ -11,6 +11,8 @@
 
 - mention copyright/trademarks, all are blizzards
 
+- performance?
+
 - cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
 
 - do a "live" load of the char ?

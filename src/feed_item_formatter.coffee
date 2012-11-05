@@ -202,7 +202,7 @@ class wf.FeedItemFormatter
               if prof_info.rank?
                 professions_desc += ", " if professions_desc.length >0
                 professions_desc += "#{name} is now rank #{@get_new_one(prof_info.rank)}"
-          change_description += "Profession(s): #{professions_desc} "
+          change_description += "Profession(s): #{professions_desc} " if professions_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""
