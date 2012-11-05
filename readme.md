@@ -2,26 +2,18 @@
 
 ## TODO
 
-- tidy feed more
-  - profession changes
-  - progression/raids changes?
-  - pvp/battleground changes?
-  - talents/glyphs
-  - hunter pets, levels?
+- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
 
 - mention copyright/trademarks, all are blizzards
 
 - performance?
 
-- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
-
 - do a "live" load of the char ?
-
 
 - search/find my char/guild?
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 
-
+- just a space between parts of the manual feed changes, maybe use comma/full stop - re-work that class with more generc functions
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
@@ -30,14 +22,10 @@
 
 - fix tests, wowSpec failing too much, refactor wow.coffee
 
-
 ## BUGS
--
-
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - double check feed updates vs battle.net - showing correct item?
-
 
 ## PENDING BEING TESTED
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
@@ -46,17 +34,11 @@ maybe....
 - titles changes?
 - some criteria cases come up blank?
 
-
-#### history 
-- 1 week TTL for main/latest char entry, done, accessed_at
-- 1 day TTL for history items, done, archived_at
-- refresh everytime its viewed via get_history, done
-- so if not viewed or becomes history, it gets deleted
-- if char updates regularly, it will have lot of history...for 1 day
-
-
-
 ## LATER
+- feed/track hunter pets, no levels, is it worth tracking names/type?
+- feed/track talents/glyphs changes
+- feed/track pvp/battleground changes, number won/lost?
+- feed/track progression/raids changes?
 - BUG view not found item gives err (if hist present, but no armory)
 - not deleting old history... maybe strip code, rely on TTL stuff
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
@@ -121,6 +103,14 @@ maybe....
 - feed for profession levels?
 
 ## NOTES
+
+#### history 
+- 1 week TTL for main/latest char entry, done, accessed_at
+- 1 day TTL for history items, done, archived_at
+- refresh everytime its viewed via get_history, done
+- so if not viewed or becomes history, it gets deleted
+- if char updates regularly, it will have lot of history...for 1 day
+
 
 #### AppFog cheatsheet:
     rvm use 1.8.7-p358@af-tool

@@ -76,7 +76,7 @@ describe "feed item formatter", ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
-      n = f.get_name item
+      n = f.get_formal_name item
       n.should.equal "test" # unchanged
 
     it "get_name, titles, none selected", ->
@@ -88,7 +88,7 @@ describe "feed item formatter", ->
             [
               name: "123"
             ]
-      n = f.get_name item
+      n = f.get_formal_name item
       n.should.equal "test" # unchanged
 
     it "get_name, titles, one selected", ->
@@ -101,5 +101,5 @@ describe "feed item formatter", ->
               name: "123-%s"
               selected: "YES"
             ]
-      n = f.get_name item
+      n = f.get_formal_name item
       n.should.equal "123-test" # changed

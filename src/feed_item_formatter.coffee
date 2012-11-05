@@ -65,8 +65,8 @@ class wf.FeedItemFormatter
 
   get_formal_name: (p) ->
     # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
-    alt_text = "#{p.name}"
-    if p.armory?.titles?
+    alt_text = "#{p?.name}"
+    if p?.armory?.titles?
       # wf.debug "titles - found"
       for t in p.armory.titles
         # wf.debug "titles - this one? #{JSON.stringify(t)}"
