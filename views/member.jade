@@ -8,12 +8,13 @@ block content
       div 
         | Guild: 
         a(href='/view/guild/#{w.region}/#{w.realm}/#{w.armory.guild.name}')= w.armory.guild.name 
-        | &nbsp;View : 
-        a(href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple') armory
-        &nbsp;-&nbsp;
-        a(href='http://#{p.region}.battle.net/api/wow/character/#{p.realm}/#{p.name}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items') api
-        &nbsp;-&nbsp;
-        a(href='/feed/#{w.type}/#{w.region}/#{w.realm}/#{w.name}.rss') rss
+    div
+      | &nbsp;View : 
+      a(href='http://#{p.region}.battle.net/wow/en/character/#{p.realm}/#{p.name}/simple') armory
+      &nbsp;-&nbsp;
+      a(href='http://#{p.region}.battle.net/api/wow/character/#{p.realm}/#{p.name}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items') api
+      &nbsp;-&nbsp;
+      a(href='/feed/#{w.type}/#{w.region}/#{w.realm}/#{w.name}.rss') rss
     hr
     each item in f
       .clear
