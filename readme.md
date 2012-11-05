@@ -1,47 +1,35 @@
-TODO
-- view not found item gives err (if hist present, but no armory)
+# WoW Activity Feed
 
-- not deleting old history... fix or put in TTL 
-
-history 
-- 1 week TTL for main/latest char entry, done, accessed_at
-- 1 day TTL for history items, done, archived_at
-- refresh everytime its viewed via get_history, done
-- so if not viewed or becomes history, it gets deleted
-- if char updates regularly, it will have lot of history...for 1 day
-
-
-- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
+## TODO
 
 - tidy feed more
--- profession changes
--- progression/raids changes?
--- pvp/battleground changes?
--- talents/glyphs
--- hunter pets, levels?
+  - profession changes
+  - progression/raids changes?
+  - pvp/battleground changes?
+  - talents/glyphs
+  - hunter pets, levels?
 
--- some criteria cases come up blank?
+- mention copyright/trademarks, all are blizzards
 
-
-- if after removing above, no changes, then dont report them
-
-- search/find my char/guild?
-- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
+- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
 
 - do a "live" load of the char ?
 
 
+- search/find my char/guild?
+- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 
-- mention copyright/trademarks, all are blizzards
+
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, not working? using Twitter -> fb link working better, get text, no images (will twitter stop that...) (and twitterfeed to twitter)
+- or could be RSS related, does Atom/rel-alt links help?
 
 - fix tests, wowSpec failing too much, refactor wow.coffee
 
 
-BUGS
+## BUGS
 -
 
 maybe....
@@ -49,17 +37,29 @@ maybe....
 - double check feed updates vs battle.net - showing correct item?
 
 
-PENDING BEING TESTED
+## PENDING BEING TESTED
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 - armory job seems to lockup sometimes... added a timeout, see if it helps...
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
--- titles changes?
+- titles changes?
+- some criteria cases come up blank?
 
 
-LATER
+#### history 
+- 1 week TTL for main/latest char entry, done, accessed_at
+- 1 day TTL for history items, done, archived_at
+- refresh everytime its viewed via get_history, done
+- so if not viewed or becomes history, it gets deleted
+- if char updates regularly, it will have lot of history...for 1 day
+
+
+
+## LATER
+- BUG view not found item gives err (if hist present, but no armory)
+- not deleting old history... maybe strip code, rely on TTL stuff
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 - track calls to website - where are they coming from (ip, referring site, browser, ...)
-- make home/loaded pages work when no history present - maybe???
+- BUG make home/loaded pages work when no history present - maybe???
 - cache class/race static for display (eg mage/orc ...)
 - hiding player achievements!
 - about page, http://www.sitepoint.com/css3-starwars-scrolling-text/?utm_source=hackernewsletter&utm_medium=email ...
@@ -118,9 +118,9 @@ LATER
 - feed for items?
 - feed for profession levels?
 
-NOTES
+## NOTES
 
-AppFog notes:
+#### AppFog cheatsheet:
     rvm use 1.8.7-p358@af-tool
     rvm use ruby-1.9.2-p320@af-tool
     af update waf1
@@ -158,7 +158,7 @@ and another to run express under nodemon, so its restarted when code changes
 node_modules/.bin/nodemon app.js
 
 
-ON OSX
+## ON OSX
 
 start mongo - sudo port load mongodb
 and maybe sudo rm /opt/local/var/db/mongodb/mongod.lock
@@ -171,7 +171,7 @@ compile coffee - same as above
 dex:
 dex -w -f /opt/local/var/log/mongodb/mongodb.log mongodb://localhost
 
-LINKS
+## LINKS
 
 perf tool - http://www.nodetime.com
 

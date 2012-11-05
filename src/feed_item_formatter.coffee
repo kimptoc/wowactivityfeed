@@ -188,6 +188,21 @@ class wf.FeedItemFormatter
                 titles_desc += "'#{name}'"
           change_title += "New title(s): #{titles_title} " if titles_title.length >0
           change_description += "Gained some title(s): #{titles_desc} " if titles_desc.length >0
+        if item.whats_changed.changes.professions_map?
+          professions_desc = ""
+          for own name, prof_info of item.whats_changed.changes.professions_map
+            if prof_info instanceof Array
+              if prof_info.length == 1
+                professions_desc += ", " if professions_desc.length >0
+                professions_desc += "Took up #{name}"
+              else if prof_info.length == 3
+                professions_desc += ", " if professions_desc.length >0
+                professions_desc += "Gave up #{name}"
+            else
+              if prof_info.rank?
+                professions_desc += ", " if professions_desc.length >0
+                professions_desc += "#{name} is now rank #{@get_new_one(prof_info.rank)}"
+          change_description += "Profession(s): #{professions_desc} "
 
     # if we dont identify a change above, then assume none
     if change_description == ""
