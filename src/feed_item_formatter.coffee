@@ -129,9 +129,11 @@ class wf.FeedItemFormatter
               gear_change += "#{name}: #{@get_new_one(gear.name)}"
           if gear_change.length > 0
             change_description += "Gear change: #{gear_change}. "
-        if item.whats_changed.changes.reputation_map? and ! item.whats_changed.changes.reputation_map instanceof Array
+        if item.whats_changed.changes.reputation_map? and ! (item.whats_changed.changes.reputation_map instanceof Array)
+          wf.debug "looks like some rep changes..."
           rep_change = ""
           for own name, values of item.whats_changed.changes.reputation_map
+            wf.debug "rep changes for:#{name}"
             rep_change += ", " if rep_change.length >0
             rep_change += "#{name}:#{@get_new_one(values.value)}"
           change_description += "Rep change(s): #{rep_change}. "
@@ -206,6 +208,7 @@ class wf.FeedItemFormatter
 
     # if we dont identify a change above, then assume none
     if change_description == ""
+      wf.debug "No change found, so not generating a feed item"
       return null
     if item?.type == "member" and item.armory?.thumbnail?
       change_description = "#{@char_link(item)} #{@char_name(item)} #{change_description}"

@@ -98,15 +98,15 @@ get_feed = (wowthings, callback) ->
     #wf.debug wowthing
     feed = []
     feed_worker = (item, callback) ->
-      wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
+      # wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
       wf.feed_formatter.process item, (fmt_items) ->
         for fi in fmt_items
           feed.push(fi)
         callback?()
-    wf.debug "about to do async queue for formatting"
+    # wf.debug "about to do async queue for formatting"
     feed_queue = async.queue feed_worker, 5
     feed_queue.drain = ->
-      wf.debug "feed_queue drain called!"
+      # wf.debug "feed_queue drain called!"
       feed.sort (a,b) ->
         return b.date - a.date
       feed = feed[0..wf.HISTORY_LIMIT*3]
