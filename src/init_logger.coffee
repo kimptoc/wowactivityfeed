@@ -44,6 +44,10 @@ wf.warn = (x) ->
   wf.logger.warn(x)
   store_error(x, "WARN")
 
+wf.timing = (x) ->
+  wf.logger.warn(x)
+  store_error(x, "TIMING")
+
 wf.error_no_store = (x) ->
   wf.logger.error(x)
 
