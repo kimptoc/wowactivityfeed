@@ -37,7 +37,7 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    wf.debug "format.process"
+    wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}"
     item_ids = @get_items(item)
     wf.debug "got items, #{item_ids.length}"
     wf.wow.load_items item_ids, (items) =>
@@ -130,10 +130,8 @@ class wf.FeedItemFormatter
           if gear_change.length > 0
             change_description += "Gear change: #{gear_change}. "
         if item.whats_changed.changes.reputation_map? and ! (item.whats_changed.changes.reputation_map instanceof Array)
-          wf.debug "looks like some rep changes..."
           rep_change = ""
           for own name, values of item.whats_changed.changes.reputation_map
-            wf.debug "rep changes for:#{name}"
             rep_change += ", " if rep_change.length >0
             rep_change += "#{name}:#{@get_new_one(values.value)}"
           change_description += "Rep change(s): #{rep_change}. "

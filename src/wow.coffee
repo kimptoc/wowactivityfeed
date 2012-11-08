@@ -156,28 +156,55 @@ class wf.WoW
       store.ensure_index armory_collection, armory_archived_ttl_index_2, { unique: false, expireAfterSeconds: wf.ARCHIVED_ITEM_TIMEOUT }, ->
         store.ensure_index armory_collection, armory_accessed_ttl_index_3, { unique: false, expireAfterSeconds: wf.ACCESSED_ITEM_TIMEOUT }, callback
 
+  repatch_item_key: (item) ->
+    item?.region+item?.realm+item?.type+item?.name
+
+  repatch_results: (results, callback)  ->
+    # assumed results are in descending time order ...
+    previous_item_cache = {}
+    for item in results
+      if item.armory?
+        # wf.debug "saving previous item:#{JSON.stringify(item.whats_changed)}"
+        previous_item_cache[@repatch_item_key(item)] = item
+      else
+        previous_item = previous_item_cache[@repatch_item_key(item)]
+        if previous_item?
+          # for own name, value of previous_item.armory
+            # wf.debug "armory item:#{name}"
+          sanitised_changes = wf.makeCopy(previous_item.whats_changed)
+          for own name, value of sanitised_changes.changes
+            wf.debug "checking if we have field:#{name}/#{previous_item.armory[name]}"
+            unless previous_item.armory[name]?
+              wf.debug "we dont have field:#{name}, so deleting changes for it"
+              delete sanitised_changes.changes[name]
+          item.armory = wf.restore sanitised_changes, previous_item.armory
+          # dont keep feed/news stuff from old entries - ideally should just do unique items on output... later perhaps 
+          delete item.armory.feed if item.armory.feed?
+          delete item.armory.news if item.armory.news?
+          previous_item_cache[@repatch_item_key(item)] = item
+    callback?(results)
 
   get_history: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, =>
-        @ensure_armory_indexes ->
+        @ensure_armory_indexes =>
           selector = {type, region, realm, name}
-          store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) ->
+          store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
             if results? and results.length >0
               selector.lastModified = results[0].lastModified
-              store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, ->
+              store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
                 if type == "guild" # if its a guild, also query for guild members
                   wf.debug "Got a guild, so also query for members..."
                   selector = {type:"member", region, realm, "armory.guild.name":name}
-                  store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) ->
-                    store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, ->
+                  store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
+                    store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
                       for m in members
                         results.push m
-                      result_handler?(results)
+                      @repatch_results(results, result_handler)
                 else
-                  result_handler?(results)
+                  @repatch_results(results, result_handler)
             else
-              result_handler?(results)
+              result_handler?(null)
     else
       result_handler?(null)
 
