@@ -9,7 +9,7 @@ require './timing'
 wf.mongo_db = null
 
 class wf.StoreMongo
-  collection_cache = {}
+  # collection_cache = {}
   mongo_connecting = false
 
   constructor: ->
@@ -177,13 +177,13 @@ class wf.StoreMongo
 
   with_collection: (collection_name, worker) ->
     @with_connection ->
-      return worker?(collection_cache[collection_name]) if collection_cache[collection_name]
+      # return worker?(collection_cache[collection_name]) if collection_cache[collection_name]
       wf.mongo_db.collection collection_name, (err, coll) ->
         if err
           wf.error_no_store(err)
           worker?(null)
         else
-          collection_cache[collection_name] ?= coll
+          # collection_cache[collection_name] ?= coll
           worker?(coll)
 
   with_connection: (worker) ->
