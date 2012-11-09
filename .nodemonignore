@@ -3,7 +3,7 @@ src/*.coffee
 store/*
 logs/*
 tmp/*
-readme.txt
+readme.md
 .git/*
 .idea/*
 public/*

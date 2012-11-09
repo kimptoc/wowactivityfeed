@@ -21,6 +21,7 @@
         "moment":"",
         "async":"",
         "nodetime":"",
-        "underscore":""
+        "underscore":"",
+        "nodefly":""
     }
 }

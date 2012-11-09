@@ -2,14 +2,12 @@
 
 ## TODO
 
-- compare rss feed gen here - do it myself? http://davidwalsh.name/rss-express
 - fails -  http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fwafbeta.kimptoc.net%2Ffeed%2Fguild%2Feu%2FDarkspear%2FMean%2520Girls.rss
 - fails feed validation http://validator.w3.org/appc/
-
+- more url/alt links
 
 - mention copyright/trademarks, all are blizzards
 
-- performance? seems ok after restart - GC issue?
 
 - do a "live" load of the char ?
 
@@ -30,7 +28,8 @@ maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - double check feed updates vs battle.net - showing correct item?
 
-## PENDING BEING TESTED
+## FIXED MAYBE PENDING BEING TESTED
+- performance? seems ok after restart, removed collection caching... - GC issue or VM issue?
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 - armory job seems to lockup sometimes... added a timeout, see if it helps...
 - rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
@@ -38,7 +37,7 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
-- on stats page/uptime output?
+- on stats page/uptime output? http://nodejs.org/api/all.html#all_child_process_exec_command_options_callback
 - put in image links for changed items on my custom feed bit (get items, display them - multiple...)
 - feed items refer to latest char info, eg level, even though at time of feed item, it might have been different - could we link feed item to relevant/best char info we have? Or just give up on historic info option... or just leave
 - Kwiks for home page update slideshow? http://devsmash.com/projects/kwicks/examples/slideshow
@@ -170,6 +169,17 @@ compile coffee - same as above
 
 dex:
 dex -w -f /opt/local/var/log/mongodb/mongodb.log mongodb://localhost
+
+## APACHE BENCH
+
+ab -n 10 -c 3 http://wafbeta.kimptoc.net/feed/guild/eu/Darkspear/Mean%20Girls.rss
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       28   35   5.4     39      44
+Processing:   555 1794 1410.6   1063    3848
+Waiting:      452 1700 1404.0    994    3743
+Total:        599 1829 1412.5   1091    3887
 
 ## LINKS
 

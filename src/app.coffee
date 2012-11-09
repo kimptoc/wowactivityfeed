@@ -1,5 +1,7 @@
 global.wf ?= {}
 
+require './init_nodefly'
+
 express = require('express')
 http = require('http')
 path = require('path')
@@ -160,12 +162,14 @@ wf.app.get '/feedold/all.rss', (req, res) ->
 
   wf.wow.get_loaded (items) ->
     build_feed items, feed, (xml) ->
+      res.set('Content-Type', 'application/xml')
       res.send xml
  
 wf.app.get '/feed/all.rss', (req, res) ->
 
   wf.wow.get_loaded (items) ->
     get_feed items, (items_to_publish) ->
+      res.set('Content-Type', 'application/xml')
       res.render "rss", 
         title: 'WoW Activity Feed'
         description: 'WoW Activity Feed - all changes'
@@ -196,6 +200,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
   wf.wow.get_history region, realm, type, name, (items)->
     wf.timing_off("/feed/#{name}")
     build_feed items, feed, (xml) ->
+      res.set('Content-Type', 'application/xml')
       res.send xml
 
  
