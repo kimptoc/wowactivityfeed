@@ -4,7 +4,7 @@ cronJob = require('cron').CronJob
 
 wf.armory_load_requested = false
 
-wf.hourlyjob = new cronJob '00 00 */2 * * *', (-> 
+wf.hourlyjob = new cronJob '00 00 */1 * * *', (-> 
   wf.info "cronjob tick...hourly load"
   wf.armory_load_requested = true
   ),

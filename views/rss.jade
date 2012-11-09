@@ -1,0 +1,20 @@
+doctype xml
+rss(version='2.0', xmlns:atom='<a href="http://www.w3.org/2005/Atom" rel="nofollow">http://www.w3.org/2005/Atom</a>')
+    channel
+        title= title
+        link <a href="#{site_url}" rel="nofollow">#{site_url}</a>
+        atom:link(href='<a href="#{feed_url}" rel="nofollow">#{feed_url}</a>', rel='self', type='application/rss+xml')
+        description= description
+        language en-US
+        if feed.length
+            lastBuildDate= new Date(feed[0].date).toUTCString()
+        each entry in feed
+            item
+                title= entry.title
+                link <a href="#{entry.url}" rel="nofollow">#{entry.url}</a>
+                description
+                    | <![CDATA[
+                    | !{entry.description}
+                    | ]]>
+                pubDate= new Date(entry.date).toUTCString()
+                guid(isPermaLink='false') !{entry.guid}

@@ -148,7 +148,7 @@ wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   handle_view(req, res)
 
-wf.app.get '/feed/all.rss', (req, res) ->
+wf.app.get '/feedold/all.rss', (req, res) ->
 
   feed = new rss
     title: 'WoW Activity Feed'
@@ -161,6 +161,19 @@ wf.app.get '/feed/all.rss', (req, res) ->
   wf.wow.get_loaded (items) ->
     build_feed items, feed, (xml) ->
       res.send xml
+ 
+wf.app.get '/feed/all.rss', (req, res) ->
+
+  wf.wow.get_loaded (items) ->
+    get_feed items, (items_to_publish) ->
+      res.render "rss", 
+        title: 'WoW Activity Feed'
+        description: 'WoW Activity Feed - all changes'
+        feed_url: "#{wf.SITE_URL}/feed/all.rss"
+        site_url: "#{wf.SITE_URL}"
+        image_url: 'http://www.google.com/icon.png'
+        author: 'Chris Kimpton'
+        feed:items_to_publish
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 

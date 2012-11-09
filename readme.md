@@ -2,11 +2,14 @@
 
 ## TODO
 
-- cache some info at history top level, eg guild name and thumbnail - so old history items show better, or just "patch" old items using diff
+- compare rss feed gen here - do it myself? http://davidwalsh.name/rss-express
+- fails -  http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fwafbeta.kimptoc.net%2Ffeed%2Fguild%2Feu%2FDarkspear%2FMean%2520Girls.rss
+- fails feed validation http://validator.w3.org/appc/
+
 
 - mention copyright/trademarks, all are blizzards
 
-- performance?
+- performance? seems ok after restart - GC issue?
 
 - do a "live" load of the char ?
 
@@ -35,6 +38,11 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- on stats page/uptime output?
+- put in image links for changed items on my custom feed bit (get items, display them - multiple...)
+- feed items refer to latest char info, eg level, even though at time of feed item, it might have been different - could we link feed item to relevant/best char info we have? Or just give up on historic info option... or just leave
+- Kwiks for home page update slideshow? http://devsmash.com/projects/kwicks/examples/slideshow
+- stats - show min/max accessed/archived dates and count nulls - number of error today (ideally through agg framework)
 - feed/track hunter pets, no levels, is it worth tracking names/type?
 - feed/track talents/glyphs changes
 - feed/track pvp/battleground changes, number won/lost?
