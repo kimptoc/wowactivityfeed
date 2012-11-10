@@ -1,6 +1,5 @@
 global.wf ?= {}
 
-require './init_nodefly'
 
 express = require('express')
 http = require('http')
@@ -18,6 +17,8 @@ require './prettify_json'
 require './cron'
 require './defaults'
 require './timing'
+
+require './init_nodefly'
 
 wf.app = express()
 
