@@ -11,7 +11,7 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
         each entry in feed
             item
                 title= entry.title
-                link <a href="#{entry.url}" rel="nofollow">#{entry.url}</a>
+                link= entry.url
                 description
                     | <![CDATA[
                     | !{entry.description}
