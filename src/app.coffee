@@ -156,7 +156,7 @@ wf.app.get '/feedold/all.rss', (req, res) ->
   feed = new rss
     title: 'WoW Activity Feed'
     description: 'Test all changes feed'
-    feed_url: "#{wf.SITE_URL}/feed/all.rss"
+    feed_url: "#{wf.SITE_URL}feed/all.rss"
     site_url: "#{wf.SITE_URL}"
     image_url: 'http://www.google.com/icon.png'
     author: 'Chris Kimpton'
@@ -174,7 +174,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
       res.render "rss", 
         title: 'WoW Activity Feed'
         description: 'WoW Activity Feed - all changes'
-        feed_url: "#{wf.SITE_URL}/feed/all.rss"
+        feed_url: "#{wf.SITE_URL}feed/all.rss"
         site_url: "#{wf.SITE_URL}"
         image_url: 'http://www.google.com/icon.png'
         author: 'Chris Kimpton'
@@ -193,8 +193,8 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
   feed = new rss
     title: "WoW Activity Feed for #{name}"
     description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
-    feed_url: "#{wf.SITE_URL}/feed/#{type}/#{region}/#{realm}/#{name}.rss"
-    site_url: "#{wf.SITE_URL}/view/#{type}/#{region}/#{realm}/#{name}"
+    feed_url: "#{wf.SITE_URL}feed/#{type}/#{region}/#{realm}/#{name}.rss"
+    site_url: "#{wf.SITE_URL}view/#{type}/#{region}/#{realm}/#{name}"
     image_url: 'http://www.google.com/icon.png'
     author: 'Chris Kimpton'
 
