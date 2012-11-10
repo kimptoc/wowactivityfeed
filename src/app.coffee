@@ -159,7 +159,6 @@ wf.app.get '/feedold/all.rss', (req, res) ->
     feed_url: "#{wf.SITE_URL}feed/all.rss"
     site_url: "#{wf.SITE_URL}"
     image_url: 'http://www.google.com/icon.png'
-    author: 'Chris Kimpton'
 
   wf.wow.get_loaded (items) ->
     build_feed items, feed, (xml) ->
@@ -177,12 +176,33 @@ wf.app.get '/feed/all.rss', (req, res) ->
         feed_url: "#{wf.SITE_URL}feed/all.rss"
         site_url: "#{wf.SITE_URL}"
         image_url: 'http://www.google.com/icon.png'
-        author: 'Chris Kimpton'
         feed:items_to_publish
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 
   wf.timing_on("/feed/#{req.params.name}")
+
+  type = req.params.type
+  type = 'member' if type == "character"
+  region = req.params.region.toLowerCase()
+  realm = req.params.realm
+  name = req.params.name
+
+  wf.wow.get_history region, realm, type, name, (items)->
+    wf.timing_off("/feed/#{name}")
+    get_feed items, (items_to_publish) ->
+      res.set('Content-Type', 'application/xml')
+      res.render "rss", 
+        title: "WoW Activity Feed for #{name}"
+        description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
+        feed_url: "#{wf.SITE_URL}feed/#{type}/#{region}/#{realm}/#{name}.rss"
+        site_url: "#{wf.SITE_URL}view/#{type}/#{region}/#{realm}/#{name}"
+        image_url: 'http://www.google.com/icon.png'
+        feed:items_to_publish
+
+wf.app.get '/feedold/:type/:region/:realm/:name.rss', (req, res) ->
+
+  wf.timing_on("/feedold/#{req.params.name}")
 
   type = req.params.type
   type = 'member' if type == "character"
@@ -196,7 +216,6 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
     feed_url: "#{wf.SITE_URL}feed/#{type}/#{region}/#{realm}/#{name}.rss"
     site_url: "#{wf.SITE_URL}view/#{type}/#{region}/#{realm}/#{name}"
     image_url: 'http://www.google.com/icon.png'
-    author: 'Chris Kimpton'
 
   wf.wow.get_history region, realm, type, name, (items)->
     wf.timing_off("/feed/#{name}")
