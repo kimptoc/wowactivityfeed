@@ -8,7 +8,7 @@ block content
       ul
       each i in reg
         li 
-          a(href='/view/#{i.type}/#{i.region}/#{i.realm}/#{i.name}') #{i.name} / #{i.type} - #{i.realm} (#{i.region}) 
+          a(href='/view/#{i.type}/#{encodeURIComponent(i.region)}/#{encodeURIComponent(i.realm)}/#{encodeURIComponent(i.name)}') #{i.name} / #{i.type} - #{i.realm} (#{i.region}) 
             small last viewed:[#{i.updated_at}]
     else
       h3 Nothing registered yet!
