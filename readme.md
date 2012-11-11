@@ -36,6 +36,7 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- need a logo! :)
 - feed complains about uri/iri issues when validating - unicode in url
 - feed/more url/alt links
 - on stats page/uptime output? http://nodejs.org/api/all.html#all_child_process_exec_command_options_callback
@@ -111,6 +112,10 @@ maybe....
 - feed for profession levels?
 
 ## NOTES
+
+
+Nodefly - any use?
+http://apm.nodefly.com/#dashboard
 
 - test feed 
   -  http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fwafbeta.kimptoc.net%2Ffeed%2Fguild%2Feu%2FDarkspear%2FMean%2520Girls.rss
