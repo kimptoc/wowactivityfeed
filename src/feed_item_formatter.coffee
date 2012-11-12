@@ -264,7 +264,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{item?.lastModified}&id=#{thingId}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{news_item.timestamp}&id=#{thingId}"
       date: news_item.timestamp
       date_formatted: @format_date(news_item.timestamp)
       author: item?.name
@@ -305,7 +305,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{item?.lastModified}&id=#{thingId}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{feed_item.timestamp}&id=#{thingId}"
       date: feed_item.timestamp
       date_formatted: @format_date(feed_item.timestamp)
       author: item?.name

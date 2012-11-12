@@ -96,7 +96,13 @@ get_feed_all = (callback) ->
   wf.wow.get_loaded (wowthings) ->
     get_feed wowthings, callback
 
-get_feed = (wowthings, callback) ->
+get_feed = (wowthings, req = null, callback) ->
+  if 'function' == typeof req
+    callback = req
+    req = null
+  if req? and req.query['ts']?
+    filterLastModified = parseInt(req.query['ts'])
+  wf.debug "filterLastModified:#{filterLastModified}"
   if wowthings? and wowthings.length > 0
     #wf.debug wowthing
     feed = []
@@ -104,7 +110,9 @@ get_feed = (wowthings, callback) ->
       # wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
       wf.feed_formatter.process item, (fmt_items) ->
         for fi in fmt_items
-          feed.push(fi)
+          wf.debug "Checking #{filterLastModified} vs #{fi.date}:#{filterLastModified == parseInt(fi.date)}"
+          if  (!filterLastModified?) or filterLastModified == parseInt(fi.date)
+            feed.push(fi) 
         callback?()
     # wf.debug "about to do async queue for formatting"
     feed_queue = async.queue feed_worker, 5
@@ -131,7 +139,7 @@ handle_view = (req, res) ->
   name = req.params.name
   wf.wow.get_history region, realm, type, name, (wowthings) ->
     if wowthings? and wowthings.length > 0
-      get_feed wowthings, (feed) ->
+      get_feed wowthings, req, (feed) ->
         guild_item = null
         if type == "guild"
           for item in wowthings
