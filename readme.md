@@ -2,25 +2,9 @@
 
 ## TODO
 
-- feed validation failing due to space in url, need to correctly encode them
-- http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fwafbeta.kimptoc.net%2Ffeed%2Fguild%2Feu%2FDarkspear%2FMean%2520Girls.rss
-
-- mention copyright/trademarks, all are blizzards
+- D4D designs sketch/wireframe
 
 
-- do a "live" load of the char ?
-
-- search/find my char/guild?
-- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
-
-- just a space between parts of the manual feed changes, maybe use comma/full stop - re-work that class with more generc functions
-
-
-- twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
-- fb to twitter, not working? using Twitter -> fb link working better, get text, no images (will twitter stop that...) (and twitterfeed to twitter)
-- or could be RSS related, does Atom/rel-alt links help?
-
-- fix tests, wowSpec failing too much, refactor wow.coffee
 
 ## BUGS
 maybe....
@@ -36,9 +20,26 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- mention copyright/trademarks, all are blizzards
+- licence for code?
+- not found/404 handling?
+
+- do a "live" load of the char ?
+
+- search/find my char/guild?
+- search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
+
+- just a space between parts of the text for manual feed changes, maybe use comma/full stop - re-work that class with more generc functions
+
+
+- twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
+- fb to twitter, not working? using Twitter -> fb link working better, get text, no images (will twitter stop that...) (and twitterfeed to twitter)
+- or could be RSS related, does Atom/rel-alt links help?
+
+- fix tests, wowSpec failing too much, refactor wow.coffee
+
 - need a logo! :)
-- feed complains about uri/iri issues when validating - unicode in url
-- feed/more url/alt links
+- feed/add more url/alt rel links, eg images for items/achievements etc
 - on stats page/uptime output? http://nodejs.org/api/all.html#all_child_process_exec_command_options_callback
 - put in image links for changed items on my custom feed bit (get items, display them - multiple...)
 - feed items refer to latest char info, eg level, even though at time of feed item, it might have been different - could we link feed item to relevant/best char info we have? Or just give up on historic info option... or just leave
@@ -48,30 +49,17 @@ maybe....
 - feed/track talents/glyphs changes
 - feed/track pvp/battleground changes, number won/lost?
 - feed/track progression/raids changes?
-- BUG view not found item gives err (if hist present, but no armory)
-- not deleting old history... maybe strip code, rely on TTL stuff
 - getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 - track calls to website - where are they coming from (ip, referring site, browser, ...)
-- BUG make home/loaded pages work when no history present - maybe???
 - cache class/race static for display (eg mage/orc ...)
-- hiding player achievements!
 - about page, http://www.sitepoint.com/css3-starwars-scrolling-text/?utm_source=hackernewsletter&utm_medium=email ...
-- guild feed has char achievements, so show or ignore... probably will get dupes...
-- on guild feed, rely on member feed for their updates
-- on member feed, only show guild changes, if not being used on the guild feed...
-- install notes/make this a markdown doc
-- armory_history - make disappear after a time, TTL, 1 month?
+- install notes/how to setup this site
 - make a fb page to promote this site, eg http://www.staynalive.com/2012/02/how-to-replace-your-rss-feed.html / http://ogp.me/
-- review masonry/isotope usage - is it best option?
-- save log messages to db in capped collection
 - cache latest info in memory
 - home page ,page background of faded (random) warcraft poster
--- whats site for, rss
--- and number of armory calls made today, last modified, load running
-- Ttl on history Coll - 1 week?
+  - whats site for, rss
+  - and number of armory calls made today, last modified, load running
 - home page/last viewed? popular?
-- home page/use lib to pack in update boxes
-- use alternate rss lib that provides other link types...
 - stats/numbers for last hour
 - stats/oldest/newest registered updated date
 - stats/number of actual/real results (is it calls less errors and non-mod?)
@@ -83,31 +71,21 @@ maybe....
 - performance, load/feed/all pages seem slow  - indexes? docs large, only select specific fields?
 - option to run for one guild only, no ability to register more people, load guilds/members from config file
 - caching? only rebuild feed once a min or so...
-- licence for code?
 - redirect load/data pages to other pages - stats/registered
 - thanks page - for all tools used :)
 - pet battle related feed, levels, achievements
 - show guild name on char feed entries, if in a guild
 - options include/exclude guildies on guild feed
-- update registered entry with time of last good update, last update and error, if error, count of updates
-- get item names, is there an API call or just build list from all the gear on chars... or just link to wowhead (http://blizzard.github.com/api-wow-docs/#item-api)
 - make 30 limit on history a param
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
 - chrome extension to give feed url for a specific battle net page, when on it
 - limits... how to restrict use?? needed?
 - make localisable, ie public lang strings in sep file(s)
-- rss, send correct content-type??
 - highlight members with updates, maybe list of most recent updates on front page
-- should(not)exist dont give stack trace... alternative test?
 - put armory link in info - for errors and good entries
 - track realm status changes: eg
   "http://us.battle.net/api/wow/realm/status?realms=Medivh,Blackrock"
-- count number of api calls per day, page to view them
-- store dateSaved on member/guild updates
-- update registered entry with date/time of last change (ie when an update had a diff)
 - track armory import requests, date/time/requesting ip
-- feed for guild
-- feed for char/guild achievements
 - feed for items?
 - feed for profession levels?
 
