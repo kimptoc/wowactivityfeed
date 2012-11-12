@@ -195,8 +195,8 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
       res.render "rss", 
         title: "WoW Activity Feed for #{name}"
         description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
-        feed_url: "#{wf.SITE_URL}feed/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}.rss"
-        site_url: "#{wf.SITE_URL}view/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}"
+        feed_url: "#{wf.SITE_URL}feed/#{type}/#{escape(region)}/#{escape(realm)}/#{escape(name)}.rss"
+        site_url: "#{wf.SITE_URL}view/#{type}/#{escape(region)}/#{escape(realm)}/#{escape(name)}"
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
