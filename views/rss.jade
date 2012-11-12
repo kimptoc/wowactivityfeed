@@ -13,8 +13,6 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
                 title= entry.title
                 link= entry.url
                 description
-                    | <![CDATA[
                     | #{entry.description}
-                    | ]]>
                 pubDate= new Date(entry.date).toUTCString()
                 guid(isPermaLink='false') !{entry.guid}
