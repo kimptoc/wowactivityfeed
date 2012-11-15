@@ -58,7 +58,11 @@ wf.app.configure ->
   # wf.app.use(express.logger('dev'))  
   wf.app.use(wf.expressLogger())
 
-  wf.app.use(require('stylus').middleware(path.join(__dirname,'..', 'public')))  
+  wf.app.use(require('stylus').middleware(
+    src: path.join(__dirname,'..', 'stylus')
+    dest: path.join(__dirname,'..', 'public')
+  ))  
+
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.wow ?= new wf.WoW()
   # todo - push this into wow object
