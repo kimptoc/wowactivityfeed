@@ -1,2 +1,35 @@
-div
-  | Wireframe 2
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/home-w2.css')
+  .container
+    .search_box
+      input(type='text', style='width: 10%')
+      | &nbsp;
+      select
+        option Darkspear(EU)
+        option Darkspear(US)
+        option Darkspear(CN)
+      | &nbsp;
+      button Search
+
+    .search_results
+      | Results:
+      ul
+        li 1) Mean Girls - Guild (Darkspear/EU) [
+          a(href='') rss
+          | ]
+        li 2) Innoxera - Character (Darkspear/EU) [
+          a(href='') rss
+          | ]
+
+    .info_slides
+      | Tabs across the top , content below
+      .info_options
+        ul
+          li example usages, 
+          li info/stats on actual usage, 
+          li recent character updates
+      //- .info_main
+      //-   | CONTENT
+
