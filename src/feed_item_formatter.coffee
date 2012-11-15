@@ -141,16 +141,12 @@ class wf.FeedItemFormatter
           for own name, member_info of item.whats_changed.changes.members_map
             if member_info instanceof Array
               if member_info.length == 1
-                member_title += ", " if member_title.length >0
-                member_title += "#{member_info[0].character.name} joined"
                 member_desc += ", " if member_desc.length >0
                 member_desc += "#{member_info[0].character.name} has joined"
               else if member_info.length == 3
-                member_title += ", " if member_title.length >0
-                member_title += "#{member_info[0].character.name} left "
                 member_desc += ", " if member_desc.length >0
                 member_desc += "#{member_info[0].character.name} has left"
-          change_title += "member change(s): #{member_title} " if member_title.length >0
+          change_title += "Guild membership changed! " if member_desc.length >0
           change_description += "Guild membership has changed: #{member_desc} " if member_desc.length >0
         if item.whats_changed.changes.mounts_collected_map?
           mounts_title = ""

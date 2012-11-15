@@ -173,9 +173,9 @@ class wf.WoW
             # wf.debug "armory item:#{name}"
           sanitised_changes = wf.makeCopy(previous_item.whats_changed)
           for own name, value of sanitised_changes.changes
-            wf.debug "checking if we have field:#{name}/#{previous_item.armory[name]}"
+            # wf.debug "checking if we have field:#{name}/#{previous_item.armory[name]}"
             unless previous_item.armory[name]?
-              wf.debug "we dont have field:#{name}, so deleting changes for it"
+              # wf.debug "we dont have field:#{name}, so deleting changes for it"
               delete sanitised_changes.changes[name]
           item.armory = wf.restore sanitised_changes, previous_item.armory
           # dont keep feed/news stuff from old entries - ideally should just do unique items on output... later perhaps 
@@ -308,7 +308,7 @@ class wf.WoW
       # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
       if info?
         @store_update info.type, info.region, info.realm, info.name, info, =>
-          wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+          # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
           @ensure_registered_correct item, info, callback
       else
         # send old info back, needed for guilds so we can query the members

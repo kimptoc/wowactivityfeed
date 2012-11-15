@@ -17,6 +17,7 @@ require './prettify_json'
 require './cron'
 require './defaults'
 require './timing'
+require './google_analytics'
 
 require './init_nodefly'
 
@@ -114,7 +115,7 @@ get_feed = (wowthings, req = null, callback) ->
       # wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
       wf.feed_formatter.process item, (fmt_items) ->
         for fi in fmt_items
-          wf.debug "Checking #{filterLastModified} vs #{fi.date}:#{filterLastModified == parseInt(fi.date)}"
+          # wf.debug "Checking #{filterLastModified} vs #{fi.date}:#{filterLastModified == parseInt(fi.date)}"
           if  (!filterLastModified?) or filterLastModified == parseInt(fi.date)
             feed.push(fi) 
         callback?()
@@ -178,6 +179,8 @@ wf.app.get '/feedold/all.rss', (req, res) ->
       res.send xml
  
 wf.app.get '/feed/all.rss', (req, res) ->
+  wf.debug "Tracking:#{req.path}"
+  wf.ga.trackPage(req.path);
 
   wf.wow.get_loaded (items) ->
     get_feed items, (items_to_publish) ->
@@ -191,6 +194,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
         feed:items_to_publish
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
+  wf.ga.trackPage(req.path);
 
   wf.timing_on("/feed/#{req.params.name}")
 
