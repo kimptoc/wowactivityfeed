@@ -7,4 +7,6 @@ readme.md
 .git/*
 .idea/*
 public/*
+stylus/*
+views/*
 .DS_Store
