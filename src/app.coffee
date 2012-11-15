@@ -231,7 +231,12 @@ wf.app.get '/feedold/:type/:region/:realm/:name.rss', (req, res) ->
       res.set('Content-Type', 'application/xml')
       res.send xml
 
- 
+wf.app.get '/debug/wireframe1', (req, res) ->
+  res.render "wireframe1" 
+
+wf.app.get '/debug/wireframe2', (req, res) ->
+  res.render "wireframe2" 
+
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
   wf.wow.get_registered (regs) ->

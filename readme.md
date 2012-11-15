@@ -20,6 +20,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- some direct update links failing, eg:
+  - http://wafbeta.kimptoc.net/view/member/cn/%u8FBE%u65AF%u96F7%u739B/%u6653%u8428?ts=1352829579000&utm_source=twitterfeed&utm_medium=twitter
 - mention copyright/trademarks, all are blizzards
 - licence for code?
 - not found/404 handling?
@@ -35,6 +37,9 @@ maybe....
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
 - fb to twitter, not working? using Twitter -> fb link working better, get text, no images (will twitter stop that...) (and twitterfeed to twitter)
 - or could be RSS related, does Atom/rel-alt links help?
+- options - hootsuite, twitterfeed, twitter -> fb, fb -> twitter
+- DIY/ twitter - http://stackoverflow.com/questions/6377844/node-js-twitter-client
+- DIY/fb - https://developers.facebook.com/docs/reference/javascript/
 
 - fix tests, wowSpec failing too much, refactor wow.coffee
 
