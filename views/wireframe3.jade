@@ -1,7 +1,13 @@
 extends layout
 
 block content
-  link(rel='stylesheet', href='/stylesheets/home-w2.css')
+  link(rel='stylesheet', href='/stylesheets/home.css')
+
+  .container
+    .offset-by-four
+      .eight.columns
+        h2 World of Warcraft Activity Feed
+
   .container
     .search_box
       .offset-by-four
@@ -30,21 +36,3 @@ block content
             li 2) Innoxera - Character (Darkspear/EU) [
               a(href='') rss
               | ]
-
-  .container
-    .info_slides
-      .container
-        .sixteen.columns
-          | Tabs across the top , content below (only visible before searching)
-      .info_options
-        .container
-          .five.columns
-            | example usages
-          .six.columns
-            | info/stats on actual usage
-          .five.columns
-            | recent character updates
-        .container
-          .sixteen.columns
-            .info_main
-              | CONTENT

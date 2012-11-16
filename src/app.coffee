@@ -245,6 +245,9 @@ wf.app.get '/debug/wireframe1', (req, res) ->
 wf.app.get '/debug/wireframe2', (req, res) ->
   res.render "wireframe2" 
 
+wf.app.get '/debug/wireframe3', (req, res) ->
+  res.render "wireframe3" 
+
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
   wf.wow.get_registered (regs) ->
