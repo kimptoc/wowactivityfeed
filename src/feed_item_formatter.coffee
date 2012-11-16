@@ -147,7 +147,7 @@ class wf.FeedItemFormatter
                 member_desc += ", " if member_desc.length >0
                 member_desc += "#{member_info[0].character.name} has left"
           change_title += "Guild membership changed! " if member_desc.length >0
-          change_description += "Guild membership has changed: #{member_desc} " if member_desc.length >0
+          change_description += "Guild membership has changed: #{member_desc}. " if member_desc.length >0
         if item.whats_changed.changes.mounts_collected_map?
           mounts_title = ""
           mounts_desc = ""
@@ -159,7 +159,7 @@ class wf.FeedItemFormatter
                 mounts_desc += ", " if mounts_desc.length >0
                 mounts_desc += "#{mount_info[0].name}"
           change_title += "New mount(s): #{mounts_title} " if mounts_title.length >0
-          change_description += "Gained some mount(s): #{mounts_desc} " if mounts_desc.length >0
+          change_description += "Gained some mount(s): #{mounts_desc}. " if mounts_desc.length >0
         if item.whats_changed.changes.pets_collected_map?
           pets_title = ""
           pets_desc = ""
@@ -171,7 +171,7 @@ class wf.FeedItemFormatter
                 pets_desc += ", " if pets_desc.length >0
                 pets_desc += "#{pet_info[0].name}"
           change_title += "New pet(s): #{pets_title} " if pets_title.length >0
-          change_description += "Gained some pet(s): #{pets_desc} " if pets_desc.length >0
+          change_description += "Gained some pet(s): #{pets_desc}. " if pets_desc.length >0
         if item.whats_changed.changes.titles_map?
           titles_title = ""
           titles_desc = ""
@@ -183,7 +183,7 @@ class wf.FeedItemFormatter
                 titles_desc += ", " if titles_desc.length >0
                 titles_desc += "'#{name}'"
           change_title += "New title(s): #{titles_title} " if titles_title.length >0
-          change_description += "Gained some title(s): #{titles_desc} " if titles_desc.length >0
+          change_description += "Gained some title(s): #{titles_desc}. " if titles_desc.length >0
         if item.whats_changed.changes.professions_map?
           professions_desc = ""
           for own name, prof_info of item.whats_changed.changes.professions_map
@@ -198,7 +198,7 @@ class wf.FeedItemFormatter
               if prof_info.rank?
                 professions_desc += ", " if professions_desc.length >0
                 professions_desc += "#{name} is now rank #{@get_new_one(prof_info.rank)}"
-          change_description += "Profession(s): #{professions_desc} " if professions_desc.length >0
+          change_description += "Profession(s): #{professions_desc}. " if professions_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""

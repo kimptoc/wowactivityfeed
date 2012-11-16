@@ -14,9 +14,7 @@ maybe....
 ## FIXED MAYBE PENDING BEING TESTED
 - performance? seems ok after restart, removed collection caching... - GC issue or VM issue?
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
-- armory job seems to lockup sometimes... added a timeout, see if it helps...
-- rss/guid is rubbish / waiting on google reader/twitterfeed - see if they handle the new id better
-- titles changes?
+- details a char's titles changes?
 - some criteria cases come up blank?
 
 ## LATER
@@ -31,7 +29,7 @@ maybe....
 - search/find my char/guild?
 - search? could try all realms... or at least select region/realm and enter name - can confirm/select char...
 
-- just a space between parts of the text for manual feed changes, maybe use comma/full stop - re-work that class with more generc functions
+- just a space between parts of the text for manual feed changes, maybe use comma/full stop - re-work that class with more generic functions
 
 
 - twitter feed to facebook - just showing a link... twitterfeed config or use another way in?
