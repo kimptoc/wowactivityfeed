@@ -4,32 +4,47 @@ block content
   link(rel='stylesheet', href='/stylesheets/home-w2.css')
   .container
     .search_box
-      input(type='text', style='width: 10%')
-      | &nbsp;
-      select
-        option Darkspear(EU)
-        option Darkspear(US)
-        option Darkspear(CN)
-      | &nbsp;
-      button Search
+      .offset-by-four
+        .three.columns
+          input(type='text')
+        .four.columns
+          select
+            option Darkspear(EU)
+            option Darkspear(US)
+            option Darkspear(CN)
+        .one.column
+          button Search
 
-    .search_results
-      | Results:
-      ul
-        li 1) Mean Girls - Guild (Darkspear/EU) [
-          a(href='') rss
-          | ]
-        li 2) Innoxera - Character (Darkspear/EU) [
-          a(href='') rss
-          | ]
+  .search_results
+    .container
+      .offset-by-four
+        .three.columns
+          | Results:
+    .container
+      .offset-by-four
+        .ten.columns
+          ul
+            li 1) Mean Girls - Guild (Darkspear/EU) [
+              a(href='') rss
+              | ]
+            li 2) Innoxera - Character (Darkspear/EU) [
+              a(href='') rss
+              | ]
 
+  .container
     .info_slides
-      | Tabs across the top , content below
+      .container
+        .sixteen.columns
+          | Tabs across the top , content below
       .info_options
-        ul
-          li example usages, 
-          li info/stats on actual usage, 
-          li recent character updates
-      //- .info_main
-      //-   | CONTENT
-
+        .container
+          .five.columns
+            | example usages
+          .six.columns
+            | info/stats on actual usage
+          .five.columns
+            | recent character updates
+        .container
+          .sixteen.columns
+            .info_main
+              | CONTENT
