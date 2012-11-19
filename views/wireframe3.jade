@@ -1,19 +1,20 @@
-extends layout
+extends layout_new
 
 block content
   link(rel='stylesheet', href='/stylesheets/home.css')
+  link(rel='stylesheet', href='/stylesheets/fonts.css')
 
   .container
-    .offset-by-four
-      .eight.columns
-        h3.bordered World of Warcraft Activity Feed
+    .offset-by-three
+      .nine.columns
+        h3.bordered World of Warcraft Feed
 
   .container
     .search_box
       .offset-by-four
         .three.columns
           input(type='text')
-        .four.columns
+        .three.columns
           select
             option Darkspear(EU)
             option Darkspear(US)

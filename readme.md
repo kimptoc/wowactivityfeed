@@ -18,6 +18,9 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- show delta on rep change (eg Cartel: 2100 (+100))
+- kimptonar not updating - is there a bug in guild update tracking?
+- stats/trends, popular items/achievements etc
 - some direct update links failing, eg:
   - http://wafbeta.kimptoc.net/view/member/cn/%u8FBE%u65AF%u96F7%u739B/%u6653%u8428?ts=1352829579000&utm_source=twitterfeed&utm_medium=twitter
 - mention copyright/trademarks, all are blizzards
