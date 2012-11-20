@@ -147,11 +147,6 @@ class wf.WoW
   armory_calls: (callback)->
     info = 
       startup_time: moment(startup_time).format('H:mm:ss ddd')
-      todays_calls: 0
-      todays_errors: 0
-      todays_not_modified: 0
-      todays_by_type: {}
-      error_summary :{}
       memory_usage: process.memoryUsage()
       node_uptime: process.uptime()
       armory_load:
