@@ -6,21 +6,29 @@ block content
 
   .container
     .offset-by-three
-      .nine.columns
+      .ten.columns
         h3.bordered World of Warcraft Feed
 
   .container
     .search_box
-      .offset-by-four
-        .three.columns
-          input(type='text')
-        .three.columns
-          select
+      .offset-by-five
+        .six.columns
+          input(type='text', style='width:100%; float:right')
+
+  .container
+    .search_box
+      .offset-by-five
+        .six.columns
+          select(style='float:right')
             option Darkspear(EU)
             option Darkspear(US)
             option Darkspear(CN)
-        .one.column
-          button Search
+
+  .container
+    .search_box
+      .offset-by-five
+        .six.columns
+          button(style='float:right') Search
 
   .search_results
     .container
