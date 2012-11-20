@@ -256,6 +256,10 @@ wf.app.get '/debug/armory_load', (req, res) ->
   wf.wow.get_registered (regs) ->
     res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
 
+wf.app.get '/debug/statsold', (req, res) ->
+  wf.wow.armory_calls_old (result) ->
+    res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
+
 wf.app.get '/debug/stats', (req, res) ->
   wf.wow.armory_calls (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"

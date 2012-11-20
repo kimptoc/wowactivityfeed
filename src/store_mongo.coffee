@@ -160,6 +160,18 @@ class wf.StoreMongo
               wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
               loaded_handler?(docs)
   
+
+  aggregate: (collection_name, pipeline, options, callback) ->
+    @with_collection collection_name, (coll) ->
+    # @with_connection (db) ->
+      # coll.count (err, result) ->
+      #   wf.debug "Agg count:#{result}"
+      # db.command aggregate: collection_name, pipeline: pipeline, (err, results) ->
+      coll.aggregate pipeline, options, (err, results) ->
+        if err
+          wf.error("aggregate:#{err}")
+        callback?(results)
+
   dbstats: (coll_array, callback) ->
     results = {}
     @with_connection (db) =>

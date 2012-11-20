@@ -96,7 +96,7 @@ class wf.WoW
     else
       result_handler?(null)
 
-  armory_calls: (callback)->
+  armory_calls_old: (callback)->
     info = 
       startup_time: moment(startup_time).format('H:mm:ss ddd')
       total_calls: 0
@@ -143,6 +143,60 @@ class wf.WoW
         info.earliest = moment(info.earliest).format('H:mm:ss ddd')
         info.latest = moment(info.latest).format('H:mm:ss ddd')
         callback?(info)
+
+  armory_calls: (callback)->
+    info = 
+      startup_time: moment(startup_time).format('H:mm:ss ddd')
+      total_calls: 0
+      total_errors: 0
+      total_not_modified: 0
+      total_by_type: {}
+      todays_calls: 0
+      todays_errors: 0
+      todays_not_modified: 0
+      todays_by_type: {}
+      earliest: Infinity
+      latest: 0
+      error_summary :{}
+      memory_usage: process.memoryUsage()
+      node_uptime: process.uptime()
+      armory_load:
+        armory_load_running: job_running_lock
+        number_running: loader_queue?.running() 
+        number_queued: loader_queue?.length()
+      item_loader_queue:
+        number_running: item_loader_queue?.running()
+        number_queued: item_loader_queue?.length()
+    # todo also pass items_collection
+    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
+      info.db = stats      
+      # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
+      store.aggregate calls_collection, 
+        [{ $group : { _id:"$type", totalByType:{ $sum:1 }, earliest: {$min: "$start_time"}, latest: {$max: "$start_time"} } }], 
+        {}, 
+        (results) ->
+          info.aggregate = results
+          callback?(info)
+      # store.load_all calls_collection, {}, {}, (entries) ->
+      #   for call in entries
+      #     info.earliest = call.start_time if call.start_time < info.earliest
+      #     info.latest = call.start_time if call.start_time > info.latest
+      #     info.total_calls += 1
+      #     if call.had_error
+      #       info.total_errors += 1 
+      #       info["error_summary"][call.error] ?= 0 
+      #       info["error_summary"][call.error] += 1
+      #     info.total_not_modified += 1 if call.not_modified
+      #     info.total_by_type[call.type] ?= 0
+      #     info.total_by_type[call.type] += 1
+      #     if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
+      #       info.todays_calls += 1
+      #       info.todays_errors += 1 if call.had_error
+      #       info.todays_not_modified += 1 if call.not_modified
+      #       info.todays_by_type[call.type] ?= 0
+      #       info.todays_by_type[call.type] += 1
+      #   info.earliest = moment(info.earliest).format('H:mm:ss ddd')
+      #   info.latest = moment(info.latest).format('H:mm:ss ddd')
 
   get_loaded: (loaded_handler) ->
     @ensure_armory_indexes ->
