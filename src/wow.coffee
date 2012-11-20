@@ -165,16 +165,22 @@ class wf.WoW
     store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
       info.db = stats      
       # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
+      start_of_day = moment().sod().valueOf()
+      twohours_ago = moment().subtract({hours:2}).valueOf()
       store.aggregate calls_collection, 
         [
           { $project: 
             type: 1
-            start_time:1
+            start_time: 1
+            error: 1
             errors:{$cmp: ["$had_error", false]}
             not_modifieds:{$cmp: ["$not_modified", false]}
+            date_category:{$cond:[{$gte:["$start_time", twohours_ago]},"last-2hours", $cond:[{$gte:["$start_time", start_of_day]},"today","before-today"]]}
           },
           { $group : 
-            _id:"$type"
+            # _id: "$type"
+            # _id:{ error:"$error", type:"$type"}
+            _id:{ date_category:"$date_category", type:"$type", error:"$error"}
             totalByType:{ $sum:1 }
             earliest: {$min: "$start_time"}
             latest: {$max: "$start_time"}
@@ -184,31 +190,26 @@ class wf.WoW
         ], 
         {}, 
         (results) ->
-          for type_stat in results
-            type_stat.earliest = moment(type_stat.earliest).format("H:mm:ss ddd")
-            type_stat.latest = moment(type_stat.latest).format("H:mm:ss ddd")
-          info.aggregate = results
+          if results?
+            results2 = {}
+            for type_stat in results
+              type_stat.earliest = moment(type_stat.earliest).format("H:mm:ss ddd")
+              type_stat.latest = moment(type_stat.latest).format("H:mm:ss ddd")
+              results2[type_stat._id.date_category] ?= {}
+              if type_stat._id.error?
+                key = type_stat._id.type + "/" + type_stat._id.error + "-" + type_stat.earliest + " - " + type_stat.latest
+                total = type_stat.errors
+                results2[type_stat._id.date_category][key] = total
+              else
+                key = type_stat._id.type + "-" + type_stat.earliest + " - " + type_stat.latest
+                total = type_stat.totalByType
+                results2[type_stat._id.date_category][key] = total
+                key = type_stat._id.type + "/" + "not-modified" + "-" + type_stat.earliest + " - " + type_stat.latest
+                total = type_stat.not_modified
+                results2[type_stat._id.date_category][key] = total
+            # info.aggregate = results
+            info.aggregate_calls = results2
           callback?(info)
-      # store.load_all calls_collection, {}, {}, (entries) ->
-      #   for call in entries
-      #     info.earliest = call.start_time if call.start_time < info.earliest
-      #     info.latest = call.start_time if call.start_time > info.latest
-      #     info.total_calls += 1
-      #     if call.had_error
-      #       info.total_errors += 1 
-      #       info["error_summary"][call.error] ?= 0 
-      #       info["error_summary"][call.error] += 1
-      #     info.total_not_modified += 1 if call.not_modified
-      #     info.total_by_type[call.type] ?= 0
-      #     info.total_by_type[call.type] += 1
-      #     if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
-      #       info.todays_calls += 1
-      #       info.todays_errors += 1 if call.had_error
-      #       info.todays_not_modified += 1 if call.not_modified
-      #       info.todays_by_type[call.type] ?= 0
-      #       info.todays_by_type[call.type] += 1
-      #   info.earliest = moment(info.earliest).format('H:mm:ss ddd')
-      #   info.latest = moment(info.latest).format('H:mm:ss ddd')
 
   get_loaded: (loaded_handler) ->
     @ensure_armory_indexes ->
