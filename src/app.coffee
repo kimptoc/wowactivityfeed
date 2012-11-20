@@ -84,7 +84,7 @@ wf.app.all '*', (req, res, next) ->
 
 wf.app.get '/', (req, res) ->
   get_feed_all (feed)->
-    res.render "index", title: 'Home', f: feed.sample(12)
+    res.render "index", title: 'Home', f: feed.sample(6)
 
 wf.app.get '/registered', (req, res) ->
   wf.wow.get_registered (results) ->
