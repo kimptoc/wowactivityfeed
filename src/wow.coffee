@@ -147,16 +147,10 @@ class wf.WoW
   armory_calls: (callback)->
     info = 
       startup_time: moment(startup_time).format('H:mm:ss ddd')
-      total_calls: 0
-      total_errors: 0
-      total_not_modified: 0
-      total_by_type: {}
       todays_calls: 0
       todays_errors: 0
       todays_not_modified: 0
       todays_by_type: {}
-      earliest: Infinity
-      latest: 0
       error_summary :{}
       memory_usage: process.memoryUsage()
       node_uptime: process.uptime()
@@ -172,9 +166,27 @@ class wf.WoW
       info.db = stats      
       # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
       store.aggregate calls_collection, 
-        [{ $group : { _id:"$type", totalByType:{ $sum:1 }, earliest: {$min: "$start_time"}, latest: {$max: "$start_time"} } }], 
+        [
+          { $project: 
+            type: 1
+            start_time:1
+            errors:{$cmp: ["$had_error", false]}
+            not_modifieds:{$cmp: ["$not_modified", false]}
+          },
+          { $group : 
+            _id:"$type"
+            totalByType:{ $sum:1 }
+            earliest: {$min: "$start_time"}
+            latest: {$max: "$start_time"}
+            errors: {$sum: "$errors"} 
+            not_modified: {$sum :"$not_modifieds"}
+          }
+        ], 
         {}, 
         (results) ->
+          for type_stat in results
+            type_stat.earliest = moment(type_stat.earliest).format("H:mm:ss ddd")
+            type_stat.latest = moment(type_stat.latest).format("H:mm:ss ddd")
           info.aggregate = results
           callback?(info)
       # store.load_all calls_collection, {}, {}, (entries) ->
