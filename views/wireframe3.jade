@@ -13,35 +13,34 @@ block content
     .search_box
       .offset-by-four
         .eight.columns
-          input(type='text', style='width:100%; float:right')
+          input(type='text', placeholder='Search for character or guild')
 
-  .container
-    .search_box
       .offset-by-four
         .eight.columns
-          select(style='float:right')
+          select
+            option [select realm]
             option Darkspear(EU)
             option Darkspear(US)
             option Darkspear(CN)
 
-  .container
-    .search_box
       .offset-by-four
         .eight.columns
-          button(style='float:right') Search
+          button Search
 
   .search_results
     .container
       .offset-by-four
-        .three.columns
+        .eight.columns
           | Results:
     .container
       .offset-by-four
-        .ten.columns
+        .eight.columns
           ol
-            li Mean Girls - Guild (Darkspear/EU) [
+            li [
               a(href='') rss
               | ]
-            li Innoxera - Character (Darkspear/EU) [
+              | Mean Girls - Guild (Darkspear/EU) 
+            li [
               a(href='') rss
               | ]
+              | Innoxera - Character (Darkspear/EU) 
