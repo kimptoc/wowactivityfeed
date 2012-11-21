@@ -1,0 +1,64 @@
+extends layout_new
+
+block content
+  link(rel='stylesheet', href='/stylesheets/home4.css')
+  link(rel='stylesheet', href='/stylesheets/fonts.css')
+
+  .container
+    .offset-by-one
+      .fourteen.columns
+        h3.bordered World of Warcraft Activity
+
+  .container
+    .search_box
+      .offset-by-one
+        .eight.columns
+          input(type='text', placeholder='Search for character or guild')
+
+          select
+            option [select realm]
+            option Darkspear(EU)
+            option Darkspear(US)
+            option Darkspear(CN)
+
+          button Search
+
+  .container
+    // Start Header Slider
+    .offset-by-one
+      .twelve.columns
+        .top_slider
+          #top_slider.camera_wrap.camera_azure_skin
+            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
+              .camera_caption.fadeFromBottom
+          // /sider
+          .clear
+            // ClearFix
+    // END Header Slider
+
+  //- .search_results
+  //-   .container
+  //-     .offset-by-four
+  //-       .eight.columns
+  //-         | Results:
+  //-   .container
+  //-     .offset-by-four
+  //-       .eight.columns
+  //-         ol
+  //-           li [
+  //-             a(href='') rss
+  //-             | ]
+  //-             | Mean Girls - Guild (Darkspear/EU) 
+  //-             br
+  //-             | -> recent updates:
+  //-             ul
+  //-               li Level 20!
+  //-               li Gained achievement 'appeared on WoW Feed Site'
+  //-           li [
+  //-             a(href='') rss
+  //-             | ]
+  //-             | Innoxera - Character (Darkspear/EU) 

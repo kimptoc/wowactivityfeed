@@ -26,7 +26,7 @@ html(lang='en')
     //- link(rel='stylesheet', href='/css/base.css')
     link(rel='stylesheet', href='/css/skeleton.css')
     //- link(rel='stylesheet', href='/css/layout.css')
-    //- link(rel='stylesheet', href='/css/camera.css')
+    link(rel='stylesheet', href='/css/camera.css')
     //- link(rel='stylesheet', href='/fonts/stylesheet.css')
     //- link(rel='stylesheet', href='/stylesheets/stimenu.css')
     //- link(rel='stylesheet', href='/stylesheets/app.css')
@@ -58,22 +58,22 @@ html(lang='en')
     script(type='text/javascript', src='/js/jquery.mobile.customized.min.js')
     script(type='text/javascript', src='/js/jquery.easing.1.3.js')
     script(type='text/javascript', src='/js/jquery-ui.min.js')
-    //- script(type='text/javascript', src='/js/camera.min.js')
+    script(type='text/javascript', src='/js/camera.min.js')
     //- script(type='text/javascript', src='/js/jquery.iconmenu.js')
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
       script(type='text/javascript', src='/js/respond.src.js')
     //- script(type='text/javascript', src='/js/script.js')
-    //- script(type='text/javascript')
-    //-   jQuery(function(){
-    //-   jQuery('#top_slider').camera({
-    //-   alignment: 'center',
-    //-   height: '43.62%',
-    //-   //navigationHover: true
-    //-   });
+    script(type='text/javascript')
+      jQuery(function(){
+      jQuery('#top_slider').camera({
+      alignment: 'center',
+      height: '43.62%',
+      //navigationHover: true
+      });
 
-    //-   jQuery('#sti-menu').iconmenu();
-    //-   });
+      //   jQuery('#sti-menu').iconmenu();
+      });
 
     block content_footer
 
