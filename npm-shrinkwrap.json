@@ -1,0 +1,398 @@
+{
+  "name": "wowfeed",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": {
+      "version": "3.0.3",
+      "dependencies": {
+        "connect": {
+          "version": "2.7.0",
+          "dependencies": {
+            "qs": {
+              "version": "0.5.1"
+            },
+            "formidable": {
+              "version": "1.0.11"
+            },
+            "bytes": {
+              "version": "0.1.0"
+            },
+            "pause": {
+              "version": "0.0.1"
+            }
+          }
+        },
+        "commander": {
+          "version": "0.6.1"
+        },
+        "range-parser": {
+          "version": "0.0.4"
+        },
+        "mkdirp": {
+          "version": "0.3.3"
+        },
+        "cookie": {
+          "version": "0.0.5"
+        },
+        "crc": {
+          "version": "0.2.0"
+        },
+        "fresh": {
+          "version": "0.1.0"
+        },
+        "methods": {
+          "version": "0.0.1"
+        },
+        "send": {
+          "version": "0.1.0",
+          "dependencies": {
+            "mime": {
+              "version": "1.2.6"
+            }
+          }
+        },
+        "cookie-signature": {
+          "version": "0.0.1"
+        },
+        "debug": {
+          "version": "0.7.0"
+        }
+      }
+    },
+    "jade": {
+      "version": "0.27.7",
+      "dependencies": {
+        "commander": {
+          "version": "0.6.1"
+        },
+        "mkdirp": {
+          "version": "0.3.4"
+        }
+      }
+    },
+    "stylus": {
+      "version": "0.30.1",
+      "dependencies": {
+        "cssom": {
+          "version": "0.2.5"
+        },
+        "mkdirp": {
+          "version": "0.3.4"
+        },
+        "debug": {
+          "version": "0.7.0"
+        }
+      }
+    },
+    "armory": {
+      "version": "0.5.0",
+      "from": "git://github.com/kimptoc/node-armory.git",
+      "dependencies": {
+        "request": {
+          "version": "2.12.0",
+          "dependencies": {
+            "form-data": {
+              "version": "0.0.3",
+              "dependencies": {
+                "combined-stream": {
+                  "version": "0.0.3",
+                  "dependencies": {
+                    "delayed-stream": {
+                      "version": "0.0.5"
+                    }
+                  }
+                },
+                "async": {
+                  "version": "0.1.9"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.7"
+            }
+          }
+        }
+      }
+    },
+    "wowhead": {
+      "version": "0.1.0",
+      "dependencies": {
+        "request": {
+          "version": "2.12.0",
+          "dependencies": {
+            "form-data": {
+              "version": "0.0.3",
+              "dependencies": {
+                "combined-stream": {
+                  "version": "0.0.3",
+                  "dependencies": {
+                    "delayed-stream": {
+                      "version": "0.0.5"
+                    }
+                  }
+                },
+                "async": {
+                  "version": "0.1.9"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.7"
+            }
+          }
+        },
+        "sax": {
+          "version": "0.3.5"
+        }
+      }
+    },
+    "coffee-script": {
+      "version": "1.4.0"
+    },
+    "mocha": {
+      "version": "1.7.0",
+      "dependencies": {
+        "commander": {
+          "version": "0.6.1"
+        },
+        "growl": {
+          "version": "1.6.1"
+        },
+        "jade": {
+          "version": "0.26.3",
+          "dependencies": {
+            "mkdirp": {
+              "version": "0.3.0"
+            }
+          }
+        },
+        "diff": {
+          "version": "1.0.2"
+        },
+        "debug": {
+          "version": "0.7.0"
+        },
+        "mkdirp": {
+          "version": "0.3.3"
+        },
+        "ms": {
+          "version": "0.3.0"
+        }
+      }
+    },
+    "should": {
+      "version": "1.2.1"
+    },
+    "nodemon": {
+      "version": "0.6.23"
+    },
+    "rss": {
+      "version": "0.0.4",
+      "dependencies": {
+        "xml": {
+          "version": "0.0.7"
+        }
+      }
+    },
+    "mongodb": {
+      "version": "1.2.0",
+      "dependencies": {
+        "bson": {
+          "version": "0.1.5"
+        }
+      }
+    },
+    "log4js": {
+      "version": "0.5.5",
+      "dependencies": {
+        "async": {
+          "version": "0.1.15"
+        }
+      }
+    },
+    "jsondiffpatch": {
+      "version": "0.0.5",
+      "dependencies": {
+        "cli-color": {
+          "version": "0.2.1",
+          "dependencies": {
+            "es5-ext": {
+              "version": "0.9.1"
+            },
+            "memoizee": {
+              "version": "0.2.3",
+              "dependencies": {
+                "event-emitter": {
+                  "version": "0.2.1"
+                },
+                "next-tick": {
+                  "version": "0.1.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "cron": {
+      "version": "1.0.1"
+    },
+    "sinon": {
+      "version": "1.5.0",
+      "dependencies": {
+        "buster-format": {
+          "version": "0.5.5",
+          "dependencies": {
+            "buster-core": {
+              "version": "0.6.4"
+            }
+          }
+        }
+      }
+    },
+    "portchecker": {
+      "version": "0.1.1"
+    },
+    "moment": {
+      "version": "1.7.2"
+    },
+    "async": {
+      "version": "0.1.22"
+    },
+    "nodetime": {
+      "version": "0.6.3",
+      "dependencies": {
+        "request": {
+          "version": "2.11.4",
+          "dependencies": {
+            "form-data": {
+              "version": "0.0.3",
+              "dependencies": {
+                "combined-stream": {
+                  "version": "0.0.3",
+                  "dependencies": {
+                    "delayed-stream": {
+                      "version": "0.0.5"
+                    }
+                  }
+                },
+                "async": {
+                  "version": "0.1.9"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.7"
+            }
+          }
+        },
+        "timekit": {
+          "version": "0.1.9",
+          "dependencies": {
+            "bindings": {
+              "version": "1.0.0"
+            }
+          }
+        },
+        "v8tools": {
+          "version": "0.1.1",
+          "dependencies": {
+            "bindings": {
+              "version": "1.0.0"
+            }
+          }
+        }
+      }
+    },
+    "underscore": {
+      "version": "1.4.2"
+    },
+    "nodefly": {
+      "version": "0.1.14b",
+      "dependencies": {
+        "nodefly-gcinfo": {
+          "version": "0.0.11"
+        },
+        "measured": {
+          "version": "0.1.3"
+        },
+        "restler": {
+          "version": "2.0.1"
+        },
+        "socket.io-client": {
+          "version": "0.9.11",
+          "dependencies": {
+            "uglify-js": {
+              "version": "1.2.5"
+            },
+            "ws": {
+              "version": "0.4.23",
+              "dependencies": {
+                "commander": {
+                  "version": "0.6.1"
+                },
+                "tinycolor": {
+                  "version": "0.0.1"
+                },
+                "options": {
+                  "version": "0.0.3"
+                }
+              }
+            },
+            "xmlhttprequest": {
+              "version": "1.4.2"
+            },
+            "active-x-obfuscator": {
+              "version": "0.0.1",
+              "dependencies": {
+                "zeparser": {
+                  "version": "0.0.5"
+                }
+              }
+            }
+          }
+        },
+        "timekit": {
+          "version": "0.1.8",
+          "dependencies": {
+            "bindings": {
+              "version": "1.0.0"
+            }
+          }
+        },
+        "memwatch": {
+          "version": "0.1.5"
+        }
+      }
+    },
+    "ga": {
+      "version": "0.0.2",
+      "dependencies": {
+        "request": {
+          "version": "2.12.0",
+          "dependencies": {
+            "form-data": {
+              "version": "0.0.3",
+              "dependencies": {
+                "combined-stream": {
+                  "version": "0.0.3",
+                  "dependencies": {
+                    "delayed-stream": {
+                      "version": "0.0.5"
+                    }
+                  }
+                },
+                "async": {
+                  "version": "0.1.9"
+                }
+              }
+            },
+            "mime": {
+              "version": "1.2.7"
+            }
+          }
+        }
+      }
+    }
+  }
+}
