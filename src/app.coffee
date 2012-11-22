@@ -9,9 +9,10 @@ moment = require('moment')
 _ = require('underscore')
 async = require "async"
 
+require './init_logger'
+
 require './defaults'
 
-require './init_logger'
 require './wow'
 require './feed_item_formatter'
 require './prettify_json'
