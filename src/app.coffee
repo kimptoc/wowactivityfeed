@@ -33,12 +33,12 @@ wf.app.configure 'production', ->
   wf.SITE_URL = wf.SITE_URL_PROD
   wf.SITE_URL = process.env.SITE_URL if process.env.SITE_URL?
   if process.env.MONGODB_P708DEFAULT_URL?
-    wf.info "Looks like a pogoapp host"
     dbparts = /mongodb:\/\/(.*):(.*)@(.*)\/(.*)/.exec(process.env.MONGODB_P708DEFAULT_URL)
     wf.mongo_info.hostname = dbparts[3]
     wf.mongo_info.username = dbparts[1]
     wf.mongo_info.password = dbparts[2]
     wf.mongo_info.db = dbparts[4]
+    wf.info "Looks like a pogoapp host:#{process.env.MONGODB_P708DEFAULT_URL}/#{JSON.stringify(wf.mongo_info)}"
   else if process.env.MONGO_HOST?
     wf.info "Found MONGO_HOST, using that"
     wf.mongo_info = {}
