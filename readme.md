@@ -18,6 +18,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- personalise, use image/char name
+- criteria for same date - merge?
 - show delta on rep change (eg Cartel: 2100 (+100))
 - kimptonar not updating - is there a bug in guild update tracking?
 - stats/trends, popular items/achievements etc
