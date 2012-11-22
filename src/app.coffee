@@ -1,5 +1,6 @@
 global.wf ?= {}
 
+require './init_nodefly'
 
 express = require('express')
 http = require('http')
@@ -20,7 +21,6 @@ require './cron'
 require './timing'
 require './google_analytics'
 
-require './init_nodefly'
 
 wf.app = express()
 
