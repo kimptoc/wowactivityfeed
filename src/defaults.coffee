@@ -20,3 +20,22 @@ wf.mongo_info =
     "name":""
     "db":"wowfeed"
 
+if process.env.MONGODB_P708DEFAULT_URL?
+  dbparts = /mongodb:\/\/(.*):(.*)@(.*)\/(.*)/.exec(process.env.MONGODB_P708DEFAULT_URL)
+  wf.mongo_info.hostname = dbparts[3]
+  wf.mongo_info.username = dbparts[1]
+  wf.mongo_info.password = dbparts[2]
+  wf.mongo_info.db = dbparts[4]
+  wf.info "Looks like a pogoapp host:#{process.env.MONGODB_P708DEFAULT_URL}/#{JSON.stringify(wf.mongo_info)}"
+else if process.env.MONGO_HOST?
+  wf.info "Found MONGO_HOST, using that"
+  wf.mongo_info = {}
+  wf.mongo_info.hostname = process.env.MONGO_HOST
+  wf.mongo_info.port = parseInt(process.env.MONGO_PORT)
+  wf.mongo_info.username = process.env.MONGO_USER
+  wf.mongo_info.password = process.env.MONGO_PW
+  wf.mongo_info.db = process.env.MONGO_DB
+else if process.env.VCAP_SERVICES?
+  wf.info "No MONGO_HOST, using #{process.env.VCAP_SERVICES}"
+  env = JSON.parse(process.env.VCAP_SERVICES)
+  wf.mongo_info = env['mongodb-1.8'][0]['credentials']
