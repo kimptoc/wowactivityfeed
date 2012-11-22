@@ -33,6 +33,7 @@ class wf.WoW
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
   armory_static_index_1 = {static_type:1, id:1}
+  armory_item_index_1 = {item_id:1}
   job_running_lock = false
   loader_queue = null
   armory_pending_queue = []
@@ -119,7 +120,6 @@ class wf.WoW
       item_loader_queue:
         number_running: item_loader_queue?.running()
         number_queued: item_loader_queue?.length()
-    # todo also pass items_collection
     store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
       info.db = stats      
       store.load_all calls_collection, {}, {}, (entries) ->
@@ -156,7 +156,6 @@ class wf.WoW
       item_loader_queue:
         number_running: item_loader_queue?.running()
         number_queued: item_loader_queue?.length()
-    # todo also pass items_collection
     store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
       info.db = stats      
       # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
@@ -527,11 +526,12 @@ class wf.WoW
 
   load_items: (item_id_array, callback) ->
     if item_id_array? and item_id_array.length >0
-      store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
-        items_hash = {}
-        for i in items
-          items_hash[i.item_id] = i
-        callback?(items_hash)
+      store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
+        store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
+          items_hash = {}
+          for i in items
+            items_hash[i.item_id] = i
+          callback?(items_hash)
     else
       callback?({})
 
