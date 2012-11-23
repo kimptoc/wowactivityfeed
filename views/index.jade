@@ -21,13 +21,16 @@ block content
         .columns.sixteen
           h5 Recent Updates
           #recent_updates_id.recent_updates
-            if f
+            if f && f.length > 0
               each item in f
                 .item_update
                   h5 
                     a(href='#{item.url}') !{item.title}
                   span &nbsp; !{item.description}
                     small &nbsp; #{item.date_formatted}
+            else
+              div No recent updates :(
+                br
           .clear
           a.more_link(href='/loaded')
             span More

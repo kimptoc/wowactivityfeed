@@ -97,9 +97,9 @@ get_feed = (wowthings, req = null, callback) ->
   if req? and req.query['ts']?
     filterLastModified = parseInt(req.query['ts'])
   wf.debug "filterLastModified:#{filterLastModified}"
+  feed = []
   if wowthings? and wowthings.length > 0
     #wf.debug wowthing
-    feed = []
     feed_worker = (item, callback) ->
       # wf.debug "feed_queue; running:#{feed_queue.running()}, queued:#{feed_queue.length()}"
       wf.feed_formatter.process item, (fmt_items) ->
@@ -118,6 +118,8 @@ get_feed = (wowthings, req = null, callback) ->
       callback?(feed)
     for item in wowthings
       feed_queue.push item
+  else
+    callback?(feed)
 
 build_feed = (items, feed, callback) ->
   get_feed items, (items_to_publish) ->
