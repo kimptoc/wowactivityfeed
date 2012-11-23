@@ -18,6 +18,7 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- only use elipsis when tight for space, eg on boxes on webpage
 - personalise, use image/char name
 - criteria for same date - merge?
 - show delta on rep change (eg Cartel: 2100 (+100))
@@ -48,7 +49,7 @@ maybe....
 
 - need a logo! :)
 - feed/add more url/alt rel links, eg images for items/achievements etc
-- on stats page/uptime output? http://nodejs.org/api/all.html#all_child_process_exec_command_options_callback
+- on stats page/df -h, uptime etc output? http://nodejs.org/api/all.html#all_child_process_exec_command_options_callback
 - put in image links for changed items on my custom feed bit (get items, display them - multiple...)
 - feed items refer to latest char info, eg level, even though at time of feed item, it might have been different - could we link feed item to relevant/best char info we have? Or just give up on historic info option... or just leave
 - Kwiks for home page update slideshow? http://devsmash.com/projects/kwicks/examples/slideshow

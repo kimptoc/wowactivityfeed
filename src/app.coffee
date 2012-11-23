@@ -242,6 +242,9 @@ wf.app.get '/debug/wireframe3', (req, res) ->
 wf.app.get '/debug/wireframe4', (req, res) ->
   res.render "wireframe4" 
 
+wf.app.get '/debug/wireframe5', (req, res) ->
+  res.render "wireframe5" 
+
 wf.app.get '/debug/fonts', (req, res) ->
   res.render "fonts"
 
