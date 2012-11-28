@@ -18,6 +18,10 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- char++ tooltips -  https://github.com/darkspotinthecorner/DarkTip
+- item colours/api tips - http://us.battle.net/wow/en/forum/topic/6521202864
+- show notfound image when char images not found - home page/loaded page
+- stats, summarise loaded data - popular items/achievements, average level/rep?
 - only use elipsis when tight for space, eg on boxes on webpage
 - personalise, use image/char name
 - criteria for same date - merge?

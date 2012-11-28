@@ -1,0 +1,101 @@
+extends layout_new
+
+block content
+  link(rel='stylesheet', href='/stylesheets/wf6.css')
+  link(rel='stylesheet', href='/stylesheets/fonts.css')
+
+  .container
+    .offset-by-one
+      .fourteen.columns
+        h3 World of Warcraft Activity 
+          #site_avatar
+            a(href='/view/member/eu/Darkspear/Kimptoc')
+              img(src='http://eu.battle.net/static-render/eu/darkspear/230/384742-avatar.jpg')
+            div
+              | by Kimptoc
+
+  .container
+    // Start Header Slider
+    link(rel='stylesheet', href='/css/camera.css')
+    .offset-by-one
+      .fourteen.columns
+        .top_slider
+          #top_slider.camera_wrap.camera_azure_skin
+            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
+              .camera_caption.fadeFromBottom
+          // /sider
+          .clear
+            // ClearFix
+    // END Header Slider
+
+  .container
+    .offset-by-three
+      .search_box
+        .fourteen.columns
+          input(type='text', placeholder='Search for character or guild')
+
+          select
+            option [select realm]
+            option Darkspear(EU)
+            option Darkspear(US)
+            option Darkspear(CN)
+
+          button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
+
+  .search_results
+    .container
+      .offset-by-one
+        .eight.columns
+          | Results:
+          br
+          | &nbsp;
+    .container
+      .offset-by-one
+        .one.columns
+          a(href='')
+            img(src='/images/samples/sample-avatar.jpg', class='avatar')
+        .one.columns
+          a(href='')
+            img(src='/images/icons/ico_rss.png', title='rss feed')
+        .eight.columns
+            | Mean Girls - Guild (Darkspear/EU) 
+    .container
+      .offset-by-three
+        .eight.columns
+          ul
+            li Level 20!
+            li Gained achievement 'appeared on WoW Feed Site'
+    .container 
+      .offset-by-one
+        .one.column
+          a(href='')
+            img(src='/images/samples/sample-avatar.jpg', class='avatar')
+        .one.columns
+          a(href='')
+            img(src='/images/icons/ico_rss.png', title='rss feed')
+        .eight.columns
+            | Innoxera - Character (Darkspear/EU) 
+
+block content_footer
+  script(type='text/javascript', src='/js/camera.min.js')
+  script(type='text/javascript')
+    jQuery(function(){
+    jQuery('#top_slider').camera({
+    alignment: 'center',
+    height: '43.62%',
+    //navigationHover: true
+    });
+
+    });
+
+

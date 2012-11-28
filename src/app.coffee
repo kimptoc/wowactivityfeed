@@ -245,8 +245,14 @@ wf.app.get '/debug/wireframe4', (req, res) ->
 wf.app.get '/debug/wireframe5', (req, res) ->
   res.render "wireframe5" 
 
+wf.app.get '/debug/wireframe6', (req, res) ->
+  res.render "wireframe6" 
+
 wf.app.get '/debug/fonts', (req, res) ->
   res.render "fonts"
+
+wf.app.get '/debug/colours', (req, res) ->
+  res.render "colours"
 
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
