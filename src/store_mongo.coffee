@@ -20,6 +20,7 @@ class wf.StoreMongo
   #   mongo_db?.close()
 
   remove_all: (collection_name, removed_handler) ->
+    wf.debug "about to get collection: #{collection_name}"
     @with_collection collection_name, (coll) ->
       wf.debug "now to remove all '#{collection_name}'"
       coll.remove (err) ->
@@ -205,7 +206,7 @@ class wf.StoreMongo
       if mongo_connecting
         # todo - handle this properly... probably some async tool
         wf.error_no_store("already opening connecting, try again later...")
-        setTimeout (=> @with_connection(worker)), 5000
+        setTimeout (=> @with_connection(worker)), 100
         return
       mongo_connecting = true
       mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)

@@ -102,7 +102,7 @@ describe "mongo backed store:", ->
           one:"blue"
           two:"red"
 
-      store.ensure_index "foo", {name: 1}, ->
+      store.ensure_index "foo", {name: 1}, null, ->
         store.add "foo",someObj, (counter)->
           wf.debug "store complete, #{counter}"
           counter.should.equal 1
@@ -137,7 +137,7 @@ describe "mongo backed store:", ->
         done()
 
     it "ensure index basic", (done) ->
-      store.ensure_index "foo", {a:1}, ->
+      store.ensure_index "foo", {a:1}, null, ->
         done()
 
     it "test add/count db", (done) ->
