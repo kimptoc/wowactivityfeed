@@ -48,6 +48,29 @@ describe "mongo backed store:", ->
         counter.should.equal 1
         done()
 
+    it "insert() 1 item", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+
+      store.insert "foo",someObj, ->
+        wf.debug "insert complete"
+        done()
+
+    it "insert() 2 item", (done) ->
+      someObj =
+        id: 123
+        name: "foo"
+        a: 2
+      someObj2 =
+        id: 124
+        name: "foo2"
+        b: 4
+
+      store.insert "foo",[someObj,someObj2], ->
+        wf.debug "insert complete"
+        done()
+
     it "upsert item then count", (done) ->
       someObj =
         id: 467
