@@ -88,6 +88,13 @@ describe "wow armory lookup:", ->
         should.exist realms
         should.exist realms.region
         realms.length.should.be.above(10)
+        realms_by_region_and_slug = {}
+        for realm in realms
+          realms_by_region_and_slug[realm.region] ?= {}
+          region = realms_by_region_and_slug[realm.region] 
+          existing = region[realm.slug]
+          should.not.exist existing
+          region[realm.slug] = true
         done()
 
     it "get all char achievements static", (done) ->

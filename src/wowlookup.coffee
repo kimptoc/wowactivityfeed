@@ -103,6 +103,7 @@ class wf.WowLookup
               all_realms.push realm
           region_callback?()
       async.forEach all_regions, get_region_realms, ->
+        wf.info "All realms retrieved:#{all_realms.length}"
         callback?(all_realms)
 
   get_static: (static_load_method, region = "eu", callback) ->

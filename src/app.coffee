@@ -231,7 +231,9 @@ wf.app.get '/feedold/:type/:region/:realm/:name.rss', (req, res) ->
       res.send xml
 
 wf.app.get '/debug/search', (req, res) ->
-  res.render 'search'
+  wf.wow.get_realms (realms) ->
+    res.render 'search', {realms}
+
 wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 
 

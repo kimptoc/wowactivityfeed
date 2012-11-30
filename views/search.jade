@@ -9,9 +9,9 @@ block content
 
           select
             option [select realm]
-            option Darkspear(EU)
-            option Darkspear(US)
-            option Darkspear(CN)
+            if realms
+              each r in realms
+                option #{r.name}(#{r.region})
 
           button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
 

@@ -32,9 +32,11 @@ wf.loadjob = create_cron '*/10 * * * * *', (->
     wf.wow.armory_load()
   )
 
-# wf.loadjob = create_cron '59 * * * * *', (-> 
-#   wf.wow.realms_loader()
-#   )
+wf.loadjob = create_cron '42 * * * * *', (-> 
+  wf.info "Reloading realms"
+  wf.wow.realms_loader ->
+    wf.info "Realm reload complete"
+  )
 
 # wf.staticjob = new cronJob '00 00 00 * * *', (-> 
 #   wf.debug "cronjob tick...load armory static"

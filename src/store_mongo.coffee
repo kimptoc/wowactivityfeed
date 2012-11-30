@@ -23,7 +23,7 @@ class wf.StoreMongo
     wf.debug "about to get collection: #{collection_name}"
     @with_collection collection_name, (coll) ->
       wf.debug "now to remove all '#{collection_name}'"
-      coll.remove safe:true, (err) ->
+      coll.remove {}, safe:true, (err) ->
         wf.error(err) if err
         removed_handler?()
 

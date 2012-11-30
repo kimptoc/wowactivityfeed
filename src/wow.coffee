@@ -537,13 +537,16 @@ class wf.WoW
     else
       callback?({})
 
+  get_realms: (callback) ->
+    store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback
+
   realms_loader: (callback) =>
     # load and then replace
     @armory_realms_logged_call (realms) ->
       wf.info "Realms returned:#{realms.length}"
       if realms? and realms.length > 0  
         #  TODO find a unique key!!!
-        # store.ensure_index realms_collection, realms_index_1, null, ->
+        store.ensure_index realms_collection, realms_index_1, null, ->
           store.remove_all realms_collection, ->
             store.insert realms_collection, realms, callback
 
