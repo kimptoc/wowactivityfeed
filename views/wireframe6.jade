@@ -5,19 +5,19 @@ block content
   link(rel='stylesheet', href='/stylesheets/fonts.css')
 
   .container
-    .offset-by-one
-      .fifteen.columns
+      .thirteen.columns
+        .pagetitle World of Warcraft Activity
+      .two.columns
         #site_avatar
           a(href='/view/member/eu/Darkspear/Kimptoc')
             img(src='http://eu.battle.net/static-render/eu/darkspear/230/384742-avatar.jpg')
-          div
+            div
             | by Kimptoc
-        .pagetitle World of Warcraft Activity
 
   .container
     // Start Header Slider
     link(rel='stylesheet', href='/css/camera.css')
-    .offset-by-one
+    .offset-by-none
       .fifteen.columns
         .top_slider
           #top_slider.camera_wrap.camera_azure_skin
@@ -39,7 +39,7 @@ block content
     // END Header Slider
 
   .container
-    .offset-by-three
+    .offset-by-none
       .search_box
         .fifteen.columns
           input(type='text', placeholder='Search for character or guild')
@@ -54,13 +54,13 @@ block content
 
   .search_results
     .container
-      .offset-by-one
+      .offset-by-none
         .eight.columns
           | Results:
           br
           | &nbsp;
     .container
-      .offset-by-one
+      .offset-by-none
         .one.columns
           a(href='')
             img(src='/images/samples/sample-avatar.jpg', class='avatar')
@@ -70,13 +70,14 @@ block content
         .eight.columns
             | Mean Girls - Guild (Darkspear/EU) 
     .container
-      .offset-by-three
+      .offset-by-two
         .eight.columns
-          ul
-            li Level 20!
-            li Gained achievement 'appeared on WoW Feed Site'
+          .achievements
+            ul
+              li Level 20!
+              li Gained achievement 'appeared on WoW Feed Site'
     .container 
-      .offset-by-one
+      .offset-by-none
         .one.column
           a(href='')
             img(src='/images/samples/sample-avatar.jpg', class='avatar')

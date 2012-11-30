@@ -4,6 +4,26 @@
 
 - D4D designs sketch/wireframe
 
+- realms load/key??
+[2012-11-30 07:58:00.529] [ERROR] [default] - { [MongoError: E11000 duplicate key error index: wowfeed.armory_realms.$slug_1_region_1  dup key: { : "a
+  name: 'MongoError',
+  err: 'E11000 duplicate key error index: wowfeed.armory_realms.$slug_1_region_1  dup key: { : "aegwynn", : "eu" }',
+  code: 11000,
+  n: 0,
+  connectionId: 454,
+  ok: 1 }
+MongoError: E11000 duplicate key error index: wowfeed.armory_realms.$slug_1_region_1  dup key: { : "aegwynn", : "eu" }
+    at Db.wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/db.js:1913:11)
+    at null.<anonymous> (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/collection.js:323:26)
+    at g (events.js:192:14)
+    at EventEmitter.emit (events.js:126:20)
+    at Db._callHandler (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/db.js:1477:25)
+    at Server.connect.connectionPool.on.server._serverState (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/server
+    at MongoReply.parseBody (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/responses/mongo_reply.js:127:5)
+    at Server.connect.connectionPool.on.server._serverState (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/server
+    at EventEmitter.emit (events.js:96:17)
+    at _connect (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/co
+
 
 
 ## BUGS

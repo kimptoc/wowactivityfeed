@@ -106,6 +106,7 @@
         .container .two-thirds.column               { width: 492px; }
 
         /* Offsets */
+        .container .offset-by-none                  { }
         .container .offset-by-one                   { padding-left: 48px; }
         .container .offset-by-two                   { padding-left: 96px; }
         .container .offset-by-three                 { padding-left: 144px; }

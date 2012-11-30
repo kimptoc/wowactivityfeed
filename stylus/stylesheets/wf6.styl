@@ -4,26 +4,41 @@ text_colour()
   brown
 
 body
-  background beige
+  // background beige
   color text_colour() 
 
-.pagetitle
+.pagetitle 
   color text_colour() 
   font-family font_family_title()
-  font-style bold
+  font-weight bold
   -webkit-margin-before 0.25em
-  // text-shadow 4px 4px 3px #999999
+  text-shadow 2px 2px 2px #999999
   // text-shadow -4px 4px 3px #666, 1px -1px 2px #000
+  // display table-cell
+  // text-align center
+  // height 5em
+  // vertical-align middle
+  height 100%
+  // vertical-align middle
+  margin-top 20px
 
-.pagetitle div
-  font-size small
 
 #site_avatar
-  display: inline-block;
+  font-family font_family_title()
+  display: inline-block
   float right
+  margin-bottom 15px
+  font-size small
+  text-align center
+
+.search_box input
+  font-size 1.2em
+
+.search_box select, .search_box select option
+  font-size 2.5em
 
 .search_box
-  // margin-top 20px
+  margin-top 10px
   // input,select,button
   //   display inline
   //   // float right
@@ -31,7 +46,11 @@ body
     width 50%
 
 .search_results
-  margin-top 20px
+  margin-top 30px
 
 .search_results .avatar
   width 2em
+
+.search_results .achievements
+  font-size smaller
+  margin-top -20px
