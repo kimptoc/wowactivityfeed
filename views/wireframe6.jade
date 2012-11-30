@@ -40,17 +40,16 @@ block content
 
   .container
     .offset-by-none
-      .search_box
-        .fifteen.columns
-          input(type='text', placeholder='Search for character or guild')
-
-          select
-            option [select realm]
-            option Darkspear(EU)
-            option Darkspear(US)
-            option Darkspear(CN)
-
-          button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
+      .search_box.fifteen.columns
+        input(type='text', placeholder='Search for character or guild')
+        | &nbsp;
+        select
+          option [select realm]
+          option Darkspear(EU)
+          option Darkspear(US)
+          option Darkspear(CN)
+        | &nbsp;
+        button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
 
   .search_results
     .container

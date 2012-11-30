@@ -12,7 +12,7 @@ body
   font-family font_family_title()
   font-weight bold
   -webkit-margin-before 0.25em
-  text-shadow 2px 2px 2px #999999
+  // text-shadow 2px 2px 2px #999999
   // text-shadow -4px 4px 3px #666, 1px -1px 2px #000
   // display table-cell
   // text-align center
@@ -31,19 +31,20 @@ body
   font-size small
   text-align center
 
-.search_box input
-  font-size 1.2em
-
-.search_box select, .search_box select option
-  font-size 1.2em
-
 .search_box
+  vertical-align middle
   margin-top 10px
   // input,select,button
   //   display inline
   //   // float right
   input
+    font-size 1em
     width 50%
+  select
+    font-size 1em
+  button
+    font-size 1em
+
 
 .search_results
   margin-top 30px
