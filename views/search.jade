@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    .offset-by-three
+      .search_box
+        .ten.columns
+          input(type='text', placeholder='Search for character or guild')
+
+          select
+            option [select realm]
+            option Darkspear(EU)
+            option Darkspear(US)
+            option Darkspear(CN)
+
+          button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
+

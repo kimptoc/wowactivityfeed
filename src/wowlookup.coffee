@@ -1,5 +1,7 @@
 global.wf ||= {}
 
+async = require "async"
+
 require "./defaults"
 require './init_logger'
 portcheck = require 'portchecker'
@@ -85,6 +87,23 @@ class wf.WowLookup
           callback?(null)
         else
           callback?(item)
+
+  get_realms: (callback) ->
+    all_regions = ["eu","us","cn","kr","tw"] # more ... TBD
+    all_realms = [] # results
+    @with_armory (armory) ->
+      get_region_realms = (region, region_callback) =>
+        armory.realmStatus {region}, (err, realms) ->
+          if err
+            wf.error "Problem finding realms for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          else
+            wf.info "Region #{region} found #{realms.length} realm(s)"            
+            for realm in realms
+              realm.region = region
+              all_realms.push realm
+          region_callback?()
+      async.forEach all_regions, get_region_realms, ->
+        callback?(all_realms)
 
   get_static: (static_load_method, region = "eu", callback) ->
     @with_armory (armory) ->

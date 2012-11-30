@@ -230,6 +230,8 @@ wf.app.get '/feedold/:type/:region/:realm/:name.rss', (req, res) ->
       res.set('Content-Type', 'application/xml')
       res.send xml
 
+wf.app.get '/debug/search', (req, res) ->
+  res.render 'search'
 wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 
 
@@ -274,6 +276,10 @@ wf.app.get '/debug/logs/:type', (req, res) ->
 wf.app.get '/debug/clear_all', (req, res) ->
   wf.wow.clear_all ->
     res.render "message", msg: "Database cleared!"
+
+wf.app.get '/debug/load_realms', (req, res) ->
+  wf.wow.realms_loader()
+  res.render 'message', msg: "Realms load in progress"
 
 wf.app.get '/debug/sample_data', (req, res) ->
   wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"

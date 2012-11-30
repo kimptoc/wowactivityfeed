@@ -24,12 +24,14 @@ class wf.WoW
   static_collection = "armory_static"
   calls_collection = "armory_calls"
   items_collection = "armory_items"
+  realms_collection = "armory_realms"
 
   fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
 
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
+  realms_index_1 = {slug:1, region:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
   armory_static_index_1 = {static_type:1, id:1}
@@ -534,6 +536,33 @@ class wf.WoW
           callback?(items_hash)
     else
       callback?({})
+
+  realms_loader: (callback) =>
+    # load and then replace
+    @armory_realms_logged_call (realms) ->
+      wf.info "Realms returned:#{realms.length}"
+      if realms? and realms.length > 0  
+        #  TODO find a unique key!!!
+        # store.ensure_index realms_collection, realms_index_1, null, ->
+          store.remove_all realms_collection, ->
+            store.insert realms_collection, realms, callback
+
+  armory_realms_logged_call: (callback) =>
+    armory_stats = 
+      type: "realms"
+      region: "all"
+      name: "realms"
+      realm: "na"
+      start_time: new Date().getTime()
+    wowlookup.get_realms (info) ->
+      wf.info "get realms responded, realms:#{info.length}"
+      armory_stats.end_time = new Date().getTime()
+      armory_stats.error = info?.error
+      armory_stats.not_modified = (info is undefined and !armory_stats.error?)
+      armory_stats.had_error = info?.error?
+      store.insert calls_collection, armory_stats, ->
+        callback?(info)
+    
 
   item_loader: (item_id, callback) =>
     # see if we have it already

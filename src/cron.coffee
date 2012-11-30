@@ -32,6 +32,10 @@ wf.loadjob = create_cron '*/10 * * * * *', (->
     wf.wow.armory_load()
   )
 
+# wf.loadjob = create_cron '59 * * * * *', (-> 
+#   wf.wow.realms_loader()
+#   )
+
 # wf.staticjob = new cronJob '00 00 00 * * *', (-> 
 #   wf.debug "cronjob tick...load armory static"
 #   wf.wow.static_load()

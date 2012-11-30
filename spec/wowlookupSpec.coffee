@@ -82,6 +82,14 @@ describe "wow armory lookup:", ->
         info.id.should.equal 87417
         done()
 
+    it "get all realms", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_realms (realms) ->
+        should.exist realms
+        should.exist realms.region
+        realms.length.should.be.above(10)
+        done()
+
     it "get all char achievements static", (done) ->
       this.timeout(15000)
       wow = new wf.WowLookup()
