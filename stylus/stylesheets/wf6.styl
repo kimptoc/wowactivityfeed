@@ -5,9 +5,19 @@ text_colour()
 
 body
   // background beige
-  color text_colour() 
+  color text_colour()
+  background-image url('/images/samples/sholazar-basin1-1280x960.jpg')
+  background-size 100%
+  // background-color transparent
+
+.container
+  // background #660000
+  background white
+  opacity 0.9
+  // filter alpha(opacity = 60.0)
 
 .pagetitle 
+  // opacity 1.0
   color text_colour() 
   font-family font_family_title()
   font-weight bold
@@ -24,6 +34,7 @@ body
 
 
 #site_avatar
+  // a div color text_colour() 
   font-family font_family_title()
   display: inline-block
   float right
@@ -32,8 +43,10 @@ body
   text-align center
 
 .search_box
+  // opacity 1.0
   vertical-align middle
   margin-top 10px
+  text-align center
   // input,select,button
   //   display inline
   //   // float right
@@ -47,11 +60,11 @@ body
 
 
 .search_results
-  margin-top 30px
-
-.search_results .avatar
-  width 2em
-
-.search_results .achievements
-  font-size smaller
-  margin-top -20px
+  // opacity 0.9
+  // margin-top 30px
+  padding-top 30px
+  .avatar
+    width 2em
+  .achievements
+    font-size smaller
+    margin-top -20px
