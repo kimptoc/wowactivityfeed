@@ -32,7 +32,7 @@ wf.loadjob = create_cron '*/10 * * * * *', (->
     wf.wow.armory_load()
   )
 
-wf.loadjob = create_cron '42 * * * * *', (-> 
+wf.loadjob = create_cron '00 42 * * * *', (-> 
   wf.info "Reloading realms"
   wf.wow.realms_loader ->
     wf.info "Realm reload complete"
