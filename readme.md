@@ -16,6 +16,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- limiting textsize needed for news feed items too, eg when lots of criteria for an achievement
+- if no registed items, armory load hangs - hamdle this case
 
 - for guild level changes, link to wowhead info on new level ??? and rely on official feed items for these
 

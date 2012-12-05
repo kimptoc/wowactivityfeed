@@ -97,6 +97,20 @@ describe "wow armory lookup:", ->
           region[realm.slug] = true
         done()
 
+    it "get all races", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_races null, (races) ->
+        should.exist races
+        races.length.should.be.above(7)
+        done()
+
+    it "get all classes", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_classes null, (classes) ->
+        should.exist classes
+        classes.length.should.be.above(7)
+        done()
+
     it "get all char achievements static", (done) ->
       this.timeout(15000)
       wow = new wf.WowLookup()

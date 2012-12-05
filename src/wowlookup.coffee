@@ -88,6 +88,24 @@ class wf.WowLookup
         else
           callback?(item)
 
+  get_races: (region = "eu", callback) ->
+    @with_armory (armory) ->
+      armory.races {region}, (err, races) ->
+        if err
+          wf.error "Problem finding races for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          callback?(null)
+        else
+          callback?(races)
+
+  get_classes: (region = "eu", callback) ->
+    @with_armory (armory) ->
+      armory.classes {region}, (err, classes) ->
+        if err
+          wf.error "Problem finding classes for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          callback?(null)
+        else
+          callback?(classes)
+
   get_realms: (callback) ->
     all_regions = ["eu","us","cn","kr","tw"] # more ... TBD
     all_realms = [] # results

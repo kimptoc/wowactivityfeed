@@ -34,8 +34,9 @@ wf.loadjob = create_cron '*/10 * * * * *', (->
 
 wf.loadjob = create_cron '00 42 * * * *', (-> 
   wf.info "Reloading realms"
-  wf.wow.realms_loader ->
-    wf.info "Realm reload complete"
+  # wf.wow.realms_loader ->
+  wf.wow.static_loader ->
+    wf.info "Static load complete"
   )
 
 # wf.staticjob = new cronJob '00 00 00 * * *', (-> 

@@ -28,6 +28,7 @@ class wf.WoW
 
   fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
 
+  static_index_1 = {id:1, static_type:1}
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
@@ -539,6 +540,28 @@ class wf.WoW
 
   get_realms: (callback) ->
     store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback
+
+  static_loader: (callback) ->
+    async.parallel [@realms_loader, @races_loader, @classes_loader], callback
+
+  load_static_claz: (type, claz, loaded_callback) ->
+    claz.static_type = type
+    store.ensure_index static_collection, static_index_1, null, ->
+      store.upsert static_collection, {static_type:claz.static_type, id:claz.id}, claz, loaded_callback
+
+  classes_loader: (callback) =>
+    wowlookup.get_classes null, (classes) =>
+      if classes? and classes.length > 0
+        loader = (claz, loaded_callback) =>
+          @load_static_claz 'CLASS', claz, loaded_callback
+        async.forEach classes, loader, callback
+
+  races_loader: (callback) =>
+    wowlookup.get_races null, (races) =>
+      if races? and races.length > 0
+        loader = (race, loaded_callback) =>
+          @load_static_claz 'RACE', race, loaded_callback
+        async.forEach races, loader, callback
 
   realms_loader: (callback) =>
     # load and then replace
