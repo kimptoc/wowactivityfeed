@@ -14,13 +14,13 @@ block content
             div
             | by Kimptoc
         .pagetitle
-          | Activity
+          | WoW Activity
 
   .container
     // Start Header Slider
     link(rel='stylesheet', href='/css/camera.css')
-    .offset-by-none
-      .sixteen.columns
+    .offset-by-two
+      .eleven.columns
         .top_slider
           #top_slider.camera_wrap.camera_azure_skin
             div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
@@ -55,7 +55,7 @@ block content
 
   .container.search_results
     .container
-      .offset-by-none
+      .offset-by-two
         .eight.columns
           .results_title
             | Found:
@@ -70,12 +70,12 @@ block content
             img(src='/images/samples/sample-avatar.jpg', class='avatar')
           a(href='')
             img(src='/images/icons/ico_rss.png', title='rss feed')
+          | &nbsp;
           a(href='', title='Open this in WoW Armory, TOOD - img')
-            | &nbsp;
-            | [W]
-          a(href='', title='Open activity page for this, TOOD - img')
-            | &nbsp;
-            | [M]
+            img(src='/images/samples/armory-icon.png', style='width: 30%;')
+          | &nbsp;
+          a(href='', title='Open activity page for this, TOOD - img', style='font-family: Caribbean Regular; color: yellow;vertical-align: top;')
+            | A
         .eight.columns
           | Level 21 Human Priest of Guild Mean Girls (Darkspear/EU)
           .achievements
@@ -89,15 +89,15 @@ block content
               li 
                 .time Nov 1, 03:59 - 
                 | Gained achievement 'Had 2 days off WoW'
-          a(href='', title='Top3 gear items, TOOD - img')
+          .recent_gear
+            a(href='', title='Top3 gear items, TOOD - img')
+              img(src='http://us.media.blizzard.com/wow/icons/56/achievement_dungeon_ulduar77_normal.jpg')
             | &nbsp;
-            | [I1]
-          a(href='', title='Top3 gear items, TOOD - img')
+            a(href='', title='Top3 gear items, TOOD - img')
+              img(src='http://us.media.blizzard.com/wow/icons/56/inv_belt_26.jpg')
             | &nbsp;
-            | [I2]
-          a(href='', title='Top3 gear items, TOOD - img')
-            | &nbsp;
-            | [I3]
+            a(href='', title='Top3 gear items, TOOD - img')
+              img(src='http://us.media.blizzard.com/wow/icons/56/inv_glove_mail_raidshaman_l_01.jpg')
 
 block content_footer
   script(type='text/javascript', src='/js/camera.min.js')
