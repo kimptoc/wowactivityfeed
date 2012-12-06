@@ -1,0 +1,112 @@
+extends layout_new
+
+block content
+  link(rel='stylesheet', href='/stylesheets/wf7.css')
+  link(rel='stylesheet', href='/stylesheets/fonts.css')
+
+  .container
+      .sixteen.columns
+        .pagelogo
+          img(src='/images/samples/WoW-001S.png')
+        #site_avatar
+          a(href='/view/member/eu/Darkspear/Kimptoc')
+            img(src='http://eu.battle.net/static-render/eu/darkspear/230/384742-avatar.jpg')
+            div
+            | by Kimptoc
+        .pagetitle
+          | Activity
+
+  .container
+    // Start Header Slider
+    link(rel='stylesheet', href='/css/camera.css')
+    .offset-by-none
+      .sixteen.columns
+        .top_slider
+          #top_slider.camera_wrap.camera_azure_skin
+            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
+              .camera_caption.fadeFromBottom
+            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
+              .camera_caption.fadeFromBottom
+          // /sider
+          .clear
+            // ClearFix
+    // END Header Slider
+
+  .container
+    .offset-by-two
+      .search_box.fourteen.columns
+        input(type='text', placeholder='Lookup character or guild')
+        | &nbsp;
+        select
+          option [select realm]
+          option Darkspear(EU)
+          option Darkspear(US)
+          option Darkspear(CN)
+        | &nbsp;
+        button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
+
+  .container.search_results
+    .container
+      .offset-by-none
+        .eight.columns
+          | Found:
+          br
+          | &nbsp;
+    .container
+      .offset-by-two
+        .two.columns
+          | Kimptocii
+          a(href='')
+            img(src='/images/samples/sample-avatar.jpg', class='avatar')
+          a(href='')
+            img(src='/images/icons/ico_rss.png', title='rss feed')
+          a(href='', title='Open this in WoW Armory, TOOD - img')
+            | &nbsp;
+            | [W]
+          a(href='', title='Open activity page for this, TOOD - img')
+            | &nbsp;
+            | [M]
+        .eight.columns
+          | Level 21 Human Priest of Guild Mean Girls (Darkspear/EU)
+          .achievements
+            ul
+              li 
+                .time Sep 21, 18:00 - 
+                | Now Level 21!
+              li 
+                .time Oct 31, 23:59 - 
+                | Gained achievement 'appeared on WoW Feed Site'
+              li 
+                .time Nov 1, 03:59 - 
+                | Gained achievement 'Had 2 days off WoW'
+          a(href='', title='Top3 gear items, TOOD - img')
+            | &nbsp;
+            | [I1]
+          a(href='', title='Top3 gear items, TOOD - img')
+            | &nbsp;
+            | [I2]
+          a(href='', title='Top3 gear items, TOOD - img')
+            | &nbsp;
+            | [I3]
+
+block content_footer
+  script(type='text/javascript', src='/js/camera.min.js')
+  script(type='text/javascript')
+    jQuery(function(){
+    jQuery('#top_slider').camera({
+    alignment: 'center',
+    height: '43.62%',
+    //navigationHover: true
+    });
+
+    });
+
+

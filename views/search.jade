@@ -11,7 +11,7 @@ block content
             option [select realm]
             if realms
               each r in realms
-                option #{r.name}(#{r.region})
+                option #{r.name} (#{r.region})
 
           button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
 

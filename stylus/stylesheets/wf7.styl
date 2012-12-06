@@ -1,0 +1,88 @@
+@import 'globals'
+
+text_colour()
+  yellow
+
+body
+  // background black
+  color text_colour()
+  background-image url('/images/samples/sholazar-basin1-1280x960.jpg')
+  background-size 100%
+  // background-color transparent
+
+.container
+  // background #660000
+  // background #5C3317  
+  background-image url('/images/samples/mainbg.png')
+  opacity 0.9
+  // filter alpha(opacity = 60.0)
+
+.pagetitle 
+  // opacity 1.0
+  color text_colour() 
+  font-family font_family_title()
+  // font-weight bold
+  -webkit-margin-before 0.25em
+  // text-shadow 2px 2px 2px #999999
+  // text-shadow -4px 4px 3px #666, 1px -1px 2px #000
+  // display table-cell
+  text-align center
+  // height 5em
+  // vertical-align middle
+  height 100%
+  // vertical-align middle
+  // margin-top 20px
+
+.pagelogo
+  img
+    float right
+    width 20%
+    height 20%
+
+#site_avatar
+  // a div color text_colour() 
+  font-family font_family_title()
+  display: inline-block
+  float left
+  margin-bottom 15px
+  font-size small
+  text-align center
+  img
+    margin-top 5px
+    width 70%
+    height 70%
+  a
+    color text_colour() 
+
+.search_box
+  // opacity 1.0
+  vertical-align middle
+  margin-top 10px
+  // text-align center
+  // input,select,button
+  //   display inline
+  //   // float right
+  input
+    font-size 1em
+    width 50%
+  select
+    font-size 1em
+  button
+    font-size 1em
+
+.time
+  display inline
+  font-size smaller
+  font-style italic
+  color orange
+
+.search_results
+  // opacity 0.9
+  // margin-top 30px
+  padding-top 30px
+  .avatar
+    // width 2em
+    width 80%
+  .achievements
+    font-size smaller
+    // margin-top -20px
