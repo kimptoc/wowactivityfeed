@@ -14,15 +14,20 @@ create_cron = (cron_schedule, cron_task) ->
     wf.error e
 
 
-wf.hourlyjob = create_cron '00 00 0-21/3 * * *', (-> 
-  wf.info "cronjob tick...hourly load"
+wf.hourlyjob = create_cron '00 00 * * * *', (-> 
+  wf.info "cronjob tick...hourly, on the hour load"
   wf.armory_load_requested = true
   )
 
-wf.hourlyjob = create_cron '00 30 1-22/3 * * *', (-> 
-  wf.info "cronjob tick...hourly load"
-  wf.armory_load_requested = true
-  )
+# wf.hourlyjob = create_cron '00 00 0-21/3 * * *', (-> 
+#   wf.info "cronjob tick...3 hourly, on the hour load"
+#   wf.armory_load_requested = true
+#   )
+
+# wf.hourlyjob = create_cron '00 30 1-22/3 * * *', (-> 
+#   wf.info "cronjob tick...3 hourly, on the half hour load"
+#   wf.armory_load_requested = true
+#   )
 
 wf.loadjob = create_cron '*/10 * * * * *', (-> 
   wf.debug "cronjob tick...check if armory load requested"
