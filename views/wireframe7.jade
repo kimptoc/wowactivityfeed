@@ -20,61 +20,46 @@ block content
     // Start Header Slider
     link(rel='stylesheet', href='/css/camera.css')
     .offset-by-two
-      .eleven.columns
-        .top_slider
-          #top_slider.camera_wrap.camera_azure_skin
-            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
-              .camera_caption.fadeFromBottom
-            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
-              .camera_caption.fadeFromBottom
-            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
-              .camera_caption.fadeFromBottom
-            div(data-thumb='/images/top_slider/slider_image1.jpg', data-src='/images/top_slider/slider_image1.jpg')
-              .camera_caption.fadeFromBottom
-            div(data-thumb='/images/top_slider/slider_image2.jpg', data-src='/images/top_slider/slider_image2.jpg')
-              .camera_caption.fadeFromBottom
-            div(data-thumb='/images/top_slider/slider_image3.jpg', data-src='/images/top_slider/slider_image3.jpg')
-              .camera_caption.fadeFromBottom
+      .twelve.columns
+        .sample_usage
+            img(src='/images/top_slider/slider_image1.jpg')
           // /sider
-          .clear
-            // ClearFix
     // END Header Slider
 
   .container
     .offset-by-two
       .search_box.fourteen.columns
-        input(type='text', placeholder='Lookup character or guild')
+        br 
         | &nbsp;
+        input(type='text', placeholder='Lookup character or guild')
+        | &nbsp; &nbsp; &nbsp;
         select
           option [select realm]
           option Darkspear(EU)
           option Darkspear(US)
           option Darkspear(CN)
-        | &nbsp;
+        | &nbsp; &nbsp; &nbsp;
         button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
 
   .container.search_results
     .container
       .offset-by-two
-        .eight.columns
-          .results_title
-            | Found:
-            br
-            | &nbsp;
-    .container
-      .offset-by-two
         .two.columns
           .char_title
             | Kimptocii
+            br 
+            | &nbsp;
           a(href='')
             img(src='/images/samples/sample-avatar.jpg', class='avatar')
+            p
+            | &nbsp;
           a(href='')
             img(src='/images/icons/ico_rss.png', title='rss feed')
           | &nbsp;
           a(href='', title='Open this in WoW Armory, TOOD - img')
             img(src='/images/samples/armory-icon.png', style='width: 30%;')
           | &nbsp;
-          a(href='', title='Open activity page for this, TOOD - img', style='font-family: Caribbean Regular; color: yellow;vertical-align: top;')
+          a(href='', title='Open activity page for this, TOOD - img', style='color: yellow;vertical-align: top;')
             | A
         .eight.columns
           | Level 21 Human Priest of Guild Mean Girls (Darkspear/EU)
@@ -92,10 +77,10 @@ block content
           .recent_gear
             a(href='', title='Top3 gear items, TOOD - img')
               img(src='http://us.media.blizzard.com/wow/icons/56/achievement_dungeon_ulduar77_normal.jpg')
-            | &nbsp;
+            | &nbsp; &nbsp; &nbsp;
             a(href='', title='Top3 gear items, TOOD - img')
               img(src='http://us.media.blizzard.com/wow/icons/56/inv_belt_26.jpg')
-            | &nbsp;
+            | &nbsp; &nbsp; &nbsp;
             a(href='', title='Top3 gear items, TOOD - img')
               img(src='http://us.media.blizzard.com/wow/icons/56/inv_glove_mail_raidshaman_l_01.jpg')
     p &nbsp;
