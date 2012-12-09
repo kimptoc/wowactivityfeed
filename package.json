@@ -15,7 +15,6 @@
         "mocha":"",
         "should":"",
         "nodemon":"",
-        "rss":"",
         "mongodb":"",
         "log4js":"",
         "jsondiffpatch":"",

@@ -5,7 +5,6 @@ require './init_nodefly'
 express = require('express')
 http = require('http')
 path = require('path')
-rss = require('rss')
 moment = require('moment')
 _ = require('underscore')
 async = require "async"
@@ -155,20 +154,6 @@ wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
 wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
   handle_view(req, res)
 
-wf.app.get '/feedold/all.rss', (req, res) ->
-
-  feed = new rss
-    title: 'WoW Activity Feed'
-    description: 'Test all changes feed'
-    feed_url: "#{wf.SITE_URL}feed/all.rss"
-    site_url: "#{wf.SITE_URL}"
-    image_url: 'http://www.google.com/icon.png'
-
-  wf.wow.get_loaded (items) ->
-    build_feed items, feed, (xml) ->
-      res.set('Content-Type', 'application/xml')
-      res.send xml
- 
 wf.app.get '/feed/all.rss', (req, res) ->
   wf.debug "Tracking:#{req.path}"
   wf.ga.trackPage(req.path);
@@ -185,12 +170,12 @@ wf.app.get '/feed/all.rss', (req, res) ->
         feed:items_to_publish
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
-  wf.warn JSON.stringify(req.headers)
+  wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
-    category: req.path
-    action: req.headers
-    label: req.header('user-agent')
+    action: req.path
+    category: req.header('user-agent')
+    label: req.headers
     value: 42
 
   wf.timing_on("/feed/#{req.params.name}")
@@ -212,29 +197,6 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
         site_url: "#{wf.SITE_URL}view/#{type}/#{escape(region)}/#{escape(realm)}/#{escape(name)}"
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
-
-wf.app.get '/feedold/:type/:region/:realm/:name.rss', (req, res) ->
-
-  wf.timing_on("/feedold/#{req.params.name}")
-
-  type = req.params.type
-  type = 'member' if type == "character"
-  region = req.params.region.toLowerCase()
-  realm = req.params.realm
-  name = req.params.name
-
-  feed = new rss
-    title: "WoW Activity Feed for #{name}"
-    description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
-    feed_url: "#{wf.SITE_URL}feed/#{type}/#{region}/#{realm}/#{name}.rss"
-    site_url: "#{wf.SITE_URL}view/#{type}/#{region}/#{realm}/#{name}"
-    image_url: 'http://www.google.com/icon.png'
-
-  wf.wow.get_history region, realm, type, name, (items)->
-    wf.timing_off("/feed/#{name}")
-    build_feed items, feed, (xml) ->
-      res.set('Content-Type', 'application/xml')
-      res.send xml
 
 wf.app.get '/debug/search', (req, res) ->
   wf.wow.get_realms (realms) ->
