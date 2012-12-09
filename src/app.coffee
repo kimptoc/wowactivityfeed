@@ -185,7 +185,13 @@ wf.app.get '/feed/all.rss', (req, res) ->
         feed:items_to_publish
  
 wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
+  wf.warn JSON.stringify(req.headers)
   wf.ga.trackPage(req.path);
+  wf.ga.trackEvent
+    category: req.path
+    action: req.headers
+    label: req.header('user-agent')
+    value: 42
 
   wf.timing_on("/feed/#{req.params.name}")
 
