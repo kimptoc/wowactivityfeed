@@ -163,7 +163,8 @@ class wf.WoW
       info.db = stats      
       # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
       start_of_day = moment().sod().valueOf()
-      twohours_ago = moment().subtract({hours:2}).valueOf()
+      yesterday = moment().sod().subtract(days:1).valueOf()
+      twohours_ago = moment().subtract(hours:2).valueOf()
       store.aggregate calls_collection, 
         [
           { $project: 
@@ -172,7 +173,7 @@ class wf.WoW
             error: 1
             errors:{$cmp: ["$had_error", false]}
             not_modifieds:{$cmp: ["$not_modified", false]}
-            date_category:{$cond:[{$gte:["$start_time", twohours_ago]},"last-2hours", $cond:[{$gte:["$start_time", start_of_day]},"today","before-today"]]}
+            date_category:{$cond:[$gte:["$start_time", twohours_ago],"last-2hours", $cond:[$gte:["$start_time", start_of_day],"today",$cond:[$gte:["$start_time", yesterday],"yesterday", "before-yesterday"]]]}
           },
           { $group : 
             # _id: "$type"

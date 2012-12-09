@@ -17,6 +17,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- on guild page, show recent joiners/leavers
+- guild logo - is there one?
 - limiting textsize needed for news feed items too, eg when lots of criteria for an achievement
 - if no registed items, armory load hangs - hamdle this case
 
