@@ -106,7 +106,7 @@ class wf.WowLookup
         else
           callback?(classes)
 
-  get_realms: (callback) ->
+  get_realms_old: (callback) ->
     all_regions = ["eu","us","cn","kr","tw"] # more ... TBD
     all_realms = [] # results
     @with_armory (armory) ->
@@ -122,6 +122,21 @@ class wf.WowLookup
           region_callback?()
       async.forEach all_regions, get_region_realms, ->
         wf.info "All realms retrieved:#{all_realms.length}"
+        callback?(all_realms)
+
+  get_realms: (region, callback) ->
+    @with_armory (armory) ->
+      armory.realmStatus {region}, (err, realms) ->
+        date_retrieved = new Date()
+        all_realms = [] # results
+        if err
+          wf.error "Problem finding realms for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+        else
+          wf.info "Region #{region} found #{realms.length} realm(s)"            
+          for realm in realms
+            realm.region = region
+            realm.date_retrieved = date_retrieved
+            all_realms.push realm
         callback?(all_realms)
 
   get_static: (static_load_method, region = "eu", callback) ->

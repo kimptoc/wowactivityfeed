@@ -84,9 +84,9 @@ describe "wow armory lookup:", ->
 
     it "get all realms", (done) ->
       wow = new wf.WowLookup()
-      wow.get_realms (realms) ->
+      wow.get_realms "eu",(realms) ->
         should.exist realms
-        should.exist realms.region
+        should.exist realms[0].region
         realms.length.should.be.above(10)
         realms_by_region_and_slug = {}
         for realm in realms

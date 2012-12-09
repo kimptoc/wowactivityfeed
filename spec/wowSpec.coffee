@@ -131,7 +131,7 @@ describe "wow wrapper:", ->
 
     it "armory realms load", (done) ->
       mock_lookup = sinon.mock(wow.get_wowlookup())
-      mock_lookup.expects("get_realms").once().yields(
+      mock_lookup.expects("get_realms").exactly(5).yields(
         [
           {slug:"one", region:"eu"}
           {slug:"two", region:"us"}
@@ -139,7 +139,7 @@ describe "wow wrapper:", ->
       mock_store = sinon.mock(wow.get_store())
       mock_store.expects("ensure_index").once().yields()
       mock_store.expects("remove_all").once().yields()
-      mock_store.expects("insert").twice().yields()
+      mock_store.expects("insert").exactly(6).yields()
 
       wow.realms_loader ->
         done()

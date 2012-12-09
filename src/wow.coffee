@@ -100,53 +100,6 @@ class wf.WoW
     else
       result_handler?(null)
 
-  armory_calls_old: (callback)->
-    info = 
-      startup_time: moment(startup_time).format('H:mm:ss ddd')
-      total_calls: 0
-      total_errors: 0
-      total_not_modified: 0
-      total_by_type: {}
-      todays_calls: 0
-      todays_errors: 0
-      todays_not_modified: 0
-      todays_by_type: {}
-      earliest: Infinity
-      latest: 0
-      error_summary :{}
-      memory_usage: process.memoryUsage()
-      node_uptime: process.uptime()
-      armory_load:
-        armory_load_running: job_running_lock
-        number_running: loader_queue?.running() 
-        number_queued: loader_queue?.length()
-      item_loader_queue:
-        number_running: item_loader_queue?.running()
-        number_queued: item_loader_queue?.length()
-    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
-      info.db = stats      
-      store.load_all calls_collection, {}, {}, (entries) ->
-        for call in entries
-          info.earliest = call.start_time if call.start_time < info.earliest
-          info.latest = call.start_time if call.start_time > info.latest
-          info.total_calls += 1
-          if call.had_error
-            info.total_errors += 1 
-            info["error_summary"][call.error] ?= 0 
-            info["error_summary"][call.error] += 1
-          info.total_not_modified += 1 if call.not_modified
-          info.total_by_type[call.type] ?= 0
-          info.total_by_type[call.type] += 1
-          if moment().sod().format("DDD") == moment(call.start_time).format("DDD")
-            info.todays_calls += 1
-            info.todays_errors += 1 if call.had_error
-            info.todays_not_modified += 1 if call.not_modified
-            info.todays_by_type[call.type] ?= 0
-            info.todays_by_type[call.type] += 1
-        info.earliest = moment(info.earliest).format('H:mm:ss ddd')
-        info.latest = moment(info.latest).format('H:mm:ss ddd')
-        callback?(info)
-
   armory_calls: (callback)->
     info = 
       startup_time: moment(startup_time).format('H:mm:ss ddd')
@@ -159,7 +112,7 @@ class wf.WoW
       item_loader_queue:
         number_running: item_loader_queue?.running()
         number_queued: item_loader_queue?.length()
-    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, wf.logs_collection], (stats) ->
+    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, static_collection, realms_collection, wf.logs_collection], (stats) ->
       info.db = stats      
       # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
       start_of_day = moment().sod().valueOf()
@@ -566,23 +519,31 @@ class wf.WoW
 
   realms_loader: (callback) =>
     # load and then replace
-    @armory_realms_logged_call (realms) ->
-      wf.info "Realms returned:#{realms.length}"
-      if realms? and realms.length > 0  
-        #  TODO find a unique key!!!
+    all_regions = ["eu","us","cn","kr","tw"] 
+    all_realms = []
+    get_region_realms = (region, region_callback) =>   
+      @armory_realms_logged_call region, (realms) ->
+        wf.info "For region #{region}, realms returned:#{realms.length}"
+        all_realms = all_realms.concat(realms)
+        region_callback?()
+    async.forEach all_regions, get_region_realms, ->
+      wf.info "Realms calls done, time to persist:#{all_realms.length}"
+      if all_realms? and all_realms.length > 0  
         store.ensure_index realms_collection, realms_index_1, null, ->
           store.remove_all realms_collection, ->
-            store.insert realms_collection, realms, callback
+            store.insert realms_collection, all_realms, callback
+      else
+        callback?()
 
-  armory_realms_logged_call: (callback) =>
+  armory_realms_logged_call: (region, callback) =>
     armory_stats = 
       type: "realms"
-      region: "all"
+      region: region
       name: "realms"
       realm: "na"
       start_time: new Date().getTime()
-    wowlookup.get_realms (info) ->
-      wf.info "get realms responded, realms:#{info.length}"
+    wowlookup.get_realms region, (info) ->
+      wf.info "get realms for region #{region} responded, realms:#{info.length}"
       armory_stats.end_time = new Date().getTime()
       armory_stats.error = info?.error
       armory_stats.not_modified = (info is undefined and !armory_stats.error?)
