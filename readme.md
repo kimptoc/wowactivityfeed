@@ -17,6 +17,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- put 1 month expiry on items - so they get refreshed, if used, removed if not
+- change realms load to do upsert - if one region is down, then we lose all their realms :(
 - on guild page, show recent joiners/leavers
 - guild logo - is there one?
 - use last-Modified on responses, base of underlying data max last modified

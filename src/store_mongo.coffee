@@ -115,6 +115,7 @@ class wf.StoreMongo
           count_handler?(count)
 
   load: (collection_name, document_key, options, loaded_handler) ->
+    wf.error "Collection name is null" unless collection_name?
     @with_collection collection_name, (coll) ->
       options ?= {}
       options["limit"] ?= -1
