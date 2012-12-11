@@ -5,7 +5,7 @@ require './init_logger'
 class wf.CallLogger
 
   constructor: (wow, wowlookup, store) ->
-    wow['armory_get_logged_call'] = (item, callback) =>
+    wow.armory_get_logged_call = (item, callback) =>
       wf.debug "Wrapped armory call"
       armory_stats = 
         type: item.type
@@ -22,7 +22,7 @@ class wf.CallLogger
           store.insert wow.get_calls_collection(), armory_stats, =>
             callback?(doc, info)
     
-    wow['armory_item_logged_call'] = (item_id, callback) =>
+    wow.armory_item_logged_call = (item_id, callback) =>
       armory_stats = 
         type: "item"
         region: "eu"
@@ -37,7 +37,7 @@ class wf.CallLogger
         store.insert wow.get_calls_collection(), armory_stats, =>
           callback?(info)
       
-    wow['armory_realms_logged_call'] = (region, callback) =>
+    wow.armory_realms_logged_call = (region, callback) =>
       armory_stats = 
         type: "realms"
         region: region
