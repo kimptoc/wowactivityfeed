@@ -10,9 +10,9 @@ require "./store_mongo"
 require "./wowlookup"
 require './feed_item_formatter'
 
-require('./init_logger')
-require('./calc_changes')
-
+require './init_logger'
+require './calc_changes'
+require './call_logger'
 
 # this an in memory cache of the latest guild/char details
 class wf.WoW
@@ -46,11 +46,18 @@ class wf.WoW
   constructor: (callback)->
     wf.info "WoW constructor"
     feed_formatter = new wf.FeedItemFormatter()
+    new wf.CallLogger(this, wowlookup, store)
     item_loader_queue = async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
     store.create_collection calls_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
       wf.wow ?= this
       callback?(this)
+
+  get_calls_collection: ->
+    calls_collection
+
+  get_armory_collection: ->
+    armory_collection
 
   ensure_registered: (region, realm, type, name, registered_handler) ->
     wf.debug "Registering #{name}"
@@ -262,37 +269,6 @@ class wf.WoW
       # for each, go through its categories/achievements and achievements, store in db
       # 
 
-  armory_get_logged_call: (item, callback) =>
-    armory_stats = 
-      type: item.type
-      region: item.region
-      name: item.name
-      realm: item.realm
-      start_time: new Date().getTime()
-    store.load armory_collection, {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
-      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
-        armory_stats.end_time = new Date().getTime()
-        armory_stats.error = info?.error
-        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
-        armory_stats.had_error = info?.error?
-        store.insert calls_collection, armory_stats, =>
-          callback?(doc, info)
-    
-  armory_item_logged_call: (item_id, callback) =>
-    armory_stats = 
-      type: "item"
-      region: "eu"
-      name: item_id
-      realm: "na"
-      start_time: new Date().getTime()
-    wowlookup.get_item item_id, null, (info) ->
-      armory_stats.end_time = new Date().getTime()
-      armory_stats.error = info?.error
-      armory_stats.not_modified = (info is undefined and !armory_stats.error?)
-      armory_stats.had_error = info?.error?
-      store.insert calls_collection, armory_stats, =>
-        callback?(info)
-    
   ensure_registered_correct: (item, info, callback) =>
     if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
       wf.info "Registered entry is different, update registered"
@@ -322,6 +298,7 @@ class wf.WoW
       callback?(info)
 
   armory_item_loader: (item, callback) =>
+    wf.debug "About to call Armory via logged call"
     @armory_get_logged_call item, (doc, info) =>
       # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
       if info?
@@ -535,22 +512,6 @@ class wf.WoW
       else
         callback?()
 
-  armory_realms_logged_call: (region, callback) =>
-    armory_stats = 
-      type: "realms"
-      region: region
-      name: "realms"
-      realm: "na"
-      start_time: new Date().getTime()
-    wowlookup.get_realms region, (info) ->
-      wf.info "get realms for region #{region} responded, realms:#{info.length}"
-      armory_stats.end_time = new Date().getTime()
-      armory_stats.error = info?.error
-      armory_stats.not_modified = (info is undefined and !armory_stats.error?)
-      armory_stats.had_error = info?.error?
-      store.insert calls_collection, armory_stats, ->
-        callback?(info)
-    
 
   item_loader: (item_id, callback) =>
     # see if we have it already
