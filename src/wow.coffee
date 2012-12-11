@@ -299,15 +299,16 @@ class wf.WoW
 
   armory_item_loader: (item, callback) =>
     wf.debug "About to call Armory via logged call"
-    @armory_get_logged_call item, (doc, info) =>
-      # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
-      if info?
-        @store_update info.type, info.region, info.realm, info.name, info, =>
-          # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-          @ensure_registered_correct item, info, callback
-      else
-        # send old info back, needed for guilds so we can query the members
-        callback?(doc?.armory) 
+    store.load @get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
+      @armory_get_logged_call item, doc, (info) =>
+        # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+        if info?
+          @store_update info.type, info.region, info.realm, info.name, info, =>
+            # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+            @ensure_registered_correct item, info, callback
+        else
+          # send old info back, needed for guilds so we can query the members
+          callback?(doc?.armory) 
 
   armory_results_loader: (loader_queue, results_array) ->
     loader_queue.push results_array, (info) ->
