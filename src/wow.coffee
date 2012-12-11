@@ -300,7 +300,7 @@ class wf.WoW
   armory_item_loader: (item, callback) =>
     wf.debug "About to call Armory via logged call"
     store.load @get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
-      @armory_get_logged_call item, doc, (info) =>
+      @armory_get_logged_call item.type, item.region, item.name, item.realm, doc.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
           @store_update info.type, info.region, info.realm, info.name, info, =>
