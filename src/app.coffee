@@ -14,6 +14,7 @@ require './init_logger'
 require './defaults'
 
 require './wow'
+require './wow_stats'
 require './feed_item_formatter'
 require './prettify_json'
 require './cron'
@@ -54,6 +55,7 @@ wf.app.configure ->
 
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.wow ?= new wf.WoW()
+  wf.wow_stats = new wf.WoWStats()
   # todo - push this into wow object
   wf.feed_formatter = new wf.FeedItemFormatter()
   # wf.wow.static_load()
@@ -239,7 +241,7 @@ wf.app.get '/debug/statsold', (req, res) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/stats', (req, res) ->
-  wf.wow.armory_calls (result) ->
+  wf.wow_stats.armory_calls wf.wow, (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
 
 wf.app.get '/debug/logs/:type', (req, res) ->

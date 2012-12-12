@@ -1,9 +1,7 @@
 global.wf ||= {}
 
-startup_time = new Date().getTime()
 
 async = require "async"
-moment = require "moment"
 
 require "./defaults"
 require "./store_mongo"
@@ -52,6 +50,18 @@ class wf.WoW
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
       wf.wow ?= this
       callback?(this)
+
+  get_loader_queue: ->
+    loader_queue
+
+  get_item_loader_queue: ->
+    item_loader_queue
+    
+  get_job_running_lock: ->
+    job_running_lock
+
+  get_collections: ->
+    [armory_collection, calls_collection, registered_collection, items_collection, static_collection, realms_collection, wf.logs_collection]
 
   get_calls_collection: ->
     calls_collection
@@ -107,67 +117,6 @@ class wf.WoW
     else
       result_handler?(null)
 
-  armory_calls: (callback)->
-    info = 
-      startup_time: moment(startup_time).format('H:mm:ss ddd')
-      memory_usage: process.memoryUsage()
-      node_uptime: process.uptime()
-      armory_load:
-        armory_load_running: job_running_lock
-        number_running: loader_queue?.running() 
-        number_queued: loader_queue?.length()
-      item_loader_queue:
-        number_running: item_loader_queue?.running()
-        number_queued: item_loader_queue?.length()
-    store.dbstats [armory_collection, calls_collection, registered_collection, items_collection, static_collection, realms_collection, wf.logs_collection], (stats) ->
-      info.db = stats      
-      # > db.armory_history.aggregate( {$group : { _id:"$name", count:{$sum:1}}})
-      start_of_day = moment().sod().valueOf()
-      yesterday = moment().sod().subtract(days:1).valueOf()
-      twohours_ago = moment().subtract(hours:2).valueOf()
-      store.aggregate calls_collection, 
-        [
-          { $project: 
-            type: 1
-            start_time: 1
-            error: 1
-            errors:{$cmp: ["$had_error", false]}
-            not_modifieds:{$cmp: ["$not_modified", false]}
-            date_category:{$cond:[$gte:["$start_time", twohours_ago],"last-2hours", $cond:[$gte:["$start_time", start_of_day],"today",$cond:[$gte:["$start_time", yesterday],"yesterday", "before-yesterday"]]]}
-          },
-          { $group : 
-            # _id: "$type"
-            # _id:{ error:"$error", type:"$type"}
-            _id:{ date_category:"$date_category", type:"$type", error:"$error"}
-            totalByType:{ $sum:1 }
-            earliest: {$min: "$start_time"}
-            latest: {$max: "$start_time"}
-            errors: {$sum: "$errors"} 
-            not_modified: {$sum :"$not_modifieds"}
-          }
-        ], 
-        {}, 
-        (results) ->
-          if results?
-            results2 = {}
-            for type_stat in results
-              type_stat.earliest = moment(type_stat.earliest).format("H:mm:ss ddd")
-              type_stat.latest = moment(type_stat.latest).format("H:mm:ss ddd")
-              results2[type_stat._id.date_category] ?= {}
-              if type_stat._id.error?
-                key = type_stat._id.type + "/" + type_stat._id.error + "-" + type_stat.earliest + " - " + type_stat.latest
-                total = type_stat.errors
-                results2[type_stat._id.date_category][key] = total
-              else
-                key = type_stat._id.type + "-" + type_stat.earliest + " - " + type_stat.latest
-                total = type_stat.totalByType
-                results2[type_stat._id.date_category][key] = total
-                key = type_stat._id.type + "/" + "not-modified" + "-" + type_stat.earliest + " - " + type_stat.latest
-                total = type_stat.not_modified
-                results2[type_stat._id.date_category][key] = total
-            # info.aggregate = results
-            info.aggregate_calls = results2
-          callback?(info)
 
   get_loaded: (loaded_handler) ->
     @ensure_armory_indexes ->
