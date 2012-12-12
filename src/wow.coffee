@@ -233,42 +233,6 @@ class wf.WoW
     else
       result_handler?(null)
 
-  static_load: =>
-    # load achievements
-    try 
-      @save_achievements("characterAchievements")
-      @save_achievements("guildAchievements")
-    catch e
-      wf.error "static_load:#{e}"
-
-  save_achievements: (name) ->
-    wowlookup.get_static name, "eu", (achievements) ->
-      # data returned is quite structured - so flatten it out to save it
-      # go through all groups
-      return unless achievements?
-      for achievementGroup in achievements
-        # get groups categories
-        if achievementGroup.achievements?
-          for groupAchievement in achievementGroup.achievements
-            groupAchievement.static_type = name
-            groupAchievement.group_name = achievementGroup.name
-            groupAchievement.group_id = achievementGroup.id
-            store.ensure_index static_collection, armory_static_index_1, null, ->
-              store.upsert static_collection, {static_type:name, id:groupAchievement.id}, groupAchievement
-        # get categories and their achievements
-        if achievementGroup.categories?
-          for groupCategory in achievementGroup.categories
-            for categoryAchievement in groupCategory.achievements
-              categoryAchievement.static_type = name
-              categoryAchievement.category_name = groupCategory.name
-              categoryAchievement.category_id = groupCategory.id
-              categoryAchievement.group_name = achievementGroup.name
-              categoryAchievement.group_id = achievementGroup.id
-              store.upsert static_collection, {static_type:name, id:categoryAchievement.id}, categoryAchievement
-
-      # for each, go through its categories/achievements and achievements, store in db
-      # 
-
   ensure_registered_correct: (item, info, callback) =>
     if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
       wf.info "Registered entry is different, update registered"
@@ -297,42 +261,19 @@ class wf.WoW
     else
       callback?(info)
 
-  armory_item_loader: (item, callback) =>
-    store.load @get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
-      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
-        # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
-        if info?
-          @store_update info.type, info.region, info.realm, info.name, info, =>
-            # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-            @ensure_registered_correct item, info, callback
-        else
-          # send old info back, needed for guilds so we can query the members
-          callback?(doc?.armory) 
+  get_realms: (callback) ->
+    store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback
 
-  armory_results_loader: (loader_queue, results_array) ->
-    loader_queue.push results_array, (info) ->
-      if info?.type == "guild" and info?.members?
-        for member in info.members
-          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
-
-  armory_load: (loaded_callback) =>
-    wf.info "armory_load..."
-    return if job_running_lock # only run one at a time....
-    job_running_lock = true
-    try 
-      loader_queue = async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads 
-      loader_queue.drain = ->
-        job_running_lock = false
-        loader_queue = null
-        loaded_callback?()
-      if armory_pending_queue? and armory_pending_queue.length >0
-        wf.info "Loading from armory_pending_queue, length:#{armory_pending_queue.length}"
-        temp_pending_queue = armory_pending_queue[..]
-        armory_pending_queue = []
-        @armory_results_loader(loader_queue, temp_pending_queue)
-      else
-        @get_registered (results_array) =>
-          @armory_results_loader(loader_queue, results_array)
+  load_items: (item_id_array, callback) ->
+    if item_id_array? and item_id_array.length >0
+      store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
+        store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
+          items_hash = {}
+          for i in items
+            items_hash[i.item_id] = i
+          callback?(items_hash)
+    else
+      callback?({})
 
 
 
@@ -458,19 +399,79 @@ class wf.WoW
               wf.debug "Now saved #{info.name}/#{name}, no old one"
               stored_handler?()
 
-  load_items: (item_id_array, callback) ->
-    if item_id_array? and item_id_array.length >0
-      store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
-        store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
-          items_hash = {}
-          for i in items
-            items_hash[i.item_id] = i
-          callback?(items_hash)
-    else
-      callback?({})
 
-  get_realms: (callback) ->
-    store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback
+
+  static_load: =>
+    # load achievements / #not used, at the moment
+    try 
+      @save_achievements("characterAchievements")
+      @save_achievements("guildAchievements")
+    catch e
+      wf.error "static_load:#{e}"
+
+  save_achievements: (name) ->
+    # load achievements / #not used, at the moment
+    wowlookup.get_static name, "eu", (achievements) ->
+      # data returned is quite structured - so flatten it out to save it
+      # go through all groups
+      return unless achievements?
+      for achievementGroup in achievements
+        # get groups categories
+        if achievementGroup.achievements?
+          for groupAchievement in achievementGroup.achievements
+            groupAchievement.static_type = name
+            groupAchievement.group_name = achievementGroup.name
+            groupAchievement.group_id = achievementGroup.id
+            store.ensure_index static_collection, armory_static_index_1, null, ->
+              store.upsert static_collection, {static_type:name, id:groupAchievement.id}, groupAchievement
+        # get categories and their achievements
+        if achievementGroup.categories?
+          for groupCategory in achievementGroup.categories
+            for categoryAchievement in groupCategory.achievements
+              categoryAchievement.static_type = name
+              categoryAchievement.category_name = groupCategory.name
+              categoryAchievement.category_id = groupCategory.id
+              categoryAchievement.group_name = achievementGroup.name
+              categoryAchievement.group_id = achievementGroup.id
+              store.upsert static_collection, {static_type:name, id:categoryAchievement.id}, categoryAchievement
+
+
+  armory_item_loader: (item, callback) =>
+    store.load @get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
+      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
+        # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+        if info?
+          @store_update info.type, info.region, info.realm, info.name, info, =>
+            # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+            @ensure_registered_correct item, info, callback
+        else
+          # send old info back, needed for guilds so we can query the members
+          callback?(doc?.armory) 
+
+  armory_results_loader: (loader_queue, results_array) ->
+    loader_queue.push results_array, (info) ->
+      if info?.type == "guild" and info?.members?
+        for member in info.members
+          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
+
+  armory_load: (loaded_callback) =>
+    wf.info "armory_load..."
+    return if job_running_lock # only run one at a time....
+    job_running_lock = true
+    try 
+      loader_queue = async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads 
+      loader_queue.drain = ->
+        job_running_lock = false
+        loader_queue = null
+        loaded_callback?()
+      if armory_pending_queue? and armory_pending_queue.length >0
+        wf.info "Loading from armory_pending_queue, length:#{armory_pending_queue.length}"
+        temp_pending_queue = armory_pending_queue[..]
+        armory_pending_queue = []
+        @armory_results_loader(loader_queue, temp_pending_queue)
+      else
+        @get_registered (results_array) =>
+          @armory_results_loader(loader_queue, results_array)
 
   static_loader: (callback) ->
     async.parallel [@realms_loader, @races_loader, @classes_loader], callback
