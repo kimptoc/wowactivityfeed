@@ -32,7 +32,7 @@ class wf.WoW
   registered_index_1 = {name:1, realm:1, region:1, type:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
-  realms_index_1 = {slug:1, region:1}
+  realms_index_1 = {name:1, slug:1, region:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
   armory_static_index_1 = {static_type:1, id:1}
@@ -298,9 +298,8 @@ class wf.WoW
       callback?(info)
 
   armory_item_loader: (item, callback) =>
-    wf.debug "About to call Armory via logged call"
     store.load @get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
-      @armory_get_logged_call item.type, item.region, item.name, item.realm, doc.lastModified, (info) =>
+      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
           @store_update info.type, info.region, info.realm, info.name, info, =>
@@ -500,7 +499,7 @@ class wf.WoW
     all_regions = ["eu","us","cn","kr","tw"] 
     all_realms = []
     get_region_realms = (region, region_callback) =>   
-      @armory_realms_logged_call region, (realms) ->
+      wowlookup.get_realms region, (realms) ->
         wf.info "For region #{region}, realms returned:#{realms.length}"
         all_realms = all_realms.concat(realms)
         region_callback?()
@@ -520,7 +519,7 @@ class wf.WoW
     # persist
     store.load items_collection, {item_id}, null, (doc) =>
       unless doc?
-        @armory_item_logged_call item_id, (item)->
+        wowlookup.get_item item_id, null, (item)->
           if item?
             item.item_id = item_id
             store.add items_collection, item, callback

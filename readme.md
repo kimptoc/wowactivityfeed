@@ -17,6 +17,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- get duplicate key on item id - could be parallel timing thing
+-   err: 'E11000 duplicate key error index: wowfeed.armory_items.$item_id_1  dup key: { : 83801 }',
 - consider grunt-reduce for express asset pipeline - http://dailyjs.com/2012/12/10/extender-gridy-reduce/
 - put 1 month expiry on items - so they get refreshed, if used, removed if not
 - change realms load to do upsert - if one region is down, then we lose all their realms :(
