@@ -15,6 +15,7 @@ require './defaults'
 
 require './wow'
 require './wow_stats'
+require './wow_loader'
 require './feed_item_formatter'
 require './prettify_json'
 require './cron'
@@ -56,6 +57,7 @@ wf.app.configure ->
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.wow ?= new wf.WoW()
   wf.wow_stats = new wf.WoWStats()
+  wf.wow_loader = new wf.WoWLoader(wf.wow)
   # todo - push this into wow object
   wf.feed_formatter = new wf.FeedItemFormatter()
   # wf.wow.static_load()

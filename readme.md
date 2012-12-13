@@ -5,6 +5,8 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
+menu?  http://jpanelmenu.com/
+
 ## BUGS
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
@@ -23,7 +25,7 @@ maybe....
 - put 1 month expiry on items - so they get refreshed, if used, removed if not
 - change realms load to do upsert - if one region is down, then we lose all their realms :(
 - on guild page, show recent joiners/leavers
-- guild logo - is there one?
+- guild logo - is there one? - maybe http://us.battle.net/wow/en/forum/topic/6571627473
 - use last-Modified on responses, base of underlying data max last modified
 - limiting textsize needed for news feed items too, eg when lots of criteria for an achievement
 - if no registed items, armory load hangs - hamdle this case
