@@ -180,7 +180,7 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
     action: req.path
     category: req.header('user-agent')
     label: JSON.stringify(req.headers)
-    value: 42
+    value: 1
 
   wf.timing_on("/feed/#{req.params.name}")
 
