@@ -240,8 +240,9 @@ class wf.WoWLoader
         @wow.set_loader_queue(null)
         loaded_callback?()
       if @wow.get_armory_pending_queue()? and @wow.get_armory_pending_queue().length >0
-        wf.info "Loading from armory_pending_queue, length:#{armory_pending_queue.length}"
-        temp_pending_queue = @wow.get_armory_pending_queue[..]
+        wf.info "Loading from armory_pending_queue, length:#{@wow.get_armory_pending_queue().length}"
+        temp_pending_queue = @wow.get_armory_pending_queue()[..]
+        wf.info "Loading from armory_pending_queue/temp, length:#{temp_pending_queue.length}"
         @wow.clear_armory_pending_queue()
         @armory_results_loader(@wow.get_loader_queue(), temp_pending_queue)
       else

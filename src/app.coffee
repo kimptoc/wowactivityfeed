@@ -44,7 +44,7 @@ wf.app.configure ->
   wf.app.use(express.bodyParser())  
   wf.app.use(express.methodOverride())  
   wf.app.use(wf.app.router)  
-  wf.app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000)
+  wf.app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 4000)
   wf.app.use(express.favicon())  
   # wf.app.use(express.logger('dev'))  
   wf.app.use(wf.expressLogger())

@@ -5,6 +5,10 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
+for specific char/guild armory loads, seems to do nothing :(
+
+handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
+
 menu?  http://jpanelmenu.com/
 
 ## BUGS
