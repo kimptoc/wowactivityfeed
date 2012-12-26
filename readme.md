@@ -5,7 +5,6 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-for specific char/guild armory loads, seems to do nothing :(
 
 handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
 
@@ -23,6 +22,9 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+-http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
+-Crusader Spinlady (Ðeus lo vult) New title(s): ', Master of the Ways'
+ 
 - get duplicate key on item id - could be parallel timing thing
 -   err: 'E11000 duplicate key error index: wowfeed.armory_items.$item_id_1  dup key: { : 83801 }',
 - consider grunt-reduce for express asset pipeline - http://dailyjs.com/2012/12/10/extender-gridy-reduce/
@@ -156,6 +158,9 @@ http://apm.nodefly.com/#dashboard
 - run on ubuntu for forever via npm forever
    forever start -l logs/forever.log -o logs/out.log -e logs/err.log app.js
 
+- to update npm-shrinkwrap.json, delete it and recreate it
+  npm shrinkwrap
+  
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
 
@@ -208,6 +213,10 @@ Waiting:      452 1700 1404.0    994    3743
 Total:        599 1829 1412.5   1091    3887
 
 ## LINKS
+
+hosting:
+- http://www.lowendbox.com/
+- 
 
 Unofficial WoW fansite kit - http://us.battle.net/wow/en/forum/topic/7006895011
 
