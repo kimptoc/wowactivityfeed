@@ -5,6 +5,8 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
+DNS move
+- ok?
 
 handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
 
@@ -160,7 +162,7 @@ http://apm.nodefly.com/#dashboard
 
 - to update npm-shrinkwrap.json, delete it and recreate it
   npm shrinkwrap
-  
+
 - uploads via node-cron
   https://github.com/ncb000gt/node-cron/
 
