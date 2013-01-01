@@ -9,6 +9,7 @@ portcheck = require 'portchecker'
 class wf.WowLookup
 
   armory_instance = null
+  armory_connecting = false
   armory_calls = 
     guild: "guild"
     member: "character"
@@ -52,9 +53,13 @@ class wf.WowLookup
     if armory_instance?
       armory_handler?(armory_instance)
     else
-      @get_armory (armory) ->
-        armory_instance = armory
-        armory_handler?(armory_instance)
+      if armory_connecting
+        setTimeout (=> @with_armory(armory_handler)), 100
+      else
+        armory_connecting = true
+        @get_armory (armory) ->
+          armory_instance = armory
+          armory_handler?(armory_instance)
 
   get: (type, region, realm, name, lastModified, result_handler) ->
     wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}, last mod:#{new Date(lastModified)}"
