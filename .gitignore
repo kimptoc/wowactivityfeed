@@ -2,4 +2,5 @@
 /logs/
 /tmp/
 /public/stylesheets/
+/public/js-cs/
 /node_modules/

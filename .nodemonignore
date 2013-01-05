@@ -1,5 +1,6 @@
 #creates an exception for .coffee files
 src/*.coffee
+src_client/*.coffee
 store/*
 logs/*
 tmp/*

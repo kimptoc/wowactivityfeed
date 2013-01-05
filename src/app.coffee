@@ -202,6 +202,15 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
+wf.app.get '/search', (req, res) ->
+  wf.wow.get_realms (realms) ->
+    res.render 'search_backbone', {realms}
+
+wf.app.get '/json/realms', (req, res) ->
+  wf.wow.get_realms (realms) ->
+    res.send JSON.stringify(realms)
+
+
 wf.app.get '/debug/search', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.render 'search', {realms}

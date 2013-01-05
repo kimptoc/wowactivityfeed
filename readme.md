@@ -5,8 +5,9 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-DNS move
-- ok?
+- search, scrape all comm sites / wowsearch.coffee
+- backbone based
+- use jquery on server for scraping
 
 handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
 
@@ -16,6 +17,7 @@ menu?  http://jpanelmenu.com/
 maybe....
 - kimptopanda showing achievements that they dont have...revealed all in winterspring, check in-game
 - double check feed updates vs battle.net - showing correct item?
+- existing items showing as new, why? if guild/member being accessed then it should be kept current
 
 ## FIXED MAYBE PENDING BEING TESTED
 - performance? seems ok after restart, removed collection caching... - GC issue or VM issue?
@@ -180,6 +182,7 @@ jsdiff.diff(a,b)
 member or char?
 one window to compile
 coffee --compile --watch --output js/ src/ spec/
+coffee --compile --watch --output public/js-cs src_client
 
 another To run tests (at least on my win7 box)
 

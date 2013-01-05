@@ -26,6 +26,8 @@
         "nodetime":"",
         "underscore":"",
         "nodefly":"",
-        "ga":""
+        "ga":"",
+        "cheerio":"",
+        "request":""
     }
 }

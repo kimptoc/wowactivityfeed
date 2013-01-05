@@ -61,7 +61,7 @@ class wf.StoreMongo
           wf.error_no_store(err)
           stored_handler?(null)
         else
-          wf.debug "saved:#{document_object}"
+          wf.debug "saved in #{collection_name}:#{document_object}"
           stored_handler?(coll)
 
   create_collection: (collection_name, options, callback) ->

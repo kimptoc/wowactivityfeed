@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  include templates/search_template.jade
+  // backbone
+  script(type='text/javascript', src='/js/underscore.js')
+  script(type='text/javascript', src='/js/backbone.js')
+  //- script(type='text/javascript', src='/js/underscore-min.js')
+  //- script(type='text/javascript', src='/js/backbone-min.js')
+  script(type='text/javascript', src='/js-cs/realms.js')
+  script(type='text/javascript', src='/js-cs/search_view.js')
+  script(type='text/javascript', src='/js-cs/router.js')
+  script(type='text/javascript', src='/js-cs/search.js')
+  #backbone_container
+  :coffeescript
+    console.log "Bootstrap the backbone bit of the app"
+    wf.Search.init()

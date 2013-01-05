@@ -1,0 +1,18 @@
+script(type='text/template',id='search-template')
+  div 
+    .offset-by-three
+      .search_box
+        .ten.columns
+          div
+          input(type='text', placeholder='Search for a character or guild', autofocus)
+
+          select
+            option [select a realm/region]
+            <% _.each(realms, function(realm) { %>
+            option <%= realm.name %> (<%= realm.region %>)
+            <% }); %>
+            //- if realms
+            //-   each r in realms
+            //-     option #{r.name} (#{r.region})
+
+          button(id='search_now') Search
