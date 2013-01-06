@@ -11,6 +11,9 @@ http://www.fonts2u.com/caribbean-regular.font
 
 - handle case diffs, eg Tony might exist and be returned for query on tony
 
+example guild/member same name/realm
+http://localhost:4000/json/lookup/eu/Wrathbringer/Tony
+
 handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
 
 not handling exotic chars, eg this gives error

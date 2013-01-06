@@ -210,6 +210,13 @@ wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)
 
+wf.app.get '/json/lookup/:region/:realm/:name', (req, res) ->
+  region = req.params.region.toLowerCase()
+  realm = req.params.realm
+  name = req.params.name
+  wf.wow.lookup region, realm, name, (results) ->
+    res.send JSON.stringify(results)
+
 
 wf.app.get '/debug/search', (req, res) ->
   wf.wow.get_realms (realms) ->

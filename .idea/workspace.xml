@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow.coffee" afterPath="$PROJECT_DIR$/src/wow.coffee" />
     </list>
     <ignored path="wowfeed.iws" />
@@ -57,7 +58,10 @@
         <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state line="13" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <marker date="1357434283000" expanded="true" signature="61:971" placeholder="..." />
+                <marker date="1357434283000" expanded="true" signature="583:858" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,7 +69,7 @@
       <file leaf-file-name="wow.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/wow.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="226" column="0" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.9465241">
+            <state line="204" column="10" selection-start="7385" selection-end="7385" vertical-scroll-proportion="0.30481285">
               <folding />
             </state>
           </provider>
@@ -275,7 +279,7 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="last_opened_file_path" value="$USER_HOME$/Sites/php/facebookapp" />
     <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
@@ -512,13 +516,16 @@
     <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <marker date="1357434283000" expanded="true" signature="61:971" placeholder="..." />
+            <marker date="1357434283000" expanded="true" signature="583:858" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="226" column="0" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.9465241">
+        <state line="204" column="10" selection-start="7385" selection-end="7385" vertical-scroll-proportion="0.30481285">
           <folding />
         </state>
       </provider>

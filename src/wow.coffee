@@ -198,6 +198,23 @@ class wf.WoW
           previous_item_cache[@repatch_item_key(item)] = item
     callback?(results)
 
+  lookup: (region, realm, name, result_handler) =>
+    # need to return both if found (guild and member)!!! probably should drive from browser to avoid delay!
+    lookup_results = []
+    async.parallel [
+      (done) =>
+        @get_history_counted region, realm, 'member', name, 1, (results) => 
+          if results? and results.length >0 
+            lookup_results = lookup_results.concat(results)
+          done()
+      (done) =>
+        @get_history_counted region, realm, 'guild', name, 1, (results) =>
+          if results? and results.length >0 
+            lookup_results = lookup_results.concat(results)
+          done()
+    ], ->
+      result_handler?(lookup_results)
+
   get_history: (region, realm, type, name, result_handler) =>
     @get_history_counted(region, realm, type, name, 1, result_handler)
 
@@ -210,7 +227,7 @@ class wf.WoW
               result_handler(results)
             else
               if counter < 30
-                wf.info "wait for armory load to complete...#{counter}"
+                wf.info "wait for armory load to complete... #{region}/#{realm}/#{type}/#{name}-#{counter}"
                 setTimeout (=> @get_history_counted(region, realm, type, name, counter+1, result_handler)), 1000
               else
                 result_handler?(null)
