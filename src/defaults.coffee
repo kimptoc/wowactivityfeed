@@ -1,6 +1,7 @@
 global.wf ||= {}
 
-wf.SITE_URL = "http://localhost:3000"
+wf.SITE_PORT = process.env.VCAP_APP_PORT || process.env.PORT || 4000
+wf.SITE_URL = "http://localhost:#{wf.SITE_PORT}"
 wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
 wf.HISTORY_LIMIT = 12
 wf.HISTORY_SAVE_LIMIT = 4

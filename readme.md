@@ -9,7 +9,12 @@ http://www.fonts2u.com/caribbean-regular.font
 - backbone based
 - use jquery on server for scraping
 
+- handle case diffs, eg Tony might exist and be returned for query on tony
+
 handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
+
+not handling exotic chars, eg this gives error
+http://localhost:4000/view/member/us/Kael%27thas/Fe%E5therz?ts=1357347891000&id=7093
 
 menu?  http://jpanelmenu.com/
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="" />
+    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow.coffee" afterPath="$PROJECT_DIR$/src/wow.coffee" />
+    </list>
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +34,10 @@
       <file leaf-file-name="search_backbone.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/search_backbone.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="2" selection-start="564" selection-end="564" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="14" column="2" selection-start="590" selection-end="590" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1357433711000" expanded="true" signature="21:681" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,16 +45,27 @@
       <file leaf-file-name="search_template.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/templates/search_template.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="31" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
+            <state line="17" column="31" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1357408989000" expanded="true" signature="6:571" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search_view.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search_view.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
+      <file leaf-file-name="wow.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/wow.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="20" selection-start="238" selection-end="254" vertical-scroll-proportion="0.28745645">
+            <state line="226" column="0" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.9465241">
               <folding />
             </state>
           </provider>
@@ -59,7 +74,7 @@
       <file leaf-file-name="search.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src_client/search.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="30" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
+            <state line="13" column="28" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -104,7 +119,6 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/wowlookup.coffee" />
-        <option value="$PROJECT_DIR$/src/wow.coffee" />
         <option value="$PROJECT_DIR$/src/wow_loader.coffee" />
         <option value="$PROJECT_DIR$/src/store_mongo.coffee" />
         <option value="$PROJECT_DIR$/src/wow_search.coffee" />
@@ -112,6 +126,7 @@
         <option value="$PROJECT_DIR$/src_client/search.coffee" />
         <option value="$PROJECT_DIR$/views/templates/search_template.jade" />
         <option value="$PROJECT_DIR$/src_client/search_view.coffee" />
+        <option value="$PROJECT_DIR$/src/wow.coffee" />
       </list>
     </option>
   </component>
@@ -436,11 +451,6 @@
         <state line="4" column="0" selection-start="309" selection-end="318" vertical-scroll-proportion="-2.4615386" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="8" selection-start="1191" selection-end="1197" vertical-scroll-proportion="-4.3076925" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="15" selection-start="1645" selection-end="1651" vertical-scroll-proportion="-4.1923075" />
@@ -448,7 +458,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/store_mongo.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="46" selection-start="1875" selection-end="1875" vertical-scroll-proportion="-4.6153846" />
+        <state line="63" column="46" selection-start="1875" selection-end="1875" vertical-scroll-proportion="-4.6153846">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow_search.coffee">
@@ -467,14 +479,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/search_backbone.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="2" selection-start="564" selection-end="564" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="14" column="2" selection-start="590" selection-end="590" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1357433711000" expanded="true" signature="21:681" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/search.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="30" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
+        <state line="13" column="28" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -488,14 +502,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/templates/search_template.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="31" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="17" column="31" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1357408989000" expanded="true" signature="6:571" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="20" selection-start="238" selection-end="254" vertical-scroll-proportion="0.28745645">
+        <state line="13" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="226" column="0" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.9465241">
           <folding />
         </state>
       </provider>

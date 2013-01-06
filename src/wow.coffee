@@ -199,28 +199,42 @@ class wf.WoW
     callback?(results)
 
   get_history: (region, realm, type, name, result_handler) =>
+    @get_history_counted(region, realm, type, name, 1, result_handler)
+
+  get_history_counted: (region, realm, type, name, counter, result_handler) =>
     if type == "guild" or type == "member"
       @ensure_registered region, realm, type, name, =>
         @ensure_armory_indexes =>
-          selector = {type, region, realm, name}
-          store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
+          @get_history_from_db region, realm, type, name, (results) =>
             if results? and results.length >0
-              selector.lastModified = results[0].lastModified
-              store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
-                if type == "guild" # if its a guild, also query for guild members
-                  wf.debug "Got a guild, so also query for members..."
-                  selector = {type:"member", region, realm, "armory.guild.name":name}
-                  store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
-                    store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
-                      for m in members
-                        results.push m
-                      @repatch_results(results, result_handler)
-                else
-                  @repatch_results(results, result_handler)
+              result_handler(results)
             else
-              result_handler?(null)
+              if counter < 30
+                wf.info "wait for armory load to complete...#{counter}"
+                setTimeout (=> @get_history_counted(region, realm, type, name, counter+1, result_handler)), 1000
+              else
+                result_handler?(null)
     else
       result_handler?(null)
+
+  get_history_from_db: (region, realm, type, name, result_handler) =>
+    selector = {type, region, realm, name}
+    store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
+      if results? and results.length >0
+        selector.lastModified = results[0].lastModified
+        store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
+          if type == "guild" # if its a guild, also query for guild members
+            wf.debug "Got a guild, so also query for members..."
+            selector = {type:"member", region, realm, "armory.guild.name":name}
+            store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
+              store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
+                for m in members
+                  results.push m
+                @repatch_results(results, result_handler)
+          else
+            @repatch_results(results, result_handler)
+      else
+        result_handler?(null)
 
   get_realms: (callback) ->
     store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback
