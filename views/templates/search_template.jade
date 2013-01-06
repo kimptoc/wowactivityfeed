@@ -4,7 +4,7 @@ script(type='text/template',id='search-template')
       .search_box
         .ten.columns
           div
-          input(type='text', placeholder='Search for a character or guild', autofocus)
+          input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
 
           select
             option [select a realm/region]
@@ -15,4 +15,4 @@ script(type='text/template',id='search-template')
             //-   each r in realms
             //-     option #{r.name} (#{r.region})
 
-          button(id='search_now') Search
+          button#search_now Search

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/wowfeed.iml" afterPath="$PROJECT_DIR$/.idea/wowfeed.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.nodemonignore" afterPath="$PROJECT_DIR$/.nodemonignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store_mongo.coffee" afterPath="$PROJECT_DIR$/src/store_mongo.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow_loader.coffee" afterPath="$PROJECT_DIR$/src/wow_loader.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
-    </list>
+    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="" />
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,7 +50,7 @@
       <file leaf-file-name="search_view.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="51" selection-start="285" selection-end="285" vertical-scroll-proportion="0.28745645">
+            <state line="11" column="20" selection-start="238" selection-end="254" vertical-scroll-proportion="0.28745645">
               <folding />
             </state>
           </provider>
@@ -506,7 +495,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="51" selection-start="285" selection-end="285" vertical-scroll-proportion="0.28745645">
+        <state line="11" column="20" selection-start="238" selection-end="254" vertical-scroll-proportion="0.28745645">
           <folding />
         </state>
       </provider>
