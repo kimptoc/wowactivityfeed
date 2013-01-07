@@ -10,6 +10,8 @@ class wf.SearchView extends Backbone.View
 
   initialize: =>
     @model.realms.bind('reset',@render)
+    @model.results.bind('reset',@render)
+    @model.results.bind('add',@render)
     # _.bindAll(this, 'render')
 
   searchNowClicked: =>
@@ -26,7 +28,7 @@ class wf.SearchView extends Backbone.View
     # @$el.html( @template( @model.toJSON() ) )
     # model = new Backbone.Model()
     # model.set "foo","bar"
-    @$el.html( @template( realms : @model.realms.toJSON() ) )
+    @$el.html( @template( realms : @model.realms.toJSON(), results: @model.results.toJSON() ) )
     $container = $("#backbone_container");
     $container.append(@el);
 

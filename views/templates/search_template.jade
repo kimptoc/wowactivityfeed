@@ -6,13 +6,22 @@ script(type='text/template',id='search-template')
           div
           input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
 
-          select
-            option [select a realm/region]
+          select#realm_region
+            option(value="") [select a realm/region]
             <% _.each(realms, function(realm) { %>
-            option <%= realm.name %> (<%= realm.region %>)
+            | <option id="<%= realm._id %>" data-realm="<%= realm.name %>" data-region="<%= realm.region %>"> <%= realm.name %> (<%= realm.region %>)</option>
             <% }); %>
             //- if realms
             //-   each r in realms
             //-     option #{r.name} (#{r.region})
 
           button#search_now Search
+
+    .offset-by-three
+      .search_results
+        .ten.columns
+          div
+            <% _.each(results, function(item) { %>
+            | <%= item.name %>/<%= item.type %><br>
+            <% }); %>
+

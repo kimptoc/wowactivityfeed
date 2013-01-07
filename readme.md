@@ -9,7 +9,11 @@ http://www.fonts2u.com/caribbean-regular.font
 - backbone based
 - use jquery on server for scraping
 
-- handle case diffs, eg Tony might exist and be returned for query on tony
+- handle case diffs, eg Tony might exist and be returned for query on tony, lookup does it ok - just need to handle response.
+- indicate number of things found (0/1/2)
+- alert if no name/realm/region selected
+- format results
+- integrate search into home page
 
 example guild/member same name/realm
 http://localhost:4000/json/lookup/eu/Wrathbringer/Tony

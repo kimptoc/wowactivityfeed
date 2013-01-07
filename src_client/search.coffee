@@ -9,7 +9,8 @@ class wf.Search
   @init: ->
     console.log "Search.init"
     @realms = new wf.Realms()
-    @searchView = new wf.SearchView(model : {realms : wf.Search.realms})
+    @results = new wf.Results()
+    @searchView = new wf.SearchView(model : {realms: @realms, results: @results})
     @searchView.on('search:clicked', @searchClicked)
     # @app = new wf.Router()
     @realms.fetch()
@@ -19,9 +20,12 @@ class wf.Search
 # this.trips = new TimeTravel.Collections.Trips(tripData);
 # this.app = new TimeTravel.Routers.TripRouter();
 
-  @searchClicked: ->
+  @searchClicked: =>
     # ensure text entered
     # ensure realm selected
-    search_text = $('#search_text').text()
-    console.log $('#')
-    console.log "Time to search for #{search_text}!"
+    name = $('#search_text').val()
+    realm = $('#realm_region option:selected').attr('data-realm')
+    region = $('#realm_region option:selected').attr('data-region')
+    console.log "Time to search for #{name}/#{realm}/#{region}!"
+    @results.reset()
+    @results.search name, region, realm
