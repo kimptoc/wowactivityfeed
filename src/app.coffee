@@ -210,11 +210,15 @@ wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)
 
-wf.app.get '/json/lookup/:region/:realm/:name', (req, res) ->
+wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
+  type = req.params.type
+  type = 'member' if type == "character"
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
-  wf.wow.lookup region, realm, name, (results) ->
+  wf.wow.get region, realm, type, name, (result)->
+    results = []
+    results.push result if result? # might get nothing back, so need to return empty array
     res.send JSON.stringify(results)
 
 

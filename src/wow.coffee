@@ -148,7 +148,7 @@ class wf.WoW
 
   get: (region, realm, type, name, result_handler) =>
     if type == "guild" or type == "member"
-      @ensure_registered region, realm, type, name, ->
+      @ensure_registered region, realm, type, name, =>
         @ensure_armory_indexes ->
           store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
     else
@@ -197,23 +197,6 @@ class wf.WoW
           delete item.armory.news if item.armory.news?
           previous_item_cache[@repatch_item_key(item)] = item
     callback?(results)
-
-  lookup: (region, realm, name, result_handler) =>
-    # need to return both if found (guild and member)!!! probably should drive from browser to avoid delay!
-    lookup_results = []
-    async.parallel [
-      (done) =>
-        @get_history_counted region, realm, 'member', name, 1, (results) => 
-          if results? and results.length >0 
-            lookup_results = lookup_results.concat(results)
-          done()
-      (done) =>
-        @get_history_counted region, realm, 'guild', name, 1, (results) =>
-          if results? and results.length >0 
-            lookup_results = lookup_results.concat(results)
-          done()
-    ], ->
-      result_handler?(lookup_results)
 
   get_history: (region, realm, type, name, result_handler) =>
     @get_history_counted(region, realm, type, name, 1, result_handler)
