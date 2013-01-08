@@ -11,6 +11,8 @@ async = require "async"
 
 require './init_logger'
 
+require './string'
+
 require './defaults'
 
 require './wow'
@@ -215,7 +217,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
   type = 'member' if type == "character"
   region = req.params.region.toLowerCase()
   realm = req.params.realm
-  name = req.params.name
+  name = wf.String.capitalise(req.params.name)
   wf.wow.get region, realm, type, name, (result)->
     results = []
     results.push result if result? # might get nothing back, so need to return empty array

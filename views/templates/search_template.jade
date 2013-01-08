@@ -22,6 +22,9 @@ script(type='text/template',id='search-template')
         .ten.columns
           div
             <% _.each(results, function(item) { %>
-            | <%= item.name %>/<%= item.type %><br>
+            | <% print(wf.String.capitalise(item.type)) %>: <%= item.name %>
+            | <li>
+            | <ul>Level <%= item.armory.level %></ul>
+            | </li>
             <% }); %>
 
