@@ -10,7 +10,7 @@ portcheck = require 'portchecker'
 require "./wowlookup"
 require "./wow"
 
-# not using search - maybe I should delete that
+# not using this - maybe I should delete it
 class wf.WowSearch
 
   wowlookup = null

@@ -27,5 +27,9 @@ class wf.Search
     realm = $('#realm_region option:selected').attr('data-realm')
     region = $('#realm_region option:selected').attr('data-region')
     console.log "Time to search for #{name}/#{realm}/#{region}!"
+    @results.results_complete = false
     @results.reset()
-    @results.search name, region, realm
+    @results.search name, region, realm, =>
+      console.log "search complete..."
+      @results.results_complete = true
+      @searchView.render()

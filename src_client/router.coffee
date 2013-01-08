@@ -1,5 +1,6 @@
 window.wf ?= {}
 
+# DONT THIS IS USED _ remote it?
 class wf.Router extends Backbone.Router
   routes: 
     "": "index"

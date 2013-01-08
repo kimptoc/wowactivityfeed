@@ -1,8 +1,8 @@
 if (typeof window == "undefined")
-  root = global
+  ns = global
 else
-  root = window
-root.wf ?= {}
+  ns = window
+ns.wf ?= {}
 
 class wf.String
   @capitalise: (str) ->

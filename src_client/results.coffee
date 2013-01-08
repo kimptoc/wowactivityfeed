@@ -7,9 +7,16 @@ class wf.Results extends Backbone.Collection
 
   url: -> "/json/get/#{@type}/#{@region}/#{@realm}/#{@name}"
 
-  search: (@name, @region, @realm) =>
-    @type = 'guild'
-    @fetch {update:true, remove:false}
-    @type = 'member'
-    @fetch {update:true, remove:false}
+  search: (@name, @region, @realm, search_complete_callback) =>
+    async.parallel [
+      (done) =>
+        console.log "search for guild named #{name}"
+        @type = 'guild'
+        @fetch {update:true, remove:false, success: done}
+    , (done) =>
+        console.log "search for member named #{name}"
+        @type = 'member'
+        @fetch {update:true, remove:false, success: done}
+    ], search_complete_callback
+
 

@@ -21,6 +21,10 @@ script(type='text/template',id='search-template')
       .search_results
         .ten.columns
           div
+            <% if (results_complete === true) { %>
+            | Search complete, total found: <%= results.length %>
+            <% } %>
+          div
             <% _.each(results, function(item) { %>
             | <% print(wf.String.capitalise(item.type)) %>: <%= item.name %>
             | <li>
