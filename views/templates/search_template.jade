@@ -3,19 +3,19 @@ script(type='text/template',id='search-template')
     .offset-by-three
       .search_box
         .ten.columns
-          div
-          input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
+          form
+            input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
 
-          select#realm_region
-            option(value="") [select a realm/region]
-            <% _.each(realms, function(realm) { %>
-            | <option id="<%= realm._id %>" data-realm="<%= realm.name %>" data-region="<%= realm.region %>"> <%= realm.name %> (<%= realm.region %>)</option>
-            <% }); %>
-            //- if realms
-            //-   each r in realms
-            //-     option #{r.name} (#{r.region})
+            select#realm_region
+              option(value="") [select a realm/region]
+              <% _.each(realms, function(realm) { %>
+              | <option id="<%= realm._id %>" data-realm="<%= realm.name %>" data-region="<%= realm.region %>"> <%= realm.name %> (<%= realm.region %>)</option>
+              <% }); %>
+              //- if realms
+              //-   each r in realms
+              //-     option #{r.name} (#{r.region})
 
-          button#search_now Search
+              input#search_now(type="submit",name="SUBMIT",value="Search")
 
     .offset-by-three
       .search_results

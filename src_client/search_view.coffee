@@ -28,6 +28,7 @@ class wf.SearchView extends Backbone.View
       alert(error)
     else
       @trigger('search:clicked')
+    return false
 
   render: =>
     console.log "SearchView.render"
