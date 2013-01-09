@@ -32,5 +32,6 @@ class wf.SearchView extends Backbone.View
     $container.append(@el);
 
     $('#search_text').val(@name)
+    $('#'+@realm_region_id).attr('selected','selected')
     $('#search_now').on('click', @searchNowClicked)
     return this
