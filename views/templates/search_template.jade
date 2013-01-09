@@ -21,8 +21,10 @@ script(type='text/template',id='search-template')
       .search_results
         .ten.columns
           div
-            <% if (results_complete === true) { %>
+            <% if (results_complete) { %>
             | Search complete, total found: <%= results.length %>
+            <% } else if (searching) { %>
+            | Searching ... 
             <% } %>
           div
             <% _.each(results, function(item) { %>

@@ -40,8 +40,9 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
--http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
--Crusader Spinlady (Ðeus lo vult) New title(s): ', Master of the Ways'
+- show timestamp in msg body
+- http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
+- Crusader Spinlady (Ðeus lo vult) New title(s): ', Master of the Ways'
  
 - get duplicate key on item id - could be parallel timing thing
 -   err: 'E11000 duplicate key error index: wowfeed.armory_items.$item_id_1  dup key: { : 83801 }',
