@@ -16,7 +16,7 @@ class wf.SearchView extends Backbone.View
     @model.results.bind('add',@render)
 
   searchNowClicked: =>
-    @name = $('#search_text').val()
+    @name = $('#search_text').val().trim()
     @realm_region_id = $('#realm_region option:selected').attr('id')
     error = ""
     error += "Enter a name to search for" unless @name? and @name.length >0

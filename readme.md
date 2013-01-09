@@ -5,8 +5,8 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-
-- alert if no name/realm/region selected
+- make enter key do a search too
+- exotic char issues - eg Tänks or Terenas
 - format results
 - integrate search into home page
 

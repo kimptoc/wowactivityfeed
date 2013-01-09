@@ -61,7 +61,7 @@ class wf.FeedItemFormatter
   char_link: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{escape(p.realm)}/#{escape(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
+    "<a href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   get_formal_name: (p) ->
     # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
@@ -78,7 +78,7 @@ class wf.FeedItemFormatter
   char_name: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{escape(p.realm)}/#{escape(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
+    "<a href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
 
   item_link: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
@@ -217,7 +217,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: change_description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{item?.lastModified}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{item?.lastModified}"
       date: item?.lastModified 
       date_formatted: @format_date(item?.lastModified)
       author: item?.name
@@ -266,7 +266,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{news_item.timestamp}&id=#{thingId}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{news_item.timestamp}&id=#{thingId}"
       date: news_item.timestamp
       date_formatted: @format_date(news_item.timestamp)
       author: item?.name
@@ -307,7 +307,7 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{escape(item?.region)}/#{escape(item?.realm)}/#{escape(item?.name)}?ts=#{feed_item.timestamp}&id=#{thingId}"
+      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{feed_item.timestamp}&id=#{thingId}"
       date: feed_item.timestamp
       date_formatted: @format_date(feed_item.timestamp)
       author: item?.name

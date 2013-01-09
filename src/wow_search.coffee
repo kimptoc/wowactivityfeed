@@ -62,7 +62,7 @@ class wf.WowSearch
   search: (query, callback) =>
     wf.info "Searching for:#{query}"
     results = []
-    request uri: "http://eu.battle.net/wow/en/search?q=#{encodeURI(query)}&f=wowguild", (error, response, body) ->
+    request uri: "http://eu.battle.net/wow/en/search?q=#{encodeURIComponent(query)}&f=wowguild", (error, response, body) ->
       $ = cheerio.load(body, ignoreWhitespace: true)
       result_rows = $('.table tbody tr')
       for row_src in result_rows
@@ -81,8 +81,8 @@ class wf.WowSearch
       callback?(results)
     regions = ["eu","us","kr","tw"]
     for region in regions
-      url = "http://#{region}.battle.net/wow/en/search?f=wowcharacter&q=#{encodeURI(query)}"
+      url = "http://#{region}.battle.net/wow/en/search?f=wowcharacter&q=#{encodeURIComponent(query)}"
       @search_member(query, region, url, results,  callback)
-    url = "http://#{region}.battle.net/wow/en/search?f=wowcharacter&q=#{encodeURI(query)}"
+    url = "http://#{region}.battle.net/wow/en/search?f=wowcharacter&q=#{encodeURIComponent(query)}"
     @search_member(query, region, url, results,  callback)
 
