@@ -4,7 +4,8 @@ forever stopall
 sleep 2
 forever list
 
-coffee --compile --output js/ src/ spec/
+coffee --compile --output js/ src/ spec/ src_common
+coffee --compile --output public/js-cs src_client src_common
 
 export NODE_ENV=production
 export SITE_URL=http://wafbeta.kimptoc.net/
