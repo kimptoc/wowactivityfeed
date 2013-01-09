@@ -18,7 +18,16 @@ class wf.SearchView extends Backbone.View
   searchNowClicked: =>
     @name = $('#search_text').val()
     @realm_region_id = $('#realm_region option:selected').attr('id')
-    @trigger('search:clicked')
+    error = ""
+    error += "Enter a name to search for" unless @name? and @name.length >0
+    unless @realm_region_id?
+      error += " and " if error.length > 0
+      error += "Select a realm/region"
+    error += "!" unless error?
+    if error.length > 0
+      alert(error)
+    else
+      @trigger('search:clicked')
 
   render: =>
     console.log "SearchView.render"

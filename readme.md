@@ -5,15 +5,10 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-- search, scrape all comm sites / wowsearch.coffee
-- backbone based
-- use jquery on server for scraping
 
-- indicate number of things found (0/1/2)
 - alert if no name/realm/region selected
 - format results
 - integrate search into home page
-- remember input/search text- currently blanks on search
 
 example guild/member same name/realm
 http://localhost:4000/json/lookup/eu/Wrathbringer/Tony
@@ -40,6 +35,7 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- search, scrape all comm sites / wowsearch.coffee - did it, but is it legit??? and how to handle hundreds of results?
 - show timestamp in msg body
 - http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
 - Crusader Spinlady (Ðeus lo vult) New title(s): ', Master of the Ways'

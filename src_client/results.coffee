@@ -17,6 +17,6 @@ class wf.Results extends Backbone.Collection
         console.log "search for member named #{name}"
         @type = 'member'
         @fetch {update:true, remove:false, success: done}
-    ], search_complete_callback
+    ], -> setTimeout search_complete_callback, 1000
 
 
