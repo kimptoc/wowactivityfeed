@@ -85,7 +85,7 @@
       }
     },
     "armory": {
-      "version": "0.5.0",
+      "version": "0.5.2",
       "from": "git://github.com/kimptoc/node-armory.git",
       "dependencies": {
         "request": {
@@ -93,7 +93,7 @@
           "from": "git://github.com/mreinstein/request.git",
           "dependencies": {
             "form-data": {
-              "version": "0.0.6",
+              "version": "0.0.3",
               "dependencies": {
                 "combined-stream": {
                   "version": "0.0.3",
@@ -104,7 +104,7 @@
                   }
                 },
                 "async": {
-                  "version": "0.1.22"
+                  "version": "0.1.9"
                 }
               }
             },

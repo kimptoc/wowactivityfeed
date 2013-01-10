@@ -24,12 +24,17 @@ class wf.WowLookup
     wf.info "WowLookup constructor"
 
   get_armory: (callback) ->
+    armory_defaults = 
+      publicKey: wf.WOW_API_PUBLIC_KEY
+      privateKey: wf.WOW_API_PRIVATE_KEY
+
     request_defaults = 
       timeout: wf.ARMORY_CALL_TIMEOUT
 
     if process.env.NODE_ENV == "production"
       wf.info "Its production - dont use a proxy to the armory"
-      armory = require('armory').defaults(request:request_defaults)
+      armory_defaults.request = request_defaults
+      armory = require('armory').defaults(armory_defaults)
       callback(armory)
     else
       try
@@ -38,15 +43,18 @@ class wf.WowLookup
           if is_open
             wf.info "Found the proxy, so use it:#{is_open}"
             request_defaults.proxy = "http://localhost:8888"
-            armory = require('armory').defaults(request:request_defaults)
+            armory_defaults.request = request_defaults
+            armory = require('armory').defaults(armory_defaults)
             callback(armory)
           else
             wf.info "Proxy not found, so connecting to armory direct"
-            armory = require('armory').defaults(request:request_defaults)
+            armory_defaults.request = request_defaults
+            armory = require('armory').defaults(armory_defaults)
             callback(armory)
       catch e
         wf.info "Proxy not found, so connecting to armory direct:#{e}"
-        armory = require('armory').defaults(request:request_defaults)
+        armory_defaults.request = request_defaults
+        armory = require('armory').defaults(armory_defaults)
         callback(armory)
 
   with_armory: (armory_handler) ->

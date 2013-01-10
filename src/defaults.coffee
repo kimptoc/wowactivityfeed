@@ -13,6 +13,12 @@ wf.REGISTERED_ITEM_TIMEOUT = 60*60*24*7   # 7 days
 wf.ARCHIVED_ITEM_TIMEOUT = 60*60*24 # 1 day
 wf.ACCESSED_ITEM_TIMEOUT = 60*60*24*7   # 7 days
 
+wf.WOW_API_PUBLIC_KEY = process.env.WOW_API_PUBLIC_KEY
+wf.WOW_API_PRIVATE_KEY = process.env.WOW_API_PRIVATE_KEY
+
+wf.info "WOW/Public:#{wf.WOW_API_PUBLIC_KEY}"
+wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
+
 wf.mongo_info = 
     "hostname":"localhost"
     "port":27017

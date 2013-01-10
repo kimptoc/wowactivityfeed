@@ -5,10 +5,11 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-- make enter key do a search too
 - exotic char issues - eg Tänks or Terenas
 - format results
 - integrate search into home page
+
+http://wowactivity.kimptoc.net/view/member/us/Earthen%20Ring/Kimptoc
 
 example guild/member same name/realm
 http://localhost:4000/json/lookup/eu/Wrathbringer/Tony
