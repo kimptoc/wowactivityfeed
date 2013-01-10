@@ -85,7 +85,7 @@
       }
     },
     "armory": {
-      "version": "0.5.2",
+      "version": "0.5.3",
       "from": "git://github.com/kimptoc/node-armory.git",
       "dependencies": {
         "request": {
