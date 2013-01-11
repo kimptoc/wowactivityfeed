@@ -37,6 +37,7 @@ class wf.SearchView extends Backbone.View
       results: @model.results.toJSON(), 
       results_complete: @model.results.results_complete,
       searching: @model.results.searching,
+      elapsed_seconds: @model.results.elapsed_seconds
       name: name ) )
     $container = $("#backbone_container");
     $container.append(@el);

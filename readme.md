@@ -36,6 +36,8 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- if get "not found" for character/guild, dont add to registered collection
+- allow search by name only (no realm/region) - but only look at what we have cached?  Any use?
 - Handle timeout on search/json call...
 - when get errors on realms/classes/races, could leave data invalid- be more careful
 - ERROR: Problem finding realms for region:tw error:ETIMEDOUT : {"code":"ETIMEDOUT"} -

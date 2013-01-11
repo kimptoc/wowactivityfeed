@@ -33,8 +33,11 @@ class wf.Search
     @results.searching = true
     @searchView.render()
     @results.reset()
+    start_time = new Date()
     @results.search name, region, realm, =>
+      elapsed_millis = (new Date()) - start_time
       console.log "search complete..."
       @results.results_complete = true
       @results.searching = false
+      @results.elapsed_seconds = (elapsed_millis / 1000).toString()
       @searchView.render()

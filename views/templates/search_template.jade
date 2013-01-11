@@ -22,15 +22,24 @@ script(type='text/template',id='search-template')
         .ten.columns
           div
             <% if (results_complete) { %>
-            | Search complete, total found: <%= results.length %>
+            | Search complete, total found: <%= results.length %> (took <%= elapsed_seconds %> seconds)
             <% } else if (searching) { %>
             | Searching ... 
             <% } %>
           div
             <% _.each(results, function(item) { %>
-            | <% print(wf.String.capitalise(item.type)) %>: <%= item.name %>
-            | <li>
-            | <ul>Level <%= item.armory.level %></ul>
-            | </li>
+            | <%= item.name %>
+            | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
+            | <% if (item.armory.guild) { print(' of '+item.armory.guild.name); } %>
+            | &nbsp; Level: <%= item.armory.level %>
+            | &nbsp; - <%= item.realm %> / <%= item.region %>
+            div
+              | &nbsp; <a href='/feed/<%= item.type %>/<%= encodeURIComponent(item.region) %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>.rss'>rss</a>
+              | &nbsp; <a href='http://<%= item.region %>.battle.net/wow/en/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>/simple'>armory</a>
+              | &nbsp; <a href='http://<%= item.region %>.battle.net/api/wow/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts'>api</a>
+              <% _.each(_.first(item.waf_feed,3), function(feed_item) { %>
+              div <%= feed_item.description %>
+                small &nbsp; <%= feed_item.date_formatted %>
+              <% }); %>
             <% }); %>
 
