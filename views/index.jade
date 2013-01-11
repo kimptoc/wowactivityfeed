@@ -1,19 +1,19 @@
 extends layout
 
 block content
+  link(rel='stylesheet', href='/stylesheets/index.css')
+  .container
     // Start Header Slider
-    .top_slider
-      #top_slider.camera_wrap.camera_azure_skin
-        div(data-thumb='images/top_slider/slider_image1.jpg', data-src='images/top_slider/slider_image1.jpg')
-          .camera_caption.fadeFromBottom
-        div(data-thumb='images/top_slider/slider_image2.jpg', data-src='images/top_slider/slider_image2.jpg')
-          .camera_caption.fadeFromBottom
-        div(data-thumb='images/top_slider/slider_image3.jpg', data-src='images/top_slider/slider_image3.jpg')
-          .camera_caption.fadeFromBottom
-      // /sider
+    .offset-by-three
+      .ten.columns
+        .sample_usage
+            img(src='/images/top_slider/slider_image1.jpg')
       .clear
         // ClearFix
     // END Header Slider
+
+    include search_backbone.jade
+
     // Start Container
     .container
       //h3.bordered World of Warcraft Activity Feed
