@@ -232,6 +232,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
       if items? and items.length >0 # might get nothing back, so need to return empty array
         item = items[0] 
         item.waf_feed = items_to_publish
+        item.url = items_to_publish[0].url
         item.wow_type = item.type
         item.wow_type = 'character' if item.type == 'member'
         results.push item

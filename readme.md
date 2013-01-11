@@ -36,6 +36,7 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- put generic char link on search, not the timespace specific link
 - if get "not found" for character/guild, dont add to registered collection
 - allow search by name only (no realm/region) - but only look at what we have cached?  Any use?
 - Handle timeout on search/json call...
