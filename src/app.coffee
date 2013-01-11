@@ -87,9 +87,9 @@ wf.app.get '/registered', (req, res) ->
 wf.app.get '/about', (req, res) ->
   res.render "about"
 
-wf.app.get '/loaded', (req, res) ->
+wf.app.get '/everyone', (req, res) ->
   get_feed_all (feed) ->
-    res.render "loaded", f: feed
+    res.render "everyone", f: feed
 
 get_feed_all = (callback) ->    
   wf.wow.get_loaded (wowthings) ->
