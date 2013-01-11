@@ -209,7 +209,7 @@ class wf.WoW
             if results? and results.length >0
               result_handler(results)
             else
-              if counter < 30
+              if counter < 20
                 wf.info "wait for armory load to complete... #{region}/#{realm}/#{type}/#{name}-#{counter}"
                 setTimeout (=> @get_history_counted(region, realm, type, name, counter+1, result_handler)), 1000
               else

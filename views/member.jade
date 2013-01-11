@@ -10,11 +10,11 @@ block content
         a(href='/view/guild/#{w.region}/#{w.realm}/#{w.armory.guild.name}')= w.armory.guild.name 
     div
       | &nbsp;View : 
-      a(href='http://#{p.region}.battle.net/wow/en/character/#{escape(p.realm)}/#{escape(p.name)}/simple') armory
+      a(href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple') armory
       &nbsp;-&nbsp;
-      a(href='http://#{p.region}.battle.net/api/wow/character/#{escape(p.realm)}/#{escape(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts') api
+      a(href='http://#{p.region}.battle.net/api/wow/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts') api
       &nbsp;-&nbsp;
-      a(href='/feed/#{w.type}/#{escape(w.region)}/#{escape(w.realm)}/#{escape(w.name)}.rss') rss
+      a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}.rss') rss
     hr
     each item in f
       .clear

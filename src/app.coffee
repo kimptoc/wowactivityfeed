@@ -199,8 +199,8 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
       res.render "rss", 
         title: "WoW Activity Feed for #{name}"
         description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
-        feed_url: "#{wf.SITE_URL}feed/#{type}/#{escape(region)}/#{escape(realm)}/#{escape(name)}.rss"
-        site_url: "#{wf.SITE_URL}view/#{type}/#{escape(region)}/#{escape(realm)}/#{escape(name)}"
+        feed_url: "#{wf.SITE_URL}feed/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}.rss"
+        site_url: "#{wf.SITE_URL}view/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}"
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
@@ -213,15 +213,27 @@ wf.app.get '/json/realms', (req, res) ->
     res.send JSON.stringify(realms)
 
 wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
+
+  wf.ga.trackPage(req.path);
+  wf.ga.trackEvent
+    action: req.path
+    category: req.header('user-agent')
+    label: JSON.stringify(req.headers)
+    value: 1
+
   type = req.params.type
   type = 'member' if type == "character"
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = wf.String.capitalise(req.params.name)
-  wf.wow.get region, realm, type, name, (result)->
-    results = []
-    results.push result if result? # might get nothing back, so need to return empty array
-    res.send JSON.stringify(results)
+  wf.wow.get_history region, realm, type, name, (items)->
+    get_feed items, (items_to_publish) ->
+      results = []
+      if items? and items.length >0 # might get nothing back, so need to return empty array
+        item = items[0] 
+        item.waf_feed = items_to_publish
+        results.push item
+      res.send JSON.stringify(results)
 
 
 wf.app.get '/debug/search', (req, res) ->

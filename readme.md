@@ -9,7 +9,7 @@ http://www.fonts2u.com/caribbean-regular.font
 - format results
 - integrate search into home page
 
-http://wowactivity.kimptoc.net/view/member/us/Earthen%20Ring/Kimptoc
+- using API key now, but getting intermittent invalid sig, are any working? does it related to use of modified flag?
 
 example guild/member same name/realm
 http://localhost:4000/json/lookup/eu/Wrathbringer/Tony
@@ -36,6 +36,12 @@ maybe....
 - some criteria cases come up blank?
 
 ## LATER
+- Handle timeout on search/json call...
+- when get errors on realms/classes/races, could leave data invalid- be more careful
+- ERROR: Problem finding realms for region:tw error:ETIMEDOUT : {"code":"ETIMEDOUT"} -
+- ERROR: Problem finding classes for region:eu error:ETIMEDOUT : {"code":"ETIMEDOUT"} -
+- ERROR: Problem finding races for region:eu error:ETIMEDOUT : {"code":"ETIMEDOUT"} -
+
 - search, scrape all comm sites / wowsearch.coffee - did it, but is it legit??? and how to handle hundreds of results?
 - show timestamp in msg body
 - http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
