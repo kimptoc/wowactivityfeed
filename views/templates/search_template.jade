@@ -1,8 +1,8 @@
 script(type='text/template',id='search-template')
   div 
-    .offset-by-three
+    .offset-by-two
       .search_box
-        .ten.columns
+        .fourteen.columns
           form
             input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
 
@@ -18,31 +18,30 @@ script(type='text/template',id='search-template')
               input#search_now(type="submit",name="SUBMIT",value="Search")
 
     .offset-by-three
-      .search_results
         .ten.columns
-          div
+          #search_results_msg
             <% if (results_complete) { %>
             | Search complete, total found: <%= results.length %> (took <%= elapsed_seconds %> seconds)
             <% } else if (searching) { %>
             | Searching ... 
             <% } %>
-          div
+          #search_results
             <% _.each(results, function(item) { %>
-            .clear
-            | <h5><a href='<%= item.url %>'><%= item.name %></a></h5>
-            | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
-            | <% if (item.armory.guild) { print('Member of '+item.armory.guild.name); } %>
-            | &nbsp; Level: <%= item.armory.level %>
-            | &nbsp; - <%= item.realm %> / <%= item.region %>
-            div
+            .search_result_item
+              .clear
+              | <h5><a href='<%= item.url %>'><%= item.name %></a> <small>(<%= item.wow_type %>)</small></h5>
+              | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
+              | <% if (item.armory.guild) { print('Member of '+item.armory.guild.name); } %>
+              | &nbsp; Level: <%= item.armory.level %>
+              | &nbsp; - <%= item.realm %> / <%= item.region %>
               | &nbsp; <a href='/feed/<%= item.type %>/<%= encodeURIComponent(item.region) %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>.rss'>rss</a>
               | &nbsp; <a href='http://<%= item.region %>.battle.net/wow/en/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>/simple'>armory</a>
               | &nbsp; <a href='http://<%= item.region %>.battle.net/api/wow/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts'>api</a>
-            div
-              <% _.each(_.first(item.waf_feed,3), function(feed_item) { %>
-              .clear
-              div <%= feed_item.description %>
-                small &nbsp; <%= feed_item.date_formatted %>
-              <% }); %>
+              .search_result_achievements
+                <% _.each(_.first(item.waf_feed,3), function(feed_item) { %>
+                .clear
+                div <%= feed_item.description %>
+                  small &nbsp; <%= feed_item.date_formatted %>
+                <% }); %>
             <% }); %>
 
