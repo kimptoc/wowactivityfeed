@@ -5,23 +5,8 @@
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font
 
-- exotic char issues - eg Tänks or Terenas
-- format results
-- integrate search into home page
-
-- using API key now, but getting intermittent invalid sig, are any working? does it related to use of modified flag?
-
-example guild/member same name/realm
-http://localhost:4000/json/lookup/eu/Wrathbringer/Tony
-
-handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
-
-
-
-not handling exotic chars, eg this gives error
-http://localhost:4000/view/member/us/Kael%27thas/Fe%E5therz?ts=1357347891000&id=7093
-
 menu?  http://jpanelmenu.com/
+
 
 ## BUGS
 maybe....
@@ -29,13 +14,19 @@ maybe....
 - double check feed updates vs battle.net - showing correct item?
 - existing items showing as new, why? if guild/member being accessed then it should be kept current
 
+
 ## FIXED MAYBE PENDING BEING TESTED
 - performance? seems ok after restart, removed collection caching... - GC issue or VM issue?
 - do all in memory?  only persist registered/latest item from armory? limit history to n'entries...
 - details a char's titles changes?
 - some criteria cases come up blank?
 
+
 ## LATER
+- Lose copyright bit
+- Only do classes daily, ERROR: Problem finding classes for region:eu error:Daily limit exceeded : {} 
+- handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
+- Disable search btn while search is ongoing 
 - put generic char link on search, not the timespace specific link
 - if get "not found" for character/guild, dont add to registered collection
 - allow search by name only (no realm/region) - but only look at what we have cached?  Any use?
