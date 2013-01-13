@@ -56,12 +56,23 @@ class wf.FeedItemFormatter
       callback?(results)
 
   achievement_link: (achievement) ->
-    "<a href='http://www.wowhead.com/achievement=#{achievement.id}' alt='#{achievement.title}' title='#{achievement.title}'><img src='http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg' align='right' style='border:solid yellow 1px;'></a>"
+    "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\"><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
+
+  armory_link: (p) =>
+    "http://#{p.region}.battle.net/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple"
+
+  wow_type: (type) =>
+    wow_type = type
+    wow_type = 'character' if type == 'member'
+    return wow_type
+
+  armory_api_link: (p) =>
+    "http://#{p.region}.battle.net/api/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts"
 
   char_link: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'><img src='http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}' align='left' style='border:solid black 1px;' class='char_image'></a>"
+    "<a href=\""+@armory_link(p)+"\" alt=\"#{alt_text}\" title=\"#{alt_text}\"><img src=\"http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}\" align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   get_formal_name: (p) ->
     # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
@@ -78,7 +89,7 @@ class wf.FeedItemFormatter
   char_name: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
-    "<a href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple' alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
+    "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
 
   item_link: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
@@ -90,6 +101,14 @@ class wf.FeedItemFormatter
     #todo - handle not found, img link, wowhead link/hover...
     name = items?[item_id]?.name
     name ||= "Unknown...."
+
+  waf_url: (item, feed_timestamp, thingId) ->
+    the_url = "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}"
+    the_url = the_url + "?ts=#{feed_timestamp}&id=#{thingId}" if feed_timestamp? or thingId?
+    return the_url
+
+  waf_rss_url: (item) ->
+    "#{wf.SITE_URL}/feed/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}.rss"
 
   add_criteria: (description, criteria) ->
     if criteria? and criteria.length >0
@@ -217,7 +236,12 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: change_description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{item?.lastModified}"
+      wow_type: @wow_type(item?.type)
+      url: @waf_url(item, item?.lastModified,null)
+      waf_url: @waf_url(item)
+      waf_rss_url: @waf_rss_url(item)
+      armory_link: @armory_link(item)
+      armory_api_link: @armory_api_link(item)
       date: item?.lastModified 
       date_formatted: @format_date(item?.lastModified)
       author: item?.name
@@ -266,7 +290,12 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{news_item.timestamp}&id=#{thingId}"
+      wow_type: @wow_type(item?.type)
+      url: @waf_url(item, news_item.timestamp,thingId)
+      waf_url: @waf_url(item)
+      waf_rss_url: @waf_rss_url(item)
+      armory_link: @armory_link(item)
+      armory_api_link: @armory_api_link(item)
       date: news_item.timestamp
       date_formatted: @format_date(news_item.timestamp)
       author: item?.name
@@ -307,9 +336,15 @@ class wf.FeedItemFormatter
     result = 
       title: change_title
       description: description
-      url: "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}?ts=#{feed_item.timestamp}&id=#{thingId}"
+      wow_type: @wow_type(item?.type)
+      url: @waf_url(item, feed_item.timestamp,thingId)
+      waf_url: @waf_url(item)
+      waf_rss_url: @waf_rss_url(item)
+      armory_link: @armory_link(item)
+      armory_api_link: @armory_api_link(item)
       date: feed_item.timestamp
       date_formatted: @format_date(feed_item.timestamp)
       author: item?.name
       guid: "#{feed_item.timestamp}-#{change_title}"
+
     return result

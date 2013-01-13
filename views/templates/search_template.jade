@@ -29,14 +29,14 @@ script(type='text/template',id='search-template')
             <% _.each(results, function(item) { %>
             .search_result_item
               .clear
-              | <h5><a href='<%= item.url %>'><%= item.name %></a> <small>(<%= item.wow_type %>)</small></h5>
+              | <h5><a href="<%= item.waf_url %>"><%= item.name %></a> <small>(<%= item.wow_type %>)</small></h5>
               | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
               | <% if (item.armory.guild) { print('Member of '+item.armory.guild.name); } %>
               | &nbsp; Level: <%= item.armory.level %>
               | &nbsp; - <%= item.realm %> / <%= item.region %>
-              | &nbsp; <a href='/feed/<%= item.type %>/<%= encodeURIComponent(item.region) %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>.rss'>rss</a>
-              | &nbsp; <a href='http://<%= item.region %>.battle.net/wow/en/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>/simple'>armory</a>
-              | &nbsp; <a href='http://<%= item.region %>.battle.net/api/wow/<%= item.wow_type %>/<%= encodeURIComponent(item.realm) %>/<%= encodeURIComponent(item.name) %>?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts'>api</a>
+              | &nbsp; <a href="<%= item.waf_rss_url %>">rss</a>
+              | &nbsp; <a href="<%= item.armory_link %>">armory</a>
+              | &nbsp; <a href="<%= item.armory_api_link %>">api</a>
               .search_result_achievements
                 <% _.each(_.first(item.waf_feed,3), function(feed_item) { %>
                 .clear

@@ -5,7 +5,7 @@ class wf.Result extends Backbone.Model
 class wf.Results extends Backbone.Collection
   model: wf.Result
 
-  url: -> "/json/get/#{@type}/#{@region}/#{encodeURIComponent(@realm)}/#{encodeURIComponent(@name)}"
+  url: -> "/json/get/#{@type}/#{@region}/#{encodeURIComponent(@realm)}/#{encodeURIComponent(@name.trim())}"
 
   search: (@name, @region, @realm, search_complete_callback) =>
     async.parallel [

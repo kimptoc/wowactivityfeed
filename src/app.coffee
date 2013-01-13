@@ -204,10 +204,6 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
-wf.app.get '/search', (req, res) ->
-  wf.wow.get_realms (realms) ->
-    res.render 'search_backbone', {realms}
-
 wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)
@@ -232,16 +228,14 @@ wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
       if items? and items.length >0 # might get nothing back, so need to return empty array
         item = items[0] 
         item.waf_feed = items_to_publish
-        item.url = items_to_publish[0].url
-        item.wow_type = item.type
-        item.wow_type = 'character' if item.type == 'member'
+        item.waf_url = items_to_publish[0].waf_url
+        item.waf_rss_url = items_to_publish[0].waf_rss_url
+        item.armory_link = items_to_publish[0].armory_link
+        item.armory_api_link = items_to_publish[0].armory_api_link
+        item.wow_type = items_to_publish[0].wow_type
         results.push item
       res.send JSON.stringify(results)
 
-
-wf.app.get '/debug/search', (req, res) ->
-  wf.wow.get_realms (realms) ->
-    res.render 'search', {realms}
 
 wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 

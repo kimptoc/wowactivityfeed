@@ -23,6 +23,7 @@ maybe....
 
 
 ## LATER
+- faq - how to use rss, with twitter, with fb, with google reader (etc), with guildlaunch.com
 - Lose copyright bit
 - Only do classes daily, ERROR: Problem finding classes for region:eu error:Daily limit exceeded : {} 
 - handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
