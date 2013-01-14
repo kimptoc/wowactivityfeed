@@ -31,7 +31,7 @@ class wf.SearchView extends Backbone.View
     return false
 
   render: =>
-    console.log "SearchView.render"
+    # console.log "SearchView.render"
     @$el.html( @template( 
       realms : @model.realms.toJSON(), 
       results: @model.results.toJSON(), 

@@ -10,11 +10,11 @@ class wf.Results extends Backbone.Collection
   search: (@name, @region, @realm, search_complete_callback) =>
     async.parallel [
       (done) =>
-        console.log "search for guild named #{name}"
+        # console.log "search for guild named #{name}"
         @type = 'guild'
         @fetch {update:true, remove:false, success: done}
     , (done) =>
-        console.log "search for member named #{name}"
+        # console.log "search for member named #{name}"
         @type = 'member'
         @fetch {update:true, remove:false, success: done}
     ], -> setTimeout search_complete_callback, 1000

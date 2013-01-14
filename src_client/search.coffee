@@ -7,7 +7,7 @@ class wf.Search
   # views = {}
 
   @init: ->
-    console.log "Search.init"
+    # console.log "Search.init"
     @realms = new wf.Realms()
     @results = new wf.Results()
     @results.searching = false
@@ -28,7 +28,7 @@ class wf.Search
     name = $('#search_text').val()
     realm = $('#realm_region option:selected').attr('data-realm')
     region = $('#realm_region option:selected').attr('data-region')
-    console.log "Time to search for #{name}/#{realm}/#{region}!"
+    # console.log "Time to search for #{name}/#{realm}/#{region}!"
     @results.results_complete = false
     @results.searching = true
     @searchView.render()
@@ -36,7 +36,7 @@ class wf.Search
     start_time = new Date()
     @results.search name, region, realm, =>
       elapsed_millis = (new Date()) - start_time
-      console.log "search complete..."
+      # console.log "search complete..."
       @results.results_complete = true
       @results.searching = false
       @results.elapsed_seconds = (elapsed_millis / 1000).toString()
