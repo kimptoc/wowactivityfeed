@@ -227,12 +227,15 @@ wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
       results = []
       if items? and items.length >0 # might get nothing back, so need to return empty array
         item = items[0] 
+        item_lookup = {type, realm, region, name:item.name}
+        item_lookup.name = item.guild if type == "guild" and item.guild?
         item.waf_feed = items_to_publish
-        item.waf_url = items_to_publish[0].waf_url
-        item.waf_rss_url = items_to_publish[0].waf_rss_url
-        item.armory_link = items_to_publish[0].armory_link
-        item.armory_api_link = items_to_publish[0].armory_api_link
-        item.wow_type = items_to_publish[0].wow_type
+        item.waf_url = wf.feed_formatter.waf_url(item_lookup)
+        item.waf_rss_url = wf.feed_formatter.waf_rss_url(item_lookup)
+        item.armory_link = wf.feed_formatter.armory_link(item_lookup)
+        item.armory_api_link = wf.feed_formatter.armory_api_link(item_lookup)
+        item.wow_type = wf.feed_formatter.wow_type(type)
+        item.name = item_lookup.name 
         results.push item
       res.send JSON.stringify(results)
 
@@ -269,10 +272,6 @@ wf.app.get '/debug/armory_load', (req, res) ->
   wf.wow.get_registered (regs) ->
     res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
 
-wf.app.get '/debug/statsold', (req, res) ->
-  wf.wow.armory_calls_old (result) ->
-    res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
-
 wf.app.get '/debug/stats', (req, res) ->
   wf.wow_stats.armory_calls wf.wow, (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
@@ -281,13 +280,9 @@ wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
     res.render "logs", {logs}
 
-wf.app.get '/debug/clear_all', (req, res) ->
-  wf.wow.clear_all ->
-    res.render "message", msg: "Database cleared!"
-
-wf.app.get '/debug/load_realms', (req, res) ->
-  wf.wow.realms_loader()
-  res.render 'message', msg: "Realms load in progress"
+# wf.app.get '/debug/clear_all', (req, res) ->
+#  wf.wow.clear_all ->
+#    res.render "message", msg: "Database cleared!"
 
 wf.app.get '/debug/sample_data', (req, res) ->
   wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"

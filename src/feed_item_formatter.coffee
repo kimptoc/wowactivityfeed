@@ -59,7 +59,7 @@ class wf.FeedItemFormatter
     "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\"><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
 
   armory_link: (p) =>
-    "http://#{p.region}.battle.net/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple"
+    "http://#{p.region}.battle.net/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
 
   wow_type: (type) =>
     wow_type = type
@@ -67,7 +67,7 @@ class wf.FeedItemFormatter
     return wow_type
 
   armory_api_link: (p) =>
-    "http://#{p.region}.battle.net/api/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts"
+    "http://#{p.region}.battle.net/api/wow/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts"
 
   char_link: (p) =>
     alt_text = @get_formal_name(p)
@@ -245,6 +245,7 @@ class wf.FeedItemFormatter
       date: item?.lastModified 
       date_formatted: @format_date(item?.lastModified)
       author: item?.name
+      guild: item?.armory?.guild?.name
       guid: "#{item?.lastModified}-#{change_title}"
     return result
 
@@ -299,6 +300,7 @@ class wf.FeedItemFormatter
       date: news_item.timestamp
       date_formatted: @format_date(news_item.timestamp)
       author: item?.name
+      guild: item?.armory?.guild?.name
       guid: "#{news_item.timestamp}-#{change_title}"
     return result
 
@@ -345,6 +347,7 @@ class wf.FeedItemFormatter
       date: feed_item.timestamp
       date_formatted: @format_date(feed_item.timestamp)
       author: item?.name
+      guild: item?.armory?.guild?.name
       guid: "#{feed_item.timestamp}-#{change_title}"
 
     return result
