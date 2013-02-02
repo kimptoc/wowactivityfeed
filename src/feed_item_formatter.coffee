@@ -226,9 +226,9 @@ class wf.FeedItemFormatter
     max_title_length = 75
     max_description_length = 300
     if change_title.length > max_title_length
-      change_title = change_title.substring(0,max_title_length)+"&hellip;"
+      change_title = change_title.substring(0,max_title_length)+"..."
     if change_description.length > max_description_length
-      change_description = change_description.substring(0,max_description_length)+"&hellip;"
+      change_description = change_description.substring(0,max_description_length)+"..."
     if item?.type == "member" and item.armory?.thumbnail?
       change_description = "#{@char_link(item)} #{@char_name(item)}: #{change_description}"
     else if item?.type == "guild"
