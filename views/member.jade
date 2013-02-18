@@ -24,10 +24,10 @@ block content
         span #{item.date_formatted}
         span 
           a(href='#{item.url}') link
-    hr
+    //- hr
     //if w.armory
     //  #{JSON.stringify(w.armory)}
-    each hist in h
-      div CHANGE: #{fmtdate(hist.lastModified)} : #{JSON.stringify(hist.whats_changed)}
-    hr
+    //- each hist in h
+      //- div CHANGE: #{fmtdate(hist.lastModified)} : #{JSON.stringify(hist.whats_changed)}
+    //- hr
     // #{JSON.stringify(w)} 

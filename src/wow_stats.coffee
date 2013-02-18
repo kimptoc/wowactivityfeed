@@ -23,8 +23,8 @@ class wf.WoWStats
         number_queued: wow.get_item_loader_queue()?.length()
     wow.get_store().dbstats wow.get_collections(), (stats) ->
       info.db = stats      
-      start_of_day = moment().sod().valueOf()
-      yesterday = moment().sod().subtract(days:1).valueOf()
+      start_of_day = moment().startOf('day').valueOf()
+      yesterday = moment().startOf('day').subtract(days:1).valueOf()
       twohours_ago = moment().subtract(hours:2).valueOf()
       wow.get_store().aggregate wow.get_calls_collection(), 
         [
