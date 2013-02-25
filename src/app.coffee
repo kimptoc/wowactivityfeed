@@ -152,7 +152,10 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
     else
-      res.render "message", msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
+      res.render "#{req.params.type}_not_found", 
+        msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
+        w: req.params
+        p: req.params
 
 wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
   handle_view(req, res)

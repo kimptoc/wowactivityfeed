@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    h3.bordered #{p.region} / #{p.realm} / member: #{w.name}
+  .container
+    h3.bordered Message
+    hr
+    p !{msg}
+  .container
+    div
+      | &nbsp;View : 
+      a(href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple') armory
+      &nbsp;-&nbsp;
+      a(href='http://#{p.region}.battle.net/api/wow/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts') api
+      //- &nbsp;-&nbsp;
+      //- a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}.rss') rss

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name}
+  .container
+    h3.bordered Message
+    hr
+    p !{msg}
+  .container
+    div
+      | View : 
+      a(href='http://#{w.region}.battle.net/wow/en/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') armory
+      &nbsp;-&nbsp;
+      a(href='http://#{p.region}.battle.net/api/wow/guild/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=members,achievements,news,challenge') api
+      //- &nbsp;-&nbsp;
+      //- a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}.rss') rss
