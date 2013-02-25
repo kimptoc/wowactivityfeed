@@ -210,6 +210,16 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
 wf.app.get '/info', (req, res) ->
   res.render 'info', info: wf.info_queue
 
+wf.app.get '/feed/info.rss', (req, res) ->
+  res.set('Content-Type', 'application/xml')
+  res.render "rss", 
+    title: "WoW Activity Feed Info"
+    description: "WoW Activity Feed Info"
+    feed_url: "#{wf.SITE_URL}feed/info.rss"
+    site_url: "#{wf.SITE_URL}info"
+    image_url: 'http://www.google.com/icon.png'
+    feed:wf.info_queue
+
 wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)

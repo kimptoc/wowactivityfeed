@@ -5,6 +5,9 @@ block content
   .container
     h3.bordered Info
     hr
+    a(href='/feed/info.rss') rss
     ul
     each item in info
-      li !{item.msg} (#{item.timestamp})
+      li !{item.title}:!{item.description} (#{item.date}) 
+        a(href=#{item.url})
+  
