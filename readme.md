@@ -2,7 +2,20 @@
 
 ## TODO
 
-Search for "kill order" sargeras / us - get char listed not guild...
+setup new box:
+- copy ~/.zshrc
+- apache config
+
+
+info feed
+= num members/guilds being checked (6 hourly)
+= number guild/member calls per day (daily)
+= link to how to use (every 6 hourly)
+- biggest guild (+number of members, by region)
+- highest rep char (by region)
+- highest level guild (by region)
+- most popular realm by chars, by guilds, by region
+
 
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font

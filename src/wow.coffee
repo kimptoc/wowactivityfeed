@@ -207,7 +207,7 @@ class wf.WoW
         @ensure_armory_indexes =>
           @get_history_from_db region, realm, type, name, (results) =>
             if results? and results.length >0
-              result_handler(results)
+              result_handler?(results)
             else
               if counter < wf.ARMORY_LOOKUP_TIMEOUT
                 wf.info "wait for armory load to complete... #{region}/#{realm}/#{type}/#{name}-#{counter}"

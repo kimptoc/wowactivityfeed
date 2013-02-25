@@ -207,6 +207,9 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
+wf.app.get '/info', (req, res) ->
+  res.render 'info', info: wf.info_queue
+
 wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)

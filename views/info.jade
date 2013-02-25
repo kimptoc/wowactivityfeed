@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/pretty_json.css')
+  .container
+    h3.bordered Info
+    hr
+    ul
+    each item in info
+      li !{item.msg} (#{item.timestamp})
