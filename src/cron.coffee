@@ -26,7 +26,7 @@ wf.info_queue = []
 
 push_info = (msg) ->
   wf.info_queue.unshift 
-    title: "WoW Activity Info @ #{new Date()}"
+    title: "WoW Activity Info @ #{moment(new Date()).format("H:mm D MMM")}"
     url: wf.SITE_URL
     description: msg
     date: new Date()
