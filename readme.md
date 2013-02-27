@@ -5,7 +5,14 @@
 setup new box:
 - copy ~/.zshrc
 - apache config
-
+- backup/restore mongodb/wowfeed
+- put /etc config into git/bitbucket
+- crontab
+-* mongo pw
+-* armory key
+- apache setup, server name/alias, port forwarding
+- logrotate rolling config
+- crontab??
 
 info feed
 = num members/guilds being checked (6 hourly)

@@ -35,7 +35,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-wf.counts1job = create_cron '00 40 1,7,13,19 * * *', -> 
+wf.counts1job = create_cron '00 30 3,9,15,21 * * *', -> 
 # wf.counts1job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
@@ -53,7 +53,7 @@ wf.counts3job = create_cron '00 40 2,8,14,20 * * *', ->
 
 # count of calls yesterday
 # wf.counts2job = create_cron '*/10 * * * * *', -> 
-wf.counts2job = create_cron '00 15 00 * * *', -> 
+wf.counts2job = create_cron '00 25 02 * * *', -> 
   wf.info "cronjob tick...daily guild/member calls"
   if wf.wow?
     start_of_day = moment().startOf('day').valueOf()
