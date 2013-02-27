@@ -35,7 +35,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-wf.counts1job = create_cron '00 30 3,9,15,21 * * *', -> 
+wf.counts1job = create_cron '00 12 3,9,15,21,23 * * *', -> 
 # wf.counts1job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
