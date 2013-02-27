@@ -30,7 +30,7 @@ push_info = (msg) ->
     url: wf.SITE_URL
     description: msg
     date: new Date()
-    guid: new Date()
+    guid: new Date().getTime()
   wf.info_queue = _.first(wf.info_queue,wf.INFO_HISTORY_LIMIT)
 
 
