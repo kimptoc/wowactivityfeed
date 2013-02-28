@@ -27,6 +27,8 @@ wf.hourlyjob = create_cron '00 00 * * * *', ->
 wf.info_queue = []
 
 
+# PR stats
+
 push_info = (msg) ->
   now = new Date()
   info = 
@@ -47,13 +49,13 @@ wf.counts1job = create_cron '00 00 3,12,15,21,23 * * *', ->
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
       wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'member'}, (num_chars) ->
-        push_info("There are currently #{num_guilds} guilds and #{num_chars} members registered.")
+        push_info("Currently tracking #{num_guilds} guilds and #{num_chars} toons.")
 
 # how to use waf
 wf.counts3job = create_cron '00 40 2,8,14,20 * * *', -> 
 # wf.counts3job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, how to"
-  push_info("Want to know how to use your guild/character feed on your site - see the <a href='https://wafbeta.uservoice.com/'>help</a>.")
+  push_info("Want to know how to use your guild/character feed on your site - see this link https://wafbeta.uservoice.com/.")
 
 
 
@@ -66,7 +68,9 @@ wf.counts2job = create_cron '00 25 02 * * *', ->
     yesterday = moment().startOf('day').subtract(days:1).valueOf()
     wf.wow.get_store().count wf.wow.get_calls_collection(), {type:'guild', start_time:{$gte:yesterday, $lt:start_of_day}}, (num_guilds) ->
       wf.wow.get_store().count wf.wow.get_calls_collection(), {type:'member', start_time:{$gte:yesterday, $lt:start_of_day}}, (num_chars) ->
-        push_info("Yesterday, there were #{num_guilds} guild and #{num_chars} member armory lookups.")
+        push_info("Yesterday, we did #{num_guilds} guild and #{num_chars} toon lookups at the armory.")
+
+
 
 
 
