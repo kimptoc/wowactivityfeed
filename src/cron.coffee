@@ -37,11 +37,11 @@ push_info = (msg) ->
     url: "#{wf.SITE_URL}?ts=#{now.getTime()}"
   wf.info_queue.unshift info
   wf.info_queue = _.first(wf.info_queue,wf.INFO_HISTORY_LIMIT)
-  wf.tweeter.update "#{info.title} - #{info.description}. #{info.url}"
+  wf.tweeter.update "#{info.title} - #{info.description} #{info.url}"
 
 
 # count of guilds/members registered
-wf.counts1job = create_cron '00 45 3,11,15,21,23 * * *', -> 
+wf.counts1job = create_cron '00 50 3,11,15,21,23 * * *', -> 
 # wf.counts1job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
