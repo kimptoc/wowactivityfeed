@@ -28,6 +28,7 @@
         "nodefly":"",
         "ga":"",
         "cheerio":"",
-        "request":""
+        "request":"",
+        "twit":""
     }
 }

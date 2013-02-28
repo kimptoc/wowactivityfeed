@@ -4,8 +4,11 @@ _ = require('underscore')
 cronJob = require('cron').CronJob
 moment = require "moment"
 
+require "./tweet"
 
 wf.armory_load_requested = false
+
+wf.tweeter = new wf.Tweet()
 
 create_cron = (cron_schedule, cron_task) ->
   try 
@@ -26,17 +29,19 @@ wf.info_queue = []
 
 push_info = (msg) ->
   now = new Date()
-  wf.info_queue.unshift 
+  info = 
     title: "WoW Activity Info @ #{moment(new Date()).format("H:mm D MMM")}"
     description: msg
     date: now
     guid: now.getTime()
     url: "#{wf.SITE_URL}?ts=#{now.getTime()}"
+  wf.info_queue.unshift info
   wf.info_queue = _.first(wf.info_queue,wf.INFO_HISTORY_LIMIT)
+  wf.tweeter.update "#{info.title} - #{info.description}. #{info.url}"
 
 
 # count of guilds/members registered
-wf.counts1job = create_cron '00 10 3,10,15,21,23 * * *', -> 
+wf.counts1job = create_cron '00 30 3,11,15,21,23 * * *', -> 
 # wf.counts1job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
