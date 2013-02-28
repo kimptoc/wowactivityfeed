@@ -3,16 +3,12 @@
 ## TODO
 
 setup new box:
-- copy ~/.zshrc
-- apache config
-- backup/restore mongodb/wowfeed
-- put /etc config into git/bitbucket
-- crontab
--* mongo pw
--* armory key
-- apache setup, server name/alias, port forwarding
-- logrotate rolling config
-- crontab??
+- logrotate rolling config - doesnt seem to be running...
+- configure driver to connect to replicaset, so that change of primary is handling automatically
+
+https://github.com/mongodb/node-mongodb-native/blob/master/docs/replicaset.md
+http://docs.mongodb.org/manual/tutorial/force-member-to-be-primary/
+
 
 info feed
 = num members/guilds being checked (6 hourly)
@@ -22,7 +18,7 @@ info feed
 - highest rep char (by region)
 - highest level guild (by region)
 - most popular realm by chars, by guilds, by region
-
+- PR/lure people in - click here to find your toon...
 
 - D4D designs sketch/wireframe
 http://www.fonts2u.com/caribbean-regular.font

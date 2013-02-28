@@ -32,7 +32,7 @@ wf.info_queue = []
 push_info = (msg) ->
   now = new Date()
   info = 
-    title: "WoW Activity Info @ #{moment(new Date()).format("H:mm D MMM")}"
+    title: "WoW Activity @ #{moment(new Date()).format("H:mm D MMM")}"
     description: msg
     date: now
     guid: now.getTime()
@@ -52,16 +52,16 @@ wf.counts1job = create_cron '00 00 3,12,15,21,23 * * *', ->
         push_info("Currently tracking #{num_guilds} guilds and #{num_chars} toons.")
 
 # how to use waf
-wf.counts3job = create_cron '00 40 2,8,14,20 * * *', -> 
+wf.counts3job = create_cron '00 40 2,8,14,22 * * *', -> 
 # wf.counts3job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, how to"
-  push_info("Want to know how to use your guild/character feed on your site - see this link https://wafbeta.uservoice.com/.")
+  push_info("How to use guild/character RSS feed - https://wafbeta.uservoice.com/.")
 
 
 
 # count of calls yesterday
-# wf.counts2job = create_cron '*/10 * * * * *', -> 
 wf.counts2job = create_cron '00 25 02 * * *', -> 
+# wf.counts2job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...daily guild/member calls"
   if wf.wow?
     start_of_day = moment().startOf('day').valueOf()
