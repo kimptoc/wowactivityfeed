@@ -4,7 +4,16 @@
 
 setup new box:
 - logrotate rolling config - doesnt seem to be running...
-- configure driver to connect to replicaset, so that change of primary is handling automatically
+- configure driver to connect to replicaset, so that change of primary is handling automatically or just make others hidden!
+- print node/mongo version on debug page
+- check for 0 registered - alert if so
+- stormvz uses ubuntu/apt node... and its current?
+
+➜  apt git:(master) ✗ sudo find . -type f -exec grep node {} \; -print
+deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
+deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
+./sources.list.d/chris-lea-node_js-precise.list
+
 
 https://github.com/mongodb/node-mongodb-native/blob/master/docs/replicaset.md
 http://docs.mongodb.org/manual/tutorial/force-member-to-be-primary/
