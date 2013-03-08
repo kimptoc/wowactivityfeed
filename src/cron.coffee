@@ -49,7 +49,11 @@ wf.counts1job = create_cron '00 00 3,12,15,21,23 * * *', ->
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
       wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'member'}, (num_chars) ->
-        push_info("Currently tracking #{num_guilds} guilds and #{num_chars} toons.")
+        if num_chars? and num_chars > 0 and num_guilds? and num_guilds > 0
+          push_info("Currently tracking #{num_guilds} guilds and #{num_chars} toons.")
+        else
+          push_info("Uh-oh - something has gone horribly wrong... there may be trouble ahead - call @kimptoc urgently!")
+
 
 # how to use waf
 wf.counts3job = create_cron '00 40 2,8,14,22 * * *', -> 
@@ -68,7 +72,10 @@ wf.counts2job = create_cron '00 25 02 * * *', ->
     yesterday = moment().startOf('day').subtract(days:1).valueOf()
     wf.wow.get_store().count wf.wow.get_calls_collection(), {type:'guild', start_time:{$gte:yesterday, $lt:start_of_day}}, (num_guilds) ->
       wf.wow.get_store().count wf.wow.get_calls_collection(), {type:'member', start_time:{$gte:yesterday, $lt:start_of_day}}, (num_chars) ->
-        push_info("Yesterday, we did #{num_guilds} guild and #{num_chars} toon lookups at the armory.")
+        if num_chars? and num_chars > 0 and num_guilds? and num_guilds > 0
+          push_info("Yesterday, we did #{num_guilds} guild and #{num_chars} toon lookups at the armory.")
+        else
+          push_info("Uh-oh - something has gone horribly wrong... there may be trouble ahead - call @kimptoc urgently!")
 
 
 
