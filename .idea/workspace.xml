@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feed_item_formatter.coffee" afterPath="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/search_template.jade" afterPath="$PROJECT_DIR$/views/templates/search_template.jade" />
-    </list>
+    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="" />
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,11 +23,9 @@
       <file leaf-file-name="feed_item_formatter.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="0" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.5403088">
+            <state line="78" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.025728988">
               <folding>
-                <marker date="1358090033000" expanded="false" signature="2045:2069" placeholder="..." />
-                <marker date="1358090033000" expanded="true" signature="2417:2440" placeholder="..." />
-                <marker date="1358090033000" expanded="false" signature="3401:3425" placeholder="..." />
+                <marker date="1359830493000" expanded="false" signature="2045:2069" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -99,7 +94,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -208,6 +202,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -216,8 +211,8 @@
     <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="last_opened_file_path" value="$USER_HOME$/Sites/php/facebookapp" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -275,13 +270,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="742" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5553772" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17274758" sideWeight="0.5505618" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17274758" sideWeight="0.43820226" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17274758" sideWeight="0.55698234" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17274758" sideWeight="0.4317817" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918397" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -292,6 +286,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5553772" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -384,83 +379,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow_search.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="49" selection-start="1650" selection-end="1650" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="52" column="49" selection-start="1650" selection-end="1650" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/router.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="0.025167786">
-          <folding />
-        </state>
+        <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="0.025167786" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/search_backbone.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="2" selection-start="768" selection-end="768" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="16" column="2" selection-start="768" selection-end="768" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/search.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="28" selection-start="511" selection-end="511" vertical-scroll-proportion="0.27013424">
-          <folding />
-        </state>
+        <state line="19" column="28" selection-start="511" selection-end="511" vertical-scroll-proportion="0.27013424" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/templates/search_template.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="47" column="0" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1357910134000" expanded="true" signature="61:1408" placeholder="..." />
-          </folding>
-        </state>
+        <state line="18" column="0" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src_client/realms.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="189" column="44" selection-start="6559" selection-end="6559" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="189" column="44" selection-start="6559" selection-end="6559" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="204" column="29" selection-start="6905" selection-end="6905" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="204" column="29" selection-start="6905" selection-end="6905" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/registered.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="397" selection-end="397" vertical-scroll-proportion="0.36020583">
-          <folding />
-        </state>
+        <state line="14" column="0" selection-start="397" selection-end="397" vertical-scroll-proportion="0.36020583" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.5403088">
+        <state line="78" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.025728988">
           <folding>
-            <marker date="1358090033000" expanded="false" signature="2045:2069" placeholder="..." />
-            <marker date="1358090033000" expanded="true" signature="2417:2440" placeholder="..." />
-            <marker date="1358090033000" expanded="false" signature="3401:3425" placeholder="..." />
+            <marker date="1359830493000" expanded="false" signature="2045:2069" placeholder="..." />
           </folding>
         </state>
       </provider>

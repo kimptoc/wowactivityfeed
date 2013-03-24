@@ -2,8 +2,44 @@
 
 ## TODO
 
+Things...
+
+Auto reconnect to mongo?
+ 
+url returning num registered (0 and if db problem)
+ 
+trigger restart if 0 on that url (hourly check)
+
+
+ERROR
+
+[2013-03-13 21:19:44.640] [ERROR] [default] - [Error: no open connections]
+Error: no open connections
+    at Db._executeInsertCommand (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/db.js:1789:27)
+    at insertAll (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/collection.js:320:13)
+    at Collection.insert (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/collection.js:92:3)
+    at wf.StoreMongo.StoreMongo.insert (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:92:21)
+    at wf.StoreMongo.StoreMongo.with_collection (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:317:51)
+    at Db.collection (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/db.js:478:44)
+    at wf.StoreMongo.StoreMongo.with_collection (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:312:28)
+    at StoreMongo.wf.StoreMongo.StoreMongo.with_connection (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:327:16)
+    at StoreMongo.wf.StoreMongo.StoreMongo.with_collection (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:311:19)
+    at StoreMongo.wf.StoreMongo.StoreMongo.insert (/home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:91:19)
+
+[2013-03-13 21:19:43.628] [ERROR] [default] - [Error: connection closed]
+Error: connection closed
+    at Server.connect.connectionPool.on.server._serverState (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/connection/server.js:611:45)
+    at EventEmitter.emit (events.js:126:20)
+    at connection.on._self._poolState (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/connection/connection_pool.js:139:15)
+    at EventEmitter.emit (events.js:99:17)
+    at Socket.closeHandler (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/mongodb/connection/connection.js:481:12)
+    at Socket.EventEmitter.emit (events.js:96:17)
+    at Socket._destroy.destroyed (net.js:358:10)
+    at process.startup.processNextTick.process._tickCallback (node.js:244:9)
+
+    
+
 setup new box:
-- logrotate rolling config - doesnt seem to be running...
 - configure driver to connect to replicaset, so that change of primary is handling automatically or just make others hidden!
 - print node/mongo version on debug page
 - check for 0 registered - alert if so
