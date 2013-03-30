@@ -3,7 +3,11 @@ REPORTER = dot
 
 check: test
 
-test: test-unit test-acceptance
+test: coffee-compile test-unit test-acceptance
+
+coffee-compile:
+	./node_modules/.bin/coffee --compile --output js/ src/ spec/ src_common
+	./node_modules/.bin/coffee --compile --output public/js-cs src_client src_common
 
 test-unit:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
