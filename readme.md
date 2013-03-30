@@ -1,6 +1,6 @@
 # WoW Activity Feed
 
-![Travis CI Build Status](https://travis-ci.org/kimptoc/wowactivityfeed.png)
+[![Build Status via Travis CI](https://travis-ci.org/kimptoc/wowactivityfeed.png?branch=master)](https://travis-ci.org/kimptoc/wowactivityfeed)
 
 ## TODO
 
