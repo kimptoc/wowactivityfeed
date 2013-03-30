@@ -2,6 +2,15 @@
 
 ## TODO
 
+Travis?
+
+Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
+
+Localisation - accept/pass through to wow api
+grab from browser, but allow override
+http://stackoverflow.com/questions/12132251/translation-localization-workflow-for-nodejs-express-app
+https://www.google.co.uk/search?q=express+js+localization&aq=0&oq=expressjs+locali&sourceid=chrome&ie=UTF-8
+
 Things...
 
 Auto reconnect to mongo?
