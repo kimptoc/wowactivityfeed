@@ -1,5 +1,7 @@
 # WoW Activity Feed
 
+https://travis-ci.org/kimptoc/wowactivityfeed.png
+
 ## TODO
 
 Travis?

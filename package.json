@@ -10,7 +10,6 @@
         "jade":"",
         "stylus":"",
         "armory":"git://github.com/kimptoc/node-armory.git",
-        "wowhead":"",
         "coffee-script":"",
         "mocha":"",
         "should":"",
