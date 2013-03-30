@@ -49,7 +49,7 @@ describe "feed item formatter", ->
             level : [4,5]
         lastModified : 1
       f.process item, (d)->
-        d[0].description.should.match /is now level 5/
+        d[0].description.should.match /Now at level 5/
         d[0].date.should.equal 1
         done()
 

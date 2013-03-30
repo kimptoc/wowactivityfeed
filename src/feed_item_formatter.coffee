@@ -130,7 +130,7 @@ class wf.FeedItemFormatter
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
-        change_description = " And as if by magic, #{item.name} appeared!"
+        change_description = "And as if by magic, #{item.name} appeared!"
       else
         if item.whats_changed.changes.level?
           change_title = " #{@get_formal_name(item)} - level #{@get('level',item)}! "
