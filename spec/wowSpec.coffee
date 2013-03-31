@@ -102,8 +102,6 @@ describe "wow wrapper:", ->
           wow.get_loaded (docs) ->
             should.exist docs
             docs.length.should.be.above 10
-            for doc in docs
-              doc.name.should.equal doc.armory.name
             done()
 
     it "armory load/valid guild/update, no change", (done) ->
