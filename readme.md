@@ -4,7 +4,9 @@
 
 ## TODO
 
-Travis?
+Make tests pass!
+
+Getting errors in logs, eg about LEAF signature?
 
 Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
 
