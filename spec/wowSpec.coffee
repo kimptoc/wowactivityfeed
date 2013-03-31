@@ -1,9 +1,11 @@
 should = require 'should'
 sinon = require 'sinon'
 
+require './init_logger'
 require "./commonSpec"
 
 require "./wow"
+require "./wow_loader"
 
 describe "wow wrapper:", ->
   describe "register:", ->
@@ -51,7 +53,7 @@ describe "wow wrapper:", ->
       mock_store.expects("load").once().yields()
       mock_store.expects("add").once().yields()
       mock_store.expects("load_all").once().yields([{}])
-      mock_store.expects("ensure_index").once().yields()
+      mock_store.expects("ensure_index").twice().yields()
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
         wow.get_registered (items) ->
           items.length.should.equal 1
@@ -95,7 +97,8 @@ describe "wow wrapper:", ->
     it "armory load/valid guild/new/real", (done) ->
       this.timeout(20000);
       wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.armory_load ->
+        wowload = new wf.WoWLoader(wow)
+        wowload.armory_load ->
           wow.get_loaded (docs) ->
             should.exist docs
             docs.length.should.equal 29

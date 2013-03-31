@@ -49,6 +49,23 @@ Error: connection closed
     at process.startup.processNextTick.process._tickCallback (node.js:244:9)
 
     
+Intermittent error:
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/server.js:529
+        throw err;
+              ^
+Error: Callback was already called.
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/lib/async.js:22:31
+    at WoWLoader.wf.WoWLoader.WoWLoader.ensure_registered_correct (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:95:49)
+    at WoWLoader.ensure_registered_correct (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:54:62)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:370:28
+    at WoWLoader.wf.WoWLoader.WoWLoader.store_update (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:203:11)
+    at WoWLoader.store_update (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:51:49)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:369:26
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/call_logger.js:33:55
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/store_mongo.js:97:59
+    at null.<anonymous> (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/collection.js:337:9)
+
+    
 
 setup new box:
 - configure driver to connect to replicaset, so that change of primary is handling automatically or just make others hidden!

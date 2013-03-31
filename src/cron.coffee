@@ -3,6 +3,8 @@ global.wf ||= {}
 _ = require('underscore')
 cronJob = require('cron').CronJob
 moment = require "moment"
+request = require 'request'
+parseString = require('xml2js').parseString;
 
 require "./tweet"
 
@@ -60,6 +62,20 @@ wf.counts3job = create_cron '00 40 2,8,14,22 * * *', ->
 # wf.counts3job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...6 hourly, how to"
   push_info("How to use guild/character RSS feed - https://wafbeta.uservoice.com/.")
+
+
+# how to use waf
+wf.counts4job = create_cron '00 35 00 * * *', -> 
+# wf.counts4job = create_cron '00 10 17 * * *', -> 
+# wf.counts4job = create_cron '*/10 * * * * *', -> 
+  wf.info "cronjob tick...daily build status"
+  request 'https://api.travis-ci.org/repos/kimptoc/wowactivityfeed.xml', (err1,resp1,body) ->
+    parseString body, (err2,resp2) ->
+      build_status = resp2.Projects.Project[0]["$"]
+      push_info("TravisCI Status:#{build_status.lastBuildStatus}, build:#{build_status.lastBuildLabel} at #{build_status.lastBuildTime.substring(0,19)}")
+
+
+  # r({'uri':}, function(e, r, b) { x(b, function(e,r){ console.log(JSON.stringify(r.Projects.Project[0]["$"])); })  })
 
 
 

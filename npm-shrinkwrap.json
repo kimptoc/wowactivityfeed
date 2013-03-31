@@ -627,6 +627,18 @@
           "resolved": "https://registry.npmjs.org/oauth/-/oauth-0.9.9.tgz"
         }
       }
+    },
+    "xml2js": {
+      "version": "0.2.6",
+      "from": "xml2js@",
+      "resolved": "https://registry.npmjs.org/xml2js/-/xml2js-0.2.6.tgz",
+      "dependencies": {
+        "sax": {
+          "version": "0.4.2",
+          "from": "sax@0.4.2",
+          "resolved": "https://registry.npmjs.org/sax/-/sax-0.4.2.tgz"
+        }
+      }
     }
   }
 }

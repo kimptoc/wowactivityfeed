@@ -30,6 +30,7 @@
         "ga":"",
         "cheerio":"",
         "request":"",
-        "twit":""
+        "twit":"",
+        "xml2js":""
     }
 }
