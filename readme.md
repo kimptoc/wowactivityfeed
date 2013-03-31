@@ -4,24 +4,19 @@
 
 ## TODO
 
-Make tests pass!
-
-Getting errors in logs, eg about LEAF signature?
-
-Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
-
 Localisation - accept/pass through to wow api
 grab from browser, but allow override
 http://stackoverflow.com/questions/12132251/translation-localization-workflow-for-nodejs-express-app
 https://www.google.co.uk/search?q=express+js+localization&aq=0&oq=expressjs+locali&sourceid=chrome&ie=UTF-8
 
-Things...
+Getting errors in logs, eg about LEAF signature?
+
+Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
 
 Auto reconnect to mongo?
  
-url returning num registered (0 and if db problem)
- 
-trigger restart if 0 on that url (hourly check)
+Perhaps have a url returning num registered (0 and if db problem) - for ease of checking site health...
+ - trigger restart if 0 on that url (hourly check)
 
 
 ERROR
@@ -73,12 +68,6 @@ setup new box:
 - configure driver to connect to replicaset, so that change of primary is handling automatically or just make others hidden!
 - print node/mongo version on debug page
 - check for 0 registered - alert if so
-- stormvz uses ubuntu/apt node... and its current?
-
-➜  apt git:(master) ✗ sudo find . -type f -exec grep node {} \; -print
-deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
-deb-src http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main
-./sources.list.d/chris-lea-node_js-precise.list
 
 
 https://github.com/mongodb/node-mongodb-native/blob/master/docs/replicaset.md
