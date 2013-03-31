@@ -3,7 +3,7 @@ REPORTER = dot
 
 check: test
 
-test: coffee-compile test-unit test-acceptance
+test: coffee-compile test-unit
 
 coffee-compile:
 	./node_modules/.bin/coffee --compile --output js/ src/ spec/ src_common

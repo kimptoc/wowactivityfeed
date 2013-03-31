@@ -248,6 +248,8 @@ class wf.WoWLoader
       else
         @wow.get_registered (results_array) =>
           @armory_results_loader(@wow.get_loader_queue(), results_array)
+    catch e
+      wf.error "armory_load:#{e}"
 
   static_loader: (callback) ->
     async.parallel [@realms_loader, @races_loader, @classes_loader], callback
