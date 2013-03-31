@@ -9,6 +9,11 @@ grab from browser, but allow override
 http://stackoverflow.com/questions/12132251/translation-localization-workflow-for-nodejs-express-app
 https://www.google.co.uk/search?q=express+js+localization&aq=0&oq=expressjs+locali&sourceid=chrome&ie=UTF-8
 
+Better tests!
+
+async 0.2 - what to do to make it work...
+- https://github.com/caolan/async/issues/276
+
 Getting errors in logs, eg about LEAF signature?
 
 Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
@@ -46,7 +51,7 @@ Error: connection closed
     at process.startup.processNextTick.process._tickCallback (node.js:244:9)
 
     
-Intermittent error:
+Intermittent error: - might be related to async 0.2 issue
 /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/server.js:529
         throw err;
               ^
