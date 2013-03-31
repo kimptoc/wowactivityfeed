@@ -401,9 +401,9 @@
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.0.0.tgz"
     },
     "async": {
-      "version": "0.2.6",
-      "from": "async@",
-      "resolved": "https://registry.npmjs.org/async/-/async-0.2.6.tgz"
+      "version": "0.1.22",
+      "from": "async@0.1.22",
+      "resolved": "https://registry.npmjs.org/async/-/async-0.1.22.tgz"
     },
     "nodetime": {
       "version": "0.8.10",

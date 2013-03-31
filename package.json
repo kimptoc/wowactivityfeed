@@ -24,7 +24,7 @@
         "sinon":"",
         "portchecker":"",
         "moment":"",
-        "async":"",
+        "async":"0.1.22",
         "nodetime":"",
         "underscore":"",
         "ga":"",
