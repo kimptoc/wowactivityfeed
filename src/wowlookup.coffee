@@ -1,6 +1,5 @@
 global.wf ||= {}
 
-async = require "async"
 
 require "./defaults"
 require './init_logger'

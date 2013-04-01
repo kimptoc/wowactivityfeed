@@ -1,8 +1,6 @@
 global.wf ||= {}
 
 
-async = require "async"
-
 require "./defaults"
 require "./store_mongo"
 require "./wowlookup"

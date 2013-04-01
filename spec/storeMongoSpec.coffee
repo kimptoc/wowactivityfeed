@@ -163,6 +163,13 @@ describe "mongo backed store:", ->
       store.ensure_index "foo", {a:1}, null, ->
         done()
 
+    it "get db stats", (done) ->
+      store.dbstats [], (stats) ->
+        should.exist stats
+        should.exist stats.dbstats
+        should.exist stats.dbstats.db
+        done()
+
     it "test add/count db", (done) ->
 
       store.remove_all "foo", ->

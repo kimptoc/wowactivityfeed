@@ -95,16 +95,6 @@ describe "wow wrapper:", ->
     #   wow.armory_load ->
     #     done()
 
-    # TODO - simplify
-#    it "armory load/valid guild/new/real", (done) ->
-#      this.timeout(20000);
-#      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-#        wowload = new wf.WoWLoader(wow)
-#        wowload.armory_load ->
-#          wow.get_loaded (docs) ->
-#            should.exist docs
-#            docs.length.should.be.above 10
-#            done()
 
             #TODO too complicated - need to simplify it all!
 #    it "armory load/valid guild/update, no change", (done) ->
@@ -153,6 +143,12 @@ describe "wow wrapper:", ->
      wowload = new wf.WoWLoader(wow)
      wowload.classes_loader (classes)->
        classes.length.should.be.above 5
+       done()
+
+    it "static load", (done) ->
+     @timeout(20000)
+     wowload = new wf.WoWLoader(wow)
+     wowload.static_loader ->
        done()
 
     #TODO - simplify
