@@ -4,7 +4,9 @@
 
 ## TODO
 
-Localisation - accept/pass through to wow api
+Add tracking of browser locale - to find out the most popular locales and hence localisations to work on
+
+Localisation - accept/pass through to wow api and store - need a new key on the mongo data...
 grab from browser, but allow override
 http://stackoverflow.com/questions/12132251/translation-localization-workflow-for-nodejs-express-app
 https://www.google.co.uk/search?q=express+js+localization&aq=0&oq=expressjs+locali&sourceid=chrome&ie=UTF-8
@@ -23,6 +25,7 @@ Auto reconnect to mongo?
 Perhaps have a url returning num registered (0 and if db problem) - for ease of checking site health...
  - trigger restart if 0 on that url (hourly check)
 
+Use standard char /. Guild? - Nameplates...  Is there a free service doing this still?
 
 ERROR
 

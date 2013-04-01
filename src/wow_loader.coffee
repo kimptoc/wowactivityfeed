@@ -264,14 +264,14 @@ class wf.WoWLoader
       if classes? and classes.length > 0
         loader = (claz, loaded_callback) =>
           @load_static_claz 'CLASS', claz, loaded_callback
-        async.forEach classes, loader, callback
+        async.forEach classes, loader, -> callback?(classes)
 
   races_loader: (callback) =>
     wowlookup.get_races null, (races) =>
       if races? and races.length > 0
         loader = (race, loaded_callback) =>
           @load_static_claz 'RACE', race, loaded_callback
-        async.forEach races, loader, callback
+        async.forEach races, loader, -> callback?(races)
 
   realms_loader: (callback) =>
     # load and then replace
@@ -287,9 +287,9 @@ class wf.WoWLoader
       if all_realms? and all_realms.length > 0  
         store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
           store.remove_all @wow.get_realms_collection(), =>
-            store.insert @wow.get_realms_collection(), all_realms, callback
+            store.insert @wow.get_realms_collection(), all_realms, -> callback?(all_realms)
       else
-        callback?()
+        callback?(all_realms)
 
 
   item_loader: (item_id, callback) =>

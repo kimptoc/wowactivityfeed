@@ -134,22 +134,26 @@ describe "wow wrapper:", ->
 #      wowload.armory_load ->
 #        done()
 
-    # TODO - simplify!
-#    it "armory realms load", (done) ->
-#      mock_lookup = sinon.mock(wow.get_wowlookup())
-#      mock_lookup.expects("get_realms").exactly(5).yields(
-#        [
-#          {slug:"one", region:"eu"}
-#          {slug:"two", region:"us"}
-#        ])
-#      mock_store = sinon.mock(wow.get_store())
-#      mock_store.expects("ensure_index").once().yields()
-#      mock_store.expects("remove_all").once().yields()
-#      mock_store.expects("insert").exactly(5).yields()
-#
-#      wowload = new wf.WoWLoader(wow)
-#      wowload.realms_loader ->
-#        done()
+    it "armory realms load", (done) ->
+     @timeout(20000)
+     wowload = new wf.WoWLoader(wow)
+     wowload.realms_loader (realms)->
+       realms.length.should.be.above 10
+       done()
+
+    it "armory races load", (done) ->
+     @timeout(20000)
+     wowload = new wf.WoWLoader(wow)
+     wowload.races_loader (races)->
+       races.length.should.be.above 5
+       done()
+
+    it "armory classes load", (done) ->
+     @timeout(20000)
+     wowload = new wf.WoWLoader(wow)
+     wowload.classes_loader (classes)->
+       classes.length.should.be.above 5
+       done()
 
     #TODO - simplify
 #    it "armory load/valid guild/update, with change", (done) ->
