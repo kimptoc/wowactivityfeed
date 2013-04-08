@@ -22,10 +22,13 @@ ps -A | grep mongo
 echo
 
 echo "mongo shell -> mongo --port 27001"
-echo "mongo repl set -> rs.initiate()"
+echo "mongo repl set -> rs.initiate( { _id : \"rs\", members : [ { _id : 0, host : \"localhost:27001\" } ] } )"
 echo "add user/1 -> use admin"
 echo "add user/2 -> db.addUser('user','pass')"
 echo "login/1 -> use admin"
 echo "login/2 -> db.auth('user','pass')"
-echo "add repl set member -> rs.add('Chris-Kimptons-MacBook-Air-2011.local:27002')" # or whatever your hostname is
+# echo "add repl set member -> rs.add('localhost:27002')" # or whatever your hostname is
+# echo "add repl set member -> rs.add('Chris-Kimptons-MacBook-Air-2011.local:27002')" # or whatever your hostname is
+# echo "add repl set member -> rs.add( { \"host\": \"Chris-Kimptons-MacBook-Air-2011.local:27002\", \"priority\": 0 } )" # or whatever your hostname is
+echo "add repl set member -> rs.add( { _id: 1, host: \"localhost:27002\", priority: 0 } )" # or whatever your hostname is
 echo "repl set status -> rs.status()"

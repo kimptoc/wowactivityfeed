@@ -23,9 +23,9 @@ wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
 
 wf.mongo_info = 
     "hostname":"localhost"
-    "port":27017
-    "username":""
-    "password":""
+    "port":27001
+    "username":"user"
+    "password":"pass"
     "name":""
     "db":"wowfeed"
 
