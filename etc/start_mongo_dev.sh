@@ -32,3 +32,4 @@ echo "login/2 -> db.auth('user','pass')"
 # echo "add repl set member -> rs.add( { \"host\": \"Chris-Kimptons-MacBook-Air-2011.local:27002\", \"priority\": 0 } )" # or whatever your hostname is
 echo "add repl set member -> rs.add( { _id: 1, host: \"localhost:27002\", priority: 0 } )" # or whatever your hostname is
 echo "repl set status -> rs.status()"
+echo "dump running db -> mongodump --port 27001 -u user -p pass"
