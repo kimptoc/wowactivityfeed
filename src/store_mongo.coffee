@@ -210,8 +210,14 @@ class wf.StoreMongo
         setTimeout (=> @with_connection(worker)), 100
         return
       mongo_connecting = true
+      servers = new Array()
       mongo_server = new Mongodb.Server(wf.mongo_info.hostname,wf.mongo_info.port,wf.mongo_info)
-      new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
+      servers[0] = mongo_server
+      if wf.mongo_info1?
+        mongo_server1 = new Mongodb.Server(wf.mongo_info1.hostname,wf.mongo_info1.port,wf.mongo_info1)
+        servers[1] = mongo_server1
+      repl_set = new Mongodb.ReplSetServers(servers)
+      new Mongodb.Db(wf.mongo_info.db, repl_set, safe:true).open (err, client) ->
         if err
           wf.error_no_store(err)
           worker?(null)

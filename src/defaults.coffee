@@ -23,7 +23,15 @@ wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
 
 wf.mongo_info = 
     "hostname":"localhost"
-    "port":27001
+    "port":27004
+    "username":"user"
+    "password":"pass"
+    "name":""
+    "db":"wowfeed"
+
+wf.mongo_info1 = 
+    "hostname":"localhost"
+    "port":27002
     "username":"user"
     "password":"pass"
     "name":""
@@ -44,6 +52,14 @@ else if process.env.MONGO_HOST?
   wf.mongo_info.username = process.env.MONGO_USER
   wf.mongo_info.password = process.env.MONGO_PW
   wf.mongo_info.db = process.env.MONGO_DB
+  if process.env.MONGO_HOST1?
+    wf.info "Found MONGO_HOST1, using that too"
+    wf.mongo_info1 = {}
+    wf.mongo_info1.hostname = process.env.MONGO_HOST1
+    wf.mongo_info1.port = parseInt(process.env.MONGO_PORT1)
+    wf.mongo_info1.username = process.env.MONGO_USER1
+    wf.mongo_info1.password = process.env.MONGO_PW1
+    wf.mongo_info1.db = process.env.MONGO_DB1
 else if process.env.VCAP_SERVICES?
   wf.info "No MONGO_HOST, using #{process.env.VCAP_SERVICES}"
   env = JSON.parse(process.env.VCAP_SERVICES)
