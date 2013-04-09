@@ -217,7 +217,7 @@ class wf.StoreMongo
         mongo_server1 = new Mongodb.Server(wf.mongo_info1.hostname,wf.mongo_info1.port,wf.mongo_info1)
         servers[1] = mongo_server1
         mongo_server = new Mongodb.ReplSetServers(servers)
-      wf.info "Connecting to MongoDB:#{servers[0].host}:#{servers[0].port}"
+      wf.info "Connecting to MongoDB:#{servers[0].host}:#{servers[0].port}, using #{servers.length} servers"
       new Mongodb.Db(wf.mongo_info.db, mongo_server, safe:true).open (err, client) ->
         if err
           wf.error_no_store(err)

@@ -4,6 +4,14 @@
 
 ## TODO
 
+Put in replica set connections...
+- is db user valid for wowfeed db?
+- when multiple servers specified for the connection, fails to connect too, generic Mongo Error.
+- mongodump crashes/raised on google group :(
+- OpenVZ?
+- when node steps down, app not handling it - thought it did locally, but not using replset due to above issues...
+
+
 Add tracking of browser locale - to find out the most popular locales and hence localisations to work on
 
 Localisation - accept/pass through to wow api and store - need a new key on the mongo data...
