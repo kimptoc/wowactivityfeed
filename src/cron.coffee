@@ -22,8 +22,8 @@ create_cron = (cron_schedule, cron_task) ->
     wf.error e
 
 
-wf.hourlyjob = create_cron '00 00 * * * *', -> 
-  wf.info "cronjob tick...hourly, on the hour load"
+wf.hourlyjob = create_cron '00 00,30 * * * *', -> 
+  wf.info "cronjob tick... twice an hour api checks"
   wf.armory_load_requested = true
 
 wf.info_queue = []
@@ -97,17 +97,6 @@ wf.counts2job = create_cron '00 25 02 * * *', ->
 
 
 
-
-# wf.hourlyjob = create_cron '00 00 0-21/3 * * *', (-> 
-#   wf.info "cronjob tick...3 hourly, on the hour load"
-#   wf.armory_load_requested = true
-#   )
-
-# wf.hourlyjob = create_cron '00 30 1-22/3 * * *', (-> 
-#   wf.info "cronjob tick...3 hourly, on the half hour load"
-#   wf.armory_load_requested = true
-#   )
-
 wf.loadjob = create_cron '*/10 * * * * *', -> 
   wf.debug "cronjob tick...check if armory load requested (running now? #{wf.wow.get_job_running_lock()})"
   if wf.armory_load_requested
@@ -117,7 +106,6 @@ wf.loadjob = create_cron '*/10 * * * * *', ->
 
 wf.loadjob = create_cron '00 47 * * * *', -> 
   wf.info "Reloading realms"
-  # wf.wow.realms_loader ->
   wf.wow_loader.static_loader ->
     wf.info "Static load complete"
 
