@@ -29,6 +29,14 @@ wf.mongo_info =
     "name":""
     "db":"wowfeed"
 
+# wf.mongo_info = 
+#     "hostname":"localhost"
+#     "port":27001
+#     "username":"user"
+#     "password":"pass"
+#     "name":""
+#     "db":"wowfeed"
+
 # wf.mongo_info1 = 
 #     "hostname":"localhost"
 #     "port":27002
@@ -45,7 +53,7 @@ if process.env.MONGODB_P708DEFAULT_URL?
   wf.mongo_info.db = dbparts[4]
   wf.info "Looks like a pogoapp host:#{process.env.MONGODB_P708DEFAULT_URL}/#{JSON.stringify(wf.mongo_info)}"
 else if process.env.MONGO_HOST?
-  wf.info "Found MONGO_HOST, using that"
+  wf.info "Found MONGO_HOST, using that:#{process.env.MONGO_HOST}:#{process.env.MONGO_PORT}"
   wf.mongo_info = {}
   wf.mongo_info.hostname = process.env.MONGO_HOST
   wf.mongo_info.port = parseInt(process.env.MONGO_PORT)
@@ -53,7 +61,7 @@ else if process.env.MONGO_HOST?
   wf.mongo_info.password = process.env.MONGO_PW
   wf.mongo_info.db = process.env.MONGO_DB
   if process.env.MONGO_HOST1?
-    wf.info "Found MONGO_HOST1, using that too"
+    wf.info "Found MONGO_HOST1, using that too:#{process.env.MONGO_HOST1}:#{process.env.MONGO_PORT1}"
     wf.mongo_info1 = {}
     wf.mongo_info1.hostname = process.env.MONGO_HOST1
     wf.mongo_info1.port = parseInt(process.env.MONGO_PORT1)
