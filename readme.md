@@ -5,8 +5,8 @@
 ## TODO
 
 Put in replica set connections...
-- is db user valid for wowfeed db?
-- when multiple servers specified for the connection, fails to connect too, generic Mongo Error.
+- liquid1 keeps crashing due to index issues, raised with ISP
+- stormvz1 /proc issues - askubuntu question
 - mongodump crashes/raised on google group :(
 - OpenVZ?
 - when node steps down, app not handling it - thought it did locally, but not using replset due to above issues...

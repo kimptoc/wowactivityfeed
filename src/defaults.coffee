@@ -21,29 +21,29 @@ wf.WOW_API_PRIVATE_KEY = process.env.WOW_API_PRIVATE_KEY
 wf.info "WOW/Public:#{wf.WOW_API_PUBLIC_KEY}"
 wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
 
-wf.mongo_info = 
-    "hostname":"localhost"
-    "port":27017
-    "username":""
-    "password":""
-    "name":""
-    "db":"wowfeed"
+wf.mongo_info =
+     "hostname":"localhost"
+     "port":27017
+     "username":""
+     "password":""
+     "name":""
+     "db":"wowfeed"
 
-# wf.mongo_info = 
-#     "hostname":"localhost"
-#     "port":27001
-#     "username":"user"
-#     "password":"pass"
-#     "name":""
-#     "db":"wowfeed"
-
-# wf.mongo_info1 = 
-#     "hostname":"localhost"
-#     "port":27002
-#     "username":"user"
-#     "password":"pass"
-#     "name":""
-#     "db":"wowfeed"
+#wf.mongo_info =
+#    "hostname":"localhost"
+#    "port":27001
+#    "username":"user"
+#    "password":"pass"
+#    "name":""
+#    "db":"wowfeed"
+#
+#wf.mongo_info1 =
+#    "hostname":"localhost"
+#    "port":27002
+#    "username":"user"
+#    "password":"pass"
+#    "name":""
+#    "db":"wowfeed"
 
 if process.env.MONGODB_P708DEFAULT_URL?
   dbparts = /mongodb:\/\/(.*):(.*)@(.*)\/(.*)/.exec(process.env.MONGODB_P708DEFAULT_URL)

@@ -1,6 +1,7 @@
 should = require 'should'
 require "./commonSpec"
 
+require "./init_logger"
 require "./wowlookup"
 
 checkAchievements = (docs) ->
