@@ -5,18 +5,20 @@ async = require "async"
 
 require './init_logger'
 require './feed_item_formatter'
+require "./wowlookup"
+require './call_logger'
 
 # this class handles loading info from the Armory and saving it to the db
 class wf.WoWLoader
 
   wow = null
   store = null
-  wowlookup = null
+  wowlookup = new wf.WowLookup()
   feed_formatter = null
 
   constructor: (@wow) ->
     store = @wow.get_store()
-    wowlookup = @wow.get_wowlookup()
+    new wf.CallLogger(@wow, wowlookup, store)
     feed_formatter = new wf.FeedItemFormatter()
     @wow.set_item_loader_queue async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
 

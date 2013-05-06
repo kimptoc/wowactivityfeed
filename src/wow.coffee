@@ -3,17 +3,14 @@ global.wf ||= {}
 
 require "./defaults"
 require "./store_mongo"
-require "./wowlookup"
 
 require './init_logger'
 require './calc_changes'
-require './call_logger'
 
 # this an in memory cache of the latest guild/char details
 class wf.WoW
 
   store = new wf.StoreMongo()
-  wowlookup = new wf.WowLookup()
   registered_collection = "registered"
   armory_collection = "armory_history"
   static_collection = "armory_static"
@@ -38,7 +35,6 @@ class wf.WoW
 
   constructor: (callback)->
     wf.info "WoW constructor"
-    new wf.CallLogger(this, wowlookup, store)
     store.create_collection calls_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
       wf.wow ?= this
@@ -125,9 +121,6 @@ class wf.WoW
 
   get_store: ->
     store
-
-  get_wowlookup: ->
-    wowlookup
 
   get_registered: (registered_handler)->
     store.load_all registered_collection, {},  {sort: {"updated_at": -1}}, registered_handler
