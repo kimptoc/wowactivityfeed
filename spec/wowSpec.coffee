@@ -1,8 +1,8 @@
 should = require 'should'
 sinon = require 'sinon'
 
-require './init_logger'
 require "./commonSpec"
+require './init_logger'
 
 require "./wow"
 require "./wow_loader"
@@ -54,17 +54,17 @@ describe "wow wrapper:", ->
       mock_store.expects("add").once().yields()
       mock_store.expects("load_all").once().yields([{}])
       mock_store.expects("ensure_index").twice().yields()
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+      wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
         wow.get_registered (items) ->
           items.length.should.equal 1
           done()
 
     it "dont double register", (done)->
-      wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
-        wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls", ->
+      wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
+        wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
           wow.get_registered (items) ->
             items.length.should.equal 1
-            wow.ensure_registered "eu", "Darkspear", "guild", "Mean Girls2", ->
+            wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls2"}, ->
               wow.get_registered (items) ->
                 items.length.should.equal 2
                 done()
@@ -228,7 +228,8 @@ describe "wow wrapper:", ->
         realm: "wwewe"
         name: "test"
         lastModified: 123
-      wow.get item.region,item.realm,item.type,item.name, (result) ->
+        locale:"en_GB"
+      wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
         wf.debug "back from get"
         # todo - should.not.exist result
         done()
@@ -252,14 +253,15 @@ describe "wow wrapper:", ->
         region: "eu"
         realm: "wwewe"
         name: "test"
+        locale:"en_GB"
         lastModified: 123
       wowload = new wf.WoWLoader(wow)
-      wowload.store_update item.type, item.region, item.realm, item.name, item, ->
-        wow.get_history item.region, item.realm, item.type, item.name, (results) ->
+      wowload.store_update item.type, item.region, item.realm, item.name,item.locale, item, ->
+        wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
           results.length.should.equal 1 
           # should.exist results[0].whats_changed
           results[0].whats_changed.overview.should.equal "NEW"
-          wow.get item.region,item.realm,item.type,item.name, (result) ->
+          wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
             # should.exist result
             wf.debug "result:#{JSON.stringify(result)}"
             result.name.should.equal "test"
@@ -271,24 +273,26 @@ describe "wow wrapper:", ->
         region: "eu"
         realm: "wwewe"
         name: "test"
+        locale:"en_GB"
         lastModified: 123
       item2 =
         type: "guild"
         region: "eu"
         realm: "wwewe"
         name: "test"
+        locale:"en_GB"
         lastModified: 124
       wowload = new wf.WoWLoader(wow)
-      wowload.store_update item.type, item.region, item.realm, item.name, item, ->
-        wowload.store_update item2.type, item2.region, item2.realm, item2.name, item2, ->
-          wow.get_history item.region,item.realm,item.type,item.name, (results) ->
+      wowload.store_update item.type, item.region, item.realm, item.name,item.locale, item, ->
+        wowload.store_update item2.type, item2.region, item2.realm, item2.name,item2.locale, item2, ->
+          wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
             results.length.should.equal 2 
             results[0].lastModified.should.equal 124
             results[1].lastModified.should.equal 123
             # should.exist results[0].whats_changed
-            results[0].whats_changed.overview.should.equal "UPDATE" 
-            results[0].whats_changed.changes.should.eql 
-              lastModified : [123, 124]
+            wf.info JSON.stringify(results)
+            results[0].whats_changed.overview.should.equal "UPDATE"
+            results[0].whats_changed.changes.should.eql lastModified: [123, 124]
             done()
 
     it "try store update 2same", (done) ->
@@ -296,12 +300,13 @@ describe "wow wrapper:", ->
         type: "guild"
         region: "eu"
         realm: "wwewe"
+        locale:"en_GB"
         name: "test"
         lastModified: 123
       wowload = new wf.WoWLoader(wow)
-      wowload.store_update item.type, item.region, item.realm, item.name, item, ->
-        wowload.store_update item.type, item.region, item.realm, item.name, item, ->
-          wow.get_history item.region,item.realm,item.type,item.name, (results) ->
+      wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
+        wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
+          wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
             results.length.should.equal 1 
             # should.exist results[0].whats_changed
             results[0].whats_changed.overview.should.equal "NEW" 

@@ -138,7 +138,8 @@ handle_view = (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
-  wf.wow.get_history region, realm, type, name, (wowthings) ->
+  locale = req.params.locale or wf.REGION_LOCALE[region]
+  wf.wow.get_history region, realm, type, name, locale, (wowthings) ->
     if wowthings? and wowthings.length > 0
       get_feed wowthings, req, (feed) ->
         guild_item = null
@@ -152,15 +153,16 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
     else
-      res.render "#{req.params.type}_not_found", 
-        msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}"
+      req.params.locale ?= ""
+      res.render "#{req.params.type}_not_found",
+        msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}/#{locale}"
         w: req.params
         p: req.params
 
-wf.app.get '/wow/:region/:type/:realm/:name', (req, res) ->
+wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
   handle_view(req, res)
   
-wf.app.get '/view/:type/:region/:realm/:name', (req, res) ->
+wf.app.get '/view/:type/:region/:realm/:name/:locale?', (req, res) ->
   handle_view(req, res)
 
 wf.app.get '/feed/all.rss', (req, res) ->
@@ -178,7 +180,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
  
-wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
+wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
@@ -194,8 +196,9 @@ wf.app.get '/feed/:type/:region/:realm/:name.rss', (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
+  locale = req.params.locale or wf.REGION_LOCALE[region]
 
-  wf.wow.get_history region, realm, type, name, (items)->
+  wf.wow.get_history region, realm, type, name, locale, (items)->
     wf.timing_off("/feed/#{name}")
     get_feed items, (items_to_publish) ->
       res.set('Content-Type', 'application/xml')
@@ -224,7 +227,7 @@ wf.app.get '/json/realms', (req, res) ->
   wf.wow.get_realms (realms) ->
     res.send JSON.stringify(realms)
 
-wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
+wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
 
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
@@ -238,12 +241,13 @@ wf.app.get '/json/get/:type/:region/:realm/:name', (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = wf.String.capitalise(req.params.name)
-  wf.wow.get_history region, realm, type, name, (items)->
+  locale = req.params.locale or wf.REGION_LOCALE[region]
+  wf.wow.get_history region, realm, type, name, locale, (items)->
     get_feed items, (items_to_publish) ->
       results = []
       if items? and items.length >0 # might get nothing back, so need to return empty array
         item = items[0] 
-        item_lookup = {type, realm, region, name:item.name}
+        item_lookup = {type, realm, region, name:item.name, locale}
         item_lookup.name = item.guild if type == "guild" and item.guild?
         item.waf_feed = items_to_publish
         item.waf_url = wf.feed_formatter.waf_url(item_lookup)
@@ -301,11 +305,11 @@ wf.app.get '/debug/logs/:type', (req, res) ->
 #    res.render "message", msg: "Database cleared!"
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро"
-  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls"
-  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est"
-  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda"
-  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz"
+  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро",""
+  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls",""
+  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est",""
+  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda",""
+  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz",""
   res.render "message", msg: "Sample data registered"
 
 

@@ -1,8 +1,8 @@
 should = require 'should'
 assert = require 'assert'
 
-require './init_logger'
 require "./commonSpec"
+require './init_logger'
 require "./calc_changes"
 
 describe "diff utils", ->
@@ -37,6 +37,20 @@ describe "diff utils", ->
       diff = wf.calc_changes null, obj1
       diff.overview.should.equal "NEW"
       should.not.exist diff.changes
+
+    it "no old obj, ie new", ->
+      obj1 =
+        name: "foo"
+      diff = wf.calc_changes undefined, obj1
+      diff.overview.should.equal "NEW"
+      should.not.exist diff.changes
+
+    it "no old obj, ie new", ->
+      obj1 =
+        name: "foo"
+      diff = wf.calc_changes {}, obj1
+      diff.overview.should.equal "UPDATE"
+      should.exist diff.changes
 
     it "diff no change", ->
       obj1 = 

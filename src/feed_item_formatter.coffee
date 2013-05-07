@@ -67,7 +67,7 @@ class wf.FeedItemFormatter
     return wow_type
 
   armory_api_link: (p) =>
-    "http://#{p.region}.battle.net/api/wow/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts"
+    "http://#{p.region}.battle.net/api/wow/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{p.locale}"
 
   char_link: (p) =>
     alt_text = @get_formal_name(p)
@@ -103,12 +103,12 @@ class wf.FeedItemFormatter
     name ||= "Unknown...."
 
   waf_url: (item, feed_timestamp, thingId) ->
-    the_url = "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}"
+    the_url = "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}/#{encodeURIComponent(item?.locale)}"
     the_url = the_url + "?ts=#{feed_timestamp}&id=#{thingId}" if feed_timestamp? or thingId?
     return the_url
 
   waf_rss_url: (item) ->
-    "#{wf.SITE_URL}/feed/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}.rss"
+    "#{wf.SITE_URL}/feed/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}/#{encodeURIComponent(item?.locale)}.rss"
 
   add_criteria: (description, criteria) ->
     if criteria? and criteria.length >0

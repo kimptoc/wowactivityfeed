@@ -1,6 +1,8 @@
 global.wf ||= {}
 
 
+__ = require "arguejs"
+
 async = require "async"
 
 require './init_logger'
@@ -24,21 +26,24 @@ class wf.WoWLoader
 
 
   ensure_registered_correct: (item, info, callback) =>
-    if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region)
+    if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region or item.locale != info.locale)
       wf.info "Registered entry is different, update registered"
       item_key = 
         type: item.type
         region: item.region
         name: item.name
         realm: item.realm
-      new_item_key = 
+        locale: item.locale
+      new_item_key =
         type: info.type
         region: info.region
         name: info.name
         realm: info.realm
+        locale: info.locale
       item.realm = info.realm
       item.region = info.region
       item.name = info.name
+      item.locale = info.locale
       item.updated_at = new Date()
       store.load @wow.get_registered_collection(), new_item_key, null, (new_key_item)=>
         if new_key_item?
@@ -52,9 +57,12 @@ class wf.WoWLoader
       callback?(info)
 
 
-  format_armory_info: (type, region, realm, name, info, doc) ->
-    new_item = {region, realm, type, name}
-    new_item.lastModified = info.lastModified
+  format_armory_info: () ->
+#  format_armory_info: (type, region, realm, name,locale, info, doc) ->
+#    param = {type,region,realm,name,locale,info,doc}
+    param = __(type:String,region:String,realm:String,name:String,locale:String,info:Object,doc:undefined)
+    new_item = {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}
+    new_item.lastModified = param.info.lastModified
     # remap achievements as a map for ease of diff/use
     # if info.achievements?
     #   achievements_map = {}
@@ -70,89 +78,92 @@ class wf.WoWLoader
     #   info.achievements_criteria_map = achievements_criteria_map
 
     # remap members as a map for ease of diff/use
-    if info.members?
+    if param.info.members?
       members_map = {}
-      for m in info.members
+      for m in param.info.members
         members_map[m.character.name] = m
-      info.members_map = members_map
+      param.info.members_map = members_map
 
     # remap professions
-    if info.professions?
+    if param.info.professions?
       professions_map = {}
-      for own category, profs of info.professions
+      for own category, profs of param.info.professions
         for prof in profs
           professions_map[prof.name] = prof
-      info.professions_map = professions_map
+      param.info.professions_map = professions_map
 
     # remap reputation
-    if info.reputation?
+    if param.info.reputation?
       reputation_map = {}
-      for rep in info.reputation
+      for rep in param.info.reputation
         reputation_map[rep.name.replace(/\./g,"")] = rep
-      info.reputation_map = reputation_map
+      param.info.reputation_map = reputation_map
 
     # remap mounts
-    if info.mounts?
+    if param.info.mounts?
       mounts_collected_map = {}
-      for m in info.mounts.collected
+      for m in param.info.mounts.collected
         mounts_collected_map[m.name.replace(/\./g,"")] = m
-      info.mounts_collected_map = mounts_collected_map
+      param.info.mounts_collected_map = mounts_collected_map
 
-    if info.pets?
+    if param.info.pets?
       pets_collected_map = {}
-      for p in info.pets.collected
+      for p in param.info.pets.collected
         pets_collected_map[p.name.replace(/\./g,"")] = p
-      info.pets_collected_map = pets_collected_map
+      param.info.pets_collected_map = pets_collected_map
 
-    if info.titles?
+    if param.info.titles?
       titles_map = {}
-      for t in info.titles
+      for t in param.info.titles
         base_name = t.name.replace /%s/,""
         titles_map[base_name] = t
-      info.titles_map = titles_map
+      param.info.titles_map = titles_map
 
     # strip achievements as they are in the news/feeds items
-    delete info.achievements
+    delete param.info.achievements
 
-    new_item.armory = info
+    new_item.armory = param.info
     saved_stuff_old = {}
     saved_stuff_new = {}
     items_to_save = ['feed','news','members','reputation','professions']
     for item in items_to_save
-      if info[item]?
-        saved_stuff_new[item] = info[item]
-        info[item] = null
-      if doc?.armory?[item]?
-        saved_stuff_old[item] = doc.armory[item]
-        doc.armory[item] = null
-    whats_changed = wf.calc_changes(doc?.armory, info)
+      if param.info[item]?
+        saved_stuff_new[item] = param.info[item]
+        param.info[item] = null
+      if param.doc?.armory?[item]?
+        saved_stuff_old[item] = param.doc.armory[item]
+        param.doc.armory[item] = null
+    whats_changed = wf.calc_changes(param.doc?.armory, param.info)
     for item in items_to_save
       if saved_stuff_new[item]?
-        info[item] = saved_stuff_new[item]
+        param.info[item] = saved_stuff_new[item]
       if saved_stuff_old[item]?
-        doc.armory[item] = saved_stuff_old[item]
+        param.doc.armory[item] = saved_stuff_old[item]
     new_item.whats_changed = whats_changed
     new_item.added_date = new Date()
     new_item.accessed_at = new Date()
     return new_item
 
-  store_update: (type, region, realm, name, info, stored_handler) => 
-    if info.error? 
-      stored_handler?()
+  store_update: () =>
+    param = __(type:String,region:String,realm:String,name:String,locale:String,info:Object,stored_handler:Function)
+    if param.info.error?
+      param.stored_handler?()
       return # dont save if we had an error
+
+    wf.debug "store_update: locale=#{param.locale}"
 
     # find prev entry
     # is it same one, if so done- nowt to do
     # if not same, calc diff, then save it
     @wow.ensure_armory_indexes =>
-      store.load @wow.get_armory_collection(), {region, realm, type, name}, {sort: {"lastModified": -1}}, (doc) =>
+      store.load @wow.get_armory_collection(), {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, {sort: {"lastModified": -1}}, (doc) =>
         wf.debug "store_update:#{JSON.stringify(doc)}"
-        if doc? and doc.lastModified == info.lastModified
-          wf.debug "Ignored as no changes and saved already: #{name}"
-          stored_handler?()
+        if doc? and doc.lastModified == param.info.lastModified
+          wf.debug "Ignored as no changes and saved already: #{param.name}"
+          param.stored_handler?()
         else
-          wf.debug "New or updated: #{info.name}/#{name}"
-          new_item = @format_armory_info(type, region, realm, name, info, doc)
+          wf.debug "New or updated: #{param.info.name}/#{param.name}/#{doc}"
+          new_item = @format_armory_info(param.type, param.region, param.realm, param.name, param.locale, param.info, doc)
           wf.debug "pre add"
           store.add @wow.get_armory_collection(), new_item, =>
             items_to_get = feed_formatter.get_items new_item
@@ -161,18 +172,18 @@ class wf.WoWLoader
               @wow.get_item_loader_queue().push item_id
             if doc?
               store.update @wow.get_armory_collection(), doc, {$unset:{armory:1}, $set:{archived_at:new Date()}}, =>
-                wf.debug "Now saved #{info.name}/#{name}, updated old one"
-                store.load_all_with_fields @wow.get_armory_collection(),  {region, realm, type, name}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
+                wf.debug "Now saved #{param.info.name}/#{param.name}, updated old one"
+                store.load_all_with_fields @wow.get_armory_collection(),  {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, {lastModified:1}, {sort: {"lastModified": -1}, limit: wf.HISTORY_SAVE_LIMIT}, (docs) =>
                   # get last last mod date
                   wf.info "Current history - count:#{docs.length}"
                   last_doc_last_modified = docs[-1...-1].lastModified
                   # delete all entries with last mod date before date (less than)
-                  store.remove @wow.get_armory_collection(), {region, realm, type, name, lastModified : { $lt : last_doc_last_modified } }, (count)->
+                  store.remove @wow.get_armory_collection(), {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale, lastModified : { $lt : last_doc_last_modified } }, (count)->
                     wf.info "Deleted old history - count:#{count}"
-                    stored_handler?()
+                    param.stored_handler?()
             else
-              wf.debug "Now saved #{info.name}/#{name}, no old one"
-              stored_handler?()
+              wf.debug "Now saved #{param.info.name}/#{param.name}, no old one"
+              param.stored_handler?()
 
 
 
@@ -213,11 +224,11 @@ class wf.WoWLoader
 
   armory_item_loader: (item, callback) =>
     wf.debug "armory_item_loader:#{item?.name}"
-    store.load @wow.get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm}, {sort: {"lastModified": -1}}, (doc) =>
-      wowlookup.get item.type, item.region, item.realm, item.name, doc?.lastModified, (info) =>
+    store.load @wow.get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm, locale: item.locale}, {sort: {"lastModified": -1}}, (doc) =>
+      wowlookup.get item, doc?.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
-          @store_update info.type, info.region, info.realm, info.name, info, =>
+          @store_update info.type, info.region, info.realm, info.name, info.locale, info, =>
             # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
             @ensure_registered_correct item, info, callback
         else
@@ -228,7 +239,7 @@ class wf.WoWLoader
     loader_queue.push results_array, (info) ->
       if info?.type == "guild" and info?.members?
         for member in info.members
-          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, registered:false
+          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, locale: info.locale, registered:false
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."

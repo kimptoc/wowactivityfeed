@@ -1,5 +1,6 @@
 global.wf ||= {}
 
+__ = require "arguejs"
 
 require "./defaults"
 require './init_logger'
@@ -14,7 +15,7 @@ class wf.WowLookup
     member: "character"
     character: "character"
 
-  armory_fields = 
+  armory_fields =
     guild: ["members","achievements","news","challenge"]
     member:    ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles","items","pets","petSlots","mounts"]
     character: ["achievements","guild","feed","hunterPets","professions","progression","pvp","quests","reputation","stats","talents","titles","items","pets","petSlots","mounts"]
@@ -22,7 +23,8 @@ class wf.WowLookup
   constructor: ->
     wf.info "WowLookup constructor"
 
-  get_armory: (callback) ->
+  get_armory: () ->
+    param = __(callback:Function)
     armory_defaults = 
       publicKey: wf.WOW_API_PUBLIC_KEY
       privateKey: wf.WOW_API_PRIVATE_KEY
@@ -34,7 +36,7 @@ class wf.WowLookup
       wf.info "Its production - dont use a proxy to the armory"
       armory_defaults.request = request_defaults
       armory = require('armory').defaults(armory_defaults)
-      callback(armory)
+      param.callback(armory)
     else
       try
         portcheck.isOpen 8888,"localhost", (is_open)->
@@ -44,17 +46,17 @@ class wf.WowLookup
             request_defaults.proxy = "http://localhost:8888"
             armory_defaults.request = request_defaults
             armory = require('armory').defaults(armory_defaults)
-            callback(armory)
+            param.callback(armory)
           else
             wf.info "Proxy not found, so connecting to armory direct"
             armory_defaults.request = request_defaults
             armory = require('armory').defaults(armory_defaults)
-            callback(armory)
+            param.callback(armory)
       catch e
         wf.info "Proxy not found, so connecting to armory direct:#{e}"
         armory_defaults.request = request_defaults
         armory = require('armory').defaults(armory_defaults)
-        callback(armory)
+        param.callback(armory)
 
   with_armory: (armory_handler) ->
     if armory_instance?
@@ -68,28 +70,38 @@ class wf.WowLookup
           armory_instance = armory
           armory_handler?(armory_instance)
 
-  get: (type, region, realm, name, lastModified, result_handler) ->
-    wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}, last mod:#{new Date(lastModified)}"
+#  get: (item_info, lastModified, result_handler) ->
+  get: () ->
+    param = __(item_info:Object, lastModified:undefined, result_handler:Function)
+#    param = {item_info,lastModified,result_handler}
+    realm = param.item_info.realm
+    region = param.item_info.region
+    name = param.item_info.name
+    type = param.item_info.type
+    locale = param.item_info.locale || wf.REGION_LOCALE[region]
+    wf.debug "Armory lookup #{type} info for #{region}, #{realm}, #{name}, last mod:#{new Date(param.lastModified)}"
     @with_armory (armory) ->
-      armory[armory_calls[type]] {region, realm, name, fields: armory_fields[type], lastModified}, (err,thing) ->
+      armory[armory_calls[type]] {region, realm, name, locale, fields: armory_fields[type], lastModified:param.lastModified}, (err,thing) ->
         if err is null and thing is undefined # no changes
           wf.debug "wowlookup #{name} - not modified"
-          result_handler?(undefined)          
+          param.result_handler?(undefined)
         else if err
-          wf.warn("wowlookup error looking for #{name},#{realm},#{region},#{type}:#{err.message} : #{JSON.stringify(err)}")
-          result_handler?(
+          wf.warn("wowlookup error looking for #{name},#{realm},#{region},#{locale},#{type}:#{err.message} : #{JSON.stringify(err)}")
+          param.result_handler?(
             type: type
             region: region
             realm: realm
             name: name
+            locale: locale
             error: err.message
             lastModified: 0
-            info: "Armory lookup #{type} info for #{region}, #{realm}, #{name}")
+            info: "Armory lookup #{type} info for #{region}/#{locale}, #{realm}, #{name}")
         else
           wf.debug "wowlookup #{name}/#{thing?.name}, err:#{JSON.stringify(err)}, result:#{JSON.stringify(thing)}"
           thing?.type = type
           thing?.region = region?.toLowerCase()
-          result_handler?(thing)
+          thing?.locale = locale
+          param.result_handler?(thing)
 
   get_item: (item_id, region = "eu", callback) ->
     @with_armory (armory) ->

@@ -1,8 +1,8 @@
 should = require 'should'
 assert = require 'assert'
 
-require './init_logger'
 require "./commonSpec"
+require './init_logger'
 require "./string"
 
 describe "string extension(s)", ->

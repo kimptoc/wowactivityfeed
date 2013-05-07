@@ -1,5 +1,6 @@
 global.wf ||= {}
 
+__ = require "arguejs"
 
 require "./defaults"
 require "./store_mongo"
@@ -18,13 +19,13 @@ class wf.WoW
   items_collection = "armory_items"
   realms_collection = "armory_realms"
 
-  fields_to_select = {name:1,realm:1,region:1,type:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
+  fields_to_select = {name:1,realm:1,region:1,type:1,locale:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
 
   static_index_1 = {id:1, static_type:1}
-  registered_index_1 = {name:1, realm:1, region:1, type:1}
+  registered_index_1 = {name:1, realm:1, region:1, type:1, locale:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   realms_index_1 = {name:1, slug:1, region:1}
-  armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1}
+  armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1, locale:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
   armory_item_index_1 = {item_id:1}
@@ -100,24 +101,26 @@ class wf.WoW
   get_static_index_1: ->
     static_index_1
 
-  ensure_registered: (region, realm, type, name, registered_handler) ->
-    wf.debug "Registering #{name}"
+  ensure_registered: () ->
+    param = __(item_info:Object, registered_handler:Function)
+    wf.debug "Registering #{param.item_info.name}"
     store.ensure_index registered_collection, registered_index_1, null, ->
       store.ensure_index registered_collection, registered_ttl_index_2, { unique: false, expireAfterSeconds: wf.REGISTERED_ITEM_TIMEOUT }, ->
-        store.load registered_collection, {region,realm,type,name}, null, (doc) ->
+        store.load registered_collection, param.item_info, null, (doc) ->
           wf.info "ensure_registered:#{JSON.stringify(doc)}"
           if doc?
-            wf.debug "Registered already: #{name}"
-            store.update registered_collection, {region,realm,type,name}, $set: {updated_at:new Date()}, ->
-              wf.debug "Registered #{name}, updated timestamp"
-              registered_handler?(true)
+            wf.debug "Registered already: #{param.item_info.name}"
+            store.update registered_collection, param.item_info, $set: {updated_at:new Date()}, ->
+              wf.debug "Registered #{param.item_info.name}, updated timestamp"
+              param.registered_handler?(true)
           else
-            wf.debug "Not Registered #{name}"
-            armory_pending_queue.push {region, realm, type, name}
+            wf.debug "Not Registered #{param.item_info.name}"
+            armory_pending_queue.push param.item_info
             wf.armory_load_requested = true # new item/guild, so do an armory load soon
-            store.add registered_collection,{region,realm,type,name, updated_at:new Date()}, ->
-              wf.debug "Now Registered #{name}"
-              registered_handler?(false)
+            param.item_info.updated_at = new Date()
+            store.add registered_collection,param.item_info, ->
+              wf.debug "Now Registered #{param.item_info.name}"
+              param.registered_handler?(false)
 
   get_store: ->
     store
@@ -137,13 +140,15 @@ class wf.WoW
   clear_registered: (cleared_handler) ->
     store.remove_all registered_collection, cleared_handler
 
-  get: (region, realm, type, name, result_handler) =>
-    if type == "guild" or type == "member"
-      @ensure_registered region, realm, type, name, =>
+  get: () =>
+    param = __(region:String, realm:String, type:String, name:String, locale:String, result_handler:Function)
+    if param.type == "guild" or param.type == "member"
+      item_key = {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}
+      @ensure_registered item_key, =>
         @ensure_armory_indexes ->
-          store.load armory_collection, {type, region, realm, name}, {sort: {"lastModified": -1}}, result_handler
+          store.load armory_collection, item_key, {sort: {"lastModified": -1}}, param.result_handler
     else
-      result_handler?(null)
+      param.result_handler?(null)
 
 
   get_loaded: (loaded_handler) ->
@@ -162,7 +167,7 @@ class wf.WoW
         store.ensure_index armory_collection, armory_accessed_ttl_index_3, { unique: false, expireAfterSeconds: wf.ACCESSED_ITEM_TIMEOUT }, callback
 
   repatch_item_key: (item) ->
-    item?.region+item?.realm+item?.type+item?.name
+    item?.region+item?.realm+item?.type+item?.name+item?.locale
 
   repatch_results: (results, callback)  ->
     # assumed results are in descending time order ...
@@ -189,43 +194,46 @@ class wf.WoW
           previous_item_cache[@repatch_item_key(item)] = item
     callback?(results)
 
-  get_history: (region, realm, type, name, result_handler) =>
-    @get_history_counted(region, realm, type, name, 1, result_handler)
+  get_history: () =>
+    param = __(region:String,realm:String,type:String,name:String,locale:String,result_handler:undefined)
+    @get_history_counted(param.region, param.realm, param.type, param.name, param.locale, 1, param.result_handler)
 
-  get_history_counted: (region, realm, type, name, counter, result_handler) =>
-    if type == "guild" or type == "member"
-      @ensure_registered region, realm, type, name, =>
+  get_history_counted: () =>
+    param = __(region:String,realm:String,type:String,name:String,locale:String,counter:Number,result_handler:undefined)
+    if param.type == "guild" or param.type == "member"
+      @ensure_registered {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, =>
         @ensure_armory_indexes =>
-          @get_history_from_db region, realm, type, name, (results) =>
+          @get_history_from_db param.region, param.realm, param.type, param.name, param.locale, (results) =>
             if results? and results.length >0
-              result_handler?(results)
+              param.result_handler?(results)
             else
-              if counter < wf.ARMORY_LOOKUP_TIMEOUT
-                wf.info "wait for armory load to complete... #{region}/#{realm}/#{type}/#{name}-#{counter}"
-                setTimeout (=> @get_history_counted(region, realm, type, name, counter+1, result_handler)), 1000
+              if param.counter < wf.ARMORY_LOOKUP_TIMEOUT
+                wf.info "wait for armory load to complete... #{param.region}/#{param.locale}/#{param.realm}/#{param.type}/#{param.name}-#{param.counter}"
+                setTimeout (=> @get_history_counted(param.region, param.realm, param.type, param.name, param.locale, param.counter+1, param.result_handler)), 1000
               else
-                result_handler?(null)
+                param.result_handler?(null)
     else
-      result_handler?(null)
+      param.result_handler?(null)
 
-  get_history_from_db: (region, realm, type, name, result_handler) =>
-    selector = {type, region, realm, name}
+  get_history_from_db: () =>
+    param = __(region:String,realm:String,type:String,name:String,locale:String,result_handler:Function)
+    selector = {type:param.type, region:param.region, realm:param.realm, name:param.name, locale:param.locale}
     store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
       if results? and results.length >0
         selector.lastModified = results[0].lastModified
         store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
-          if type == "guild" # if its a guild, also query for guild members
+          if param.type == "guild" # if its a guild, also query for guild members
             wf.debug "Got a guild, so also query for members..."
-            selector = {type:"member", region, realm, "armory.guild.name":name}
+            selector = {type:"member", region:param.region, realm:param.realm, locale:param.locale, "armory.guild.name":param.name}
             store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
               store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
                 for m in members
                   results.push m
-                @repatch_results(results, result_handler)
+                @repatch_results(results, param.result_handler)
           else
-            @repatch_results(results, result_handler)
+            @repatch_results(results, param.result_handler)
       else
-        result_handler?(null)
+        param.result_handler?(null)
 
   get_realms: (callback) ->
     store.load_all_with_fields realms_collection, {}, {name:1, region:1}, {sort:{name:1, region:1}}, callback

@@ -7,15 +7,16 @@ class wf.CallLogger
   constructor: (wow, wowlookup, store) ->
 
     wowlookup_get = wowlookup.get    
-    wowlookup.get = (type, region, realm, name, lastModified, callback) ->
+    wowlookup.get = (item_info, lastModified, callback) ->
       wf.debug "Wrapped armory call"
       armory_stats = 
-        type: type
-        region: region
-        name: name
-        realm: realm
+        type: item_info.type
+        region: item_info.region
+        name: item_info.name
+        realm: item_info.realm
+        locale: item_info.locale
         start_time: new Date().getTime()
-      wowlookup_get.apply wowlookup, [type, region, realm, name, lastModified, (info) ->
+      wowlookup_get.apply wowlookup, [item_info, lastModified, (info) ->
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error
         armory_stats.not_modified = (info is undefined and !armory_stats.error?)

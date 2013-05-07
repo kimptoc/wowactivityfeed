@@ -21,7 +21,7 @@ describe "wow armory lookup:", ->
   describe "get:", ->
     it "valid guild armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "guild", "eu", "Darkspear", "Mean Girls", 0, (result) ->
+      wow.get {type:"guild", region:"eu", realm:"Darkspear", name:"Mean Girls"}, 0, (result) ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Mean Girls"
@@ -30,17 +30,18 @@ describe "wow armory lookup:", ->
 
     it "invalid guild armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "guild", "eu", "Darkspear", "Mean Girlsaaa", 0, (result) ->
+      wow.get {type:"guild", region:"eu", realm:"Darkspear", name:"Mean Girlsaaa"}, 0, (result) ->
         should.exist result
         should.exist result.error
         should.exist result.name
         done()
 
-    it "valid member armory lookup", (done) ->
+    it "valid member armory lookup basic", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptoc", 0, (result) ->
+      wow.get {type:"member", region:"eu", realm:"Darkspear", name:"Kimptoc"}, 0, (result) ->
         should.exist result
         should.not.exist result.error
+        should.exist result.locale
         result.name.should.equal "Kimptoc"
         should.exist result.achievements
         result.achievements.achievementsCompleted.length.should.equal result.achievements.achievementsCompletedTimestamp.length
@@ -49,9 +50,19 @@ describe "wow armory lookup:", ->
         result.achievements.criteria.length.should.equal result.achievements.criteriaTimestamp.length
         done()
 
+    it "valid french member armory lookup basic", (done) ->
+      wow = new wf.WowLookup()
+      wow.get {type:"member", region:"eu", realm:"Argent Dawn", name:"Grobmuk", locale:"fr_FR"}, 0, (result) ->
+        should.exist result
+        should.not.exist result.error
+        should.exist result.locale
+        result.name.should.equal "Grobmuk"
+        result.locale.should.equal "fr_FR"
+        done()
+
     it "invalid  member armory lookup", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptocaaa", 0, (result) ->
+      wow.get {type:"member", region:"eu", realm:"Darkspear", name:"Kimptocaaa"}, 0, (result) ->
         should.exist result
         should.exist result.error
         should.exist result.name
@@ -59,18 +70,18 @@ describe "wow armory lookup:", ->
 
     it "valid member armory lookup, no mods", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptoc", 0, (result) ->
+      wow.get {type:"member", region:"eu", realm:"Darkspear", name:"Kimptoc"}, 0, (result) ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Kimptoc"
         should.exist result.achievements
-        wow.get "member", "eu", "Darkspear", "Kimptoc", result.lastModified, (result) ->
+        wow.get {type:"member", region:"eu", realm:"Darkspear", name:"Kimptoc"}, result.lastModified, (result) ->
           should.strictEqual(undefined, result)
           done()
 
     it "valid member armory lookup, default null lastMod", (done) ->
       wow = new wf.WowLookup()
-      wow.get "member", "eu", "Darkspear", "Kimptoc", undefined, (result) ->
+      wow.get {type:"member", region:"eu", realm:"Darkspear", name:"Kimptoc"}, undefined, (result) ->
         should.exist result
         should.not.exist result.error
         result.name.should.equal "Kimptoc"

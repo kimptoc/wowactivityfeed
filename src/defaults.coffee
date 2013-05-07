@@ -21,6 +21,15 @@ wf.WOW_API_PRIVATE_KEY = process.env.WOW_API_PRIVATE_KEY
 wf.info "WOW/Public:#{wf.WOW_API_PUBLIC_KEY}"
 wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
 
+wf.REGION_LOCALE =
+  us: "en_US"
+  eu: "en_GB"
+  cn: "zh_CN"
+  kr: "ko_KR"
+  zh: "zh_TW"
+  tw: "zh_TW"
+
+
 wf.mongo_info =
      "hostname":"localhost"
      "port":27017
