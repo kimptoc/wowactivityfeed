@@ -1,6 +1,6 @@
 global.wf ||= {}
 
-__ = require "arguejs"
+get_args = require "arguejs"
 
 require "./defaults"
 require "./store_mongo"
@@ -102,7 +102,7 @@ class wf.WoW
     static_index_1
 
   ensure_registered: () ->
-    param = __(item_info:Object, registered_handler:Function)
+    param = get_args(item_info:Object, registered_handler:Function)
     wf.debug "Registering #{param.item_info.name}"
     store.ensure_index registered_collection, registered_index_1, null, ->
       store.ensure_index registered_collection, registered_ttl_index_2, { unique: false, expireAfterSeconds: wf.REGISTERED_ITEM_TIMEOUT }, ->
@@ -141,7 +141,7 @@ class wf.WoW
     store.remove_all registered_collection, cleared_handler
 
   get: () =>
-    param = __(region:String, realm:String, type:String, name:String, locale:String, result_handler:Function)
+    param = get_args(region:String, realm:String, type:String, name:String, locale:String, result_handler:Function)
     if param.type == "guild" or param.type == "member"
       item_key = {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}
       @ensure_registered item_key, =>
@@ -195,11 +195,11 @@ class wf.WoW
     callback?(results)
 
   get_history: () =>
-    param = __(region:String,realm:String,type:String,name:String,locale:String,result_handler:undefined)
+    param = get_args(region:String,realm:String,type:String,name:String,locale:String,result_handler:undefined)
     @get_history_counted(param.region, param.realm, param.type, param.name, param.locale, 1, param.result_handler)
 
   get_history_counted: () =>
-    param = __(region:String,realm:String,type:String,name:String,locale:String,counter:Number,result_handler:undefined)
+    param = get_args(region:String,realm:String,type:String,name:String,locale:String,counter:Number,result_handler:undefined)
     if param.type == "guild" or param.type == "member"
       @ensure_registered {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, =>
         @ensure_armory_indexes =>
@@ -216,7 +216,7 @@ class wf.WoW
       param.result_handler?(null)
 
   get_history_from_db: () =>
-    param = __(region:String,realm:String,type:String,name:String,locale:String,result_handler:Function)
+    param = get_args(region:String,realm:String,type:String,name:String,locale:String,result_handler:Function)
     selector = {type:param.type, region:param.region, realm:param.realm, name:param.name, locale:param.locale}
     store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
       if results? and results.length >0

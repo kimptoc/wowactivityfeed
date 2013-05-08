@@ -1,6 +1,6 @@
 global.wf ||= {}
 
-__ = require "arguejs"
+get_args = require "arguejs"
 
 require "./defaults"
 require './init_logger'
@@ -24,7 +24,7 @@ class wf.WowLookup
     wf.info "WowLookup constructor"
 
   get_armory: () ->
-    param = __(callback:Function)
+    param = get_args(callback:Function)
     armory_defaults = 
       publicKey: wf.WOW_API_PUBLIC_KEY
       privateKey: wf.WOW_API_PRIVATE_KEY
@@ -72,7 +72,7 @@ class wf.WowLookup
 
 #  get: (item_info, lastModified, result_handler) ->
   get: () ->
-    param = __(item_info:Object, lastModified:undefined, result_handler:Function)
+    param = get_args(item_info:Object, lastModified:undefined, result_handler:Function)
 #    param = {item_info,lastModified,result_handler}
     realm = param.item_info.realm
     region = param.item_info.region
