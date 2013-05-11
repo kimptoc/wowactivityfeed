@@ -60,7 +60,7 @@ class wf.WoWLoader
   format_armory_info: () ->
 #  format_armory_info: (type, region, realm, name,locale, info, doc) ->
 #    param = {type,region,realm,name,locale,info,doc}
-    param = get_args(type:String,region:String,realm:String,name:String,locale:String,info:Object,doc:undefined)
+    param = get_args(type:String,region:String,realm:String,name:String,locale:String,info:Object,doc:null)
     new_item = {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}
     new_item.lastModified = param.info.lastModified
     # remap achievements as a map for ease of diff/use

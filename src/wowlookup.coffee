@@ -72,7 +72,7 @@ class wf.WowLookup
 
 #  get: (item_info, lastModified, result_handler) ->
   get: () ->
-    param = get_args(item_info:Object, lastModified:undefined, result_handler:Function)
+    param = get_args(item_info:Object, lastModified:null, result_handler:Function)
 #    param = {item_info,lastModified,result_handler}
     realm = param.item_info.realm
     region = param.item_info.region

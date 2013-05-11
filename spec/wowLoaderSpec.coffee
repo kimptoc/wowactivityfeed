@@ -26,7 +26,7 @@ describe "wow loader:", ->
 
 
     it "armory load/valid guild/new/real", (done) ->
-      this.timeout(20000);
+      this.timeout(50000);
       wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
         wf.info "test/wowloader/registered"
         wowload = new wf.WoWLoader(wow)
