@@ -4,20 +4,29 @@
 
 ## TODO
 
+locale bits:
+- link from guild/member page to alternate lang versions
+- search to char in specific lang, dropdown of langs based on region
+- all urls accept locale param and when chosen links allow you specify preference
+- some wow content only in certain locales, eg cannot view US char in French (I think...)
+- localise items?
+- / and /everyone - not locale specific
+- use en_GB, fr_FR as locales?
+- use google translate manually for first cut translations?
+- track locale used via google analytics
+
+https://github.com/mashpie/i18n-node
+grab from browser, but allow override
+
+
+
 Put in replica set connections...
 - liquid1 keeps crashing due to index issues, raised with ISP
-- stormvz1 /proc issues - askubuntu question
 - mongodump crashes/raised on google group :(
 - OpenVZ?
 - when node steps down, app not handling it - thought it did locally, but not using replset due to above issues...
 
 
-Add tracking of browser locale - to find out the most popular locales and hence localisations to work on
-
-Localisation - accept/pass through to wow api and store - need a new key on the mongo data...
-grab from browser, but allow override
-http://stackoverflow.com/questions/12132251/translation-localization-workflow-for-nodejs-express-app
-https://www.google.co.uk/search?q=express+js+localization&aq=0&oq=expressjs+locali&sourceid=chrome&ie=UTF-8
 
 Better tests!
 
@@ -238,7 +247,6 @@ http://wafbeta.kimptoc.net//view/member/us/Wildhammer/Darketernall?ts=1354166678
 - display category (eg Kalimdor)/ group names (eg Exploration) in achievement descriptions
 - chrome extension to give feed url for a specific battle net page, when on it
 - limits... how to restrict use?? needed?
-- make localisable, ie public lang strings in sep file(s)
 - highlight members with updates, maybe list of most recent updates on front page
 - put armory link in info - for errors and good entries
 - track realm status changes: eg

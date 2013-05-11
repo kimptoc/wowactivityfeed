@@ -8,6 +8,7 @@ path = require('path')
 moment = require('moment')
 _ = require('underscore')
 async = require "async"
+i18n = require('i18n')
 
 require './init_logger'
 
@@ -26,6 +27,12 @@ require './google_analytics'
 
 
 wf.app = express()
+
+i18n.configure
+  locales:['en_US','es_MX','pt_BR','en_GB','es_ES','fr_FR','ru_RU','de_DE','pt_PT','it_IT','ko_KR','zh_TW','zh_CN']
+  defaultLocale: 'en_US'
+  directory: 'locales'
+
 
 
 wf.app.configure 'development', ->
@@ -54,9 +61,16 @@ wf.app.configure ->
   wf.app.use(require('stylus').middleware(
     src: path.join(__dirname,'..', 'stylus')
     dest: path.join(__dirname,'..', 'public')
-  ))  
+  ))
 
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
+
+  # default: using 'accept-language' header to guess language settings
+  wf.app.use(i18n.init)
+
+  wf.app.locals
+    i18n: i18n.__
+
   wf.wow ?= new wf.WoW()
   wf.wow_stats = new wf.WoWStats()
   wf.wow_loader = new wf.WoWLoader(wf.wow)
@@ -76,10 +90,6 @@ wf.app.all '*', (req, res, next) ->
   wf.info "ALL:get #{JSON.stringify(req.route)}"
   next()
 
-wf.app.get '/', (req, res) ->
-  get_feed_all (feed)->
-    res.render "index", title: 'Home', f: feed.sample(6)
-
 wf.app.get '/registered', (req, res) ->
   wf.wow.get_registered (results) ->
     res.render "registered", reg: results
@@ -87,9 +97,16 @@ wf.app.get '/registered', (req, res) ->
 wf.app.get '/about', (req, res) ->
   res.render "about"
 
-wf.app.get '/everyone', (req, res) ->
+wf.app.get '/everyone/:locale?', (req, res) ->
+  sort_locale(req,i18n)
   get_feed_all (feed) ->
     res.render "everyone", f: feed
+
+sort_locale = (req,i18n) ->
+  wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
+  if req.params.locale?
+    i18n.setLocale(req.params.locale)
+  wf.info "ALL:user derived locale:#{i18n.getLocale()}"
 
 get_feed_all = (callback) ->    
   wf.wow.get_loaded (wowthings) ->
@@ -160,9 +177,11 @@ handle_view = (req, res) ->
         p: req.params
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
+  sort_locale(req,i18n)
   handle_view(req, res)
   
 wf.app.get '/view/:type/:region/:realm/:name/:locale?', (req, res) ->
+  sort_locale(req,i18n)
   handle_view(req, res)
 
 wf.app.get '/feed/all.rss', (req, res) ->
@@ -182,6 +201,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
  
 wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
+  sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -311,6 +331,12 @@ wf.app.get '/debug/sample_data', (req, res) ->
   wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda",""
   wf.wow.get_history "us", "kaelthas", "member", "Feåtherz",""
   res.render "message", msg: "Sample data registered"
+
+
+wf.app.get '/:locale?', (req, res) ->
+  sort_locale(req,i18n)
+  get_feed_all (feed)->
+    res.render "index", title: 'Home', f: feed.sample(6)
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->

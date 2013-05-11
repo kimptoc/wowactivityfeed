@@ -1,6 +1,7 @@
 global.wf ||= {}
 
 moment = require 'moment'
+i18n = require('i18n')
 
 require('./init_logger')
 require('./wow')
@@ -130,13 +131,13 @@ class wf.FeedItemFormatter
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
-        change_description = "And as if by magic, #{item.name} appeared!"
+        change_description = i18n.__("And as if by magic, %s appeared!",item.name)
       else
         if item.whats_changed.changes.level?
-          change_title = " #{@get_formal_name(item)} - level #{@get('level',item)}! "
-          change_description += "Now at level #{@get('level',item)}! "
+          change_title = i18n.__(" %s - level %s! ",@get_formal_name(item),@get('level',item))
+          change_description += i18n.__("Now at level %s! ",@get('level',item))
         if item.whats_changed.changes.achievementPoints?
-          change_description += "Yay, more achievement points - now at #{@get('achievementPoints',item)}. "
+          change_description += i18n.__("Yay, more achievement points - now at %s. ",@get('achievementPoints',item))
         if item.whats_changed.changes.items?
           # wf.debug "items change...#{JSON.stringify(item.whats_changed.changes.items)}"
           gear_change = ""
@@ -147,13 +148,13 @@ class wf.FeedItemFormatter
               gear_change += ", " if gear_change.length >0
               gear_change += "#{name}: #{@get_new_one(gear.name)}"
           if gear_change.length > 0
-            change_description += "Gear change: #{gear_change}. "
+            change_description += i18n.__("Gear change: %s. ",gear_change)
         if item.whats_changed.changes.reputation_map? and ! (item.whats_changed.changes.reputation_map instanceof Array)
           rep_change = ""
           for own name, values of item.whats_changed.changes.reputation_map
             rep_change += ", " if rep_change.length >0
             rep_change += "#{name}:#{@get_new_one(values.value)}"
-          change_description += "Rep change(s): #{rep_change}. "
+          change_description += i18n.__("Rep change(s): %s. ",rep_change)
         if item.whats_changed.changes.members_map?
           member_title = ""
           member_desc = ""
@@ -161,12 +162,12 @@ class wf.FeedItemFormatter
             if member_info instanceof Array
               if member_info.length == 1
                 member_desc += ", " if member_desc.length >0
-                member_desc += "#{member_info[0].character.name} has joined"
+                member_desc += i18n.__("%s has joined",member_info[0].character.name)
               else if member_info.length == 3
                 member_desc += ", " if member_desc.length >0
-                member_desc += "#{member_info[0].character.name} has left"
+                member_desc += i18n.__("%s has left",member_info[0].character.name)
           change_title += "Guild membership changed! " if member_desc.length >0
-          change_description += "Guild membership has changed: #{member_desc}. " if member_desc.length >0
+          change_description += i18n.__("Guild membership has changed: %s. ",member_desc) if member_desc.length >0
         if item.whats_changed.changes.mounts_collected_map?
           mounts_title = ""
           mounts_desc = ""
@@ -216,7 +217,7 @@ class wf.FeedItemFormatter
             else
               if prof_info.rank?
                 professions_desc += ", " if professions_desc.length >0
-                professions_desc += "#{name} is now rank #{@get_new_one(prof_info.rank)}"
+                professions_desc += i18n.__("%s is now rank %s",name,@get_new_one(prof_info.rank))
           change_description += "Profession(s): #{professions_desc}. " if professions_desc.length >0
 
     # if we dont identify a change above, then assume none
@@ -266,23 +267,23 @@ class wf.FeedItemFormatter
       description += " (#{news_item.achievement.points}pts)"
 
     else if news_item.type == "itemPurchase"
-      change_title = "#{item.name} - #{news_item.character} bought #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} bought #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      change_title = i18n.__("%s - %s bought %s",item.name,news_item.character,@item_name(news_item.itemId, items))
+      description = i18n.__("%s bought %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
       thingId = news_item.itemId
 
     else if news_item.type == "itemLoot"
-      change_title = "#{item.name} - #{news_item.character} got some loot - #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} got #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      change_title = i18n.__("%s - %s got some loot - %s",item.name,news_item.character,@item_name(news_item.itemId, items))
+      description = i18n.__("%s got %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
       thingId = news_item.itemId
 
     else if news_item.type == "itemCraft"
-      change_title = "#{item.name} - #{news_item.character} made #{@item_name(news_item.itemId, items)}"
-      description = "#{news_item.character} made #{@item_name(news_item.itemId, items)} #{@item_link(news_item.itemId, items)}"
+      change_title = i18n.__("%s - %s made %s",item.name,news_item.character,@item_name(news_item.itemId, items))
+      description = i18n.__("%s made %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
       thingId = news_item.itemId
 
     else if news_item.type == "guildLevel"
-      change_title = "#{item.name} is now level #{news_item.levelUp}!"
-      description = "Guild #{item.name} is now at guild level #{news_item.levelUp}!"
+      change_title = i18n.__("%s is now level %s!",item.name,news_item.levelUp)
+      description = i18n.__("Guild %s is now at guild level %s!",item.name,news_item.levelUp)
       thingId = news_item.itemId
 
     else
@@ -324,12 +325,12 @@ class wf.FeedItemFormatter
 
     else if feed_item.type == "BOSSKILL"
       change_title = "#{@get_formal_name(item)} - '#{feed_item.criteria.description}'"
-      description = "#{@char_link(item)} #{@char_name(item)} Did:'#{feed_item.criteria.description}' for '#{feed_item.achievement.title}' - #{feed_item.achievement?.description}"
+      description = i18n.__("%s %s Did:'%s' for '%s' - %s",@char_link(item),@char_name(item),feed_item.criteria.description,feed_item.achievement.title,feed_item.achievement?.description)
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
       change_title = "#{@get_formal_name(item)} - got some loot - #{@item_name(feed_item.itemId, items)}!"
-      description = "#{@char_link(item)} #{@char_name(item)} now has #{@item_name(feed_item.itemId, items)}! #{@item_link(feed_item.itemId, items)}"
+      description = i18n.__("%s %s now has %s! %s",@char_link(item),@char_name(item),@item_name(feed_item.itemId, items),@item_link(feed_item.itemId, items))
       thingId = feed_item.itemId
 
     else

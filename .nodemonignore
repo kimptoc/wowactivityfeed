@@ -12,3 +12,4 @@ stylus/*
 views/*
 .DS_Store
 etc
+locales
