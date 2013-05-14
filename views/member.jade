@@ -12,9 +12,9 @@ block content
       | &nbsp;View : 
       a(href='http://#{p.region}.battle.net/wow/en/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple') armory
       &nbsp;-&nbsp;
-      a(href='http://#{p.region}.battle.net/api/wow/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{p.locale}') api
+      a(href='http://#{p.region}.battle.net/api/wow/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{w.locale}') api
       &nbsp;-&nbsp;
-      a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/#{p.locale}.rss') rss
+      a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/#{w.locale}.rss') rss
     hr
     each item in f
       .clear

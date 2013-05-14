@@ -25,6 +25,11 @@ require './cron'
 require './timing'
 require './google_analytics'
 
+sample = (a, n) ->
+    return _.take(_.shuffle(a), n)
+
+Array.prototype.sample = (n) -> sample(this, n)
+
 
 wf.app = express()
 
@@ -38,6 +43,19 @@ ensure_realms_loaded = (callback) ->
     wf.wow.get_realms (realms) ->
       wf.all_realms = realms
       callback?()
+
+sort_locale = (req,i18n) ->
+  wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
+  if req.params.locale?
+    i18n.setLocale(req.params.locale)
+  else if req.params.realm?
+    for realm in wf.all_realms
+      if realm.name == req.params.realm
+        i18n.setLocale(realm.locale)
+        break
+  wf.info "ALL:user derived locale:#{i18n.getLocale()}"
+  return i18n.getLocale()
+
 
 
 wf.app.configure 'development', ->
@@ -87,10 +105,6 @@ wf.app.configure ->
 
 
 # Routes
-sample = (a, n) ->
-    return _.take(_.shuffle(a), n)
-
-Array.prototype.sample = (n) -> sample(this, n)
 
 
 wf.app.all '*', (req, res, next) ->
@@ -109,16 +123,7 @@ wf.app.get '/everyone/:locale?', (req, res) ->
   get_feed_all (feed) ->
     res.render "everyone", f: feed, locales: wf.i18n_config.locales, root_url: '/everyone/'
 
-sort_locale = (req,i18n) ->
-  wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
-  if req.params.locale?
-    i18n.setLocale(req.params.locale)
-#  elseif req.params.realm?
-    # todo, get locale for realm
-  # cache realms...?
-  wf.info "ALL:user derived locale:#{i18n.getLocale()}"
-
-get_feed_all = (callback) ->    
+get_feed_all = (callback) ->
   wf.wow.get_loaded (wowthings) ->
     get_feed wowthings, callback
 
@@ -165,7 +170,8 @@ handle_view = (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
-  locale = req.params.locale or wf.REGION_LOCALE[region]
+#  locale = req.params.locale or wf.REGION_LOCALE[region]
+  locale = sort_locale(req,i18n)
   wf.wow.get_history region, realm, type, name, locale, (wowthings) ->
     if wowthings? and wowthings.length > 0
       get_feed wowthings, req, (feed) ->
@@ -191,11 +197,9 @@ handle_view = (req, res) ->
         root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
-  sort_locale(req,i18n)
   handle_view(req, res)
   
 wf.app.get '/view/:type/:region/:realm/:name/:locale?', (req, res) ->
-  sort_locale(req,i18n)
   handle_view(req, res)
 
 wf.app.get '/feed/all.rss', (req, res) ->
@@ -215,7 +219,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
  
 wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
-  sort_locale(req,i18n)
+  locale = sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -230,7 +234,7 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = req.params.name
-  locale = req.params.locale or wf.REGION_LOCALE[region]
+#  locale = req.params.locale or wf.REGION_LOCALE[region]
 
   wf.wow.get_history region, realm, type, name, locale, (items)->
     wf.timing_off("/feed/#{name}")
@@ -262,7 +266,7 @@ wf.app.get '/json/realms', (req, res) ->
     res.send JSON.stringify(wf.all_realms)
 
 wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
-  sort_locale(req,i18n)
+  locale = sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -275,7 +279,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
   region = req.params.region.toLowerCase()
   realm = req.params.realm
   name = wf.String.capitalise(req.params.name)
-  locale = req.params.locale or wf.REGION_LOCALE[region]
+#  locale = req.params.locale or wf.REGION_LOCALE[region]
   wf.wow.get_history region, realm, type, name, locale, (items)->
     get_feed items, (items_to_publish) ->
       results = []

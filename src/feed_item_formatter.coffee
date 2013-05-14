@@ -57,7 +57,7 @@ class wf.FeedItemFormatter
       callback?(results)
 
   achievement_link: (achievement) ->
-    "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\"><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
+    "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
 
   armory_link: (p) =>
     "http://#{p.region}.battle.net/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
@@ -96,7 +96,7 @@ class wf.FeedItemFormatter
     #todo - handle not found, img link, wowhead link/hover...
     a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{items?[item_id]?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items)}' alt='#{@item_name(item_id, items)}'>"
     a_text = "Unknown..." unless items?[item_id]
-    return "<a href='http://www.wowhead.com/item=#{item_id}'>#{a_text}</a>"
+    return "<a href='http://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
 
   item_name: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
