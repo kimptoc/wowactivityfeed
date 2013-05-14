@@ -28,11 +28,7 @@ require './google_analytics'
 
 wf.app = express()
 
-i18n.configure
-  locales:['en_US','es_MX','pt_BR','en_GB','es_ES','fr_FR','ru_RU','de_DE','pt_PT','it_IT','ko_KR','zh_TW','zh_CN']
-  defaultLocale: 'en_US'
-  directory: 'locales'
-
+i18n.configure wf.i18n_config
 
 
 wf.app.configure 'development', ->
@@ -70,6 +66,7 @@ wf.app.configure ->
 
   wf.app.locals
     i18n: i18n.__
+    i18n_locale: i18n.getLocale
 
   wf.wow ?= new wf.WoW()
   wf.wow_stats = new wf.WoWStats()
@@ -90,22 +87,25 @@ wf.app.all '*', (req, res, next) ->
   wf.info "ALL:get #{JSON.stringify(req.route)}"
   next()
 
-wf.app.get '/registered', (req, res) ->
+wf.app.get '/registered/:locale?', (req, res) ->
   wf.wow.get_registered (results) ->
-    res.render "registered", reg: results
+    res.render "registered", reg: results, locales: wf.i18n_config.locales, root_url: '/registered/'
 
-wf.app.get '/about', (req, res) ->
-  res.render "about"
+#wf.app.get '/about', (req, res) ->
+#  res.render "about"
 
 wf.app.get '/everyone/:locale?', (req, res) ->
   sort_locale(req,i18n)
   get_feed_all (feed) ->
-    res.render "everyone", f: feed
+    res.render "everyone", f: feed, locales: wf.i18n_config.locales, root_url: '/everyone/'
 
 sort_locale = (req,i18n) ->
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
   if req.params.locale?
     i18n.setLocale(req.params.locale)
+  elseif req.params.realm?
+    # todo, get locale for realm
+  # cache realms...?
   wf.info "ALL:user derived locale:#{i18n.getLocale()}"
 
 get_feed_all = (callback) ->    
@@ -168,7 +168,9 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.news if guild_item.whats_changed.changes.news?
         # delete guild_item.whats_changed.changes.lastModified if guild_item.whats_changed.changes.lastModified?
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
-        res.render req.params.type, p: req.params, w: guild_item, h: wowthings, f: feed, fmtdate: (d) -> moment(d).format("D MMM YYYY H:mm")
+        res.render req.params.type,
+          p: req.params, w: guild_item, h: wowthings, f: feed,
+          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.i18n_config.locales, root_url: '/wow/#{region}/#{type}/#{realm}/#{name}/'
     else
       req.params.locale ?= ""
       res.render "#{req.params.type}_not_found",
@@ -248,7 +250,7 @@ wf.app.get '/json/realms', (req, res) ->
     res.send JSON.stringify(realms)
 
 wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
-
+  sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -314,7 +316,7 @@ wf.app.get '/debug/armory_load', (req, res) ->
 
 wf.app.get '/debug/stats', (req, res) ->
   wf.wow_stats.armory_calls wf.wow, (result) ->
-    res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>"
+    res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>", locales: wf.i18n_config.locales, root_url: null
 
 wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
@@ -336,7 +338,7 @@ wf.app.get '/debug/sample_data', (req, res) ->
 wf.app.get '/:locale?', (req, res) ->
   sort_locale(req,i18n)
   get_feed_all (feed)->
-    res.render "index", title: 'Home', f: feed.sample(6)
+    res.render "index", title: 'Home', f: feed.sample(6), locales: wf.i18n_config.locales, root_url: '/'
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->

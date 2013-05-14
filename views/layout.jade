@@ -30,6 +30,7 @@ html(lang='en')
     link(rel='stylesheet', href='/fonts/stylesheet.css')
     link(rel='stylesheet', href='/stylesheets/stimenu.css')
     link(rel='stylesheet', href='/stylesheets/app.css')
+    link(rel='stylesheet', href='/stylesheets/layout.css')
     //if lt IE 9
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
     //
@@ -57,10 +58,19 @@ html(lang='en')
     // Delete everything in this .container and get started on your own site!
     header
       .header_block
+        if locales
+            nav.header_langs
+              ul.header_langs
+                each locale in locales
+                    li(title="Country: #{locale.substring(3,5).toLocaleUpperCase()}")
+                        if locale == i18n_locale()
+                            span.current_locale #{locale.substring(0,2).toLocaleUpperCase()}
+                        else
+                            a(href='#{root_url}#{locale}') #{locale.substring(0,2).toLocaleUpperCase()}
         nav.head_nav
           ul.mainmenu
             li
-              a(href='/everyone') All Updates
+              a(href='/everyone/#{i18n_locale()}') All Updates
             //- li
             //-   a(href='/debug/armory_load') Armory!
             //- li
@@ -68,7 +78,7 @@ html(lang='en')
             //- li
             //-   a(href='/about') About
         .logo
-          a(href='/')
+          a(href='/#{i18n_locale()}')
             span WoW
             | Feed
 

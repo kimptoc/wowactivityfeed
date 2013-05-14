@@ -10,15 +10,20 @@ locale bits:
 - all urls accept locale param and when chosen links allow you specify preference
 - some wow content only in certain locales, eg cannot view US char in French (I think...)
 - localise items?
-- / and /everyone - not locale specific
 - use en_GB, fr_FR as locales?
 - use google translate manually for first cut translations?
 - track locale used via google analytics
+- db conversion - make it seemless to new locale version... index re-creation... (or just wipe db)...
+- default locale per realm?
+
+- dont grab from browser, let user choose locale
+- / and /everyone - locale specific, specifically to default locale for links
 
 https://github.com/mashpie/i18n-node
-grab from browser, but allow override
 
 
+Code coverage
+- configure istanbul - https://github.com/gotwarlost/istanbul
 
 Put in replica set connections...
 - liquid1 keeps crashing due to index issues, raised with ISP

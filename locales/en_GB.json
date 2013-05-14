@@ -1,1 +1,19 @@
-{}
+{
+	"%s %s now has %s! %s": "%s %s now has %s! %s",
+	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+	"%s has joined": "%s has joined",
+	"%s has left": "%s has left",
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	" %s - level %s! ": " %s - level %s! ",
+	"Now at level %s! ": "Now at level %s! ",
+	"Gear change: %s. ": "Gear change: %s. ",
+	"Rep change(s): %s. ": "Rep change(s): %s. ",
+	"Yay, more achievement points - now at %s. ": "Yay, more achievement points - now at %s. ",
+	"%s - %s bought %s": "%s - %s bought %s",
+	"%s bought %s %s": "%s bought %s %s",
+	"%s - %s got some loot - %s": "%s - %s got some loot - %s",
+	"%s got %s %s": "%s got %s %s",
+	"%s - %s made %s": "%s - %s made %s",
+	"%s made %s %s": "%s made %s %s",
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!"
+}
