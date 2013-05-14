@@ -15,5 +15,6 @@
 	"%s got %s %s": "%s got %s %s",
 	"%s - %s made %s": "%s - %s made %s",
 	"%s made %s %s": "%s made %s %s",
-	"Latest Updates from Everyone!": "Latest Updates from Everyone!"
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
+	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!"
 }

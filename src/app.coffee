@@ -103,7 +103,7 @@ sort_locale = (req,i18n) ->
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
   if req.params.locale?
     i18n.setLocale(req.params.locale)
-  elseif req.params.realm?
+#  elseif req.params.realm?
     # todo, get locale for realm
   # cache realms...?
   wf.info "ALL:user derived locale:#{i18n.getLocale()}"
@@ -170,13 +170,15 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         res.render req.params.type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
-          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.i18n_config.locales, root_url: '/wow/#{region}/#{type}/#{realm}/#{name}/'
+          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.i18n_config.locales, root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
     else
       req.params.locale ?= ""
       res.render "#{req.params.type}_not_found",
         msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}/#{locale}"
         w: req.params
         p: req.params
+        locales: wf.i18n_config.locales
+        root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
   sort_locale(req,i18n)

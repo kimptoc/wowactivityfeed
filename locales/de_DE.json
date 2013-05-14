@@ -14,5 +14,6 @@
 	"%s - %s got some loot - %s": "%s - %s got some loot - %s",
 	"%s got %s %s": "%s got %s %s",
 	"%s - %s made %s": "%s - %s made %s",
-	"%s made %s %s": "%s made %s %s"
+	"%s made %s %s": "%s made %s %s",
+	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!"
 }
