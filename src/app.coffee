@@ -30,6 +30,15 @@ wf.app = express()
 
 i18n.configure wf.i18n_config
 
+ensure_realms_loaded = (callback) ->
+  if wf.all_realms
+    callback?()
+  else
+    wf.info "Reloading realms from db!"
+    wf.wow.get_realms (realms) ->
+      wf.all_realms = realms
+      callback?()
+
 
 wf.app.configure 'development', ->
   wf.info "Express app.configure/development"
@@ -68,12 +77,13 @@ wf.app.configure ->
     i18n: i18n.__
     i18n_locale: i18n.getLocale
 
-  wf.wow ?= new wf.WoW()
-  wf.wow_stats = new wf.WoWStats()
-  wf.wow_loader = new wf.WoWLoader(wf.wow)
-  # todo - push this into wow object
-  wf.feed_formatter = new wf.FeedItemFormatter()
-  # wf.wow.static_load()
+  wf.wow ?= new wf.WoW ->
+    wf.wow_stats = new wf.WoWStats()
+    wf.wow_loader = new wf.WoWLoader(wf.wow)
+    # todo - push this into wow object
+    wf.feed_formatter = new wf.FeedItemFormatter()
+    # wf.wow.static_load()
+    ensure_realms_loaded()
 
 
 # Routes
@@ -248,8 +258,8 @@ wf.app.get '/feed/info.rss', (req, res) ->
     feed:wf.info_queue
 
 wf.app.get '/json/realms', (req, res) ->
-  wf.wow.get_realms (realms) ->
-    res.send JSON.stringify(realms)
+  ensure_realms_loaded ->
+    res.send JSON.stringify(wf.all_realms)
 
 wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
   sort_locale(req,i18n)

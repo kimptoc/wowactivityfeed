@@ -265,7 +265,7 @@ class wf.WoWLoader
       wf.error "armory_load:#{e}"
 
   static_loader: (callback) ->
-    async.parallel [@realms_loader, @races_loader, @classes_loader], callback
+    async.parallel {realms:@realms_loader, races:@races_loader, classes:@classes_loader}, callback
 
   load_static_claz: (type, claz, loaded_callback) ->
     claz.static_type = type
@@ -288,16 +288,15 @@ class wf.WoWLoader
 
   realms_loader: (callback) =>
     # load and then replace
-    all_regions = ["eu","us","cn","kr","tw"] 
     all_realms = []
     get_region_realms = (region, region_callback) =>   
       wowlookup.get_realms region, (realms) ->
         wf.info "For region #{region}, realms returned:#{realms.length}"
         all_realms = all_realms.concat(realms)
         region_callback?()
-    async.forEach all_regions, get_region_realms, =>
+    async.forEach wf.all_regions, get_region_realms, =>
       wf.info "Realms calls done, time to persist:#{all_realms.length}"
-      if all_realms? and all_realms.length > 0  
+      if all_realms? and all_realms.length > 0
         store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
           store.remove_all @wow.get_realms_collection(), =>
             store.insert @wow.get_realms_collection(), all_realms, -> callback?(all_realms)

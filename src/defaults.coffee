@@ -29,6 +29,8 @@ wf.i18n_config =
   defaultLocale: 'en_US'
   directory: 'locales'
 
+wf.all_regions = ["eu","us","cn","kr","tw"]
+
 wf.REGION_LOCALE =
   us: "en_US"
   eu: "en_GB"

@@ -5,6 +5,8 @@
 ## TODO
 
 locale bits:
+- limit locale switch options to those relevant to current char, if applicable
+- cache realm list, load on boot, use that to get default locale, if not specified
 - link from guild/member page to alternate lang versions
 - search to char in specific lang, dropdown of langs based on region
 - all urls accept locale param and when chosen links allow you specify preference
