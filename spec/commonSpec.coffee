@@ -1,9 +1,6 @@
 process.env.NODE_ENV='test'
 
-i18n = require('i18n')
-
-i18n.configure wf.i18n_config
-
+require './locale'
 
 beforeEach ->
   wf.info "========================================================="

@@ -38,7 +38,7 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    wf.set_locale(item.locale, item.realm)
+    wf.set_locale(item?.locale, item?.realm)
     wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}/locale:#{item?.locale}-#{i18n.getLocale()}"
     item_ids = @get_items(item)
     wf.debug "got items, #{item_ids.length}"
