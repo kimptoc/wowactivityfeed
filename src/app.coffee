@@ -42,6 +42,21 @@ ensure_realms_loaded = (callback) ->
     wf.info "Reloading realms from db!"
     wf.wow.get_realms (realms) ->
       wf.all_realms = realms
+      regions_to_locales = {}
+      for realm in wf.all_realms
+        wf.info "realm:#{realm.name}, region:#{realm.region}, locale:#{realm.locale}"
+        region_locales = regions_to_locales[realm.region] ||= []
+        locale_found = false
+        for locale in region_locales
+          wf.info "checking #{locale} vs #{realm.locale}  = #{locale == realm.locale}"
+          if locale == realm.locale
+            locale_found = true
+            break
+        region_locales.push(realm.locale) unless locale_found
+      for region,locales of regions_to_locales
+        wf.info "Region #{region} has #{locales.length} locales"
+        locales.sort()
+      wf.regions_to_locales = regions_to_locales
       callback?()
 
 sort_locale = (req,i18n) ->
@@ -186,14 +201,14 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         res.render req.params.type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
-          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.i18n_config.locales, root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
+          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
     else
       req.params.locale ?= ""
       res.render "#{req.params.type}_not_found",
         msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}/#{locale}"
         w: req.params
         p: req.params
-        locales: wf.i18n_config.locales
+        locales: wf.regions_to_locales[region]
         root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->

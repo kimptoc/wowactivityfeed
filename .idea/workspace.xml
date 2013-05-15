@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feed_item_formatter.coffee" afterPath="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/member.jade" afterPath="$PROJECT_DIR$/views/member.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -25,7 +23,7 @@
     <file path="/diffSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367902365837" ignored="false" />
     <file path="/member_not_found.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367825664708" ignored="false" />
     <file path="/member.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368559126489" ignored="false" />
-    <file path="/app.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368558694695" ignored="false" />
+    <file path="/app.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368596648739" ignored="false" />
     <file path="/wowLoaderSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367785545297" ignored="false" />
     <file path="/wow_search.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367779149297" ignored="false" />
     <file path="/wow_loader.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368550869759" ignored="false" />
@@ -33,7 +31,7 @@
     <file path="/wow.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368545161849" ignored="false" />
     <file path="/wowlookup.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368291934744" ignored="false" />
     <file path="/wowlookupSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367778671358" ignored="false" />
-    <file path="/readme.md" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368547617565" ignored="false" />
+    <file path="/readme.md" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368565105266" ignored="false" />
     <file path="/a.dummy" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368559750162" ignored="false" />
     <file path="/Makefile" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1364683097088" ignored="false" />
     <file path="/wowSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367949440567" ignored="false" />
@@ -64,10 +62,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="32" selection-start="4979" selection-end="4979" vertical-scroll-proportion="-7.2">
+            <state line="130" column="50" selection-start="3665" selection-end="3672" vertical-scroll-proportion="0.3312102">
               <folding />
             </state>
           </provider>
@@ -82,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="feed_item_formatter.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="feed_item_formatter.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="162" selection-start="2000" selection-end="2000" vertical-scroll-proportion="0.3312102">
+            <state line="59" column="162" selection-start="2000" selection-end="2000" vertical-scroll-proportion="-4.16">
               <folding>
                 <marker date="1368559824000" expanded="true" signature="2101:2125" placeholder="..." />
                 <marker date="1368559824000" expanded="false" signature="3021:3044" placeholder="..." />
@@ -125,17 +123,10 @@
       <file leaf-file-name="wow_loader.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="298" column="46" selection-start="13326" selection-end="13326" vertical-scroll-proportion="-4.6">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/log4js/node_modules/async/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="535" column="17" selection-start="17736" selection-end="17745" vertical-scroll-proportion="-0.16">
-              <folding />
+            <state line="298" column="46" selection-start="13326" selection-end="13326" vertical-scroll-proportion="-5.2">
+              <folding>
+                <marker date="1368551168000" expanded="true" signature="13335:13571" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -143,7 +134,7 @@
       <file leaf-file-name="wow.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wow.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="6" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0">
+            <state line="237" column="2" selection-start="10010" selection-end="10010" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -152,7 +143,7 @@
       <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="29" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
+            <state line="7" column="140" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -188,10 +179,10 @@
         <option value="$PROJECT_DIR$/src/defaults.coffee" />
         <option value="$PROJECT_DIR$/src/cron.coffee" />
         <option value="$PROJECT_DIR$/src/wow_loader.coffee" />
-        <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/src/app.coffee" />
         <option value="$PROJECT_DIR$/views/member.jade" />
         <option value="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/src/app.coffee" />
       </list>
     </option>
   </component>
@@ -584,11 +575,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1366" height="742" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35416666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35416666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16976917" sideWeight="0.34935898" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17200297" sideWeight="0.6458333" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -721,13 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/log4js/node_modules/async/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="535" column="17" selection-start="17736" selection-end="17745" vertical-scroll-proportion="-0.16">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="13" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
@@ -742,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="6" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/wow_stats.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="6" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
@@ -756,30 +733,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="29" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/log4js/node_modules/async/test/test-async.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="212" column="0" selection-start="5763" selection-end="5763" vertical-scroll-proportion="-0.21465969">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="298" column="46" selection-start="13326" selection-end="13326" vertical-scroll-proportion="-4.6">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="32" selection-start="4979" selection-end="4979" vertical-scroll-proportion="-7.2">
           <folding />
         </state>
       </provider>
@@ -793,12 +749,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="162" selection-start="2000" selection-end="2000" vertical-scroll-proportion="0.3312102">
+        <state line="59" column="162" selection-start="2000" selection-end="2000" vertical-scroll-proportion="-4.16">
           <folding>
             <marker date="1368559824000" expanded="true" signature="2101:2125" placeholder="..." />
             <marker date="1368559824000" expanded="false" signature="3021:3044" placeholder="..." />
             <marker date="1368559824000" expanded="false" signature="3912:3936" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="237" column="2" selection-start="10010" selection-end="10010" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/log4js/node_modules/async/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="535" column="17" selection-start="17736" selection-end="17745" vertical-scroll-proportion="0.012232416">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="298" column="46" selection-start="13326" selection-end="13326" vertical-scroll-proportion="-5.2">
+          <folding>
+            <marker date="1368551168000" expanded="true" signature="13335:13571" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="140" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="50" selection-start="3665" selection-end="3672" vertical-scroll-proportion="0.3312102">
+          <folding />
         </state>
       </provider>
     </entry>
