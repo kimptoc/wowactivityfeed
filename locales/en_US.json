@@ -17,5 +17,7 @@
 	"Yay, more achievement points - now at %s. ": "Yay, more achievement points - now at %s. ",
 	"%s has joined": "%s has joined",
 	"%s has left": "%s has left",
-	"Guild membership has changed: %s. ": "Guild membership has changed: %s. "
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	"All Updates": "All Updates",
+	"Copyright": "Copyright"
 }

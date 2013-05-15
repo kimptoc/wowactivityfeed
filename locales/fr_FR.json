@@ -19,5 +19,14 @@
 	"%s made %s %s": "%s en %s %s",
 	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
 	"All Updates": "All Updates",
-	"Copyright": "Copyright"
+	"Copyright": "Copyright",
+	"guild": "guild",
+	"level": "level",
+	"members": "members",
+	"History available": "History available",
+	"View": "View",
+	"armory": "armory",
+	"api": "api",
+	"rss": "rss",
+	"link": "link"
 }

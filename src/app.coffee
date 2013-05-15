@@ -280,33 +280,33 @@ wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 
 
 wf.app.get '/debug/wireframe2', (req, res) ->
-  res.render "wireframe2" 
+  res.render "wireframe2", locales: null
 
 wf.app.get '/debug/wireframe3', (req, res) ->
-  res.render "wireframe3" 
+  res.render "wireframe3", locales: null
 
 wf.app.get '/debug/wireframe4', (req, res) ->
-  res.render "wireframe4" 
+  res.render "wireframe4", locales: null
 
 wf.app.get '/debug/wireframe5', (req, res) ->
-  res.render "wireframe5" 
+  res.render "wireframe5", locales: null
 
 wf.app.get '/debug/wireframe6', (req, res) ->
-  res.render "wireframe6" 
+  res.render "wireframe6", locales: null
 
 wf.app.get '/debug/wireframe7', (req, res) ->
-  res.render "wireframe7" 
+  res.render "wireframe7", locales: null
 
 wf.app.get '/debug/fonts', (req, res) ->
-  res.render "fonts"
+  res.render "fonts", locales: null
 
 wf.app.get '/debug/colours', (req, res) ->
-  res.render "colours"
+  res.render "colours", locales: null
 
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
   wf.wow.get_registered (regs) ->
-    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds"
+    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds", locales: null
 
 wf.app.get '/debug/stats', (req, res) ->
   wf.wow_stats.armory_calls wf.wow, (result) ->
@@ -314,19 +314,21 @@ wf.app.get '/debug/stats', (req, res) ->
 
 wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
-    res.render "logs", {logs}
+    res.render "logs", {logs, locales: null}
 
 # wf.app.get '/debug/clear_all', (req, res) ->
 #  wf.wow.clear_all ->
 #    res.render "message", msg: "Database cleared!"
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро",""
-  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls",""
-  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est",""
-  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda",""
-  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz",""
-  res.render "message", msg: "Sample data registered"
+  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро","ru_RU"
+  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls","en_GB"
+  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est","en_US"
+  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","fr_FR"
+  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","eu_GB"
+  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda","en_GB"
+  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz","pt_BR"
+  res.render "message", msg: "Sample data registered", locales: null
 
 
 wf.app.get '/:locale?', (req, res) ->

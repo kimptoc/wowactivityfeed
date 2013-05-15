@@ -1,5 +1,7 @@
 {
 	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!",
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
-	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s"
+	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+	"All Updates": "All Updates",
+	"Copyright": "Copyright"
 }
