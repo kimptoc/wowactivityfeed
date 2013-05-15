@@ -17,5 +17,7 @@
 	"%s got %s %s": "%s obtenu %s %s",
 	"%s - %s made %s": "%s - %s en %s",
 	"%s made %s %s": "%s en %s %s",
-	"Latest Updates from Everyone!": "Latest Updates from Everyone!"
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
+	"All Updates": "All Updates",
+	"Copyright": "Copyright"
 }

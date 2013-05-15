@@ -70,7 +70,7 @@ html(lang='en')
         nav.head_nav
           ul.mainmenu
             li
-              a(href='/everyone/#{i18n_locale()}') All Updates
+              a(href='/everyone/#{i18n_locale()}') #{i18n("All Updates")}
             //- li
             //-   a(href='/debug/armory_load') Armory!
             //- li
@@ -87,7 +87,7 @@ html(lang='en')
     // Footer
     footer
       .footer
-        .copy Copyright © 2012
+        .copy #{i18n("Copyright")} © 2012-3
         .social
           ul
             li

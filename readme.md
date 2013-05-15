@@ -5,6 +5,10 @@
 ## TODO
 
 locale bits:
+- replace remaining strings with i18n calls
+- everyone/home page should be mixed locale... ie item locale
+- use wget to crawl site and trigger conversions (or just copy english version...)
+- or exp/imp prod registered table to gen lots of combos
 - use google translate manually for first cut translations?
 - db conversion - make it seemless to new locale version... index re-creation... (or just wipe db)...
 

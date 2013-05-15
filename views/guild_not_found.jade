@@ -2,16 +2,16 @@ extends layout
 
 block content
   .container
-    h3.bordered #{w.region} / #{w.realm} / guild: #{w.name}
+    h3.bordered #{w.region} / #{w.realm} / #{i18n("guild")}: #{w.name}
   .container
-    h3.bordered Message
+    h3.bordered #{i18n("Message")}
     hr
     p !{msg}
   .container
     div
-      | View : 
-      a(href='http://#{w.region}.battle.net/wow/en/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') armory
+      | #{i18n("View")} :
+      a(href='http://#{w.region}.battle.net/wow/en/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') #{i18n("armory")}
       &nbsp;-&nbsp;
-      a(href='http://#{p.region}.battle.net/api/wow/guild/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=members,achievements,news,challenge') api
+      a(href='http://#{p.region}.battle.net/api/wow/guild/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=members,achievements,news,challenge') #{i18n("api")}
       //- &nbsp;-&nbsp;
       //- a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}.rss') rss

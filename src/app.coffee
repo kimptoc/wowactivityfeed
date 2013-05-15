@@ -10,11 +10,14 @@ _ = require('underscore')
 async = require "async"
 i18n = require('i18n')
 
+
 require './init_logger'
 
 require './string'
 
 require './defaults'
+
+require './locale'
 
 require './wow'
 require './wow_stats'
@@ -32,46 +35,6 @@ Array.prototype.sample = (n) -> sample(this, n)
 
 
 wf.app = express()
-
-i18n.configure wf.i18n_config
-
-ensure_realms_loaded = (callback) ->
-  if wf.all_realms
-    callback?()
-  else
-    wf.info "Reloading realms from db!"
-    wf.wow.get_realms (realms) ->
-      wf.all_realms = realms
-      regions_to_locales = {}
-      for realm in wf.all_realms
-        wf.info "realm:#{realm.name}, region:#{realm.region}, locale:#{realm.locale}"
-        region_locales = regions_to_locales[realm.region] ||= []
-        locale_found = false
-        for locale in region_locales
-          wf.info "checking #{locale} vs #{realm.locale}  = #{locale == realm.locale}"
-          if locale == realm.locale
-            locale_found = true
-            break
-        region_locales.push(realm.locale) unless locale_found
-      for region,locales of regions_to_locales
-        wf.info "Region #{region} has #{locales.length} locales"
-        locales.sort()
-      wf.regions_to_locales = regions_to_locales
-      callback?()
-
-sort_locale = (req,i18n) ->
-  wf.info "user locale:#{i18n.getLocale()}, url locale:#{req.params.locale}"
-  if req.params.locale?
-    i18n.setLocale(req.params.locale)
-  else if req.params.realm?
-    for realm in wf.all_realms
-      if realm.name == req.params.realm
-        i18n.setLocale(realm.locale)
-        break
-  wf.info "ALL:user derived locale:#{i18n.getLocale()}"
-  return i18n.getLocale()
-
-
 
 wf.app.configure 'development', ->
   wf.info "Express app.configure/development"
@@ -116,7 +79,7 @@ wf.app.configure ->
     # todo - push this into wow object
     wf.feed_formatter = new wf.FeedItemFormatter()
     # wf.wow.static_load()
-    ensure_realms_loaded()
+    wf.ensure_realms_loaded()
 
 
 # Routes
@@ -134,7 +97,7 @@ wf.app.get '/registered/:locale?', (req, res) ->
 #  res.render "about"
 
 wf.app.get '/everyone/:locale?', (req, res) ->
-  sort_locale(req,i18n)
+  wf.sort_locale(req,i18n)
   get_feed_all (feed) ->
     res.render "everyone", f: feed, locales: wf.i18n_config.locales, root_url: '/everyone/'
 
@@ -186,7 +149,7 @@ handle_view = (req, res) ->
   realm = req.params.realm
   name = req.params.name
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
-  locale = sort_locale(req,i18n)
+  locale = wf.sort_locale(req,i18n)
   wf.wow.get_history region, realm, type, name, locale, (wowthings) ->
     if wowthings? and wowthings.length > 0
       get_feed wowthings, req, (feed) ->
@@ -234,7 +197,7 @@ wf.app.get '/feed/all.rss', (req, res) ->
  
 wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
-  locale = sort_locale(req,i18n)
+  locale = wf.sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -277,11 +240,11 @@ wf.app.get '/feed/info.rss', (req, res) ->
     feed:wf.info_queue
 
 wf.app.get '/json/realms', (req, res) ->
-  ensure_realms_loaded ->
+  wf.ensure_realms_loaded ->
     res.send JSON.stringify(wf.all_realms)
 
 wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
-  locale = sort_locale(req,i18n)
+  locale = wf.sort_locale(req,i18n)
   wf.ga.trackPage(req.path);
   wf.ga.trackEvent
     action: req.path
@@ -367,7 +330,7 @@ wf.app.get '/debug/sample_data', (req, res) ->
 
 
 wf.app.get '/:locale?', (req, res) ->
-  sort_locale(req,i18n)
+  wf.sort_locale(req,i18n)
   get_feed_all (feed)->
     res.render "index", title: 'Home', f: feed.sample(6), locales: wf.i18n_config.locales, root_url: '/'
 
