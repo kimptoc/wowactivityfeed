@@ -2,13 +2,13 @@ extends layout
 
 block content
   .container
-    h3.bordered Registered
+    h3.bordered #{i18n("Registered")}
     hr
     if reg
       ul
       each i in reg
         li 
           a(href='/view/#{i.type}/#{encodeURIComponent(i.region)}/#{encodeURIComponent(i.realm)}/#{encodeURIComponent(i.name)}/#{encodeURIComponent(i.locale)}') #{i.name} / #{i.type} - #{i.realm} (#{i.region}-#{i.locale})
-            small last viewed:[#{i.updated_at}]
+            small #{i18n("last viewed")}:[#{i.updated_at}]
     else
-      h3 Nothing registered yet!
+      h3 #{i18n("Nothing registered yet!")}

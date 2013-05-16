@@ -13,7 +13,7 @@ html(lang='en')
     //   Basic Page Needs
     //    ================================================== 
     meta(charset='utf-8')
-    title WoW Activity Feed
+    title #{i18n("WoW Activity Feed")}
     meta(name='description', content='')
     meta(name='author', content='')
     //
@@ -79,8 +79,8 @@ html(lang='en')
             //-   a(href='/about') About
         .logo
           a(href='/#{i18n_locale()}')
-            span WoW
-            | Feed
+            span #{i18n("WoW")}
+            | #{i18n("Feed")}
 
     block content
 

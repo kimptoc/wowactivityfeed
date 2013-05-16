@@ -19,7 +19,7 @@ block content
       //h3.bordered World of Warcraft Activity Feed
       .divider40.block_mar40.divider
         .columns.sixteen
-          h5 Recent Updates
+          h5 #{i18n("Recent Updates")}
           #recent_updates_id.recent_updates
             if f && f.length > 0
               each item in f
@@ -29,20 +29,20 @@ block content
                   span &nbsp; !{item.description}
                     small &nbsp; #{item.date_formatted}
             else
-              div No recent updates :(
+              div #{i18n("No recent updates :(")}
                 br
           .clear
-          a.more_link(href='/loaded')
-            span More
+          a.more_link(href='/everyone')
+            span #{i18n("More")}
           .columns.sixteen.arial_narrow16.txt_center
       .clear
         // ClearFix
-      h3.bordered What's it all about ...
+      h3.bordered #{i18n("What's it all about ...")}
       .columns.sixteen.txt_center
         p
-          | This site provides an RSS feed of activity for your WoW character and/or guild.
-          | The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in 
-          | an RSS reader, like Google Reader.
+          | #{i18n("This site provides an RSS feed of activity for your WoW character and/or guild.")}
+          | #{i18n("The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in")}
+          | #{i18n("an RSS reader, like Google Reader.")}
       .clear
         // ClearFix
     // End Container

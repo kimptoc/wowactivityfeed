@@ -4,10 +4,10 @@ script(type='text/template',id='search-template')
       .search_box
         .fourteen.columns
           form
-            input#search_text(type='text', placeholder='Search for a character or guild', autofocus)
+            input#search_text(type='text', placeholder='#{i18n("Search for a character or guild")}', autofocus)
 
             select#realm_region
-              option(value="") [select a realm/region]
+              option(value="") #{i18n("[select a realm/region]")}
               <% _.each(realms, function(realm) { %>
               | <option id="<%= realm._id %>" data-realm="<%= realm.name %>" data-region="<%= realm.region %>"> <%= realm.name %> (<%= realm.region %>)</option>
               <% }); %>
@@ -15,13 +15,13 @@ script(type='text/template',id='search-template')
               //-   each r in realms
               //-     option #{r.name} (#{r.region})
 
-              input#search_now(type="submit",name="SUBMIT",value="Search")
+              input#search_now(type="submit",name="SUBMIT",value="#{i18n('Search')}")
 
     .offset-by-three
         .ten.columns
           #search_results_msg
             <% if (results_complete) { %>
-            | Search complete, total found: <%= results.length %> (took <%= elapsed_seconds %> seconds)
+            | #{i18n("Search complete, total found:")} <%= results.length %> (took <%= elapsed_seconds %> seconds)
             <% } else if (searching) { %>
             | Searching ... 
             <% } %>

@@ -1,17 +1,19 @@
 extends layout
 
+//NOT USED
+
 block content
   .container
     .offset-by-three
       .search_box
         .ten.columns
-          input(type='text', placeholder='Search for character or guild')
+          input(type='text', placeholder='#{i18n("Search for character or guild")}')
 
           select
-            option [select realm]
+            option #{i18n("[select realm]")}
             if realms
               each r in realms
                 option #{r.name} (#{r.region})
 
-          button(onclick='$(".top_slider").hide();$(".search_results").show();') Search
+          button(onclick='$(".top_slider").hide();$(".search_results").show();') #{i18n("Search")}
 

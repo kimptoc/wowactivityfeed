@@ -226,18 +226,18 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
 
-wf.app.get '/info', (req, res) ->
-  res.render 'info', info: wf.info_queue
+#wf.app.get '/info', (req, res) ->
+#  res.render 'info', info: wf.info_queue, locales: []
 
-wf.app.get '/feed/info.rss', (req, res) ->
-  res.set('Content-Type', 'application/xml')
-  res.render "rss", 
-    title: "WoW Activity Feed Info"
-    description: "WoW Activity Feed Info"
-    feed_url: "#{wf.SITE_URL}feed/info.rss"
-    site_url: "#{wf.SITE_URL}info"
-    image_url: 'http://www.google.com/icon.png'
-    feed:wf.info_queue
+#wf.app.get '/feed/info.rss', (req, res) ->
+#  res.set('Content-Type', 'application/xml')
+#  res.render "rss",
+#    title: "WoW Activity Feed Info"
+#    description: "WoW Activity Feed Info"
+#    feed_url: "#{wf.SITE_URL}feed/info.rss"
+#    site_url: "#{wf.SITE_URL}info"
+#    image_url: 'http://www.google.com/icon.png'
+#    feed:wf.info_queue
 
 wf.app.get '/json/realms', (req, res) ->
   wf.ensure_realms_loaded ->
