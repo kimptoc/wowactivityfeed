@@ -234,15 +234,15 @@ describe "wow wrapper:", ->
         # todo - should.not.exist result
         done()
 
-    #TODO fix/simplify - now retries
 #    it "basic get_history when none", (done) ->
 #      item =
 #        type: "guild"
 #        region: "eu"
 #        realm: "wwewe"
+#        locale:"en_GB"
 #        name: "test"
 #        lastModified: 123
-#      wow.get_history item.region, item.realm, item.type, item.name, (results) ->
+#      wow.get_history item.region, item.realm, item.type, item.name, item.locale, (results) ->
 #        wf.debug "back from get_history"
 #        results.length.should.equal 0
 #        done()
@@ -256,7 +256,7 @@ describe "wow wrapper:", ->
         locale:"en_GB"
         lastModified: 123
       wowload = new wf.WoWLoader(wow)
-      wowload.store_update item.type, item.region, item.realm, item.name,item.locale, item, ->
+      wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
         wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
           results.length.should.equal 1 
           # should.exist results[0].whats_changed
@@ -266,6 +266,50 @@ describe "wow wrapper:", ->
             wf.debug "result:#{JSON.stringify(result)}"
             result.name.should.equal "test"
             done()
+
+    it "try store update guild+", (done) ->
+      item =
+        type: "guild"
+        region: "eu"
+        realm: "wwewe"
+        name: "test"
+        locale:"en_GB"
+        lastModified: 123
+      item_member =
+        type: "member"
+        region: "eu"
+        realm: "wwewe"
+        name: "test_mem"
+        locale:"en_GB"
+        lastModified: 123
+        guild:
+          name: "test"
+      wowload = new wf.WoWLoader(wow)
+      wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
+        wowload.store_update item_member.type, item_member.region, item_member.realm, item_member.name, item_member.locale, item_member, ->
+          wow.get_history item.region, item.realm, item.type, item.name, item.locale, (results) ->
+            wf.info "first item:#{results[0].type}/#{results[0].name}"
+            setInterval( ->
+            results.length.should.equal 2
+            # should.exist results[0].whats_changed
+            results[0].whats_changed.overview.should.equal "NEW"
+            done(), 1000)
+
+    it "try store update member", (done) ->
+      item =
+        type: "member"
+        region: "eu"
+        realm: "wwewe"
+        name: "test_mem"
+        locale:"en_GB"
+        lastModified: 123
+      wowload = new wf.WoWLoader(wow)
+      wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
+        wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
+          results.length.should.equal 1
+          # should.exist results[0].whats_changed
+          results[0].whats_changed.overview.should.equal "NEW"
+          done()
 
     it "try store update 2diff", (done) ->
       item =

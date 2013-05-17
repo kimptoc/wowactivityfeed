@@ -222,13 +222,15 @@ class wf.WoW
   get_history_from_db: () =>
     param = get_args(region:String,realm:String,type:String,name:String,locale:String,result_handler:Function)
     selector = {type:param.type, region:param.region, realm:param.realm, name:param.name, locale:param.locale}
+    wf.debug "querying db for:#{param.type}/#{param.region}/#{param.realm}/#{param.name}/#{param.locale}"
     store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
       if results? and results.length >0
         selector.lastModified = results[0].lastModified
         store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
           if param.type == "guild" # if its a guild, also query for guild members
             wf.debug "Got a guild, so also query for members..."
-            selector = {type:"member", region:param.region, realm:param.realm, locale:param.locale, "armory.guild.name":param.name}
+            selector = {type:"member", region:param.region, realm:param.realm, locale:param.locale, "armory.guild.name":results[0].armory.name}
+            wf.debug "querying db for:#{selector.type}/#{selector.region}/#{selector.realm}/#{selector["armory.guild.name"]}/#{param.locale}"
             store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
               store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
                 for m in members

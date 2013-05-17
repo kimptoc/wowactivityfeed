@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" afterPath="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow.coffee" afterPath="$PROJECT_DIR$/src/wow.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/wowSpec.coffee" afterPath="$PROJECT_DIR$/spec/wowSpec.coffee" />
     </list>
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,13 +27,13 @@
     <file path="/wow_search.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367779149297" ignored="false" />
     <file path="/wow_loader.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368813329166" ignored="false" />
     <file path="/call_logger.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367778888411" ignored="false" />
-    <file path="/wow.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368811338985" ignored="false" />
+    <file path="/wow.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368827265918" ignored="false" />
     <file path="/wowlookup.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368808126484" ignored="false" />
     <file path="/wowlookupSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367778671358" ignored="false" />
     <file path="/readme.md" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368815684327" ignored="false" />
-    <file path="/a.dummy" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368809357689" ignored="false" />
+    <file path="/a.dummy" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368832936431" ignored="false" />
     <file path="/Makefile" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1364683097088" ignored="false" />
-    <file path="/wowSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367949440567" ignored="false" />
+    <file path="/wowSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368831727418" ignored="false" />
     <file path="/formatterSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368823572839" ignored="false" />
     <file path="/Dummy.txt" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368801997493" ignored="false" />
     <file path="/cron.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368550513441" ignored="false" />
@@ -68,19 +69,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/readme.md">
+      <file leaf-file-name="wowLoaderSpec.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="60" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
+            <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wowLoaderSpec.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
+      <file leaf-file-name="formatterSpec.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.54697984">
+            <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wowlookupSpec.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/wowlookupSpec.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wowSpec.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/wowSpec.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="286" column="0" selection-start="9419" selection-end="9457" vertical-scroll-proportion="0.5033557">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wow_loader.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="184" column="24" selection-start="7751" selection-end="7751" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="init_logger.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/init_logger.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="14" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logger.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/nodetime/lib/core/logger.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="2" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/log4js/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="52" selection-start="557" selection-end="557" vertical-scroll-proportion="71.15385">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="memory-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/log4js/examples/memory-test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wow.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/wow.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="234" column="67" selection-start="10301" selection-end="10301" vertical-scroll-proportion="-8.0">
               <folding />
             </state>
           </provider>
@@ -104,7 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src_client/search_view.coffee" />
         <option value="$PROJECT_DIR$/locales/fr_FR.json" />
         <option value="$PROJECT_DIR$/views/rss.jade" />
         <option value="$PROJECT_DIR$/views/templates/search_template.jade" />
@@ -112,7 +184,6 @@
         <option value="$PROJECT_DIR$/src/locale.coffee" />
         <option value="$PROJECT_DIR$/src/wowlookup.coffee" />
         <option value="$PROJECT_DIR$/logs/server.log" />
-        <option value="$PROJECT_DIR$/src/wow.coffee" />
         <option value="$PROJECT_DIR$/src/wow_loader.coffee" />
         <option value="$PROJECT_DIR$/src/cron.coffee" />
         <option value="$PROJECT_DIR$/src/app.coffee" />
@@ -120,6 +191,8 @@
         <option value="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
         <option value="$PROJECT_DIR$/spec/formatterSpec.coffee" />
         <option value="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" />
+        <option value="$PROJECT_DIR$/src/wow.coffee" />
+        <option value="$PROJECT_DIR$/spec/wowSpec.coffee" />
       </list>
     </option>
   </component>
@@ -278,35 +351,178 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodetime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodetime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodetime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log4js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log4js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wowfeed.osx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="log4js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="examples" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="123" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="125" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="123" />
-    <property name="options.lastSelected" value="editor.preferences.tabs" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="123" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="129" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="923" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="923" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="923" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="129" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="125" />
     <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="125" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FullScreen" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="editor.preferences.tabs" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
@@ -323,7 +539,18 @@
       <option name="testName" />
       <method />
     </configuration>
+    <configuration default="true" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="$PROJECT_DIR$">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <list size="0" />
@@ -369,9 +596,9 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47916666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20192307" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16976917" sideWeight="0.34935898" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17125838" sideWeight="0.5208333" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17125838" sideWeight="0.7980769" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -467,58 +694,9 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/defaults.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/jade/node_modules/monocle/node_modules/readdirp/examples/node_modules/event-stream/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/i18n/i18n.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="24" selection-start="7074" selection-end="7074" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/locales/fr_FR.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/locale.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="32" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src_common/string.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="3" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/server.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8656" column="0" selection-start="8668949" selection-end="8668949" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="144" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -530,23 +708,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="298" column="0" selection-start="13331" selection-end="13331" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cron.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="106" column="31" selection-start="3943" selection-end="3943" vertical-scroll-proportion="-1.8461539">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="327" column="0" selection-start="11621" selection-end="11621" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -562,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="60" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
@@ -576,9 +733,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="327" column="0" selection-start="11621" selection-end="11621" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/wowlookupSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.54697984">
+        <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/init_logger.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="14" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/nodetime/lib/core/logger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="2" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/log4js/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="52" selection-start="557" selection-end="557" vertical-scroll-proportion="71.15385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/log4js/examples/memory-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="67" selection-start="10301" selection-end="10301" vertical-scroll-proportion="-8.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="184" column="24" selection-start="7751" selection-end="7751" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/wowSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="286" column="0" selection-start="9419" selection-end="9457" vertical-scroll-proportion="0.5033557">
           <folding />
         </state>
       </provider>
