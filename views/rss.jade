@@ -5,7 +5,7 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
         link= site_url
         atom:link(href='#{feed_url}', rel='self', type='application/rss+xml')
         description= description
-        language en-US
+        //language en-US
         if feed.length
             lastBuildDate= new Date(feed[0].date).toUTCString()
         each entry in feed

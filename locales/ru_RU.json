@@ -36,5 +36,21 @@
 	"link": "link",
 	"Not found - will check the Armory soon %s, %s/%s/%s/%s": "Not found - will check the Armory soon %s, %s/%s/%s/%s",
 	"guild": "guild",
-	"Message": "Message"
+	"Message": "Message",
+	"character": "character",
+	"%s - %s made %s": "%s - %s made %s",
+	"%s made %s %s": "%s made %s %s",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"%s is now rank %s": "%s is now rank %s",
+	"Search for a character or guild": "Search for a character or guild",
+	"[select a realm/region]": "[select a realm/region]",
+	"Search": "Search",
+	"Search complete, total foundx:": "Search complete, total foundx:",
+	"Recent Updates": "Recent Updates",
+	"More": "More",
+	"What's it all about ...": "What's it all about ...",
+	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
+	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
 }
