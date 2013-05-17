@@ -194,12 +194,16 @@ class wf.WoW
           previous_item_cache[@repatch_item_key(item)] = item
     callback?(results)
 
-  get_history: () =>
-    param = get_args(region:String,realm:String,type:String,name:String,locale:String,result_handler:null)
+  get_history: (region,realm,type,name,locale,result_handler) =>
+    param = {region,realm,type,name,locale,result_handler}
+#  get_history: () =>
+#    param = get_args(region:String,realm:String,type:String,name:String,locale:String,result_handler:null)
     @get_history_counted(param.region, param.realm, param.type, param.name, param.locale, 1, param.result_handler)
 
-  get_history_counted: () =>
-    param = get_args(region:String,realm:String,type:String,name:String,locale:String,counter:Number,result_handler:null)
+  get_history_counted: (region,realm,type,name,locale,counter,result_handler) =>
+    param = {region,realm,type,name,locale,counter,result_handler}
+#  get_history_counted: () =>
+#    param = get_args(region:String,realm:String,type:String,name:String,locale:String,counter:Number,result_handler:null)
     if param.type == "guild" or param.type == "member"
       @ensure_registered {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, =>
         @ensure_armory_indexes =>

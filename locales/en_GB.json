@@ -59,5 +59,10 @@
 	"rss": "rss",
 	"link": "link",
 	"member": "member",
-	"Guild": "Guild"
+	"Guild": "Guild",
+	"guild ": "guild ",
+	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
+	"achieved": "achieved",
+	"Registered": "Registered",
+	"last viewed": "last viewed"
 }
