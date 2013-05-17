@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feed_item_formatter.coffee" afterPath="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/formatterSpec.coffee" afterPath="$PROJECT_DIR$/spec/formatterSpec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" afterPath="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" />
     </list>
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,7 +22,7 @@
     <file path="/member_not_found.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682847927" ignored="false" />
     <file path="/member.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682739305" ignored="false" />
     <file path="/app.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368810224415" ignored="false" />
-    <file path="/wowLoaderSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367785545297" ignored="false" />
+    <file path="/wowLoaderSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368823853117" ignored="false" />
     <file path="/wow_search.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367779149297" ignored="false" />
     <file path="/wow_loader.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368813329166" ignored="false" />
     <file path="/call_logger.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367778888411" ignored="false" />
@@ -79,24 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="formatterSpec.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
+      <file leaf-file-name="wowLoaderSpec.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.9496644">
+            <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.54697984">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="feed_item_formatter.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="248" column="27" selection-start="12430" selection-end="12430" vertical-scroll-proportion="-9.423077">
-              <folding>
-                <marker date="1368823474000" expanded="true" signature="2197:2221" placeholder="..." />
-                <marker date="1368823474000" expanded="true" signature="3117:3140" placeholder="..." />
-                <marker date="1368823474000" expanded="true" signature="4030:4054" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -119,7 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/search.jade" />
         <option value="$PROJECT_DIR$/src_client/search_view.coffee" />
         <option value="$PROJECT_DIR$/locales/fr_FR.json" />
         <option value="$PROJECT_DIR$/views/rss.jade" />
@@ -135,6 +119,7 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
         <option value="$PROJECT_DIR$/spec/formatterSpec.coffee" />
+        <option value="$PROJECT_DIR$/spec/wowLoaderSpec.coffee" />
       </list>
     </option>
   </component>
@@ -482,13 +467,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/member_not_found.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/defaults.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="32" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
@@ -573,6 +551,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="248" column="27" selection-start="12430" selection-end="12430" vertical-scroll-proportion="-9.423077">
+          <folding>
+            <marker date="1368823474000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1368823474000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1368823474000" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="60" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
@@ -580,20 +576,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
+    <entry file="file://$PROJECT_DIR$/spec/wowLoaderSpec.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="27" selection-start="12430" selection-end="12430" vertical-scroll-proportion="-9.423077">
-          <folding>
-            <marker date="1368823474000" expanded="true" signature="2197:2221" placeholder="..." />
-            <marker date="1368823474000" expanded="true" signature="3117:3140" placeholder="..." />
-            <marker date="1368823474000" expanded="true" signature="4030:4054" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/formatterSpec.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="27" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.9496644">
+        <state line="29" column="107" selection-start="684" selection-end="684" vertical-scroll-proportion="0.54697984">
           <folding />
         </state>
       </provider>
