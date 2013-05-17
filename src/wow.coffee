@@ -19,7 +19,7 @@ class wf.WoW
   items_collection = "armory_items"
   realms_collection = "armory_realms"
 
-  fields_to_select = {name:1,realm:1,region:1,type:1,locale:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
+  fields_to_select = {name:1,realm:1,region:1,type:1,locale:1, lastModified:1, whats_changed:1, "armory.level":1, "armory.name":1, "armory.realm":1, "armory.guild":1,"armory.news":1, "armory.feed":1, "armory.thumbnail":1, "armory.members":1, "armory.titles":1}
 
   static_index_1 = {id:1, static_type:1}
   registered_index_1 = {name:1, realm:1, region:1, type:1, locale:1}

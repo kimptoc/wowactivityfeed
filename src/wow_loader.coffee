@@ -25,36 +25,36 @@ class wf.WoWLoader
     @wow.set_item_loader_queue async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
 
 
-  ensure_registered_correct: (item, info, callback) =>
-    if item.registered != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region or item.locale != info.locale)
-      wf.info "Registered entry is different, update registered"
-      item_key = 
-        type: item.type
-        region: item.region
-        name: item.name
-        realm: item.realm
-        locale: item.locale
-      new_item_key =
-        type: info.type
-        region: info.region
-        name: info.name
-        realm: info.realm
-        locale: info.locale
-      item.realm = info.realm
-      item.region = info.region
-      item.name = info.name
-      item.locale = info.locale
-      item.updated_at = new Date()
-      store.load @wow.get_registered_collection(), new_item_key, null, (new_key_item)=>
-        if new_key_item?
-          # new key exists already, so delete old one
-          store.remove @wow.get_registered_collection(), item_key, ->
-            callback?(info)
-        else
-          store.upsert @wow.get_registered_collection(), item_key, item, ->
-            callback?(info)
-    else
-      callback?(info)
+#  ensure_registered_correct: (item, info, callback) =>
+#    if item.register_check != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region or item.locale != info.locale)
+#      wf.info "Registered entry is different, update registered"
+#      item_key =
+#        type: item.type
+#        region: item.region
+#        name: item.name
+#        realm: item.realm
+#        locale: item.locale
+#      new_item_key =
+#        type: info.type
+#        region: info.region
+#        name: info.name
+#        realm: info.realm
+#        locale: info.locale
+#      item.realm = info.realm
+#      item.region = info.region
+#      item.name = info.name
+#      item.locale = info.locale
+#      item.updated_at = new Date()
+#      store.load @wow.get_registered_collection(), new_item_key, null, (new_key_item)=>
+#        if new_key_item?
+#          # new key exists already, so delete old one
+#          store.remove @wow.get_registered_collection(), item_key, ->
+#            callback?(info)
+#        else
+#          store.upsert @wow.get_registered_collection(), item_key, item, ->
+#            callback?(info)
+#    else
+#      callback?(info)
 
 
   format_armory_info: () ->
@@ -228,9 +228,10 @@ class wf.WoWLoader
       wowlookup.get item, doc?.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
-          @store_update info.type, info.region, info.realm, info.name, info.locale, info, =>
+          @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
             # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-            @ensure_registered_correct item, info, callback
+            callback?(info)
+#            @ensure_registered_correct item, info, callback
         else
           # send old info back, needed for guilds so we can query the members
           callback?(doc?.armory) 
@@ -239,7 +240,7 @@ class wf.WoWLoader
     loader_queue.push results_array, (info) ->
       if info?.type == "guild" and info?.members?
         for member in info.members
-          loader_queue.push type: "member", region: info.region, realm: info.realm, name: member.character.name, locale: info.locale, registered:false
+          loader_queue.push type: "member", region: info.region.toLocaleLowerCase(), realm: info.realm.toLocaleLowerCase(), name: member.character.name.toLocaleLowerCase(), locale: info.locale, register_check:false
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
@@ -291,7 +292,10 @@ class wf.WoWLoader
     all_realms = []
     get_region_realms = (region, region_callback) =>   
       wowlookup.get_realms region, (realms) ->
-        wf.info "For region #{region}, realms returned:#{realms.length}"
+        if realms.length == 0
+          wf.error "Uh-oh For region #{region}, realms returned:#{realms.length}"
+        else
+          wf.info "For region #{region}, realms returned:#{realms.length}"
         all_realms = all_realms.concat(realms)
         region_callback?()
     async.forEach wf.all_regions, get_region_realms, =>

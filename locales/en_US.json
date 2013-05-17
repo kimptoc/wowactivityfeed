@@ -35,5 +35,19 @@
 	"What's it all about ...": "What's it all about ...",
 	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
-	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
+	"No recent updates :(": "No recent updates :(",
+	"character": "character",
+	"guild ": "guild ",
+	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
+	"achieved": "achieved",
+	" (%s pts)": " (%s pts)",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"%s:TYPE:%s:%s": "%s:TYPE:%s:%s",
+	"%s progressed towards achievement '%s'": "%s progressed towards achievement '%s'",
+	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
+	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
+	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
+	"%s - got some loot - %s!": "%s - got some loot - %s!"
 }

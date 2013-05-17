@@ -38,7 +38,7 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    wf.set_locale(item?.locale, item?.realm)
+    wf.set_locale(item?.locale, item?.armory.realm)
     wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}/locale:#{item?.locale}-#{i18n.getLocale()}"
     item_ids = @get_items(item)
     wf.debug "got items, #{item_ids.length}"
@@ -78,20 +78,20 @@ class wf.FeedItemFormatter
 
   get_formal_name: (p) ->
     # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
-    alt_text = "#{p?.name}"
+    alt_text = "#{p?.armory?.name}"
     if p?.armory?.titles?
       # wf.debug "titles - found"
       for t in p.armory.titles
         # wf.debug "titles - this one? #{JSON.stringify(t)}"
         if t.selected?
           # wf.debug "titles - yes!"
-          alt_text = t.name.replace /%s/, p.name
+          alt_text = t.name.replace /%s/, p.armory.name
     return alt_text
 
   char_name: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
-    "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.name}</a>"
+    "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.armory.name}</a>"
 
   item_link: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
@@ -132,7 +132,7 @@ class wf.FeedItemFormatter
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
-        change_description = i18n.__("And as if by magic, %s appeared!",item.name)
+        change_description = i18n.__("And as if by magic, %s appeared!",item.armory.name)
       else
         if item.whats_changed.changes.level?
           change_title = i18n.__(" %s - level %s! ",@get_formal_name(item),@get('level',item))
@@ -246,14 +246,14 @@ class wf.FeedItemFormatter
       armory_api_link: @armory_api_link(item)
       date: item?.lastModified 
       date_formatted: @format_date(item?.lastModified)
-      author: item?.name
+      author: item?.armory.name
       guild: item?.armory?.guild?.name
       guid: "#{item?.lastModified}-#{change_title}"
     return result
 
   format_news_item: (news_item, item, items) ->
-    change_title = "#{item?.name}:#{news_item.type}"
-    description = "#{item?.name}:#{news_item.type}:#{i18n.__('character')}: #{news_item.character}, i18n.__('achievement')}:#{news_item.achievement?.description}"
+    change_title = "#{item?.armory.name}:#{news_item.type}"
+    description = "#{item?.armory.name}:#{news_item.type}:#{i18n.__('character')}: #{news_item.character}, i18n.__('achievement')}:#{news_item.achievement?.description}"
 
     if news_item.type == "playerAchievement"
       return null # ignore these, assume covered by the player news feed
@@ -302,7 +302,7 @@ class wf.FeedItemFormatter
       armory_api_link: @armory_api_link(item)
       date: news_item.timestamp
       date_formatted: @format_date(news_item.timestamp)
-      author: item?.name
+      author: item?.armory.name
       guild: item?.armory?.guild?.name
       guid: "#{news_item.timestamp}-#{change_title}"
     return result
@@ -310,7 +310,7 @@ class wf.FeedItemFormatter
   format_feed_item: (feed_item, item, items) ->
 
     change_title = "#{@get_formal_name(item)}:#{feed_item.achievement?.title}"
-    description = i18n.__("%s:TYPE:%s:%s",item?.name,feed_item.type,feed_item.achievement?.description)
+    description = i18n.__("%s:TYPE:%s:%s",item?.armory.name,feed_item.type,feed_item.achievement?.description)
     if feed_item.type == "ACHIEVEMENT"
       change_title = i18n.__("%s gained the achievement '%s'",@get_formal_name(item),feed_item.achievement.title)
       description = "#{@char_link(item)} #{@char_name(item)} - #{@achievement_link(feed_item.achievement)} #{feed_item.achievement.title}: #{feed_item.achievement.description}"
@@ -349,7 +349,7 @@ class wf.FeedItemFormatter
       armory_api_link: @armory_api_link(item)
       date: feed_item.timestamp
       date_formatted: @format_date(feed_item.timestamp)
-      author: item?.name
+      author: item?.armory.name
       guild: item?.armory?.guild?.name
       guid: "#{feed_item.timestamp}-#{change_title}"
 

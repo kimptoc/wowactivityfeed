@@ -4,12 +4,18 @@
 
 ## TODO
 
+- store realm/name as lowercase, for searching but also store as returned from blizz for display
+- To check:
+
+- items, need to get locale specific versions
+- if new character, use date of oldest feed item - so the magic bit is way back in feed!
+- link from guild member to their own page
+
 locale bits:
-- search failing on test server, check what the issue is..
+- make sure search xxxve armee should work!
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
 - and/or backbone view not using i18n?
-- changing locale on front/index page not working, stuff on fr_FR (probably due to feed parsing...)
-- everyone/home page should be mixed locale... ie item locale for items, but user locale for main heading
+- everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 - use wget to crawl site and trigger conversions (or just copy english version...)
 - or exp/imp prod registered table to gen lots of combos
 - use google translate manually for first cut translations?

@@ -61,5 +61,9 @@
 	"members": "members",
 	"History available": "History available",
 	"Search complete, total found:": "Search complete, total found:",
-	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	" %s - level %s! ": " %s - level %s! ",
+	"Now at level %s! ": "Now at level %s! ",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
 }

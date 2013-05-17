@@ -89,10 +89,6 @@ wf.app.all '*', (req, res, next) ->
   wf.info "ALL:get #{JSON.stringify(req.route)}"
   next()
 
-wf.app.get '/registered/:locale?', (req, res) ->
-  wf.wow.get_registered (results) ->
-    res.render "registered", reg: results, locales: wf.i18n_config.locales, root_url: '/registered/'
-
 #wf.app.get '/about', (req, res) ->
 #  res.render "about"
 
@@ -146,9 +142,9 @@ build_feed = (items, feed, callback) ->
 handle_view = (req, res) ->
   type = req.params.type
   type = 'member' if type == "character"
-  region = req.params.region.toLowerCase()
-  realm = req.params.realm
-  name = req.params.name
+  region = req.params.region.toLocaleLowerCase()
+  realm = req.params.realm.toLocaleLowerCase()
+  name = req.params.name.toLocaleLowerCase()
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   locale = wf.sort_locale(req,i18n)
   console.log "ddd:#{type},#{region},#{realm},#{name},#{locale}"
@@ -213,9 +209,9 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
 
   type = req.params.type
   type = 'member' if type == "character"
-  region = req.params.region.toLowerCase()
-  realm = req.params.realm
-  name = req.params.name
+  region = req.params.region.toLocaleLowerCase()
+  realm = req.params.realm.toLocaleLowerCase()
+  name = req.params.name.toLocaleLowerCase()
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
 
   wf.wow.get_history region, realm, type, name, locale, (items)->
@@ -258,9 +254,11 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
 
   type = req.params.type
   type = 'member' if type == "character"
-  region = req.params.region.toLowerCase()
-  realm = req.params.realm
-  name = wf.String.capitalise(req.params.name)
+  region = req.params.region.toLocaleLowerCase()
+  realm = req.params.realm.toLocaleLowerCase()
+  name = req.params.name.toLocaleLowerCase()
+#  name = wf.String.capitalise(req.params.name)
+  wf.info "Searching for #{realm}/#{name}/#{locale}...."
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   wf.wow.get_history region, realm, type, name, locale, (items)->
     get_feed items, (items_to_publish) ->
@@ -307,6 +305,10 @@ wf.app.get '/debug/fonts', (req, res) ->
 wf.app.get '/debug/colours', (req, res) ->
   res.render "colours", locales: null
 
+wf.app.get '/debug/registered/:locale?', (req, res) ->
+  wf.wow.get_registered (results) ->
+    res.render "registered", reg: results, locales: wf.i18n_config.locales, root_url: '/registered/'
+
 wf.app.get '/debug/armory_load', (req, res) ->
   wf.armory_load_requested = true
   wf.wow.get_registered (regs) ->
@@ -320,18 +322,18 @@ wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
     res.render "logs", {logs, locales: null}
 
-# wf.app.get '/debug/clear_all', (req, res) ->
+#wf.app.get '/debug/clear_all', (req, res) ->
 #  wf.wow.clear_all ->
-#    res.render "message", msg: "Database cleared!"
+#    res.render "message", msg: "Database cleared!", locales:[]
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.wow.get_history "eu", "Soulflayer", "guild", "Мб Ро","ru_RU"
-  wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls","en_GB"
-  wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est","en_US"
-  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","fr_FR"
-  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","en_GB"
-  wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda","en_GB"
-  wf.wow.get_history "us", "kaelthas", "member", "Feåtherz","pt_BR"
+  wf.wow.get_history "eu", "Soulflayer".toLocaleLowerCase(), "guild", "Мб Ро".toLocaleLowerCase(),"ru_RU"
+  wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "guild", "Mean Girls".toLocaleLowerCase(),"en_GB"
+  wf.wow.get_history "us", "Earthen Ring".toLocaleLowerCase(), "guild", "alea iacta est".toLocaleLowerCase(),"en_US"
+  wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"fr_FR"
+  wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"en_GB"
+  wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptopanda".toLocaleLowerCase(),"en_GB"
+  wf.wow.get_history "us", "kaelthas".toLocaleLowerCase(), "member", "Feåtherz".toLocaleLowerCase(),"pt_BR"
   res.render "message", msg: "Sample data registered", locales: null
 
 
