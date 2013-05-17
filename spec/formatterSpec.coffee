@@ -76,30 +76,34 @@ describe "feed item formatter", ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
+        armory :
+          name : "Test"
       n = f.get_formal_name item
-      n.should.equal "test" # unchanged
+      n.should.equal "Test" # unchanged
 
     it "get_name, titles, none selected", ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
         armory:
+          name : "Test"
           titles:
             [
               name: "123"
             ]
       n = f.get_formal_name item
-      n.should.equal "test" # unchanged
+      n.should.equal "Test" # unchanged
 
     it "get_name, titles, one selected", ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
         armory:
+          name : "Test"
           titles:
             [
               name: "123-%s"
               selected: "YES"
             ]
       n = f.get_formal_name item
-      n.should.equal "123-test" # changed
+      n.should.equal "123-Test" # changed

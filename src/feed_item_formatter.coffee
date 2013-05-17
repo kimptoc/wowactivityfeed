@@ -38,7 +38,7 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    wf.set_locale(item?.locale, item?.armory.realm)
+    wf.set_locale(item?.locale, item?.armory?.realm)
     wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}/locale:#{item?.locale}-#{i18n.getLocale()}"
     item_ids = @get_items(item)
     wf.debug "got items, #{item_ids.length}"
@@ -132,7 +132,7 @@ class wf.FeedItemFormatter
     change_description = ""
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
-        change_description = i18n.__("And as if by magic, %s appeared!",item.armory.name)
+        change_description = i18n.__("And as if by magic, %s appeared!",item?.armory?.name)
       else
         if item.whats_changed.changes.level?
           change_title = i18n.__(" %s - level %s! ",@get_formal_name(item),@get('level',item))
@@ -246,7 +246,7 @@ class wf.FeedItemFormatter
       armory_api_link: @armory_api_link(item)
       date: item?.lastModified 
       date_formatted: @format_date(item?.lastModified)
-      author: item?.armory.name
+      author: item?.armory?.name
       guild: item?.armory?.guild?.name
       guid: "#{item?.lastModified}-#{change_title}"
     return result
