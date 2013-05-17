@@ -169,7 +169,7 @@ handle_view = (req, res) ->
     else
       req.params.locale ?= ""
       res.render "#{req.params.type}_not_found",
-        msg: i18n.__("Not found - will check the Armory soon %s, %s/%s/%s/%s",type, region, realm, name, locale)
+        msg: i18n.__("Not found - will check the Armory soon for %s, %s/%s/%s/%s",type, region, realm, name, locale)
         w: req.params
         p: req.params
         locales: wf.regions_to_locales[region]
