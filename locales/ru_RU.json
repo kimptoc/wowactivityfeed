@@ -59,5 +59,7 @@
 	"Unknown....": "Unknown....",
 	"Unknown...": "Unknown...",
 	"members": "members",
-	"History available": "History available"
+	"History available": "History available",
+	"Search complete, total found:": "Search complete, total found:",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
 }

@@ -67,7 +67,7 @@ wf.app.configure ->
   wf.app.use(express.static(path.join(__dirname,'..', 'public')))
 
   # default: using 'accept-language' header to guess language settings
-  wf.app.use(i18n.init)
+#  wf.app.use(i18n.init)
 
   wf.app.locals
     i18n: i18n.__
@@ -99,6 +99,7 @@ wf.app.get '/registered/:locale?', (req, res) ->
 wf.app.get '/everyone/:locale?', (req, res) ->
   wf.sort_locale(req,i18n)
   get_feed_all (feed) ->
+    wf.sort_locale(req,i18n)
     res.render "everyone", f: feed, locales: wf.i18n_config.locales, root_url: '/everyone/'
 
 get_feed_all = (callback) ->
@@ -163,11 +164,13 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.news if guild_item.whats_changed.changes.news?
         # delete guild_item.whats_changed.changes.lastModified if guild_item.whats_changed.changes.lastModified?
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
+        wf.sort_locale(req,i18n)
         res.render req.params.type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
           fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
     else
       req.params.locale ?= ""
+      wf.sort_locale(req,i18n)
       res.render "#{req.params.type}_not_found",
         msg: i18n.__("Not found - will check the Armory soon for %s, %s/%s/%s/%s",type, region, realm, name, locale)
         w: req.params
@@ -326,7 +329,7 @@ wf.app.get '/debug/sample_data', (req, res) ->
   wf.wow.get_history "eu", "Darkspear", "guild", "Mean Girls","en_GB"
   wf.wow.get_history "us", "Earthen Ring", "guild", "alea iacta est","en_US"
   wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","fr_FR"
-  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","eu_GB"
+  wf.wow.get_history "eu", "Chants éternels", "guild", "La XXVe Armée","en_GB"
   wf.wow.get_history "eu", "Darkspear", "member", "Kimptopanda","en_GB"
   wf.wow.get_history "us", "kaelthas", "member", "Feåtherz","pt_BR"
   res.render "message", msg: "Sample data registered", locales: null
@@ -335,7 +338,9 @@ wf.app.get '/debug/sample_data', (req, res) ->
 wf.app.get '/:locale?', (req, res) ->
   wf.sort_locale(req,i18n)
   get_feed_all (feed)->
-    res.render "index", title: 'Home', f: feed.sample(6), locales: wf.i18n_config.locales, root_url: '/'
+    feed_sample = feed.sample(6)
+    wf.sort_locale(req,i18n)
+    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/'
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->

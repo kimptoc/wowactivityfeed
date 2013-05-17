@@ -33,6 +33,11 @@ wf.ensure_realms_loaded = (callback) ->
       callback?()
 
 wf.sort_locale = (req) ->
+  language_header = req.headers['accept-language']
+  browser_locales = language_header.split(',')[0].split('-')
+  browser_locale = "#{browser_locales[0]}_#{browser_locales[1]}"
+  wf.info "language header:#{language_header}/#{browser_locale}"
+  i18n.setLocale(browser_locale)
   wf.set_locale(req.params.locale, req.params.realm, i18n)
 
 wf.set_locale = (p_locale, p_realm) ->

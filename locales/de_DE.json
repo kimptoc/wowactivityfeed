@@ -15,5 +15,11 @@
 	"%s got %s %s": "%s got %s %s",
 	"%s - %s made %s": "%s - %s made %s",
 	"%s made %s %s": "%s made %s %s",
-	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!"
+	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!",
+	"WoW Activity Feed": "WoW Activity Feed",
+	"All Updates": "All Updates",
+	"WoW": "WoW",
+	"Feed": "Feed",
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
+	"Copyright": "Copyright"
 }

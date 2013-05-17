@@ -19,5 +19,21 @@
 	"%s has left": "%s has left",
 	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
 	"All Updates": "All Updates",
-	"Copyright": "Copyright"
+	"Copyright": "Copyright",
+	"WoW Activity Feed": "WoW Activity Feed",
+	"WoW": "WoW",
+	"Feed": "Feed",
+	"Message": "Message",
+	"Registered": "Registered",
+	"last viewed": "last viewed",
+	"Search for a character or guild": "Search for a character or guild",
+	"[select a realm/region]": "[select a realm/region]",
+	"Search": "Search",
+	"Search complete, total found:": "Search complete, total found:",
+	"Recent Updates": "Recent Updates",
+	"More": "More",
+	"What's it all about ...": "What's it all about ...",
+	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
+	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
 }
