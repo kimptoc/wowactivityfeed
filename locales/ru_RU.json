@@ -52,5 +52,12 @@
 	"What's it all about ...": "What's it all about ...",
 	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
-	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
+	"guild ": "guild ",
+	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
+	"achieved": "achieved",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown...",
+	"members": "members",
+	"History available": "History available"
 }

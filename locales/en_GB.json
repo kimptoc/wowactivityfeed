@@ -64,5 +64,8 @@
 	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
 	"achieved": "achieved",
 	"Registered": "Registered",
-	"last viewed": "last viewed"
+	"last viewed": "last viewed",
+	"Message": "Message",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown..."
 }
