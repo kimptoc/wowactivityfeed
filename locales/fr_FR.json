@@ -44,5 +44,21 @@
 	"Search": "Search",
 	"Search for a character or guild": "Search for a character or guild",
 	"[select a realm/region]": "[select a realm/region]",
-	"Search complete, total found:": "Search complete, total found:"
+	"Search complete, total found:": "Search complete, total found:",
+	"%s:TYPE:%s:%s": "%s:TYPE:%s:%s",
+	"%s progressed towards achievement '%s'": "%s progressed towards achievement '%s'",
+	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
+	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
+	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
+	"Took up %s": "Took up %s",
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	" (%s pts)": " (%s pts)",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"character": "character",
+	"guild ": "guild ",
+	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
+	"achieved": "achieved",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"Not found - will check the Armory soon %s, %s/%s/%s/%s": "Not found - will check the Armory soon %s, %s/%s/%s/%s"
 }

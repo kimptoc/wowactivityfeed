@@ -96,13 +96,13 @@ class wf.FeedItemFormatter
   item_link: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
     a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{items?[item_id]?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items)}' alt='#{@item_name(item_id, items)}'>"
-    a_text = "Unknown..." unless items?[item_id]
+    a_text = i18n.__("Unknown...") unless items?[item_id]
     return "<a href='http://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
 
   item_name: (item_id, items) ->
     #todo - handle not found, img link, wowhead link/hover...
     name = items?[item_id]?.name
-    name ||= "Unknown...."
+    name ||= i18n.__("Unknown....")
 
   waf_url: (item, feed_timestamp, thingId) ->
     the_url = "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}/#{encodeURIComponent(item?.locale)}"
@@ -167,7 +167,7 @@ class wf.FeedItemFormatter
               else if member_info.length == 3
                 member_desc += ", " if member_desc.length >0
                 member_desc += i18n.__("%s has left",member_info[0].character.name)
-          change_title += "Guild membership changed! " if member_desc.length >0
+          change_title += i18n.__("Guild membership changed! ") if member_desc.length >0
           change_description += i18n.__("Guild membership has changed: %s. ",member_desc) if member_desc.length >0
         if item.whats_changed.changes.mounts_collected_map?
           mounts_title = ""
@@ -179,8 +179,8 @@ class wf.FeedItemFormatter
                 mounts_title += "#{mount_info[0].name}"
                 mounts_desc += ", " if mounts_desc.length >0
                 mounts_desc += "#{mount_info[0].name}"
-          change_title += "New mount(s): #{mounts_title} " if mounts_title.length >0
-          change_description += "Gained some mount(s): #{mounts_desc}. " if mounts_desc.length >0
+          change_title += i18n.__("New mount(s): %s ",mounts_title) if mounts_title.length >0
+          change_description += i18n.__("Gained some mount(s): %s. ",mounts_desc) if mounts_desc.length >0
         if item.whats_changed.changes.pets_collected_map?
           pets_title = ""
           pets_desc = ""
@@ -191,8 +191,8 @@ class wf.FeedItemFormatter
                 pets_title += "#{pet_info[0].name}"
                 pets_desc += ", " if pets_desc.length >0
                 pets_desc += "#{pet_info[0].name}"
-          change_title += "New pet(s): #{pets_title} " if pets_title.length >0
-          change_description += "Gained some pet(s): #{pets_desc}. " if pets_desc.length >0
+          change_title += i18n.__("New pet(s):%s ",pets_title) if pets_title.length >0
+          change_description += i18n.__("Gained some pet(s): %s. ",pets_desc) if pets_desc.length >0
         if item.whats_changed.changes.titles_map?
           titles_title = ""
           titles_desc = ""
@@ -203,23 +203,23 @@ class wf.FeedItemFormatter
                 titles_title += "'#{name}'"
                 titles_desc += ", " if titles_desc.length >0
                 titles_desc += "'#{name}'"
-          change_title += "New title(s): #{titles_title} " if titles_title.length >0
-          change_description += "Gained some title(s): #{titles_desc}. " if titles_desc.length >0
+          change_title += i18n.__("New title(s):%s ",titles_title) if titles_title.length >0
+          change_description += i18n.__("Gained some title(s): %s. ",titles_desc) if titles_desc.length >0
         if item.whats_changed.changes.professions_map?
           professions_desc = ""
           for own name, prof_info of item.whats_changed.changes.professions_map
             if prof_info instanceof Array
               if prof_info.length == 1
                 professions_desc += ", " if professions_desc.length >0
-                professions_desc += "Took up #{name}"
+                professions_desc += i18n.__("Took up %s",name)
               else if prof_info.length == 3
                 professions_desc += ", " if professions_desc.length >0
-                professions_desc += "Gave up #{name}"
+                professions_desc += i18n.__("Gave up %s",name)
             else
               if prof_info.rank?
                 professions_desc += ", " if professions_desc.length >0
                 professions_desc += i18n.__("%s is now rank %s",name,@get_new_one(prof_info.rank))
-          change_description += "Profession(s): #{professions_desc}. " if professions_desc.length >0
+          change_description += i18n.__("Profession(s): %s. ",professions_desc) if professions_desc.length >0
 
     # if we dont identify a change above, then assume none
     if change_description == ""
@@ -253,19 +253,20 @@ class wf.FeedItemFormatter
 
   format_news_item: (news_item, item, items) ->
     change_title = "#{item?.name}:#{news_item.type}"
-    description = "#{item?.name}:#{news_item.type}:character: #{news_item.character}, achievement:#{news_item.achievement?.description}"
+    description = "#{item?.name}:#{news_item.type}:#{i18n.__('character')}: #{news_item.character}, i18n.__('achievement')}:#{news_item.achievement?.description}"
 
     if news_item.type == "playerAchievement"
       return null # ignore these, assume covered by the player news feed
 
     if news_item.type == "guildAchievement"
       mentionGuild = ""
-      mentionGuild = "guild " if news_item.type == "guildAchievement"
-      change_title = "#{item.name} - #{news_item.character} gained the #{mentionGuild}achievement '#{news_item.achievement.title}'"
-      description = "#{news_item.character} achieved #{news_item.achievement.title}: #{news_item.achievement.description} #{@achievement_link(news_item.achievement)}"
+      mentionGuild = i18n.__("guild ") if news_item.type == "guildAchievement"
+      change_title = i18n.__("%s - %s gained the %s achievement '%s'",
+        item.name,news_item.character,mentionGuild,news_item.achievement.title)
+      description = "#{news_item.character} #{i18n.__('achieved')} #{news_item.achievement.title}: #{news_item.achievement.description} #{@achievement_link(news_item.achievement)}"
       thingId = news_item.achievement.id
       description = @add_criteria description, news_item.achievement.criteria
-      description += " (#{news_item.achievement.points}pts)"
+      description += i18n.__(" (%s pts)",news_item.achievement.points)
 
     else if news_item.type == "itemPurchase"
       change_title = i18n.__("%s - %s bought %s",item.name,news_item.character,@item_name(news_item.itemId, items))
@@ -309,19 +310,19 @@ class wf.FeedItemFormatter
   format_feed_item: (feed_item, item, items) ->
 
     change_title = "#{@get_formal_name(item)}:#{feed_item.achievement?.title}"
-    description = "#{item?.name}:TYPE:#{feed_item.type}:#{feed_item.achievement?.description}"
+    description = i18n.__("%s:TYPE:%s:%s",item?.name,feed_item.type,feed_item.achievement?.description)
     if feed_item.type == "ACHIEVEMENT"
-      change_title = "#{@get_formal_name(item)} gained the achievement '#{feed_item.achievement.title}'"
+      change_title = i18n.__("%s gained the achievement '%s'",@get_formal_name(item),feed_item.achievement.title)
       description = "#{@char_link(item)} #{@char_name(item)} - #{@achievement_link(feed_item.achievement)} #{feed_item.achievement.title}: #{feed_item.achievement.description}"
       thingId = feed_item.achievement.id
       description = @add_criteria description, feed_item.achievement.criteria
-      description += " (#{feed_item.achievement.points}pts)"
+      description += i18n.__(" (%s pts)",feed_item.achievement.points)
 
     else if feed_item.type == "CRITERIA"
-      change_title = "#{@get_formal_name(item)} progressed towards achievement '#{feed_item.achievement.title}'"
-      achievement_description = "#{feed_item.achievement?.description} Progressing towards achievement #{feed_item.achievement.title}"
+      change_title = i18n.__("%s progressed towards achievement '%s'",@get_formal_name(item),feed_item.achievement.title)
+      achievement_description = i18n.__("%s Progressing towards achievement %s",feed_item.achievement?.description,feed_item.achievement.title)
       achievement_description = feed_item.achievement?.title if achievement_description.indexOf(feed_item.criteria.description) >= 0
-      description = "#{@char_link(item)} #{@char_name(item)} - Step:'#{feed_item.criteria.description}' for '#{achievement_description}'"
+      description = i18n.__("%s %s - Step:'%s' for '%s'",@char_link(item),@char_name(item),feed_item.criteria.description,achievement_description)
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
@@ -330,7 +331,7 @@ class wf.FeedItemFormatter
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
-      change_title = "#{@get_formal_name(item)} - got some loot - #{@item_name(feed_item.itemId, items)}!"
+      change_title = i18n.__("%s - got some loot - %s!",@get_formal_name(item),@item_name(feed_item.itemId, items))
       description = i18n.__("%s %s now has %s! %s",@char_link(item),@char_name(item),@item_name(feed_item.itemId, items),@item_link(feed_item.itemId, items))
       thingId = feed_item.itemId
 

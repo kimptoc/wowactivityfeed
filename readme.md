@@ -14,6 +14,8 @@ locale bits:
 - changing locale on front/index page not working, stuff on fr_FR (probably due to feed parsing...)
 - and/or backbone view not using i18n?
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
+- search failing on test server, check what the issue is..
+
 - db conversion - make it seemless to new locale version... index re-creation... (or just wipe db)...
 
 https://github.com/mashpie/i18n-node

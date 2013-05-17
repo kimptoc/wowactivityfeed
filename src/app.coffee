@@ -168,7 +168,7 @@ handle_view = (req, res) ->
     else
       req.params.locale ?= ""
       res.render "#{req.params.type}_not_found",
-        msg: "Not found - registered for lookup at the Armory #{type}, #{region}/#{realm}/#{name}/#{locale}"
+        msg: i18n.__("Not found - will check the Armory soon %s, %s/%s/%s/%s",type, region, realm, name, locale)
         w: req.params
         p: req.params
         locales: wf.regions_to_locales[region]
@@ -219,8 +219,8 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
     get_feed items, (items_to_publish) ->
       res.set('Content-Type', 'application/xml')
       res.render "rss", 
-        title: "WoW Activity Feed for #{name}"
-        description: "WoW Activity Feed for #{type} #{name}, of #{region} realm #{realm}"
+        title: i18n.__("WoW Activity Feed for %s",name)
+        description: i18n.__("WoW Activity Feed for %s %s, of %s realm %s", type, name, region, realm)
         feed_url: "#{wf.SITE_URL}feed/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}.rss"
         site_url: "#{wf.SITE_URL}view/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}"
         image_url: 'http://www.google.com/icon.png'

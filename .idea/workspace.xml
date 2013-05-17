@@ -3,18 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/en_GB.json" afterPath="$PROJECT_DIR$/locales/en_GB.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feed_item_formatter.coffee" afterPath="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/fr_FR.json" afterPath="$PROJECT_DIR$/locales/fr_FR.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.jade" afterPath="$PROJECT_DIR$/views/index.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/info.jade" afterPath="$PROJECT_DIR$/views/info.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/member.jade" afterPath="$PROJECT_DIR$/views/member.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/member_not_found.jade" afterPath="$PROJECT_DIR$/views/member_not_found.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/message.jade" afterPath="$PROJECT_DIR$/views/message.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/registered.jade" afterPath="$PROJECT_DIR$/views/registered.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/ru_RU.json" afterPath="$PROJECT_DIR$/locales/ru_RU.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/search.jade" afterPath="$PROJECT_DIR$/views/search.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/search_template.jade" afterPath="$PROJECT_DIR$/views/templates/search_template.jade" />
     </list>
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +16,7 @@
     <file path="/sprintf.js" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368258003842" ignored="false" />
     <file path="/i18n.js" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368048391128" ignored="false" />
     <file path="/everyone.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368077450156" ignored="false" />
-    <file path="/feed_item_formatter.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368639913015" ignored="false" />
+    <file path="/feed_item_formatter.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368768702167" ignored="false" />
     <file path="/guild.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368627963471" ignored="false" />
     <file path="/registered.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682927617" ignored="false" />
     <file path="/*.regexp" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368257027193" ignored="false" />
@@ -33,7 +26,7 @@
     <file path="/diffSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367902365837" ignored="false" />
     <file path="/member_not_found.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682847927" ignored="false" />
     <file path="/member.jade" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682739305" ignored="false" />
-    <file path="/app.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368682434882" ignored="false" />
+    <file path="/app.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368713555703" ignored="false" />
     <file path="/wowLoaderSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367785545297" ignored="false" />
     <file path="/wow_search.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367779149297" ignored="false" />
     <file path="/wow_loader.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368550869759" ignored="false" />
@@ -41,7 +34,7 @@
     <file path="/wow.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368545161849" ignored="false" />
     <file path="/wowlookup.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368291934744" ignored="false" />
     <file path="/wowlookupSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367778671358" ignored="false" />
-    <file path="/readme.md" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368685929776" ignored="false" />
+    <file path="/readme.md" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368720150757" ignored="false" />
     <file path="/a.dummy" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1368627678830" ignored="false" />
     <file path="/Makefile" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1364683097088" ignored="false" />
     <file path="/wowSpec.coffee" changelist="89fe5eae-af60-42bc-b2fa-11c69301967d" time="1367949440567" ignored="false" />
@@ -80,15 +73,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rss.jade" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/rss.jade">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="22" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="search.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/search.jade">
           <provider selected="true" editor-type-id="text-editor">
@@ -98,10 +82,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="rss.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/rss.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="22" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="222" column="76" selection-start="7413" selection-end="7413" vertical-scroll-proportion="51.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="feed_item_formatter.coffee" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="304" column="24" selection-start="15292" selection-end="15292" vertical-scroll-proportion="-0.5769231">
+              <folding>
+                <marker date="1368768748000" expanded="false" signature="2189:2213" placeholder="..." />
+                <marker date="1368768748000" expanded="false" signature="3109:3132" placeholder="..." />
+                <marker date="1368768748000" expanded="false" signature="4000:4024" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="121" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+            <state line="16" column="58" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,28 +131,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search_template.jade" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wireframe1.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/wireframe1.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search_template.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/templates/search_template.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.64285713">
+            <state line="24" column="0" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="en_GB.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/locales/en_GB.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fr_FR.json" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="fr_FR.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/locales/fr_FR.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="2140" selection-end="2140" vertical-scroll-proportion="-19.208334">
+            <state line="39" column="19" selection-start="1863" selection-end="1863" vertical-scroll-proportion="1.0914179">
               <folding />
             </state>
           </provider>
@@ -146,25 +161,7 @@
       <file leaf-file-name="ru_RU.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/locales/ru_RU.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="search.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src_client/search.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="search_view.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src_client/search_view.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="13" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
+            <state line="29" column="0" selection-start="1356" selection-end="1356" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -189,10 +186,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/spec/commonSpec.coffee" />
-        <option value="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
         <option value="$PROJECT_DIR$/views/guild.jade" />
         <option value="$PROJECT_DIR$/views/index.jade" />
-        <option value="$PROJECT_DIR$/src/app.coffee" />
         <option value="$PROJECT_DIR$/views/info.jade" />
         <option value="$PROJECT_DIR$/views/layout.jade" />
         <option value="$PROJECT_DIR$/views/member.jade" />
@@ -202,8 +197,10 @@
         <option value="$PROJECT_DIR$/views/search.jade" />
         <option value="$PROJECT_DIR$/src_client/search_view.coffee" />
         <option value="$PROJECT_DIR$/locales/fr_FR.json" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/views/templates/search_template.jade" />
+        <option value="$PROJECT_DIR$/src/app.coffee" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/src/feed_item_formatter.coffee" />
       </list>
     </option>
   </component>
@@ -733,27 +730,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/layout_new.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/logs.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/member.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="47" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/member_not_found.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
@@ -771,27 +747,6 @@
     <entry file="file://$PROJECT_DIR$/views/registered.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="17" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/rss.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="22" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/search.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/search_backbone.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -817,30 +772,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/locales/fr_FR.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="2140" selection-end="2140" vertical-scroll-proportion="-19.208334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/locales/ru_RU.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="121" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+        <state line="29" column="0" selection-start="1356" selection-end="1356" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/templates/search_template.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.64285713">
+        <state line="24" column="0" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/search_backbone.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/wireframe1.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/search.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/rss.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="22" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="222" column="76" selection-start="7413" selection-end="7413" vertical-scroll-proportion="51.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="58" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/feed_item_formatter.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="304" column="24" selection-start="15292" selection-end="15292" vertical-scroll-proportion="-0.5769231">
+          <folding>
+            <marker date="1368768748000" expanded="false" signature="2189:2213" placeholder="..." />
+            <marker date="1368768748000" expanded="false" signature="3109:3132" placeholder="..." />
+            <marker date="1368768748000" expanded="false" signature="4000:4024" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/locales/fr_FR.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="19" selection-start="1863" selection-end="1863" vertical-scroll-proportion="1.0914179">
           <folding />
         </state>
       </provider>
