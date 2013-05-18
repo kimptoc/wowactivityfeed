@@ -269,30 +269,30 @@ class wf.FeedItemFormatter
       mentionGuild = ""
       mentionGuild = i18n.__("guild ") if news_item.type == "guildAchievement"
       change_title = i18n.__("%s - %s gained the %s achievement '%s'",
-        item.name,news_item.character,mentionGuild,news_item.achievement.title)
+        item.armory.name,news_item.character,mentionGuild,news_item.achievement.title)
       description = "#{news_item.character} #{i18n.__('achieved')} #{news_item.achievement.title}: #{news_item.achievement.description} #{@achievement_link(news_item.achievement)}"
       thingId = news_item.achievement.id
       description = @add_criteria description, news_item.achievement.criteria
       description += i18n.__(" (%s pts)",news_item.achievement.points)
 
     else if news_item.type == "itemPurchase"
-      change_title = i18n.__("%s - %s bought %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      change_title = i18n.__("%s - %s bought %s",item.armory.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
       description = i18n.__("%s bought %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "itemLoot"
-      change_title = i18n.__("%s - %s got some loot - %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      change_title = i18n.__("%s - %s got some loot - %s",item.armory.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
       description = i18n.__("%s got %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "itemCraft"
-      change_title = i18n.__("%s - %s made %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      change_title = i18n.__("%s - %s made %s",item.armory.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
       description = i18n.__("%s made %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "guildLevel"
-      change_title = i18n.__("%s is now level %s!",item.name,news_item.levelUp)
-      description = i18n.__("Guild %s is now at guild level %s!",item.name,news_item.levelUp)
+      change_title = i18n.__("%s is now level %s!",item.armory.name,news_item.levelUp)
+      description = i18n.__("Guild %s is now at guild level %s!",item.armory.name,news_item.levelUp)
       thingId = news_item.itemId
 
     else

@@ -41,6 +41,8 @@ wf.sort_locale = (req) ->
   wf.set_locale(req.params.locale, req.params.realm, req.params.region)
 
 wf.set_locale = (p_locale, p_realm, p_region) ->
+  p_realm = p_realm?.toLocaleLowerCase()
+  p_region = p_region?.toLocaleLowerCase()
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{p_locale}, realm:#{p_realm}"
   if p_locale?
     i18n.setLocale(p_locale)
