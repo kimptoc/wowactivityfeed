@@ -45,16 +45,19 @@ class wf.FeedItemFormatter
     wf.wow.load_items {item_ids,locale,region:item?.region}, (items) =>
       wf.debug "format.process - load_items, found:#{items.length}"
       results = []
-      update_obj = @format_item(item, items)
-      results.push update_obj if update_obj?
+      earliest_time = null
       if item?.armory?.feed?
         for feed_item in item.armory.feed
           update_obj = @format_feed_item(feed_item, item, items)
+          earliest_time = update_obj.date if update_obj? and (!earliest_time? or earliest_time > update_obj.date)
           results.push update_obj if update_obj?
       if item?.armory?.news?
         for news_item in item.armory.news
           update_obj = @format_news_item(news_item, item, items)
+          earliest_time = update_obj.date if update_obj? and (!earliest_time? or earliest_time > update_obj.date)
           results.push update_obj if update_obj?
+      update_obj = @format_item(item, items, earliest_time)
+      results.push update_obj if update_obj?
       callback?(results)
 
   achievement_link: (achievement) ->
@@ -132,14 +135,16 @@ class wf.FeedItemFormatter
       description = "#{description} [#{criteria_description}]" if criteria_description.length >0
     return description
 
-  format_item: (item, items) ->
+  format_item: (item, items, earliest_time) ->
     change_title = " #{@get_formal_name(item)} "
     change_title = "#{change_title} - " if item?.type == "guild"
     change_title = "#{change_title} (#{item.armory.guild.name}) " if item?.armory?.guild?.name?
     change_description = ""
+    change_date = item?.lastModified
     if item? and item.whats_changed?
       if item.whats_changed.overview == "NEW"
         change_description = i18n.__("And as if by magic, %s appeared!",item?.armory?.name)
+        change_date = earliest_time if earliest_time?
       else
         if item.whats_changed.changes.level?
           change_title = i18n.__(" %s - level %s! ",@get_formal_name(item),@get('level',item))
@@ -251,11 +256,11 @@ class wf.FeedItemFormatter
       waf_rss_url: @waf_rss_url(item)
       armory_link: @armory_link(item)
       armory_api_link: @armory_api_link(item)
-      date: item?.lastModified 
-      date_formatted: @format_date(item?.lastModified)
+      date: change_date
+      date_formatted: @format_date(change_date)
       author: item?.armory?.name
       guild: item?.armory?.guild?.name
-      guid: "#{item?.lastModified}-#{change_title}"
+      guid: "#{change_date}-#{change_title}"
     return result
 
   format_news_item: (news_item, item, items) ->

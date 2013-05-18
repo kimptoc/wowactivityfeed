@@ -59,5 +59,10 @@
 	"armory": "armory",
 	"api": "api",
 	"rss": "rss",
-	"link": "link"
+	"link": "link",
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	"guild": "guild",
+	"members": "members",
+	"History available": "History available",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
 }

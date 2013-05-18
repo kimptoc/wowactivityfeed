@@ -65,5 +65,9 @@
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
 	"Unknown....": "Unknown....",
 	"Unknown...": "Unknown...",
-	"Guild membership changed! ": "Guild membership changed! "
+	"Guild membership changed! ": "Guild membership changed! ",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"Registered": "Registered",
+	"last viewed": "last viewed"
 }

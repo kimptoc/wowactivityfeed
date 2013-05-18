@@ -65,5 +65,8 @@
 	" %s - level %s! ": " %s - level %s! ",
 	"Now at level %s! ": "Now at level %s! ",
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
-	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"%s has joined": "%s has joined",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. "
 }

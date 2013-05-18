@@ -5,19 +5,18 @@
 ## TODO
 
 locale bits:
+- if new character, use date of oldest feed item - so the magic bit is way back in feed!
+- remove class/races loads - check its not used
 - wow.coffee/load_items - when formatting item and nothing found, need to do wowlookup (thou should usually be caught by char load...)
+- realms are localised/need to load all variants and use locale in using them
+
 - when locale specified not getting correct default... data load issue?
+
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
 - and/or backbone view not using i18n?
 - everyone/home page should be mixed locale... but items dont seem to stick to correct locale
-- realms are localised/need to load all variants and use locale in using them
-
-- tests are using the main db
-- remove class/races loads - check its not used
 
 - link from guild page/ member to their own page
-- if new character, use date of oldest feed item - so the magic bit is way back in feed!
-- classes/races? - not currently used though...
 - anything else?
 
 - use wget to crawl site and trigger conversions (or just copy english version...)
