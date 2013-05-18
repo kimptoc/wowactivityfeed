@@ -252,6 +252,11 @@ class wf.WoW
     if item_id_array? and item_id_array.length >0
       store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
         store.load_all items_collection, {item_id: {$in: item_id_array}, locale:params.locale, region:params.region}, null, (items) ->
+          for wanted in item_id_array
+            found = false
+            for it in items
+              found = true if wanted == it.item_id
+            wf.wow.get_item_loader_queue().push {item_id:wanted,locale:params.locale,region:params.region} unless found
 #          items_hash = {}
 #          for i in items
 #            items_hash[i.item_id] = i
