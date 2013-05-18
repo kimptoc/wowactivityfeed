@@ -218,7 +218,7 @@ describe "wow wrapper:", ->
 
     it "try item_loader", (done) ->
       wowload = new wf.WoWLoader(wow)
-      wowload.item_loader 87417, ->
+      wowload.item_loader {item_id:87417, locale:'en_GB', region:'eu'}, ->
         done()
 
     it "basic get when none", (done) ->

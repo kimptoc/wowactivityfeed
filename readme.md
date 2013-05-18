@@ -7,6 +7,7 @@
 - store realm/name as lowercase, for searching but also store as returned from blizz for display
 - To check:
 
+- not showing items now...
 - items, need to get locale specific versions
 - if new character, use date of oldest feed item - so the magic bit is way back in feed!
 - link from guild member to their own page

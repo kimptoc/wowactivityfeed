@@ -88,10 +88,22 @@ describe "wow armory lookup:", ->
         should.exist result.achievements
         done()
 
-    it "get item info", (done) ->
+    it "get item info/1", (done) ->
       wow = new wf.WowLookup()
-      wow.get_item 87417, null, (info) ->
+      wow.get_item 87417, "en_GB" , "eu", (info) ->
         info.id.should.equal 87417
+        info.locale.should.equal "en_GB"
+        info.region.should.equal "eu"
+        info.name.should.equal "Staff of Broken Hopes"
+        done()
+
+    it "get item info/2", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_item 87417, "pt_MX" , "us", (info) ->
+        info.id.should.equal 87417
+        info.locale.should.equal "pt_MX"
+        info.region.should.equal "us"
+        info.name.should.equal "Cajado das Esperanças Despedaçadas"
         done()
 
     it "get all realms", (done) ->

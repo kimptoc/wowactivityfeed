@@ -28,7 +28,7 @@ class wf.WoW
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1, locale:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
-  armory_item_index_1 = {item_id:1}
+  armory_item_index_1 = {item_id:1,locale:1,region:1}
   job_running_lock = false
   loader_queue = null
   armory_pending_queue = []
@@ -100,6 +100,9 @@ class wf.WoW
 
   get_static_index_1: ->
     static_index_1
+
+  get_armory_item_index_1: ->
+    armory_item_index_1
 
   ensure_registered: () ->
     param = get_args(item_info:Object, registered_handler:Function)
@@ -244,15 +247,16 @@ class wf.WoW
   get_realms: (callback) ->
     store.load_all_with_fields realms_collection, {}, {name:1, region:1, locale:1}, {sort:{name:1, region:1}}, callback
 
-  load_items: (item_id_array, callback) ->
+  load_items: (params, callback) ->
+    item_id_array = params.item_ids
     if item_id_array? and item_id_array.length >0
       store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
-        store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
-          items_hash = {}
-          for i in items
-            items_hash[i.item_id] = i
-          callback?(items_hash)
+        store.load_all items_collection, {item_id: {$in: item_id_array}, locale:params.locale, region:params.region}, null, (items) ->
+#          items_hash = {}
+#          for i in items
+#            items_hash[i.item_id] = i
+          callback?(items)
     else
-      callback?({})
+      callback?([])
 
 

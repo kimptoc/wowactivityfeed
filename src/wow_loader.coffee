@@ -169,7 +169,7 @@ class wf.WoWLoader
             items_to_get = feed_formatter.get_items new_item
             wf.debug "Loading char items:#{items_to_get.length}"
             for item_id in items_to_get
-              @wow.get_item_loader_queue().push item_id
+              @wow.get_item_loader_queue().push {item_id,locale:param.locale,region:param.region}
             if doc?
               store.update @wow.get_armory_collection(), doc, {$unset:{armory:1}, $set:{archived_at:new Date()}}, =>
                 wf.debug "Now saved #{param.info.name}/#{param.name}, updated old one"
@@ -187,39 +187,39 @@ class wf.WoWLoader
 
 
 
-  static_load: =>
-    # load achievements / #not used, at the moment
-    try 
-      @save_achievements("characterAchievements")
-      @save_achievements("guildAchievements")
-    catch e
-      wf.error "static_load:#{e}"
+#  static_load: =>
+#    # load achievements / #not used, at the moment
+#    try
+#      @save_achievements("characterAchievements")
+#      @save_achievements("guildAchievements")
+#    catch e
+#      wf.error "static_load:#{e}"
 
-  save_achievements: (name) ->
-    # load achievements / #not used, at the moment
-    wowlookup.get_static name, "eu", (achievements) ->
-      # data returned is quite structured - so flatten it out to save it
-      # go through all groups
-      return unless achievements?
-      for achievementGroup in achievements
-        # get groups categories
-        if achievementGroup.achievements?
-          for groupAchievement in achievementGroup.achievements
-            groupAchievement.static_type = name
-            groupAchievement.group_name = achievementGroup.name
-            groupAchievement.group_id = achievementGroup.id
-            store.ensure_index @wow.get_static_collection(), @wow.get_static_index_1(), null, ->
-              store.upsert @wow.get_static_collection(), {static_type:name, id:groupAchievement.id}, groupAchievement
-        # get categories and their achievements
-        if achievementGroup.categories?
-          for groupCategory in achievementGroup.categories
-            for categoryAchievement in groupCategory.achievements
-              categoryAchievement.static_type = name
-              categoryAchievement.category_name = groupCategory.name
-              categoryAchievement.category_id = groupCategory.id
-              categoryAchievement.group_name = achievementGroup.name
-              categoryAchievement.group_id = achievementGroup.id
-              store.upsert @wow.get_static_collection(), {static_type:name, id:categoryAchievement.id}, categoryAchievement
+#  save_achievements: (name) ->
+#    # load achievements / #not used, at the moment
+#    wowlookup.get_static name, "eu", (achievements) ->
+#      # data returned is quite structured - so flatten it out to save it
+#      # go through all groups
+#      return unless achievements?
+#      for achievementGroup in achievements
+#        # get groups categories
+#        if achievementGroup.achievements?
+#          for groupAchievement in achievementGroup.achievements
+#            groupAchievement.static_type = name
+#            groupAchievement.group_name = achievementGroup.name
+#            groupAchievement.group_id = achievementGroup.id
+#            store.ensure_index @wow.get_static_collection(), @wow.get_static_index_1(), null, ->
+#              store.upsert @wow.get_static_collection(), {static_type:name, id:groupAchievement.id}, groupAchievement
+#        # get categories and their achievements
+#        if achievementGroup.categories?
+#          for groupCategory in achievementGroup.categories
+#            for categoryAchievement in groupCategory.achievements
+#              categoryAchievement.static_type = name
+#              categoryAchievement.category_name = groupCategory.name
+#              categoryAchievement.category_id = groupCategory.id
+#              categoryAchievement.group_name = achievementGroup.name
+#              categoryAchievement.group_id = achievementGroup.id
+#              store.upsert @wow.get_static_collection(), {static_type:name, id:categoryAchievement.id}, categoryAchievement
 
 
   armory_item_loader: (item, callback) =>
@@ -308,17 +308,17 @@ class wf.WoWLoader
         callback?(all_realms)
 
 
-  item_loader: (item_id, callback) =>
+  item_loader: (item_info, callback) =>
     # see if we have it already
     # if not, go to armory
     # persist
-    store.load @wow.get_items_collection(), {item_id}, null, (doc) =>
-      unless doc?
-        wowlookup.get_item item_id, null, (item)=>
-          if item?
-            item.item_id = item_id
-            store.add @wow.get_items_collection(), item, callback
-          else
-            callback?()
-      else
-        callback?()
+    store.ensure_index @wow.get_items_collection(), @wow.get_armory_item_index_1(), {dropDups:true}, =>
+      store.load @wow.get_items_collection(), item_info, null, (doc) =>
+        unless doc?
+          wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, (item)=>
+            if item?
+              store.add @wow.get_items_collection(), item, callback
+            else
+              callback?()
+        else
+          callback?()

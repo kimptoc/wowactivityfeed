@@ -103,13 +103,17 @@ class wf.WowLookup
           thing?.locale = locale
           param.result_handler?(thing)
 
-  get_item: (item_id, region = "eu", callback) ->
+  get_item: (item_id, locale, region = "eu", callback) ->
+    wf.debug "Item lookup:#{item_id}/#{locale}/#{region}"
     @with_armory (armory) ->
-      armory.item {id:item_id, region}, (err, item) ->
+      armory.item {id:item_id, region, locale}, (err, item) ->
         if err
-          wf.error "Problem finding item id:#{item_id} error:#{err.message} : #{JSON.stringify(err)}"
+          wf.error "Problem finding item id:#{item_id}/#{locale}/#{region} error:#{err.message} : #{JSON.stringify(err)}"
           callback?(null)
         else
+          item.item_id = item_id
+          item.locale = locale
+          item.region = region
           callback?(item)
 
   get_races: (region = "eu", callback) ->

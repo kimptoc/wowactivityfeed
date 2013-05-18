@@ -38,12 +38,12 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    wf.set_locale(item?.locale, item?.armory?.realm)
+    locale = wf.set_locale(item?.locale, item?.armory?.realm)
     wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}/locale:#{item?.locale}-#{i18n.getLocale()}"
     item_ids = @get_items(item)
-    wf.debug "got items, #{item_ids.length}"
-    wf.wow.load_items item_ids, (items) =>
-      wf.debug "format.process - load_items"
+    wf.debug "got items, want #{item_ids.length}"
+    wf.wow.load_items {item_ids,locale,region:item?.region}, (items) =>
+      wf.debug "format.process - load_items, found:#{items.length}"
       results = []
       update_obj = @format_item(item, items)
       results.push update_obj if update_obj?
@@ -93,16 +93,23 @@ class wf.FeedItemFormatter
     alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
     "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.armory.name}</a>"
 
-  item_link: (item_id, items) ->
+  get_item: (items, item_id, locale, region) ->
+    wf.debug "Cache lookup:#{item_id}/#{locale}/#{region}"
+    for item in items
+      wf.debug "Cache lookup vs:#{item.item_id}/#{item.locale}/#{item.region}"
+      return item if item.item_id == item_id and item.locale == locale and item.region == region
+    wf.debug "Cache lookup - not found!"
+    return null
+
+  item_link: (item_id, items, region) ->
     #todo - handle not found, img link, wowhead link/hover...
-    a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{items?[item_id]?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items)}' alt='#{@item_name(item_id, items)}'>"
-    a_text = i18n.__("Unknown...") unless items?[item_id]
+    a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{@get_item(items,item_id,i18n.getLocale(),region)?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items, region)}' alt='#{@item_name(item_id, items, region)}'>"
+    a_text = i18n.__("Unknown...") unless @get_item(items,item_id,i18n.getLocale(),region)
     return "<a href='http://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
 
-  item_name: (item_id, items) ->
+  item_name: (item_id, items, region) ->
     #todo - handle not found, img link, wowhead link/hover...
-    name = items?[item_id]?.name
-    name ||= i18n.__("Unknown....")
+    return @get_item(items,item_id,i18n.getLocale(),region)?.name or i18n.__("Unknown....")
 
   waf_url: (item, feed_timestamp, thingId) ->
     the_url = "#{wf.SITE_URL}/view/#{item?.type}/#{encodeURIComponent(item?.region)}/#{encodeURIComponent(item?.realm)}/#{encodeURIComponent(item?.name)}/#{encodeURIComponent(item?.locale)}"
@@ -269,18 +276,18 @@ class wf.FeedItemFormatter
       description += i18n.__(" (%s pts)",news_item.achievement.points)
 
     else if news_item.type == "itemPurchase"
-      change_title = i18n.__("%s - %s bought %s",item.name,news_item.character,@item_name(news_item.itemId, items))
-      description = i18n.__("%s bought %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
+      change_title = i18n.__("%s - %s bought %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      description = i18n.__("%s bought %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "itemLoot"
-      change_title = i18n.__("%s - %s got some loot - %s",item.name,news_item.character,@item_name(news_item.itemId, items))
-      description = i18n.__("%s got %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
+      change_title = i18n.__("%s - %s got some loot - %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      description = i18n.__("%s got %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "itemCraft"
-      change_title = i18n.__("%s - %s made %s",item.name,news_item.character,@item_name(news_item.itemId, items))
-      description = i18n.__("%s made %s %s",news_item.character,@item_name(news_item.itemId, items),@item_link(news_item.itemId, items))
+      change_title = i18n.__("%s - %s made %s",item.name,news_item.character,@item_name(news_item.itemId, items, item?.region))
+      description = i18n.__("%s made %s %s",news_item.character,@item_name(news_item.itemId, items, item?.region),@item_link(news_item.itemId, items, item?.region))
       thingId = news_item.itemId
 
     else if news_item.type == "guildLevel"
@@ -331,8 +338,8 @@ class wf.FeedItemFormatter
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
-      change_title = i18n.__("%s - got some loot - %s!",@get_formal_name(item),@item_name(feed_item.itemId, items))
-      description = i18n.__("%s %s now has %s! %s",@char_link(item),@char_name(item),@item_name(feed_item.itemId, items),@item_link(feed_item.itemId, items))
+      change_title = i18n.__("%s - got some loot - %s!",@get_formal_name(item),@item_name(feed_item.itemId, items, item?.region))
+      description = i18n.__("%s %s now has %s! %s",@char_link(item),@char_name(item),@item_name(feed_item.itemId, items, item?.region),@item_link(feed_item.itemId, items, item?.region))
       thingId = feed_item.itemId
 
     else

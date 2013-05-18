@@ -26,14 +26,14 @@ class wf.CallLogger
       ]
     
     wowlookup_get_item = wowlookup.get_item
-    wowlookup.get_item = (item_id, region, callback) ->
+    wowlookup.get_item = (item_id, locale, region, callback) ->
       armory_stats = 
         type: "item"
-        region: "eu"
+        region: region
         name: item_id
         realm: "na"
         start_time: new Date().getTime()
-      wowlookup_get_item.apply wowlookup, [item_id, region, (info) ->
+      wowlookup_get_item.apply wowlookup, [item_id, locale, region, (info) ->
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error
         armory_stats.not_modified = (info is undefined and !armory_stats.error?)

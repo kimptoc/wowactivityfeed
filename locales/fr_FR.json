@@ -62,5 +62,7 @@
 	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
 	"Not found - will check the Armory soon %s, %s/%s/%s/%s": "Not found - will check the Armory soon %s, %s/%s/%s/%s",
 	"New pet(s):%s ": "New pet(s):%s ",
-	"Gained some pet(s): %s. ": "Gained some pet(s): %s. "
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown..."
 }
