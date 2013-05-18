@@ -42,40 +42,40 @@ class wf.CallLogger
           callback?(info)
       ]
       
-    wowlookup_get_races = wowlookup.get_races
-    wowlookup.get_races = (region, callback) ->
-      armory_stats = 
-        type: "races"
-        region: region
-        name: "races"
-        realm: "na"
-        start_time: new Date().getTime()
-      wowlookup_get_races.apply wowlookup, [region, (info) ->
-        armory_stats.end_time = new Date().getTime()
-        armory_stats.error = info?.error
-        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
-        armory_stats.had_error = info?.error?
-        store.insert wow.get_calls_collection(), armory_stats, ->
-          callback?(info)
-      ]
-
-    wowlookup_get_classes = wowlookup.get_classes
-    wowlookup.get_classes = (region, callback) ->
-      armory_stats = 
-        type: "classes"
-        region: region
-        name: "classes"
-        realm: "na"
-        start_time: new Date().getTime()
-      wowlookup_get_classes.apply wowlookup, [region, (info) ->
-        armory_stats.end_time = new Date().getTime()
-        armory_stats.error = info?.error
-        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
-        armory_stats.had_error = info?.error?
-        store.insert wow.get_calls_collection(), armory_stats, ->
-          callback?(info)
-      ]
-
+#    wowlookup_get_races = wowlookup.get_races
+#    wowlookup.get_races = (region, callback) ->
+#      armory_stats =
+#        type: "races"
+#        region: region
+#        name: "races"
+#        realm: "na"
+#        start_time: new Date().getTime()
+#      wowlookup_get_races.apply wowlookup, [region, (info) ->
+#        armory_stats.end_time = new Date().getTime()
+#        armory_stats.error = info?.error
+#        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
+#        armory_stats.had_error = info?.error?
+#        store.insert wow.get_calls_collection(), armory_stats, ->
+#          callback?(info)
+#      ]
+#
+#    wowlookup_get_classes = wowlookup.get_classes
+#    wowlookup.get_classes = (region, callback) ->
+#      armory_stats =
+#        type: "classes"
+#        region: region
+#        name: "classes"
+#        realm: "na"
+#        start_time: new Date().getTime()
+#      wowlookup_get_classes.apply wowlookup, [region, (info) ->
+#        armory_stats.end_time = new Date().getTime()
+#        armory_stats.error = info?.error
+#        armory_stats.not_modified = (info is undefined and !armory_stats.error?)
+#        armory_stats.had_error = info?.error?
+#        store.insert wow.get_calls_collection(), armory_stats, ->
+#          callback?(info)
+#      ]
+#
     wowlookup_get_realms = wowlookup.get_realms
     wowlookup.get_realms = (region, callback) ->
       armory_stats = 

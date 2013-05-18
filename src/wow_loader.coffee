@@ -266,26 +266,28 @@ class wf.WoWLoader
       wf.error "armory_load:#{e}"
 
   static_loader: (callback) ->
-    async.parallel {realms:@realms_loader, races:@races_loader, classes:@classes_loader}, callback
+#    async.parallel {realms:@realms_loader, races:@races_loader, classes:@classes_loader}, callback
+    async.parallel {realms:@realms_loader}, callback
 
-  load_static_claz: (type, claz, loaded_callback) ->
-    claz.static_type = type
-    store.ensure_index @wow.get_static_collection(), @wow.get_static_index_1(), null, =>
-      store.upsert @wow.get_static_collection(), {static_type:claz.static_type, id:claz.id}, claz, loaded_callback
-
-  classes_loader: (callback) =>
-    wowlookup.get_classes null, (classes) =>
-      if classes? and classes.length > 0
-        loader = (claz, loaded_callback) =>
-          @load_static_claz 'CLASS', claz, loaded_callback
-        async.forEach classes, loader, -> callback?(classes)
-
-  races_loader: (callback) =>
-    wowlookup.get_races null, (races) =>
-      if races? and races.length > 0
-        loader = (race, loaded_callback) =>
-          @load_static_claz 'RACE', race, loaded_callback
-        async.forEach races, loader, -> callback?(races)
+#TODO make this code handle locales...
+#  load_static_claz: (type, claz, loaded_callback) ->
+#    claz.static_type = type
+#    store.ensure_index @wow.get_static_collection(), @wow.get_static_index_1(), null, =>
+#      store.upsert @wow.get_static_collection(), {static_type:claz.static_type, id:claz.id}, claz, loaded_callback
+#
+#  classes_loader: (callback) =>
+#    wowlookup.get_classes null, (classes) =>
+#      if classes? and classes.length > 0
+#        loader = (claz, loaded_callback) =>
+#          @load_static_claz 'CLASS', claz, loaded_callback
+#        async.forEach classes, loader, -> callback?(classes)
+#
+#  races_loader: (callback) =>
+#    wowlookup.get_races null, (races) =>
+#      if races? and races.length > 0
+#        loader = (race, loaded_callback) =>
+#          @load_static_claz 'RACE', race, loaded_callback
+#        async.forEach races, loader, -> callback?(races)
 
   realms_loader: (callback) =>
     # load and then replace

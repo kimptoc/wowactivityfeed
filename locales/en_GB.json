@@ -67,5 +67,6 @@
 	"last viewed": "last viewed",
 	"Message": "Message",
 	"Unknown....": "Unknown....",
-	"Unknown...": "Unknown..."
+	"Unknown...": "Unknown...",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
 }

@@ -64,5 +64,7 @@
 	"guild": "guild",
 	"members": "members",
 	"History available": "History available",
-	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }
