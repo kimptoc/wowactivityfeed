@@ -49,5 +49,15 @@
 	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
 	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
 	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
-	"%s - got some loot - %s!": "%s - got some loot - %s!"
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown...",
+	"member": "member",
+	"level": "level",
+	"Guild": "Guild",
+	"View": "View",
+	"armory": "armory",
+	"api": "api",
+	"rss": "rss",
+	"link": "link"
 }

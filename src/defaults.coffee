@@ -40,7 +40,7 @@ wf.REGION_LOCALE =
   tw: "zh_TW"
 
 
-wf.mongo_info =
+wf.mongo_info ||=
      "hostname":"localhost"
      "port":27017
      "username":""

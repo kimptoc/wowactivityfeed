@@ -147,7 +147,7 @@ handle_view = (req, res) ->
   name = req.params.name.toLocaleLowerCase()
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   locale = wf.sort_locale(req,i18n)
-  console.log "ddd:#{type},#{region},#{realm},#{name},#{locale}"
+  wf.info "handle_view:#{type},#{region},#{realm},#{name},#{locale}"
   wf.wow.get_history region, realm, type, name, locale, (wowthings) ->
     if wowthings? and wowthings.length > 0
       get_feed wowthings, req, (feed) ->

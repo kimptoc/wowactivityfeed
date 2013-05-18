@@ -38,7 +38,7 @@ class wf.FeedItemFormatter
     "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
-    locale = wf.set_locale(item?.locale, item?.armory?.realm)
+    locale = wf.set_locale(item?.locale, item?.armory?.realm, item?.armory?.region)
     wf.debug "format.process:#{item?.name}/#{item?.lastModified}/armory?:#{item?.armory?}/locale:#{item?.locale}-#{i18n.getLocale()}"
     item_ids = @get_items(item)
     wf.debug "got items, want #{item_ids.length}"
@@ -94,11 +94,11 @@ class wf.FeedItemFormatter
     "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.armory.name}</a>"
 
   get_item: (items, item_id, locale, region) ->
-    wf.debug "Cache lookup:#{item_id}/#{locale}/#{region}"
+#    wf.debug "Cache lookup:#{item_id}/#{locale}/#{region}"
     for item in items
-      wf.debug "Cache lookup vs:#{item.item_id}/#{item.locale}/#{item.region}"
+#      wf.debug "Cache lookup vs:#{item.item_id}/#{item.locale}/#{item.region}"
       return item if item.item_id == item_id and item.locale == locale and item.region == region
-    wf.debug "Cache lookup - not found!"
+#    wf.debug "Cache lookup - not found!"
     return null
 
   item_link: (item_id, items, region) ->

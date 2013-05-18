@@ -64,5 +64,6 @@
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
 	"Unknown....": "Unknown....",
-	"Unknown...": "Unknown..."
+	"Unknown...": "Unknown...",
+	"Guild membership changed! ": "Guild membership changed! "
 }
