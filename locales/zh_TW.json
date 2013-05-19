@@ -27,5 +27,8 @@
 	"%s - got some loot - %s!": "%s - got some loot - %s!",
 	"Unknown...": "Unknown...",
 	"New mount(s): %s ": "New mount(s): %s ",
-	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"character": "character"
 }

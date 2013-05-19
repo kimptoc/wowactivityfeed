@@ -116,23 +116,23 @@ class wf.WowLookup
           item.region = region
           callback?(item)
 
-  get_races: (region = "eu", callback) ->
-    @with_armory (armory) ->
-      armory.races {region}, (err, races) ->
-        if err
-          wf.error "Problem finding races for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
-          callback?(null)
-        else
-          callback?(races)
-
-  get_classes: (region = "eu", callback) ->
-    @with_armory (armory) ->
-      armory.classes {region}, (err, classes) ->
-        if err
-          wf.error "Problem finding classes for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
-          callback?(null)
-        else
-          callback?(classes)
+#  get_races: (region = "eu", callback) ->
+#    @with_armory (armory) ->
+#      armory.races {region}, (err, races) ->
+#        if err
+#          wf.error "Problem finding races for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+#          callback?(null)
+#        else
+#          callback?(races)
+#
+#  get_classes: (region = "eu", callback) ->
+#    @with_armory (armory) ->
+#      armory.classes {region}, (err, classes) ->
+#        if err
+#          wf.error "Problem finding classes for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+#          callback?(null)
+#        else
+#          callback?(classes)
 
   get_realms: (region, locale, callback) ->
     @with_armory (armory) ->
@@ -145,7 +145,7 @@ class wf.WowLookup
           wf.info "Region #{region} found #{realms.length} realm(s)"            
           for realm in realms
             realm.region = region
-            realm.locale = locale
+            realm.lookup_locale = locale
             realm.date_retrieved = date_retrieved
             all_realms.push realm
         callback?(all_realms)

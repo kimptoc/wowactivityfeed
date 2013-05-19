@@ -13,6 +13,7 @@ locale bits:
 - char status earliest time not working - maybe...
 
 - localize dates
+- not defaulting to realm locale on chants web page
 
 - link realms so can switch to appropriate locale name, eg via realm id
 
