@@ -69,5 +69,6 @@
 	"Unknown....": "Unknown....",
 	"Unknown...": "Unknown...",
 	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
-	"No recent updates :(": "No recent updates :("
+	"No recent updates :(": "No recent updates :(",
+	"Guild membership changed! ": "Guild membership changed! "
 }

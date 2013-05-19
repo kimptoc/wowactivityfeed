@@ -66,5 +66,7 @@
 	"History available": "History available",
 	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
 	"New mount(s): %s ": "New mount(s): %s ",
-	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. "
 }

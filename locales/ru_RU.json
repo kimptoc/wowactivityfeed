@@ -68,5 +68,9 @@
 	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
 	"%s has joined": "%s has joined",
 	"Guild membership changed! ": "Guild membership changed! ",
-	"Guild membership has changed: %s. ": "Guild membership has changed: %s. "
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"Registered": "Registered",
+	"last viewed": "last viewed"
 }

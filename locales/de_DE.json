@@ -53,5 +53,9 @@
 	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
 	"Message": "Message",
 	"Registered": "Registered",
-	"last viewed": "last viewed"
+	"last viewed": "last viewed",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown...",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
 }
