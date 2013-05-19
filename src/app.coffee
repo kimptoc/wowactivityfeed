@@ -334,6 +334,7 @@ wf.app.get '/debug/sample_data', (req, res) ->
   wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"en_GB"
   wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptopanda".toLocaleLowerCase(),"en_GB"
   wf.wow.get_history "us", "kaelthas".toLocaleLowerCase(), "member", "Feåtherz".toLocaleLowerCase(),"pt_BR"
+  wf.wow.get_history "tw", "銀翼要塞".toLocaleLowerCase(), "guild", "雅典娜戰爭女神".toLocaleLowerCase(),"zh_TW"
   res.render "message", msg: "Sample data registered", locales: null
 
 
