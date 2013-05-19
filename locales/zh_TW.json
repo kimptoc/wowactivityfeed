@@ -14,5 +14,18 @@
 	"Gear change: %s. ": "Gear change: %s. ",
 	"All Updates": "All Updates",
 	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
-	"Copyright": "Copyright"
+	"Copyright": "Copyright",
+	"%s:TYPE:%s:%s": "%s:TYPE:%s:%s",
+	"%s progressed towards achievement '%s'": "%s progressed towards achievement '%s'",
+	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
+	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
+	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
+	" (%s pts)": " (%s pts)",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
+	"Unknown....": "Unknown....",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"Unknown...": "Unknown...",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }

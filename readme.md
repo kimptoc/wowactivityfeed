@@ -5,26 +5,21 @@
 ## TODO
 
 locale bits:
-- realms are localised/need to load all variants and use locale in using them
-- how to get all
-- used for dropdown on search page - show all variations on find a way to show one?
-- loaded via wowlookup
-- used for locale guessing
-
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
 - and/or backbone view not using i18n?
-
+- everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 - might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
 - Item lookups not happening dynamically / lots of unknowns
-- when locale specified not getting correct default... data load issue?
 - char status earliest time not working - maybe...
 
-- dupe item issues, perhaps several threads looking for sameone, do a check as part of insert or do upsert...
+- localize dates
+
+- link realms so can switch to appropriate locale name, eg via realm id
+
+- dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
 - getting items not found - maybe looking for something which is not an item...
 
 - Validate locale- only accept what we have , default en_US otherwise
-
-- everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 
 - link from guild page/ member to their own page
 - anything else?
