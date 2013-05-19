@@ -1,5 +1,6 @@
 global.wf ||= {}
 
+_ = require "underscore"
 
 get_args = require "arguejs"
 
@@ -291,23 +292,33 @@ class wf.WoWLoader
 
   realms_loader: (callback) =>
     # load and then replace
-    all_realms = []
-    get_region_realms = (region, region_callback) =>   
-      wowlookup.get_realms region, (realms) ->
+    all_realms = {}
+    get_region_locale_realms = (param, region_callback) =>
+      wowlookup.get_realms param.region, param.locale, (realms) ->
         if realms.length == 0
-          wf.error "Uh-oh For region #{region}, realms returned:#{realms.length}"
+          wf.error "Uh-oh For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
         else
-          wf.info "For region #{region}, realms returned:#{realms.length}"
-        all_realms = all_realms.concat(realms)
+          wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
+        for realm in realms
+          realm_region_key = realm.name + realm.region
+          existing = all_realms[realm_region_key]
+          unless existing
+            all_realms[realm_region_key] = realm
         region_callback?()
-    async.forEach wf.all_regions, get_region_realms, =>
-      wf.info "Realms calls done, time to persist:#{all_realms.length}"
-      if all_realms? and all_realms.length > 0
+    region_locales = []
+    for locale in wf.locales
+      for region in wf.all_regions
+        region_locales.push {region,locale}
+    async.forEach region_locales, get_region_locale_realms, =>
+      realms_array = []
+      realms_array = _.values(all_realms) if all_realms?
+      wf.info "Realms calls done, time to persist:#{realms_array.length}"
+      if realms_array? and realms_array.length > 0
         store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
           store.remove_all @wow.get_realms_collection(), =>
-            store.insert @wow.get_realms_collection(), all_realms, -> callback?(all_realms)
+            store.insert @wow.get_realms_collection(), realms_array, -> callback?(realms_array)
       else
-        callback?(all_realms)
+        callback?(realms_array)
 
 
   item_loader: (item_info, callback) =>

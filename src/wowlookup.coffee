@@ -134,9 +134,9 @@ class wf.WowLookup
         else
           callback?(classes)
 
-  get_realms: (region, callback) ->
+  get_realms: (region, locale, callback) ->
     @with_armory (armory) ->
-      armory.realmStatus {region}, (err, realms) ->
+      armory.realmStatus {region, locale}, (err, realms) ->
         date_retrieved = new Date()
         all_realms = [] # results
         if err
@@ -145,6 +145,7 @@ class wf.WowLookup
           wf.info "Region #{region} found #{realms.length} realm(s)"            
           for realm in realms
             realm.region = region
+            realm.locale = locale
             realm.date_retrieved = date_retrieved
             all_realms.push realm
         callback?(all_realms)

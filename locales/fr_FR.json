@@ -70,5 +70,6 @@
 	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
 	"Registered": "Registered",
 	"last viewed": "last viewed",
-	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"No recent updates :(": "No recent updates :("
 }

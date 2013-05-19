@@ -39,3 +39,12 @@ describe "wow loader:", ->
             docs.length.should.be.above 10
             done()
 
+    it "armory load/realms", (done) ->
+      this.timeout(50000);
+      wowload = new wf.WoWLoader(wow)
+      wowload.realms_loader (realms) ->
+        wf.info "test/wowloader/got realms:#{realms.length}"
+        should.exist realms
+        realms.length.should.be.above 10
+        done()
+

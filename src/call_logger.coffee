@@ -77,14 +77,14 @@ class wf.CallLogger
 #      ]
 #
     wowlookup_get_realms = wowlookup.get_realms
-    wowlookup.get_realms = (region, callback) ->
+    wowlookup.get_realms = (region, locale, callback) ->
       armory_stats = 
         type: "realms"
         region: region
         name: "realms"
         realm: "na"
         start_time: new Date().getTime()
-      wowlookup_get_realms.apply wowlookup, [region, (info) ->
+      wowlookup_get_realms.apply wowlookup, [region, locale, (info) ->
         wf.info "get realms for region #{region} responded, realms:#{info.length}"
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error

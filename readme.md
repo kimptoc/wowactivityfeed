@@ -5,15 +5,25 @@
 ## TODO
 
 locale bits:
-- if new character, use date of oldest feed item - so the magic bit is way back in feed!
-- remove class/races loads - check its not used
-- wow.coffee/load_items - when formatting item and nothing found, need to do wowlookup (thou should usually be caught by char load...)
 - realms are localised/need to load all variants and use locale in using them
-
-- when locale specified not getting correct default... data load issue?
+- how to get all
+- used for dropdown on search page - show all variations on find a way to show one?
+- loaded via wowlookup
+- used for locale guessing
 
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
 - and/or backbone view not using i18n?
+
+- might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
+- Item lookups not happening dynamically / lots of unknowns
+- when locale specified not getting correct default... data load issue?
+- char status earliest time not working - maybe...
+
+- dupe item issues, perhaps several threads looking for sameone, do a check as part of insert or do upsert...
+- getting items not found - maybe looking for something which is not an item...
+
+- Validate locale- only accept what we have , default en_US otherwise
+
 - everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 
 - link from guild page/ member to their own page
@@ -148,6 +158,7 @@ maybe....
 
 
 ## LATER
+- if new character, use date of oldest feed item - so the magic bit is way back in feed! works for one char, but guild needs to look at all members... not possible now
 --Backups!
 --Review logging – make “not found” info...
 ---Feed messages??

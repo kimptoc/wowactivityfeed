@@ -108,7 +108,7 @@ describe "wow armory lookup:", ->
 
     it "get all realms", (done) ->
       wow = new wf.WowLookup()
-      wow.get_realms "eu",(realms) ->
+      wow.get_realms "eu", "en_GB", (realms) ->
         should.exist realms
         should.exist realms[0].region
         realms.length.should.be.above(10)
@@ -116,6 +116,21 @@ describe "wow armory lookup:", ->
         for realm in realms
           realms_by_region_and_slug[realm.region] ?= {}
           region = realms_by_region_and_slug[realm.region] 
+          existing = region[realm.slug]
+          should.not.exist existing
+          region[realm.slug] = true
+        done()
+
+    it "get all realms", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_realms "eu", "ru_RU", (realms) ->
+        should.exist realms
+        should.exist realms[0].region
+        realms.length.should.be.above(10)
+        realms_by_region_and_slug = {}
+        for realm in realms
+          realms_by_region_and_slug[realm.region] ?= {}
+          region = realms_by_region_and_slug[realm.region]
           existing = region[realm.slug]
           should.not.exist existing
           region[realm.slug] = true
