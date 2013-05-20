@@ -12,6 +12,9 @@ locale bits:
 - everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 - might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
 - Item lookups not happening dynamically / lots of unknowns
+- search/wowhead link, not taking italian locale - is it missing or a bug?
+
+- missing US realms, make sure it only reloads if all realms return some data.
 
 - char status earliest time not working - maybe...
 
