@@ -29,8 +29,8 @@ script(type='text/template',id='search-template')
             <% _.each(results, function(item) { %>
             .search_result_item
               .clear
-              | <h5><a href="<%= item.waf_url %>"><%= item.name %></a> <small>(<%= item.wow_type %>)</small></h5>
-              | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
+              | <h5><a href="<%= item.waf_url %>"><%= item.name %></a> <small>(<%= item.wow_type_locale %>)</small></h5>
+              | <% if (item.type === 'guild') { print(' ('+item.wow_type_locale+')'); } %>
               | <% if (item.armory.guild) { print('#{i18n("Member of")} '+item.armory.guild.name); } %>
               | &nbsp; #{i18n("Level")}: <%= item.armory.level %>
               | &nbsp; - <%= item.realm %> / <%= item.region %>

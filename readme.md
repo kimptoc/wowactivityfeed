@@ -5,8 +5,9 @@
 ## TODO
 
 locale bits:
-- how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
-- and/or backbone view not using i18n?
+- localise search results
+- eg type/guild etc, do on server
+- search using specified locale
 
 - everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 - might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
@@ -25,6 +26,8 @@ locale bits:
 
 - link from guild page/ member to their own page
 - anything else?
+
+- when a search fails, provide link to armory using given details, to help find char
 
 - use wget to crawl site and trigger conversions (or just copy english version...)
 - or exp/imp prod registered table to gen lots of combos

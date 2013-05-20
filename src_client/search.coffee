@@ -6,7 +6,7 @@ class wf.Search
   # routers = {}
   # views = {}
 
-  @init: ->
+  @init: (@locale) ->
     # console.log "Search.init"
     @realms = new wf.Realms()
     @results = new wf.Results()
@@ -34,7 +34,7 @@ class wf.Search
     @searchView.render()
     @results.reset()
     start_time = new Date()
-    @results.search name, region, realm, =>
+    @results.search name, region, realm, @locale, =>
       elapsed_millis = (new Date()) - start_time
       # console.log "search complete..."
       @results.results_complete = true

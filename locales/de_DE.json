@@ -57,5 +57,10 @@
 	"Unknown....": "Unknown....",
 	"Unknown...": "Unknown...",
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
-	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"took": "took",
+	"seconds": "seconds",
+	"Searching ...": "Searching ...",
+	"Member of": "Member of",
+	"Level": "Level"
 }

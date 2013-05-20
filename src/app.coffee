@@ -273,6 +273,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
         item.armory_link = wf.feed_formatter.armory_link(item_lookup)
         item.armory_api_link = wf.feed_formatter.armory_api_link(item_lookup)
         item.wow_type = wf.feed_formatter.wow_type(type)
+        item.wow_type_locale = i18n.__(item.wow_type)
         item.name = item_lookup.name 
         results.push item
       res.send JSON.stringify(results)
@@ -343,7 +344,7 @@ wf.app.get '/:locale?', (req, res) ->
   get_feed_all (feed)->
     feed_sample = feed.sample(6)
     wf.sort_locale(req,i18n)
-    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/'
+    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale: req.params.locale
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->
