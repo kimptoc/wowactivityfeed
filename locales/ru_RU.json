@@ -72,5 +72,10 @@
 	"New title(s):%s ": "New title(s):%s ",
 	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
 	"Registered": "Registered",
-	"last viewed": "last viewed"
+	"last viewed": "last viewed",
+	"took": "took",
+	"seconds": "seconds",
+	"Searching ...": "Searching ...",
+	"Member of": "Member of",
+	"Level": "Level"
 }

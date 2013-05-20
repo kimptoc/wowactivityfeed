@@ -21,9 +21,9 @@ script(type='text/template',id='search-template')
         .ten.columns
           #search_results_msg
             <% if (results_complete) { %>
-            | #{i18n("Search complete, total found:")} <%= results.length %> (took <%= elapsed_seconds %> seconds)
+            | #{i18n("Search complete, total found:")} <%= results.length %> (#{i18n("took")} <%= elapsed_seconds %> #{i18n("seconds")})
             <% } else if (searching) { %>
-            | Searching ... 
+            | #{i18n("Searching ...")}
             <% } %>
           #search_results
             <% _.each(results, function(item) { %>
@@ -31,12 +31,12 @@ script(type='text/template',id='search-template')
               .clear
               | <h5><a href="<%= item.waf_url %>"><%= item.name %></a> <small>(<%= item.wow_type %>)</small></h5>
               | <% if (item.type === 'guild') { print(' ('+wf.String.capitalise(item.type+')')); } %>
-              | <% if (item.armory.guild) { print('Member of '+item.armory.guild.name); } %>
-              | &nbsp; Level: <%= item.armory.level %>
+              | <% if (item.armory.guild) { print('#{i18n("Member of")} '+item.armory.guild.name); } %>
+              | &nbsp; #{i18n("Level")}: <%= item.armory.level %>
               | &nbsp; - <%= item.realm %> / <%= item.region %>
-              | &nbsp; <a href="<%= item.waf_rss_url %>">rss</a>
-              | &nbsp; <a href="<%= item.armory_link %>">armory</a>
-              | &nbsp; <a href="<%= item.armory_api_link %>">api</a>
+              | &nbsp; <a href="<%= item.waf_rss_url %>">#{i18n("rss")}</a>
+              | &nbsp; <a href="<%= item.armory_link %>">#{i18n("armory")}</a>
+              | &nbsp; <a href="<%= item.armory_api_link %>">#{i18n("api")}</a>
               .search_result_achievements
                 <% _.each(_.first(item.waf_feed,3), function(feed_item) { %>
                 .clear

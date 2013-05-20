@@ -7,13 +7,14 @@
 locale bits:
 - how to use on client/backbone - need locale files? seems to be partly working, need to remind myself what is done where
 - and/or backbone view not using i18n?
+
 - everyone/home page should be mixed locale... but items dont seem to stick to correct locale
 - might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
 - Item lookups not happening dynamically / lots of unknowns
+
 - char status earliest time not working - maybe...
 
 - localize dates
-- not defaulting to realm locale on chants web page
 
 - link realms so can switch to appropriate locale name, eg via realm id
 

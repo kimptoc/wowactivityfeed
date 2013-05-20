@@ -30,5 +30,7 @@
 	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
 	"New title(s):%s ": "New title(s):%s ",
 	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
-	"character": "character"
+	"character": "character",
+	"%s - %s made %s": "%s - %s made %s",
+	"%s made %s %s": "%s made %s %s"
 }
