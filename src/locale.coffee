@@ -1,6 +1,7 @@
 global.wf ?= {}
 
 i18n = require('i18n')
+_ = require('underscore')
 
 require './init_logger'
 
@@ -33,6 +34,7 @@ wf.ensure_realms_loaded = (callback) ->
       callback?()
 
 wf.sort_locale = (req) ->
+  wf.info "req.locale:#{req?.locale}"
   language_header = req.headers['accept-language']
   browser_locale = "en_US"
   if language_header
@@ -46,7 +48,8 @@ wf.set_locale = (p_locale, p_realm, p_region) ->
   p_realm = p_realm?.toLocaleLowerCase()
   p_region = p_region?.toLocaleLowerCase()
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{p_locale}, realm:#{p_realm}/#{p_region} - all realms:#{wf.all_realms?.length}"
-  if p_locale?
+  if p_locale? and _.contains(wf.locales,p_locale)
+    wf.info "using locale from url:#{p_locale}"
     i18n.setLocale(p_locale)
   else if p_realm?
     for realm in wf.all_realms

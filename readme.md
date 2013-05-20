@@ -22,7 +22,7 @@ locale bits:
 - dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
 - getting items not found - maybe looking for something which is not an item...
 
-- Validate locale- only accept what we have , default en_US otherwise
+- Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
 
 - link from guild page/ member to their own page
 - anything else?
