@@ -14,5 +14,22 @@
 	"Now at level %s! ": "Now at level %s! ",
 	"All Updates": "All Updates",
 	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
-	"Copyright": "Copyright"
+	"Copyright": "Copyright",
+	"%s:TYPE:%s:%s": "%s:TYPE:%s:%s",
+	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
+	" (%s pts)": " (%s pts)",
+	"%s progressed towards achievement '%s'": "%s progressed towards achievement '%s'",
+	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
+	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
+	"WoW Activity Feed": "WoW Activity Feed",
+	"WoW": "WoW",
+	"Feed": "Feed",
+	"member": "member",
+	"level": "level",
+	"Guild": "Guild",
+	"View": "View",
+	"armory": "armory",
+	"api": "api",
+	"rss": "rss",
+	"link": "link"
 }

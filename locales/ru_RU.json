@@ -77,5 +77,6 @@
 	"seconds": "seconds",
 	"Searching ...": "Searching ...",
 	"Member of": "Member of",
-	"Level": "Level"
+	"Level": "Level",
+	"%s has left": "%s has left"
 }
