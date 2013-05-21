@@ -6,13 +6,14 @@
 
 locale bits:
 
-- dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
-
 
 - Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
-- also restrict locales per realm, as per config
+- also restrict locales per realm, as per config, ie dont allow en_US for an eu realm.
+
+- use wget to crawl site and trigger conversions (or just copy english version...)
 
 - use google translate manually for first cut translations?
+
 
 - link realms so can switch to appropriate locale name, eg via realm id
 
@@ -23,7 +24,6 @@ locale bits:
 
 - when a search fails, provide link to armory using given details, to help find char
 
-- use wget to crawl site and trigger conversions (or just copy english version...)
 
 - language in RSS - needed? remove or maybe use locale?
 

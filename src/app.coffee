@@ -342,8 +342,8 @@ wf.app.get '/:locale?', (req, res) ->
   wf.sort_locale(req,i18n)
   get_feed_all (feed)->
     feed_sample = feed.sample(6)
-    wf.sort_locale(req,i18n)
-    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale: req.params.locale
+    locale = wf.sort_locale(req,i18n)
+    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:locale
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->
