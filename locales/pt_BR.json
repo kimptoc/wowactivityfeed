@@ -46,5 +46,22 @@
 	"What's it all about ...": "What's it all about ...",
 	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
-	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
+	"character": "character",
+	"Unknown....": "Unknown....",
+	"Unknown...": "Unknown...",
+	"%s - %s made %s": "%s - %s made %s",
+	"%s made %s %s": "%s made %s %s",
+	"guild": "guild",
+	"members": "members",
+	"History available": "History available",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	"%s has left": "%s has left",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }

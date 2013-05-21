@@ -40,5 +40,8 @@
 	"link": "link",
 	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
 	"guild": "guild",
-	"Message": "Message"
+	"Message": "Message",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"%s %s now has %s! %s": "%s %s now has %s! %s",
+	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s"
 }
