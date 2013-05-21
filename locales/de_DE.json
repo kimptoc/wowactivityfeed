@@ -62,5 +62,13 @@
 	"seconds": "seconds",
 	"Searching ...": "Searching ...",
 	"Member of": "Member of",
-	"Level": "Level"
+	"Level": "Level",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"%s is now rank %s": "%s is now rank %s",
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
 }

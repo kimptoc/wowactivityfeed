@@ -76,5 +76,7 @@
 	"seconds": "seconds",
 	"Searching ...": "Searching ...",
 	"Member of": "Member of",
-	"Level": "Level"
+	"Level": "Level",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. "
 }
