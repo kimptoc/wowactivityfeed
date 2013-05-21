@@ -340,7 +340,7 @@ class wf.WoWLoader
         unless doc?
           wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, (item)=>
             if item?
-              store.add @wow.get_items_collection(), item, callback
+              store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback
             else
               callback?()
         else

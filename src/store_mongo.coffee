@@ -77,20 +77,7 @@ class wf.StoreMongo
       coll.update document_key, document_object, {safe:true, upsert:true}, (err, docs) ->
         if err
           wf.error(err)
-          stored_handler?(null)
-        else
-          wf.debug "saved:#{document_object}"
-          coll.find document_key, (err, cur) ->
-            if err
-              wf.error(err)
-              stored_handler?(null)
-            else
-              cur.count (err, count) ->
-                if err
-                  wf.error(err)
-                  stored_handler?(null)
-                else 
-                  stored_handler?(count)
+        stored_handler?(null)
 
   remove: (collection_name, document_key, callback) ->
     @with_collection collection_name, (coll) ->

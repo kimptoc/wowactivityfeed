@@ -6,10 +6,8 @@
 
 locale bits:
 
+- dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
 
-- char status earliest time not working - maybe...
-- Item lookups not happening dynamically / lots of unknowns
-- search/wowhead link, not taking italian locale - is it missing or a bug?
 
 - Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
 - also restrict locales per realm, as per config
@@ -18,7 +16,6 @@ locale bits:
 
 - link realms so can switch to appropriate locale name, eg via realm id
 
-- dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
 - getting items not found - maybe looking for something which is not an item...
 
 
