@@ -293,10 +293,12 @@ class wf.WoWLoader
   realms_loader: (callback) =>
     # load and then replace
     all_realms = {}
+    get_realms_error = false
     get_region_locale_realms = (param, region_callback) =>
       wowlookup.get_realms param.region, param.locale, (realms) ->
         if realms.length == 0
           wf.error "Uh-oh For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
+          get_realms_error = true
         else
           wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
         for realm in realms
@@ -306,18 +308,22 @@ class wf.WoWLoader
             all_realms[realm_region_key] = realm
         region_callback?()
     region_locales = []
-    for locale in wf.locales
-      for region in wf.all_regions
+    for own region, locales of wf.regions_to_locales
+      for locale in locales
         region_locales.push {region,locale}
     async.forEach region_locales, get_region_locale_realms, =>
       realms_array = []
-      realms_array = _.values(all_realms) if all_realms?
-      wf.info "Realms calls done, time to persist:#{realms_array.length}"
-      if realms_array? and realms_array.length > 0
-        store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
-          store.remove_all @wow.get_realms_collection(), =>
-            store.insert @wow.get_realms_collection(), realms_array, -> callback?(realms_array)
+      if ! get_realms_error
+        realms_array = _.values(all_realms) if all_realms?
+        wf.info "Realms calls done, time to persist:#{realms_array.length}"
+        if realms_array? and realms_array.length > 0
+          store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
+            store.remove_all @wow.get_realms_collection(), =>
+              store.insert @wow.get_realms_collection(), realms_array, -> callback?(realms_array)
+        else
+          callback?(realms_array)
       else
+        wf.error "Got an error checking the realms, will ignore results this time"
         callback?(realms_array)
 
 
