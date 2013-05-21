@@ -5,12 +5,7 @@
 ## TODO
 
 locale bits:
-- localise search results
-- eg type/guild etc, do on server
-- search using specified locale
 
-- everyone/home page should be mixed locale... but items dont seem to stick to correct locale
-- might be same issue as below, but some fail on mixed page (/ or everyone) but work on own page
 - Item lookups not happening dynamically / lots of unknowns
 - search/wowhead link, not taking italian locale - is it missing or a bug?
 

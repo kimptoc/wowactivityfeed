@@ -163,7 +163,7 @@ handle_view = (req, res) ->
         wf.sort_locale(req,i18n)
         res.render req.params.type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
-          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
+          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}/"
     else
       req.params.locale ?= ""
       wf.sort_locale(req,i18n)
@@ -172,7 +172,7 @@ handle_view = (req, res) ->
         w: req.params
         p: req.params
         locales: wf.regions_to_locales[region]
-        root_url: "/wow/#{region}/#{type}/#{realm}/#{name}/"
+        root_url: "/wow/#{region}/#{type}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}/"
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
   handle_view(req, res)

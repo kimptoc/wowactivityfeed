@@ -155,11 +155,13 @@ class wf.WoW
 
 
   get_loaded: (loaded_handler) ->
-    @ensure_armory_indexes ->
+    @ensure_armory_indexes =>
       # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
-      store.load_all_with_fields armory_collection, {}, 
-        fields_to_select,  
-        {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, loaded_handler
+      store.load_all_with_fields armory_collection, {}, fields_to_select,
+        {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
+          @repatch_results(results, loaded_handler)
+
+
 
   ensure_armory_indexes: (callback)=>
     wf.debug "checking armory index/1"

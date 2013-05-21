@@ -43,6 +43,7 @@ class wf.FeedItemFormatter
     item_ids = @get_items(item)
     wf.debug "got items, want #{item_ids.length}"
     wf.wow.load_items {item_ids,locale,region:item?.region}, (items) =>
+      locale = wf.set_locale(item?.locale, item?.armory?.realm, item?.armory?.region)
       wf.debug "format.process - load_items, found:#{items.length}"
       results = []
       earliest_time = null

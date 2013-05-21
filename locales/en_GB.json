@@ -75,5 +75,7 @@
 	"seconds": "seconds",
 	"Searching ...": "Searching ...",
 	"Member of": "Member of",
-	"Level": "Level"
+	"Level": "Level",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }
