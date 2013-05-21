@@ -1,6 +1,5 @@
 global.wf ||= {}
 
-moment = require 'moment'
 i18n = require('i18n')
 
 require('./init_logger')
@@ -32,10 +31,6 @@ class wf.FeedItemFormatter
         diffs[1]
     else
       "???"
-
-  format_date: (dt) ->
-    dateMoment = moment(dt)
-    "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"    
 
   process: (item, callback) ->
     locale = wf.set_locale(item?.locale, item?.armory?.realm, item?.armory?.region)
@@ -258,7 +253,7 @@ class wf.FeedItemFormatter
       armory_link: @armory_link(item)
       armory_api_link: @armory_api_link(item)
       date: change_date
-      date_formatted: @format_date(change_date)
+      date_formatted: wf.format_date(change_date)
       author: item?.armory?.name
       guild: item?.armory?.guild?.name
       guid: "#{change_date}-#{change_title}"
@@ -314,7 +309,7 @@ class wf.FeedItemFormatter
       armory_link: @armory_link(item)
       armory_api_link: @armory_api_link(item)
       date: news_item.timestamp
-      date_formatted: @format_date(news_item.timestamp)
+      date_formatted: wf.format_date(news_item.timestamp)
       author: item?.armory.name
       guild: item?.armory?.guild?.name
       guid: "#{news_item.timestamp}-#{change_title}"
@@ -361,7 +356,7 @@ class wf.FeedItemFormatter
       armory_link: @armory_link(item)
       armory_api_link: @armory_api_link(item)
       date: feed_item.timestamp
-      date_formatted: @format_date(feed_item.timestamp)
+      date_formatted: wf.format_date(feed_item.timestamp)
       author: item?.armory.name
       guild: item?.armory?.guild?.name
       guid: "#{feed_item.timestamp}-#{change_title}"

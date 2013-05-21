@@ -6,32 +6,29 @@
 
 locale bits:
 
-- Item lookups not happening dynamically / lots of unknowns
-- search/wowhead link, not taking italian locale - is it missing or a bug?
-
 - missing US realms, make sure it only reloads if all realms return some data.
 
 - char status earliest time not working - maybe...
+- Item lookups not happening dynamically / lots of unknowns
+- search/wowhead link, not taking italian locale - is it missing or a bug?
 
-- localize dates
+- Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
+- also restrict locales per realm, as per config
+
+- use google translate manually for first cut translations?
 
 - link realms so can switch to appropriate locale name, eg via realm id
 
 - dupe item issues, perhaps several threads looking for same one, do a check as part of insert or do upsert...
 - getting items not found - maybe looking for something which is not an item...
 
-- Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
 
 - link from guild page/ member to their own page
-- anything else?
 
 - when a search fails, provide link to armory using given details, to help find char
 
 - use wget to crawl site and trigger conversions (or just copy english version...)
-- or exp/imp prod registered table to gen lots of combos
-- use google translate manually for first cut translations?
 
-- db conversion - make it seemless to new locale version... index re-creation... (or just wipe db)...
 - language in RSS - needed? remove or maybe use locale?
 
 https://github.com/mashpie/i18n-node

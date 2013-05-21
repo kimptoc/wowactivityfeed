@@ -5,7 +5,6 @@ require './init_nodefly'
 express = require('express')
 http = require('http')
 path = require('path')
-moment = require('moment')
 _ = require('underscore')
 async = require "async"
 i18n = require('i18n')
@@ -163,7 +162,7 @@ handle_view = (req, res) ->
         wf.sort_locale(req,i18n)
         res.render req.params.type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
-          fmtdate: ((d) -> moment(d).format("D MMM YYYY H:mm")), locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}/"
+          locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}/"
     else
       req.params.locale ?= ""
       wf.sort_locale(req,i18n)

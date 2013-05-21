@@ -39,6 +39,21 @@ wf.REGION_LOCALE =
   zh: "zh_TW"
   tw: "zh_TW"
 
+wf.locale_lang = 
+  'en_US':'en'
+  'es_MX':'es'
+  'pt_BR':'pt-br'
+  'en_GB':'en-gb'
+  'es_ES':'es'
+  'fr_FR':'fr'
+  'ru_RU':'ru'
+  'de_DE':'de'
+  'pt_PT':'pt'
+  'it_IT':'it'
+  'ko_KR':'ko'
+  'zh_TW':'zh-tw'
+  'zh_CN':'zh-cn'
+
 
 wf.mongo_info ||=
      "hostname":"localhost"

@@ -32,5 +32,6 @@
 	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
 	"character": "character",
 	"%s - %s made %s": "%s - %s made %s",
-	"%s made %s %s": "%s made %s %s"
+	"%s made %s %s": "%s made %s %s",
+	"Profession(s): %s. ": "Profession(s): %s. "
 }

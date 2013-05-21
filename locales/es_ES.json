@@ -35,5 +35,8 @@
 	"api": "api",
 	"rss": "rss",
 	"link": "link",
-	"Copyright": "Copyright"
+	"Copyright": "Copyright",
+	"Unknown....": "Unknown....",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"Unknown...": "Unknown..."
 }

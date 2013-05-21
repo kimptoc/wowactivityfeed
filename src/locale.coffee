@@ -2,6 +2,7 @@ global.wf ?= {}
 
 i18n = require('i18n')
 _ = require('underscore')
+moment = require 'moment'
 
 require './init_logger'
 
@@ -61,4 +62,8 @@ wf.set_locale = (p_locale, p_realm, p_region) ->
   wf.info "ALL:user derived locale:#{i18n.getLocale()}"
   return i18n.getLocale()
 
+
+wf.format_date = (dt) ->
+  dateMoment = moment(dt).lang(wf.locale_lang[i18n.getLocale()])
+  "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
 
