@@ -308,8 +308,12 @@ class wf.WoWLoader
             all_realms[realm_region_key] = realm
         region_callback?()
     region_locales = []
-    for own region, locales of wf.regions_to_locales
-      for locale in locales
+    # you'd think this would be a good idea, but there are locales not connected, eg english for chinese region :)
+#    for own region, locales of wf.regions_to_locales
+#      for locale in locales
+
+    for locale in wf.locales
+      for region in wf.all_regions
         region_locales.push {region,locale}
     async.forEach region_locales, get_region_locale_realms, =>
       realms_array = []

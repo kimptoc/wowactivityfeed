@@ -6,7 +6,6 @@
 
 locale bits:
 
-- missing US realms, make sure it only reloads if all realms return some data.
 
 - char status earliest time not working - maybe...
 - Item lookups not happening dynamically / lots of unknowns

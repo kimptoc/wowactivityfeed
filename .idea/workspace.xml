@@ -4,7 +4,9 @@
     <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.coffee" afterPath="$PROJECT_DIR$/src/app.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cron.coffee" afterPath="$PROJECT_DIR$/src/cron.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/es_ES.json" afterPath="$PROJECT_DIR$/locales/es_ES.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wow_loader.coffee" afterPath="$PROJECT_DIR$/src/wow_loader.coffee" />
     </list>
     <ignored path="wowfeed.iws" />
@@ -79,43 +81,25 @@
       <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
+            <state line="9" column="0" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wow_loader.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="wow_loader.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="325" column="81" selection-start="14751" selection-end="14751" vertical-scroll-proportion="0.8666667">
+            <state line="310" column="114" selection-start="14043" selection-end="14043" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cron.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="cron.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cron.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="31" selection-start="3943" selection-end="3943" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="defaults.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/defaults.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1375" selection-end="1375" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="locale.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/locale.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="27" selection-start="1014" selection-end="1035" vertical-scroll-proportion="0.0">
+            <state line="106" column="31" selection-start="3943" selection-end="3943" vertical-scroll-proportion="0.36666667">
               <folding />
             </state>
           </provider>
@@ -153,8 +137,8 @@
         <option value="$PROJECT_DIR$/src/locale.coffee" />
         <option value="$PROJECT_DIR$/src/app.coffee" />
         <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/src/cron.coffee" />
         <option value="$PROJECT_DIR$/src/wow_loader.coffee" />
+        <option value="$PROJECT_DIR$/src/cron.coffee" />
       </list>
     </option>
   </component>
@@ -565,21 +549,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cron.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="31" selection-start="3943" selection-end="3943" vertical-scroll-proportion="0.0">
+        <state line="9" column="0" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="325" column="81" selection-start="14751" selection-end="14751" vertical-scroll-proportion="0.8666667">
+        <state line="310" column="114" selection-start="14043" selection-end="14043" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cron.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="31" selection-start="3943" selection-end="3943" vertical-scroll-proportion="0.36666667">
           <folding />
         </state>
       </provider>
