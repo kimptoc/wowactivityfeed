@@ -10,6 +10,7 @@ require './defaults'
 
 i18n.configure wf.i18n_config
 
+
 wf.ensure_realms_loaded = (callback) ->
   if wf.all_realms
     callback?()
@@ -34,6 +35,7 @@ wf.ensure_realms_loaded = (callback) ->
       wf.regions_to_locales = regions_to_locales
       callback?()
 
+
 wf.sort_locale = (req) ->
   wf.info "req.locale:#{req?.locale}"
   language_header = req.headers['accept-language']
@@ -45,11 +47,17 @@ wf.sort_locale = (req) ->
   i18n.setLocale(browser_locale)
   wf.set_locale(req.params.locale, req.params.realm, req.params.region)
 
+
+locale_valid_for_region = (p_locale, p_region) ->
+  return true unless p_region?
+  return false unless p_locale?
+  return _.contains(wf.regions_to_locales[p_region], p_locale)
+
 wf.set_locale = (p_locale, p_realm, p_region) ->
   p_realm = p_realm?.toLocaleLowerCase()
   p_region = p_region?.toLocaleLowerCase()
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{p_locale}, realm:#{p_realm}/#{p_region} - all realms:#{wf.all_realms?.length}"
-  if p_locale? and _.contains(wf.locales,p_locale)
+  if p_locale? and locale_valid_for_region(p_locale, p_region)
     wf.info "using locale from url:#{p_locale}"
     i18n.setLocale(p_locale)
   else if p_realm?

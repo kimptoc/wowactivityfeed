@@ -24,5 +24,20 @@
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
 	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
 	"Copyright": "Copyright",
-	"Latest Updates from Everyone!": "Latest Updates from Everyone!"
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
+	"%s:TYPE:%s:%s": "%s:TYPE:%s:%s",
+	"Unknown....": "Unknown....",
+	"%s - got some loot - %s!": "%s - got some loot - %s!",
+	"Unknown...": "Unknown...",
+	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+	"%s progressed towards achievement '%s'": "%s progressed towards achievement '%s'",
+	"%s Progressing towards achievement %s": "%s Progressing towards achievement %s",
+	"%s %s - Step:'%s' for '%s'": "%s %s - Step:'%s' for '%s'",
+	"%s gained the achievement '%s'": "%s gained the achievement '%s'",
+	" (%s pts)": " (%s pts)",
+	"member": "member",
+	"level": "level",
+	"Guild": "Guild",
+	"View": "View",
+	"link": "link"
 }

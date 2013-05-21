@@ -7,7 +7,6 @@
 locale bits:
 
 
-- Validate locale- only accept what we have , default en_US otherwise, code tries to do this, but fails
 - also restrict locales per realm, as per config, ie dont allow en_US for an eu realm.
 
 - use wget to crawl site and trigger conversions (or just copy english version...)
