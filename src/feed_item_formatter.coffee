@@ -345,6 +345,7 @@ class wf.FeedItemFormatter
 
     else
       description += " #{JSON.stringify(feed_item)}"
+      wf.error "Unrecognised type:#{feed_item.type}:#{description}"
 
     result = 
       title: change_title

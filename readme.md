@@ -7,13 +7,13 @@
 locale bits:
 
 
-- also restrict locales per realm, as per config, ie dont allow en_US for an eu realm.
-
 - use wget to crawl site and trigger conversions (or just copy english version...)
+
+- remove translation entries - eg :TYPE: - is that needed still, could be better?
 
 - use google translate manually for first cut translations?
 
-
+- would be good to make item lookup wait for armory fetch of info... but hopefully not common... as should be loaded via char fetch process
 - link realms so can switch to appropriate locale name, eg via realm id
 
 - getting items not found - maybe looking for something which is not an item...
