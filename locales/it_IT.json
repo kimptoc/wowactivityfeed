@@ -49,5 +49,21 @@
 	"Unknown....": "Unknown....",
 	"Unknown...": "Unknown...",
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
-	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"%s - %s got some loot - %s": "%s - %s got some loot - %s",
+	"%s got %s %s": "%s got %s %s",
+	"%s - %s bought %s": "%s - %s bought %s",
+	"%s bought %s %s": "%s bought %s %s",
+	"%s - %s made %s": "%s - %s made %s",
+	"%s made %s %s": "%s made %s %s",
+	"%s has joined": "%s has joined",
+	"%s has left": "%s has left",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	"Yay, more achievement points - now at %s. ": "Yay, more achievement points - now at %s. ",
+	"%s(new):%s": "%s(new):%s",
+	"Rep change(s): %s. ": "Rep change(s): %s. ",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
+	"Gear change: %s. ": "Gear change: %s. "
 }
