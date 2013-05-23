@@ -10,6 +10,7 @@ locale bits:
 - use wget to crawl site and trigger conversions (or just copy english version...)
 
 - remove translation entries - eg :TYPE: - is that needed still, could be better?
+- might not be being used, only used when type not recognised...
 
 - use google translate manually for first cut translations?
 

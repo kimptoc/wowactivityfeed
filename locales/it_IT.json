@@ -47,5 +47,7 @@
 	"members": "members",
 	"History available": "History available",
 	"Unknown....": "Unknown....",
-	"Unknown...": "Unknown..."
+	"Unknown...": "Unknown...",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
 }

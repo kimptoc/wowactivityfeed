@@ -63,5 +63,9 @@
 	"Guild membership changed! ": "Guild membership changed! ",
 	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
 	"New mount(s): %s ": "New mount(s): %s ",
-	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"Message": "Message",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
 }

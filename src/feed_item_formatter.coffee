@@ -161,8 +161,13 @@ class wf.FeedItemFormatter
         if item.whats_changed.changes.reputation_map? and ! (item.whats_changed.changes.reputation_map instanceof Array)
           rep_change = ""
           for own name, values of item.whats_changed.changes.reputation_map
-            rep_change += ", " if rep_change.length >0
-            rep_change += "#{name}:#{@get_new_one(values.value)}"
+            if values instanceof Array
+              if values.length == 1
+                rep_change += i18n.__("%s(new):%s",name,values[0].value)
+            else
+              rep_change += ", " if rep_change.length >0
+              wf.debug "#{item.name}:Checking rep #{name}, values #{JSON.stringify(values.value)}"
+              rep_change += "#{name}:#{@get_new_one(values.value)}"
           change_description += i18n.__("Rep change(s): %s. ",rep_change)
         if item.whats_changed.changes.members_map?
           member_title = ""

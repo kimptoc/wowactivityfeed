@@ -57,5 +57,9 @@
 	"What's it all about ...": "What's it all about ...",
 	"This site provides an RSS feed of activity for your WoW character and/or guild.": "This site provides an RSS feed of activity for your WoW character and/or guild.",
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
-	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader."
+	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"Message": "Message",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
 }
