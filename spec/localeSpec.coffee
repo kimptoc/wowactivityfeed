@@ -9,12 +9,13 @@ require "./wow"
 
 describe "locale helpers", ->
 
-  it "check realm loading", ->
+  it "check realm loading", (done) ->
     new wf.WoW (wow)->
       wf.wow = wow
       wf.ensure_realms_loaded ->
         wf.all_realms.should.exist
         wf.all_realms.length.should.be.above 10
+        done()
 
   it "basics, no locale or url default", ->
     req =
@@ -43,7 +44,7 @@ describe "locale helpers", ->
     locale = wf.sort_locale(req)
     locale.should.equal 'en_US'
 
-  it "basics, url/realm based default", ->
+  it "basics, url/realm based default", (done)->
     new wf.WoW (wow)->
       wf.wow = wow
       wf.ensure_realms_loaded ->
@@ -55,8 +56,9 @@ describe "locale helpers", ->
             realm: 'Darkspear'
         locale = wf.sort_locale(req)
         locale.should.equal 'en_GB'
+        done()
 
-  it "basics, locale based default", ->
+  it "basics, locale based default", (done)->
     new wf.WoW (wow)->
       wf.wow = wow
       wf.ensure_realms_loaded ->
@@ -69,8 +71,9 @@ describe "locale helpers", ->
             locale: 'fr_FR'
         locale = wf.sort_locale(req)
         locale.should.equal 'fr_FR'
+        done()
 
-  it "basics, locale based default/invalid1", ->
+  it "basics, locale based default/invalid1", (done) ->
     new wf.WoW (wow)->
       wf.wow = wow
       wf.ensure_realms_loaded ->
@@ -83,8 +86,9 @@ describe "locale helpers", ->
             locale: ''
         locale = wf.sort_locale(req)
         locale.should.equal 'en_GB'
+        done()
 
-  it "basics, locale based default, invalid2", ->
+  it "basics, locale based default, invalid2", (done)->
     new wf.WoW (wow)->
       wf.wow = wow
       wf.ensure_realms_loaded ->
@@ -97,3 +101,4 @@ describe "locale helpers", ->
             locale: 'foobar2'
         locale = wf.sort_locale(req)
         locale.should.equal 'en_GB'
+        done()
