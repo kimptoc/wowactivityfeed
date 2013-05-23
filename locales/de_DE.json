@@ -70,5 +70,8 @@
 	"Profession(s): %s. ": "Profession(s): %s. ",
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
-	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s"
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"%s(new):%s": "%s(new):%s",
+	"Took up %s": "Took up %s",
+	"Gave up %s": "Gave up %s"
 }

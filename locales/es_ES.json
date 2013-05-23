@@ -61,5 +61,7 @@
 	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
 	"Message": "Message",
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
-	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s"
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"%s(new):%s": "%s(new):%s"
 }
