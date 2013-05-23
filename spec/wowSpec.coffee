@@ -17,6 +17,7 @@ describe "wow wrapper:", ->
     beforeEach (done)->
       wf.info "wowSpec:beforeEach"
       wow = new wf.WoW (wow)->
+        wf.wow = wow
         wow.clear_all ->
           done()
 
