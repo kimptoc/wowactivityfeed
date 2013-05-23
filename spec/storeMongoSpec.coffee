@@ -76,12 +76,10 @@ describe "mongo backed store:", ->
         id: 467
         name: "foo1"
 
-      store.upsert "foo",id:someObj.id,someObj, (counter) ->
-        wf.debug "store complete, #{counter}"
-        counter.should.equal 1
+      store.upsert "foo",id:someObj.id,someObj, ->
+        wf.debug "store complete"
         someObj.name = "foo2"
-        store.upsert "foo", id:someObj.id, someObj, (counter) ->
-          counter.should.equal 1
+        store.upsert "foo", id:someObj.id, someObj, ->
           done()
 
     it "add then update via $unset", (done) ->

@@ -131,19 +131,19 @@ describe "wow wrapper:", ->
        realms.length.should.be.above 10
        done()
 
-    it "armory races load", (done) ->
-     @timeout(20000)
-     wowload = new wf.WoWLoader(wow)
-     wowload.races_loader (races)->
-       races.length.should.be.above 5
-       done()
-
-    it "armory classes load", (done) ->
-     @timeout(20000)
-     wowload = new wf.WoWLoader(wow)
-     wowload.classes_loader (classes)->
-       classes.length.should.be.above 5
-       done()
+#    it "armory races load", (done) ->
+#     @timeout(20000)
+#     wowload = new wf.WoWLoader(wow)
+#     wowload.races_loader (races)->
+#       races.length.should.be.above 5
+#       done()
+#
+#    it "armory classes load", (done) ->
+#     @timeout(20000)
+#     wowload = new wf.WoWLoader(wow)
+#     wowload.classes_loader (classes)->
+#       classes.length.should.be.above 5
+#       done()
 
     it "static load", (done) ->
      @timeout(20000)
