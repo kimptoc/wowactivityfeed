@@ -125,7 +125,7 @@ describe "wow wrapper:", ->
 #        done()
 
     it "armory realms load", (done) ->
-     @timeout(20000)
+     @timeout(40000)
      wowload = new wf.WoWLoader(wow)
      wowload.realms_loader (realms)->
        realms.length.should.be.above 10
@@ -146,7 +146,7 @@ describe "wow wrapper:", ->
 #       done()
 
     it "static load", (done) ->
-     @timeout(20000)
+     @timeout(40000)
      wowload = new wf.WoWLoader(wow)
      wowload.static_loader ->
        done()
