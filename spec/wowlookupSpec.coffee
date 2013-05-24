@@ -150,30 +150,30 @@ describe "wow armory lookup:", ->
 #        classes.length.should.be.above(7)
 #        done()
 
-    it "get all char achievements static", (done) ->
-      this.timeout(15000)
-      wow = new wf.WowLookup()
-      wow.get_static "characterAchievements", "eu", (results) ->
-        should.exist results
-        results.length.should.equal 11 # char achievement categories ...
-        # validate that achievement ids are unique
-        achievements = checkAchievements(results)
-        achievment_length = Object.keys(achievements).length
-        achievment_length.should.be.above(2200)
-
-        wow.get_static "characterAchievements", "us", (results2) ->
-          should.exist results2
-          results2.length.should.equal 11 # char achievement categories ...
-          achievements = checkAchievements(results2)
-          Object.keys(achievements).length.should.equal achievment_length
-          done()
-
-    it "get all guild achievements static", (done) ->
-      wow = new wf.WowLookup()
-      wow.get_static "guildAchievements", "eu", (results) ->
-        should.exist results
-        results.length.should.equal 7 # guild achievement categories ...
-        achievements = checkAchievements(results)
-        achievment_length = Object.keys(achievements).length
-        achievment_length.should.be.above(250)
-        done()
+#    it "get all char achievements static", (done) ->
+#      this.timeout(15000)
+#      wow = new wf.WowLookup()
+#      wow.get_static "characterAchievements", "eu", (results) ->
+#        should.exist results
+#        results.length.should.equal 11 # char achievement categories ...
+#        # validate that achievement ids are unique
+#        achievements = checkAchievements(results)
+#        achievement_length = Object.keys(achievements).length
+#        achievement_length.should.be.above(2200)
+#
+#        wow.get_static "characterAchievements", "us", (results2) ->
+#          should.exist results2
+#          results2.length.should.equal 11 # char achievement categories ...
+#          achievements = checkAchievements(results2)
+#          Object.keys(achievements).length.should.equal achievement_length
+#          done()
+#
+#    it "get all guild achievements static", (done) ->
+#      wow = new wf.WowLookup()
+#      wow.get_static "guildAchievements", "eu", (results) ->
+#        should.exist results
+#        results.length.should.equal 7 # guild achievement categories ...
+#        achievements = checkAchievements(results)
+#        achievment_length = Object.keys(achievements).length
+#        achievment_length.should.be.above(250)
+#        done()

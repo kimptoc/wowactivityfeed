@@ -150,13 +150,13 @@ class wf.WowLookup
             all_realms.push realm
         callback?(all_realms)
 
-  get_static: (static_load_method, region = "eu", callback) ->
-    @with_armory (armory) ->
-      armory[static_load_method] {region}, (err, things) ->
-        if err
-          wf.error("wowlookup get_static(#{static_load_method}) error:#{err.message} : #{JSON.stringify(err)}")
-          callback?(null)
-        else
-          wf.debug "wowlookup get_static(#{static_load_method}) result:[#{things.length}]#{JSON.stringify(things)}"
-          callback?(things)
+#  get_static: (static_load_method, region = "eu", callback) ->
+#    @with_armory (armory) ->
+#      armory[static_load_method] {region}, (err, things) ->
+#        if err
+#          wf.error("wowlookup get_static(#{static_load_method}) error:#{err.message} : #{JSON.stringify(err)}")
+#          callback?(null)
+#        else
+#          wf.debug "wowlookup get_static(#{static_load_method}) result:[#{things.length}]#{JSON.stringify(things)}"
+#          callback?(things)
 
