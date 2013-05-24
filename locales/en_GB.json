@@ -78,5 +78,6 @@
 	"Level": "Level",
 	"New mount(s): %s ": "New mount(s): %s ",
 	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
-	"%s(new):%s": "%s(new):%s"
+	"%s(new):%s": "%s(new):%s",
+	"Other Langs?": "Other Langs?"
 }

@@ -14,7 +14,7 @@ wf.tweeter = new wf.Tweet()
 
 create_cron = (cron_schedule, cron_task) ->
   try 
-    new_cron_job = new cronJob cron_schedule, cron_task,
+    new cronJob cron_schedule, cron_task,
       null, 
       true, #/* Start the job right now */,
       null #/* Time zone of this job. */
@@ -22,8 +22,8 @@ create_cron = (cron_schedule, cron_task) ->
     wf.error e
 
 
-wf.hourlyjob = create_cron '00 00,30 * * * *', -> 
-  wf.info "cronjob tick... twice an hour api checks"
+create_cron '00 00,30 * * * *', ->
+  wf.info "cronjob tick... twice an hour armory char/guild update checks"
   wf.armory_load_requested = true
 
 wf.info_queue = []
@@ -45,8 +45,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-wf.counts1job = create_cron '00 00 3,12,15,21,23 * * *', -> 
-# wf.counts1job = create_cron '*/10 * * * * *', -> 
+create_cron '00 00 3,12,15,21,23 * * *', ->
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
@@ -58,16 +57,19 @@ wf.counts1job = create_cron '00 00 3,12,15,21,23 * * *', ->
 
 
 # how to use waf
-wf.counts3job = create_cron '00 40 2,8,14,22 * * *', -> 
-# wf.counts3job = create_cron '*/10 * * * * *', -> 
+create_cron '00 40 2,8,14,22 * * *', ->
   wf.info "cronjob tick...6 hourly, how to"
   push_info("How to use guild/character RSS feed - https://wafbeta.uservoice.com/.")
 
+# waf language conversion
+create_cron '00 15 4,9,13,21 * * *', ->
+  wf.info "cronjob tick...6 hourly, locales"
+  push_info "Help convert WoW Activity to your language - http://bit.ly/waflang // @webtranslateit"
+
 
 # how to use waf
-wf.counts4job = create_cron '00 35 00 * * *', -> 
+create_cron '00 35 00 * * *', ->
 # wf.counts4job = create_cron '00 10 17 * * *', -> 
-# wf.counts4job = create_cron '*/10 * * * * *', -> 
   wf.info "cronjob tick...daily build status"
   request 'https://api.travis-ci.org/repos/kimptoc/wowactivityfeed.xml', (err1,resp1,body) ->
     parseString body, (err2,resp2) ->
@@ -80,8 +82,7 @@ wf.counts4job = create_cron '00 35 00 * * *', ->
 
 
 # count of calls yesterday
-wf.counts2job = create_cron '00 25 02 * * *', -> 
-# wf.counts2job = create_cron '*/10 * * * * *', -> 
+create_cron '00 25 02 * * *', ->
   wf.info "cronjob tick...daily guild/member calls"
   if wf.wow?
     start_of_day = moment().startOf('day').valueOf()
@@ -97,14 +98,14 @@ wf.counts2job = create_cron '00 25 02 * * *', ->
 
 
 
-wf.loadjob = create_cron '*/10 * * * * *', -> 
+create_cron '*/4 * * * * *', ->
   wf.debug "cronjob tick...check if armory load requested (running now? #{wf.wow.get_job_running_lock()})"
   if wf.armory_load_requested
     wf.armory_load_requested = false
     wf.info "time for armory_load..."
     wf.wow_loader.armory_load()
 
-wf.loadjob = create_cron '00 47 * * * *', -> 
+create_cron '00 47 * * * *', ->
   wf.info "Reloading realms"
   wf.wow_loader.static_loader ->
     wf.info "Static load complete"

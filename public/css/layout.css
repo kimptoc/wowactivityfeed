@@ -58,7 +58,8 @@
 	.footer .social ul li a.soc_flicker { background:url(../images/icons/ico_flick.png) no-repeat; }
 	.footer .social ul li a.soc_twitter { background:url(../images/icons/ico_t.png) no-repeat; }
 	.footer .social ul li a.soc_github { background:url(../images/icons/octocat.png) no-repeat; }
-	
+	.footer .social ul li a.soc_text { color:#ffffff; font-size:11px; width: 48px; }
+
 	/*Dividers*/
 	.divider {background:url(../images/sep_cont1.png) repeat-y;}
 	.divider40 {background-position:40.7% 0}

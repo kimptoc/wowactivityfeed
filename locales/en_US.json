@@ -76,5 +76,6 @@
 	"Level": "Level",
 	"Guild membership changed! ": "Guild membership changed! ",
 	"New title(s):%s ": "New title(s):%s ",
-	"Gained some title(s): %s. ": "Gained some title(s): %s. "
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"Other Langs?": "Other Langs?"
 }
