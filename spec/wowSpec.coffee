@@ -10,16 +10,11 @@ require "./wow_loader"
 describe "wow wrapper:", ->
   describe "register:", ->
 
-    wow = null
     mock_store = null
     mock_lookup = null
 
-    beforeEach (done)->
-      wf.info "wowSpec:beforeEach"
-      wow = new wf.WoW (wow)->
-        wf.wow = wow
-        wow.clear_all ->
-          done()
+#    beforeEach (done)->
+#      wf.info "wowSpec:beforeEach"
 
     afterEach ->
       mock_store.verify() if mock_store?
@@ -34,39 +29,39 @@ describe "wow wrapper:", ->
 
 
     it "mock store, clear reg", (done) ->
-      mock_store = sinon.mock(wow.get_store())
+      mock_store = sinon.mock(wf.wow.get_store())
       mock_store.expects("remove_all").once().yields()
-      wow.clear_registered ->
+      wf.wow.clear_registered ->
         done()
 
 
     it "clear wow", (done) ->
-      mock_store = sinon.mock(wow.get_store())
+      mock_store = sinon.mock(wf.wow.get_store())
       mock_store.expects("remove_all").once().yields()
       mock_store.expects("load_all").once().yields([])
-      wow.clear_registered ->
-        wow.get_registered (items) ->
+      wf.wow.clear_registered ->
+        wf.wow.get_registered (items) ->
           items.length.should.equal 0
           done()
 
     it "add/check register", (done)->
-      mock_store = sinon.mock(wow.get_store())
+      mock_store = sinon.mock(wf.wow.get_store())
       mock_store.expects("load").once().yields()
       mock_store.expects("add").once().yields()
       mock_store.expects("load_all").once().yields([{}])
       mock_store.expects("ensure_index").twice().yields()
-      wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
-        wow.get_registered (items) ->
+      wf.wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
+        wf.wow.get_registered (items) ->
           items.length.should.equal 1
           done()
 
     it "dont double register", (done)->
-      wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
-        wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
-          wow.get_registered (items) ->
+      wf.wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
+        wf.wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls"}, ->
+          wf.wow.get_registered (items) ->
             items.length.should.equal 1
-            wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls2"}, ->
-              wow.get_registered (items) ->
+            wf.wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls2"}, ->
+              wf.wow.get_registered (items) ->
                 items.length.should.equal 2
                 done()
 
@@ -127,7 +122,7 @@ describe "wow wrapper:", ->
 
     it "armory realms load", (done) ->
      @timeout(40000)
-     wowload = new wf.WoWLoader(wow)
+     wowload = new wf.WoWLoader(wf.wow)
      wowload.realms_loader (realms)->
        realms.length.should.be.above 10
        done()
@@ -148,7 +143,7 @@ describe "wow wrapper:", ->
 
     it "static load", (done) ->
      @timeout(40000)
-     wowload = new wf.WoWLoader(wow)
+     wowload = new wf.WoWLoader(wf.wow)
      wowload.static_loader ->
        done()
 
@@ -218,7 +213,7 @@ describe "wow wrapper:", ->
 #        done()
 
     it "try item_loader", (done) ->
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.item_loader {item_id:87417, locale:'en_GB', region:'eu'}, ->
         done()
 
@@ -230,7 +225,7 @@ describe "wow wrapper:", ->
         name: "test"
         lastModified: 123
         locale:"en_GB"
-      wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
+      wf.wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
         wf.debug "back from get"
         # todo - should.not.exist result
         done()
@@ -256,13 +251,13 @@ describe "wow wrapper:", ->
         name: "test"
         locale:"en_GB"
         lastModified: 123
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
-        wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
+        wf.wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
           results.length.should.equal 1 
           # should.exist results[0].whats_changed
           results[0].whats_changed.overview.should.equal "NEW"
-          wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
+          wf.wow.get item.region,item.realm,item.type,item.name,item.locale, (result) ->
             # should.exist result
             wf.debug "result:#{JSON.stringify(result)}"
             result.name.should.equal "test"
@@ -285,10 +280,10 @@ describe "wow wrapper:", ->
         lastModified: 123
         guild:
           name: "test"
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
         wowload.store_update item_member.type, item_member.region, item_member.realm, item_member.name, item_member.locale, item_member, ->
-          wow.get_history item.region, item.realm, item.type, item.name, item.locale, (results) ->
+          wf.wow.get_history item.region, item.realm, item.type, item.name, item.locale, (results) ->
             wf.info "first item:#{results[0].type}/#{results[0].name}"
             setInterval( ->
             results.length.should.equal 2
@@ -304,9 +299,9 @@ describe "wow wrapper:", ->
         name: "test_mem"
         locale:"en_GB"
         lastModified: 123
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
-        wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
+        wf.wow.get_history item.region, item.realm, item.type, item.name,item.locale, (results) ->
           results.length.should.equal 1
           # should.exist results[0].whats_changed
           results[0].whats_changed.overview.should.equal "NEW"
@@ -327,10 +322,10 @@ describe "wow wrapper:", ->
         name: "test"
         locale:"en_GB"
         lastModified: 124
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.store_update item.type, item.region, item.realm, item.name,item.locale, item, ->
         wowload.store_update item2.type, item2.region, item2.realm, item2.name,item2.locale, item2, ->
-          wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
+          wf.wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
             results.length.should.equal 2 
             results[0].lastModified.should.equal 124
             results[1].lastModified.should.equal 123
@@ -348,10 +343,10 @@ describe "wow wrapper:", ->
         locale:"en_GB"
         name: "test"
         lastModified: 123
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
         wowload.store_update item.type, item.region, item.realm, item.name, item.locale, item, ->
-          wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
+          wf.wow.get_history item.region,item.realm,item.type,item.name,item.locale, (results) ->
             results.length.should.equal 1 
             # should.exist results[0].whats_changed
             results[0].whats_changed.overview.should.equal "NEW" 

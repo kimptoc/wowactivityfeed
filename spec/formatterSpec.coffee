@@ -53,7 +53,7 @@ describe "feed item formatter", ->
         d[0].date.should.equal 1
         done()
 
-    it "get items", ->
+    it "get items", (done) ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
@@ -71,8 +71,9 @@ describe "feed item formatter", ->
       d = f.get_items(item)
       d.length.should.equal 1
       d[0].should.equal 87471
+      done()
 
-    it "get_name, no titles", ->
+    it "get_name, no titles", (done) ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
@@ -80,8 +81,9 @@ describe "feed item formatter", ->
           name : "Test"
       n = f.get_formal_name item
       n.should.equal "Test" # unchanged
+      done()
 
-    it "get_name, titles, none selected", ->
+    it "get_name, titles, none selected", (done) ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
@@ -93,8 +95,9 @@ describe "feed item formatter", ->
             ]
       n = f.get_formal_name item
       n.should.equal "Test" # unchanged
+      done()
 
-    it "get_name, titles, one selected", ->
+    it "get_name, titles, one selected", (done) ->
       f = new wf.FeedItemFormatter()
       item = 
         name : "test"
@@ -107,3 +110,4 @@ describe "feed item formatter", ->
             ]
       n = f.get_formal_name item
       n.should.equal "123-Test" # changed
+      done()

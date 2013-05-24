@@ -15,11 +15,8 @@ describe "locale helpers", ->
   ]
 
   beforeEach (done) ->
-    new wf.WoW (wow)->
-      wf.wow = wow
-      wf.wow.get_store().remove_all wf.wow.get_realms_collection(), ->
-        wf.wow.get_store().insert wf.wow.get_realms_collection(), test_realms, ->
-          done()
+    wf.wow.get_store().insert wf.wow.get_realms_collection(), test_realms, ->
+      done()
 #    wf.info "Running beforeEach, create StoreMongo"
 #    store = new wf.StoreMongo()
 #    # store.clear_all ->
@@ -33,7 +30,7 @@ describe "locale helpers", ->
       wf.all_realms.length.should.equal 2
       done()
 
-  it "basics, no locale or url default", ->
+  it "basics, no locale or url default", (done) ->
     req =
       headers:
         "accept-language":'en-GB,x'
@@ -41,8 +38,9 @@ describe "locale helpers", ->
         region: 'eu'
     locale = wf.sort_locale(req)
     locale.should.equal 'en_GB'
+    done()
 
-  it "basics, no locale or url default, but have invalid loc", ->
+  it "basics, no locale or url default, but have invalid loc", (done) ->
     req =
       headers:
         "accept-language":''
@@ -50,8 +48,9 @@ describe "locale helpers", ->
         region: 'eu'
     locale = wf.sort_locale(req)
     locale.should.equal 'en_US'
+    done()
 
-  it "basics, no locale or url default, but have invalid loc/2", ->
+  it "basics, no locale or url default, but have invalid loc/2", (done) ->
     req =
       headers:
         "accept-language":'foobar'
@@ -59,6 +58,7 @@ describe "locale helpers", ->
         region: 'eu'
     locale = wf.sort_locale(req)
     locale.should.equal 'en_US'
+    done()
 
   it "basics, url/realm based default", (done)->
     wf.ensure_realms_loaded ->

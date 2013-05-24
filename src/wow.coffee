@@ -137,7 +137,11 @@ class wf.WoW
       store.remove_all armory_collection, ->
         store.drop_collection calls_collection, ->
           store.remove_all items_collection, ->
-            store.remove_all static_collection, cleared_handler
+            store.remove_all realms_collection, ->
+              store.remove_all static_collection, ->
+                wf.all_realms = undefined
+                wf.regions_to_locales = undefined
+                cleared_handler?()
 
 
   clear_registered: (cleared_handler) ->

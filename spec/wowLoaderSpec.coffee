@@ -10,15 +10,8 @@ require "./wow_loader"
 describe "wow loader:", ->
   describe "basics:", ->
 
-    wow = null
-    # mock_store = null
-    # mock_lookup = null
-
-    beforeEach (done)->
-      wf.info "wowSpec:beforeEach"
-      wow = new wf.WoW (wow)->
-        wow.clear_all ->
-          done()
+#    beforeEach (done)->
+#      wf.info "wowSpec:beforeEach"
 
     afterEach ->
       # mock_store.verify() if mock_store?
@@ -27,13 +20,13 @@ describe "wow loader:", ->
 
     it "armory load/valid guild/new/real", (done) ->
       this.timeout(50000);
-      wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls", locale:"en_GB"}, ->
+      wf.wow.ensure_registered {region:"eu", realm:"Darkspear", type:"guild", name:"Mean Girls", locale:"en_GB"}, ->
         wf.info "test/wowloader/registered"
-        wowload = new wf.WoWLoader(wow)
+        wowload = new wf.WoWLoader(wf.wow)
         wf.info "test/wowloader/created wowload"
         wowload.armory_load ->
           wf.info "test/wowloader/loaded"
-          wow.get_loaded (docs) ->
+          wf.wow.get_loaded (docs) ->
             wf.info "test/wowloader/got loaded"
             should.exist docs
             docs.length.should.be.above 10
@@ -41,7 +34,7 @@ describe "wow loader:", ->
 
     it "armory load/realms", (done) ->
       this.timeout(50000);
-      wowload = new wf.WoWLoader(wow)
+      wowload = new wf.WoWLoader(wf.wow)
       wowload.realms_loader (realms) ->
         wf.info "test/wowloader/got realms:#{realms.length}"
         should.exist realms
