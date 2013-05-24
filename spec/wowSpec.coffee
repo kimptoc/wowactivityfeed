@@ -120,12 +120,12 @@ describe "wow wrapper:", ->
 #      wowload.armory_load ->
 #        done()
 
-    it "armory realms load", (done) ->
-     @timeout(40000)
-     wowload = new wf.WoWLoader(wf.wow)
-     wowload.realms_loader (realms)->
-       realms.length.should.be.above 10
-       done()
+#    it "armory realms load", (done) ->
+#     @timeout(40000)
+#     wowload = new wf.WoWLoader(wf.wow)
+#     wowload.realms_loader (realms)->
+#       realms.length.should.be.above 10
+#       done()
 
 #    it "armory races load", (done) ->
 #     @timeout(20000)
