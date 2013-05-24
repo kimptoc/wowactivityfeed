@@ -22,7 +22,8 @@ create_cron = (cron_schedule, cron_task) ->
     wf.error e
 
 
-create_cron '00 00,30 * * * *', ->
+#create_cron '00 00,30 * * * *', ->
+create_cron '00 00 * * * *', ->
   wf.info "cronjob tick... twice an hour armory char/guild update checks"
   wf.armory_load_requested = true
 
