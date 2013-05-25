@@ -14,7 +14,6 @@ zh_CN - need to allow en_US?
 
 stats page using wrong time locale
 
-index page, summary of guilds/chars being loaded...
 
 blizzard - more capacity or run sep sites?
 

@@ -5,13 +5,14 @@ startup_time = new Date().getTime()
 moment = require "moment"
 
 require './init_logger'
+require './locale'
 
 # this an in memory cache of the latest guild/char details
 class wf.WoWStats
 
   armory_calls: (wow, callback)->
     info = 
-      startup_time: moment(startup_time).format('H:mm:ss ddd')
+      startup_time: wf.date_stats(startup_time)
       memory_usage: process.memoryUsage()
       node_uptime: process.uptime()
       armory_load:
@@ -52,8 +53,8 @@ class wf.WoWStats
           if results?
             results2 = {}
             for type_stat in results
-              type_stat.earliest = moment(type_stat.earliest).format("H:mm:ss ddd")
-              type_stat.latest = moment(type_stat.latest).format("H:mm:ss ddd")
+              type_stat.earliest = wf.date_stats(type_stat.earliest)
+              type_stat.latest = wf.date_stats(type_stat.latest)
               results2[type_stat._id.date_category] ?= {}
               if type_stat._id.error?
                 key = type_stat._id.type + "/" + type_stat._id.error + "-" + type_stat.earliest + " - " + type_stat.latest

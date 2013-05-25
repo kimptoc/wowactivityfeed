@@ -78,3 +78,5 @@ wf.format_date = (dt) ->
   dateMoment = moment(dt).lang(wf.locale_lang[i18n.getLocale()])
   "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
 
+wf.date_stats = (dt) ->
+  moment(dt).lang('en').format("H:mm:ss ddd")
