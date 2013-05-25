@@ -8,11 +8,12 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
-zh_CN - need to allow en_US?
 
+slugify realm names (as blizz does...) eg Ревущий фьорд should become ревущии-фьорд - would then need to normalised registered names again...
 
+maybe guild/char names too
 
-stats page using wrong time locale
+validate regions!
 
 
 blizzard - more capacity or run sep sites?

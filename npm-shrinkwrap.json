@@ -649,6 +649,16 @@
           "from": "debug@*"
         }
       }
+    },
+    "uslug": {
+      "version": "1.0.3",
+      "from": "uslug@",
+      "dependencies": {
+        "unorm": {
+          "version": "1.0.5",
+          "from": "unorm@>= 1.0.0"
+        }
+      }
     }
   }
 }

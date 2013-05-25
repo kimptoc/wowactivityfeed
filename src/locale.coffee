@@ -3,6 +3,7 @@ global.wf ?= {}
 i18n = require('i18n')
 _ = require('underscore')
 moment = require 'moment'
+slug = require 'uslug'
 
 require './init_logger'
 
@@ -57,7 +58,7 @@ locale_valid_for_region = (p_locale, p_region) ->
   return _.contains(wf.regions_to_locales[p_region], p_locale)
 
 wf.set_locale = (p_locale, p_realm, p_region) ->
-  p_realm = p_realm?.toLocaleLowerCase()
+  p_realm = slug(p_realm) if p_realm?
   p_region = p_region?.toLocaleLowerCase()
   wf.info "user locale:#{i18n.getLocale()}, url locale:#{p_locale}, realm:#{p_realm}/#{p_region} - all realms:#{wf.all_realms?.length}"
   if p_locale? and locale_valid_for_region(p_locale, p_region)
@@ -66,7 +67,7 @@ wf.set_locale = (p_locale, p_realm, p_region) ->
   else if p_realm?
     for realm in wf.all_realms
       wf.debug "Checking realm #{p_realm}/#{p_region} vs #{realm.name.toLocaleLowerCase()}/#{realm.region}"
-      if realm.name.toLocaleLowerCase() == p_realm and realm.region == p_region
+      if (slug(realm.name) == p_realm or realm.slug == p_realm) and realm.region == p_region
         wf.info "Found realm #{p_realm} locale #{realm.locale}"
         i18n.setLocale(realm.locale)
         break

@@ -251,7 +251,7 @@ class wf.WoW
         param.result_handler?(null)
 
   get_realms: (callback) ->
-    store.load_all_with_fields realms_collection, {}, {name:1, region:1, locale:1}, {sort:{name:1, region:1}}, callback
+    store.load_all_with_fields realms_collection, {}, {name:1, region:1, locale:1, slug:1}, {sort:{name:1, region:1}}, callback
 
   load_items: (params, callback) ->
     item_id_array = params.item_ids
