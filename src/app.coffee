@@ -346,10 +346,12 @@ wf.app.get '/debug/sample_data', (req, res) ->
 
 wf.app.get '/:locale?', (req, res) ->
   wf.sort_locale(req,i18n)
-  get_feed_all (feed)->
-    feed_sample = feed.sample(6)
-    locale = wf.sort_locale(req,i18n)
-    res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:locale
+  wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
+    wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'member'}, (num_chars) ->
+      get_feed_all (feed)->
+        feed_sample = feed.sample(6)
+        locale = wf.sort_locale(req,i18n)
+        res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:locale, stats: {num_guilds, num_chars}
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->

@@ -43,6 +43,8 @@ block content
           | #{i18n("This site provides an RSS feed of activity for your WoW character and/or guild.")}
           | #{i18n("The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in")}
           | #{i18n("an RSS reader, like Google Reader.")}
+          if stats
+            | #{i18n(" Currently tracking activity for %s guilds and %s characters", stats.num_guilds, stats.num_chars)}
       .clear
         // ClearFix
     // End Container
