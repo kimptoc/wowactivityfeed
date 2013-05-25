@@ -166,13 +166,13 @@ handle_view = (req, res) ->
         # delete guild_item.whats_changed.changes.lastModified if guild_item.whats_changed.changes.lastModified?
         # delete guild_item.whats_changed.changes.members if guild_item.whats_changed.changes.members?
         wf.sort_locale(req,i18n)
-        res.render req.params.type,
+        res.render type,
           p: req.params, w: guild_item, h: wowthings, f: feed,
           locales: wf.regions_to_locales[region], root_url: "/wow/#{region}/#{type}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}/"
     else
       req.params.locale ?= ""
       wf.sort_locale(req,i18n)
-      res.render "#{req.params.type}_not_found",
+      res.render "#{type}_not_found",
         msg: i18n.__("Not found - will check the Armory soon for %s, %s/%s/%s/%s",type, region, realm, name, locale)
         w: req.params
         p: req.params
