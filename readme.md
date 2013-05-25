@@ -2,17 +2,22 @@
 
 [![Build Status via Travis CI](https://travis-ci.org/kimptoc/wowactivityfeed.png?branch=master)](https://travis-ci.org/kimptoc/wowactivityfeed)
 
+LIVE SITE: http://wowactivity.kimptoc.net/
+
+If you want the site/feed filler text in your language (not English) - you can help here: https://webtranslateit.com/en/projects/6337-Wow-activity-/project_locales
+
 ## TODO
 
-locale bits:
+zh_CN - need to allow en_US?
+
+call logs, save locale
+
+stats page using wrong time locale
 
 
-- use wget to crawl site and trigger conversions (or just copy english version...)
+- hide most of large guilds, with a more link to see them (just hidden on page)
+- link on individual guild/member page to see all history
 
-- remove translation entries - eg :TYPE: - is that needed still, could be better?
-- might not be being used, only used when type not recognised...
-
-- use google translate manually for first cut translations?
 
 - would be good to make item lookup wait for armory fetch of info... but hopefully not common... as should be loaded via char fetch process
 - link realms so can switch to appropriate locale name, eg via realm id

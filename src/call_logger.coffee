@@ -32,6 +32,7 @@ class wf.CallLogger
         region: region
         name: item_id
         realm: "na"
+        locale: locale
         start_time: new Date().getTime()
       wowlookup_get_item.apply wowlookup, [item_id, locale, region, (info) ->
         armory_stats.end_time = new Date().getTime()
@@ -83,6 +84,7 @@ class wf.CallLogger
         region: region
         name: "realms"
         realm: "na"
+        locale: locale
         start_time: new Date().getTime()
       wowlookup_get_realms.apply wowlookup, [region, locale, (info) ->
         wf.info "get realms for region #{region} responded, realms:#{info.length}"
