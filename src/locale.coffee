@@ -17,6 +17,8 @@ wf.ensure_realms_loaded = (callback) ->
   else
     wf.info "Reloading realms from db!"
     wf.wow.get_realms (realms) ->
+      wf.info "Loaded realms from db, found:#{realms.length}"
+      callback?() if realms.length == 0
       wf.all_realms = realms
       regions_to_locales = {}
       for realm in wf.all_realms
@@ -49,6 +51,7 @@ wf.sort_locale = (req) ->
 
 
 locale_valid_for_region = (p_locale, p_region) ->
+  return true if p_locale == wf.locale_default 
   return true unless p_region?
   return false unless p_locale?
   return _.contains(wf.regions_to_locales[p_region], p_locale)

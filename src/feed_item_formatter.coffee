@@ -163,6 +163,7 @@ class wf.FeedItemFormatter
           for own name, values of item.whats_changed.changes.reputation_map
             if values instanceof Array
               if values.length == 1
+                rep_change += ", " if rep_change.length >0
                 rep_change += i18n.__("%s(new):%s",name,values[0].value)
             else
               rep_change += ", " if rep_change.length >0

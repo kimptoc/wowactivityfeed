@@ -10,9 +10,14 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 zh_CN - need to allow en_US?
 
-call logs, save locale
+
 
 stats page using wrong time locale
+
+index page, summary of guilds/chars being loaded...
+
+blizzard - more capacity or run sep sites?
+
 
 
 - hide most of large guilds, with a more link to see them (just hidden on page)

@@ -78,7 +78,13 @@ wf.app.configure ->
     # todo - push this into wow object
     wf.feed_formatter = new wf.FeedItemFormatter()
     # wf.wow.static_load()
-    wf.ensure_realms_loaded()
+    wf.ensure_realms_loaded ->
+      if !wf.all_realms or wf.all_realms.length == 0
+        wf.wow_loader.static_loader ->
+          wf.info "Static load complete"
+          wf.all_realms = undefined
+          wf.ensure_realms_loaded()
+
 
 
 # Routes

@@ -106,7 +106,7 @@ create_cron '*/4 * * * * *', ->
     wf.info "time for armory_load..."
     wf.wow_loader.armory_load()
 
-create_cron '00 47 * * * *', ->
+create_cron '00 50 23 * * *', ->
   wf.info "Reloading realms"
   wf.wow_loader.static_loader ->
     wf.info "Static load complete"

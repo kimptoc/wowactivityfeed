@@ -24,9 +24,11 @@ wf.info "WOW/Private:#{wf.WOW_API_PRIVATE_KEY}"
 wf.locales = ['en_US','es_MX','pt_BR','en_GB','es_ES','fr_FR','ru_RU','de_DE','pt_PT','it_IT','ko_KR','zh_TW','zh_CN']
 wf.locales.sort()
 
+wf.locale_default = 'en_US'
+
 wf.i18n_config =
   locales: wf.locales
-  defaultLocale: 'en_US'
+  defaultLocale: wf.locale_default
   directory: 'locales'
 
 wf.all_regions = ["eu","us","cn","kr","tw"]
