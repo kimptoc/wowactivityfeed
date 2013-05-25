@@ -74,5 +74,7 @@
 	"%s(new):%s": "%s(new):%s",
 	"Took up %s": "Took up %s",
 	"Gave up %s": "Gave up %s",
-	"Other Langs?": "Other Langs?"
+	"Other Langs?": "Other Langs?",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }

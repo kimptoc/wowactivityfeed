@@ -67,5 +67,7 @@
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
 	" %s - level %s! ": " %s - level %s! ",
 	"Now at level %s! ": "Now at level %s! ",
-	"%s(new):%s": "%s(new):%s"
+	"%s(new):%s": "%s(new):%s",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }

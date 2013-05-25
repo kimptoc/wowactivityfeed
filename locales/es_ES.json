@@ -72,5 +72,7 @@
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
 	"%s is now rank %s": "%s is now rank %s",
-	"Profession(s): %s. ": "Profession(s): %s. "
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	"New mount(s): %s ": "New mount(s): %s ",
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
 }
