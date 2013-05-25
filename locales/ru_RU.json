@@ -78,5 +78,7 @@
 	"Searching ...": "Searching ...",
 	"Member of": "Member of",
 	"Level": "Level",
-	"%s has left": "%s has left"
+	"%s has left": "%s has left",
+	"Other Langs?": "Other Langs?",
+	"%s(new):%s": "%s(new):%s"
 }

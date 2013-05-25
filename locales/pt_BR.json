@@ -68,5 +68,14 @@
 	"Message": "Message",
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
 	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
-	"%s has joined": "%s has joined"
+	"%s has joined": "%s has joined",
+	"Other Langs?": "Other Langs?",
+	"%s is now level %s!": "%s is now level %s!",
+	"Guild %s is now at guild level %s!": "Guild %s is now at guild level %s!",
+	"guild ": "guild ",
+	"%s - %s gained the %s achievement '%s'": "%s - %s gained the %s achievement '%s'",
+	"achieved": "achieved",
+	"%s(new):%s": "%s(new):%s",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. "
 }
