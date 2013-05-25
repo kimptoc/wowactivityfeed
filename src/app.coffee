@@ -152,6 +152,9 @@ handle_view = (req, res) ->
   name = req.params.name.toLocaleLowerCase()
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   locale = wf.sort_locale(req,i18n)
+  unless _.contains(wf.all_regions, region)
+    res.render 'message', msg: "Region #{region} is invalid.  Use one of #{JSON.stringify(wf.all_regions)}", locales: wf.regions_to_locales[region]
+    return
   wf.info "handle_view:#{type},#{region},#{realm},#{name},#{locale}"
   wf.wow.get_history region, realm, type, name, locale, (wowthings) ->
     if wowthings? and wowthings.length > 0
@@ -219,6 +222,10 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   name = req.params.name.toLocaleLowerCase()
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
 
+  unless _.contains(wf.all_regions, region)
+    res.render 'message', msg: "Region #{region} is invalid.  Use one of #{JSON.stringify(wf.all_regions)}", locales: wf.regions_to_locales[region]
+    return
+
   wf.wow.get_history region, realm, type, name, locale, (items)->
     wf.timing_off("/feed/#{name}")
     get_feed items, (items_to_publish) ->
@@ -263,6 +270,11 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
   realm = req.params.realm.toLocaleLowerCase()
   name = req.params.name.toLocaleLowerCase()
 #  name = wf.String.capitalise(req.params.name)
+
+  unless _.contains(wf.all_regions, region)
+    res.render 'message', msg: "Region #{region} is invalid.  Use one of #{JSON.stringify(wf.all_regions)}", locales: wf.regions_to_locales[region]
+    return
+
   wf.info "Searching for #{realm}/#{name}/#{locale}...."
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   wf.wow.get_history region, realm, type, name, locale, (items)->
