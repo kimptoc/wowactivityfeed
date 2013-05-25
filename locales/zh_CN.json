@@ -25,5 +25,12 @@
 	"The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in": "The feed can be used to produce a twitter feed or facebook page updates. Or just viewed in",
 	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
 	"Copyright": "Copyright",
-	"Latest Updates from Everyone!": "Latest Updates from Everyone!"
+	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
+	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
+	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
+	"Not found - will check the Armory soon for %s, %s/%s/%s/%s": "Not found - will check the Armory soon for %s, %s/%s/%s/%s",
+	"member": "member",
+	"Message": "Message",
+	"View": "View",
+	"Other Langs?": "Other Langs?"
 }

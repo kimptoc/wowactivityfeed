@@ -65,5 +65,12 @@
 	"Rep change(s): %s. ": "Rep change(s): %s. ",
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
-	"Gear change: %s. ": "Gear change: %s. "
+	"Gear change: %s. ": "Gear change: %s. ",
+	"Other Langs?": "Other Langs?",
+	" %s - level %s! ": " %s - level %s! ",
+	"Now at level %s! ": "Now at level %s! ",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"%s is now rank %s": "%s is now rank %s",
+	"Profession(s): %s. ": "Profession(s): %s. "
 }

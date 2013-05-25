@@ -77,5 +77,8 @@
 	"Guild membership changed! ": "Guild membership changed! ",
 	"New title(s):%s ": "New title(s):%s ",
 	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
-	"Other Langs?": "Other Langs?"
+	"Other Langs?": "Other Langs?",
+	"%s is now level %s!": "%s is now level %s!",
+	"Guild %s is now at guild level %s!": "Guild %s is now at guild level %s!",
+	"%s(new):%s": "%s(new):%s"
 }

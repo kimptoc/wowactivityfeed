@@ -63,5 +63,14 @@
 	"WoW Activity Feed for %s": "WoW Activity Feed for %s",
 	"WoW Activity Feed for %s %s, of %s realm %s": "WoW Activity Feed for %s %s, of %s realm %s",
 	"Guild membership changed! ": "Guild membership changed! ",
-	"%s(new):%s": "%s(new):%s"
+	"%s(new):%s": "%s(new):%s",
+	"Other Langs?": "Other Langs?",
+	"Registered": "Registered",
+	"last viewed": "last viewed",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	"New pet(s):%s ": "New pet(s):%s ",
+	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
+	"%s is now rank %s": "%s is now rank %s",
+	"Profession(s): %s. ": "Profession(s): %s. "
 }
