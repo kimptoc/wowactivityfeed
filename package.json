@@ -34,6 +34,7 @@
         "xml2js":"",
         "arguejs":"",
         "i18n":"",
-        "uslug":""
+        "uslug":"",
+        "express-csv":""
     }
 }

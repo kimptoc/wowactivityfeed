@@ -9,11 +9,15 @@ If you want the site/feed filler text in your language (not English) - you can h
 ## TODO
 
 
+oops - taking non-standard locales:
+ locales/favicon.ico.json
+ locales/robots.txt.json
+
+
 slugify realm names (as blizz does...) eg Ревущий фьорд should become ревущии-фьорд - would then need to normalised registered names again...
 
 maybe guild/char names too
 
-validate regions!
 
 
 blizzard - more capacity or run sep sites?

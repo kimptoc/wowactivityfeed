@@ -3,6 +3,7 @@ global.wf ?= {}
 require './init_nodefly'
 
 express = require('express')
+csv = require('express-csv')
 http = require('http')
 path = require('path')
 _ = require('underscore')
@@ -322,6 +323,10 @@ wf.app.get '/debug/fonts', (req, res) ->
 
 wf.app.get '/debug/colours', (req, res) ->
   res.render "colours", locales: null
+
+wf.app.get '/debug/registered.csv', (req, res) ->
+  wf.wow.get_registered (results) ->
+    res.csv(results);    
 
 wf.app.get '/debug/registered/:locale?', (req, res) ->
   wf.wow.get_registered (results) ->

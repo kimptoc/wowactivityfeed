@@ -659,6 +659,11 @@
           "from": "unorm@>= 1.0.0"
         }
       }
+    },
+    "express-csv": {
+      "version": "0.6.0",
+      "from": "express-csv@",
+      "resolved": "https://registry.npmjs.org/express-csv/-/express-csv-0.6.0.tgz"
     }
   }
 }
