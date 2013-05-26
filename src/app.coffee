@@ -296,6 +296,10 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
         results.push item
       res.send JSON.stringify(results)
 
+# static pages
+wf.app.get '/robots.txt', (req, res) ->
+  res.sendfile('public/robots.txt')
+
 
 wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 
