@@ -300,6 +300,9 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
 wf.app.get '/robots.txt', (req, res) ->
   res.sendfile('public/robots.txt')
 
+wf.app.get '/favicon.ico', (req, res) ->
+  res.sendfile('public/images/favicon.ico')
+
 
 wf.app.get '/debug/wireframe1', (req, res) ->
   res.render "wireframe1" 
