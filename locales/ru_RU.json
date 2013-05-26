@@ -80,5 +80,6 @@
 	"Level": "Level",
 	"%s has left": "%s has left",
 	"Other Langs?": "Other Langs?",
-	"%s(new):%s": "%s(new):%s"
+	"%s(new):%s": "%s(new):%s",
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
 }

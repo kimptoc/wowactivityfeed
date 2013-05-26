@@ -69,5 +69,13 @@
 	"Now at level %s! ": "Now at level %s! ",
 	"%s(new):%s": "%s(new):%s",
 	"New mount(s): %s ": "New mount(s): %s ",
-	"Gained some mount(s): %s. ": "Gained some mount(s): %s. "
+	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
+	"%s is now rank %s": "%s is now rank %s",
+	"Profession(s): %s. ": "Profession(s): %s. ",
+	"%s has joined": "%s has joined",
+	"Guild membership changed! ": "Guild membership changed! ",
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	"New title(s):%s ": "New title(s):%s ",
+	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
 }

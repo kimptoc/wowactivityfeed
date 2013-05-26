@@ -77,5 +77,6 @@
 	"%s has joined": "%s has joined",
 	"%s has left": "%s has left",
 	"Guild membership changed! ": "Guild membership changed! ",
-	"Guild membership has changed: %s. ": "Guild membership has changed: %s. "
+	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
 }

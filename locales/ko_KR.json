@@ -23,5 +23,6 @@
 	"an RSS reader, like Google Reader.": "an RSS reader, like Google Reader.",
 	"Copyright": "Copyright",
 	"Latest Updates from Everyone!": "Latest Updates from Everyone!",
-	"Other Langs?": "Other Langs?"
+	"Other Langs?": "Other Langs?",
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
 }

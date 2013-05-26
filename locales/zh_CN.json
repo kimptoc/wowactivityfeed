@@ -32,5 +32,6 @@
 	"member": "member",
 	"Message": "Message",
 	"View": "View",
-	"Other Langs?": "Other Langs?"
+	"Other Langs?": "Other Langs?",
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
 }
