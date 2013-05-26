@@ -275,7 +275,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
     res.render 'message', msg: "Region #{region} is invalid.  Use one of #{JSON.stringify(wf.all_regions)}", locales: wf.regions_to_locales[region]
     return
 
-  wf.info "Searching for #{realm}/#{name}/#{locale}...."
+  wf.info "Searching for #{realm}/#{name}/#{locale}/#{req.params.locale}...."
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
   wf.wow.get_history region, realm, type, name, locale, (items)->
     get_feed items, (items_to_publish) ->
@@ -363,7 +363,7 @@ wf.app.get '/:locale?', (req, res) ->
       get_feed_all (feed)->
         feed_sample = feed.sample(6)
         locale = wf.sort_locale(req,i18n)
-        res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:locale, stats: {num_guilds, num_chars}
+        res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:req.params.locale, stats: {num_guilds, num_chars}
 
 
 http.createServer(wf.app).listen(wf.app.get('port'), ->
