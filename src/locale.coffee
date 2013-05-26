@@ -81,3 +81,6 @@ wf.format_date = (dt) ->
 
 wf.date_stats = (dt) ->
   moment(dt).lang('en').format("H:mm:ss ddd")
+
+wf.date_tweet = (dt) ->
+  moment(dt).lang('en').format("H:mm D MMM")

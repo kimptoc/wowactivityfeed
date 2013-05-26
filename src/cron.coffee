@@ -7,7 +7,8 @@ request = require 'request'
 parseString = require('xml2js').parseString;
 
 require "./tweet"
-
+require './locale'
+  
 wf.armory_load_requested = false
 
 wf.tweeter = new wf.Tweet()
@@ -36,7 +37,7 @@ wf.info_queue = []
 push_info = (msg) ->
   now = new Date()
   info = 
-    title: "WoW Activity @ #{moment(new Date()).format("H:mm D MMM")}"
+    title: "WoW Activity @ #{wf.date_tweet(new Date())}"
     description: msg
     date: now
     guid: now.getTime()
