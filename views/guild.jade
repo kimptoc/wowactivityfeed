@@ -1,5 +1,8 @@
 extends layout
 
+block htmlhead
+  meta(name="robots", content="noindex")
+
 block content
   .container
     h3.bordered #{w.region}-#{w.locale} / #{w.realm} / #{i18n("guild")}: #{w.name}, #{i18n("level")}: #{w.armory.level} / #{i18n("members")}: #{w.armory.members?w.armory.members.length:'?'}
