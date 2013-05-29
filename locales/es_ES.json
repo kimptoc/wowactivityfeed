@@ -75,5 +75,6 @@
 	"Profession(s): %s. ": "Profession(s): %s. ",
 	"New mount(s): %s ": "New mount(s): %s ",
 	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
-	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
+	"Took up %s": "Took up %s"
 }

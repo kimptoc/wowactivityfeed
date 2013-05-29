@@ -78,5 +78,6 @@
 	"%s(new):%s": "%s(new):%s",
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
-	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
+	"Took up %s": "Took up %s"
 }
