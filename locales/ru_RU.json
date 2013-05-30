@@ -82,5 +82,18 @@
 	"Other Langs?": "Other Langs?",
 	"%s(new):%s": "%s(new):%s",
 	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
-	"Gave up %s": "Gave up %s"
+	"Gave up %s": "Gave up %s",
+	"tabard": "tabard",
+	"head": "head",
+	"shoulder": "shoulder",
+	"back": "back",
+	"hands": "hands",
+	"legs": "legs",
+	"feet": "feet",
+	"finger1": "finger1",
+	"finger2": "finger2",
+	"trinket1": "trinket1",
+	"trinket2": "trinket2",
+	"mainHand": "mainHand",
+	"offHand": "offHand"
 }

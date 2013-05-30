@@ -78,5 +78,21 @@
 	"%s has left": "%s has left",
 	"Guild membership changed! ": "Guild membership changed! ",
 	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
-	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
+	"wrist": "wrist",
+	"trinket2": "trinket2",
+	"mainHand": "mainHand",
+	"head": "head",
+	"shoulder": "shoulder",
+	"legs": "legs",
+	"feet": "feet",
+	"trinket1": "trinket1",
+	"chest": "chest",
+	"waist": "waist",
+	"back": "back",
+	"neck": "neck",
+	"hands": "hands",
+	"tabard": "tabard",
+	"finger1": "finger1",
+	"finger2": "finger2"
 }

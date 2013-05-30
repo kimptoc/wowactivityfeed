@@ -79,5 +79,21 @@
 	"New pet(s):%s ": "New pet(s):%s ",
 	"Gained some pet(s): %s. ": "Gained some pet(s): %s. ",
 	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
-	"Took up %s": "Took up %s"
+	"Took up %s": "Took up %s",
+	"Gave up %s": "Gave up %s",
+	"neck": "neck",
+	"wrist": "wrist",
+	"hands": "hands",
+	"waist": "waist",
+	"feet": "feet",
+	"mainHand": "mainHand",
+	"back": "back",
+	"head": "head",
+	"shoulder": "shoulder",
+	"legs": "legs",
+	"finger1": "finger1",
+	"finger2": "finger2",
+	"trinket1": "trinket1",
+	"trinket2": "trinket2",
+	"offHand": "offHand"
 }

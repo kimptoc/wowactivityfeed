@@ -76,5 +76,20 @@
 	"New mount(s): %s ": "New mount(s): %s ",
 	"Gained some mount(s): %s. ": "Gained some mount(s): %s. ",
 	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
-	"Took up %s": "Took up %s"
+	"Took up %s": "Took up %s",
+	"neck": "neck",
+	"hands": "hands",
+	"finger1": "finger1",
+	"waist": "waist",
+	"wrist": "wrist",
+	"mainHand": "mainHand",
+	"feet": "feet",
+	"back": "back",
+	"head": "head",
+	"shoulder": "shoulder",
+	"legs": "legs",
+	"finger2": "finger2",
+	"trinket1": "trinket1",
+	"trinket2": "trinket2",
+	"offHand": "offHand"
 }
