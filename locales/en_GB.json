@@ -82,5 +82,20 @@
 	"Other Langs?": "Other Langs?",
 	"%s is now level %s!": "%s is now level %s!",
 	"Guild %s is now at guild level %s!": "Guild %s is now at guild level %s!",
-	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters"
+	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
+	"head": "head",
+	"neck": "neck",
+	"shoulder": "shoulder",
+	"chest": "chest",
+	"feet": "feet",
+	"trinket1": "trinket1",
+	"trinket2": "trinket2",
+	"mainHand": "mainHand",
+	"offHand": "offHand",
+	"back": "back",
+	"wrist": "wrist",
+	"waist": "waist",
+	"legs": "legs",
+	"finger1": "finger1",
+	"finger2": "finger2"
 }

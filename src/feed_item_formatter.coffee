@@ -155,7 +155,7 @@ class wf.FeedItemFormatter
             if ! /averageItemLevel/.test(name) and gear.name?
               # wf.debug "items change:#{name}: #{@get_new_one(gear.name)} "
               gear_change += ", " if gear_change.length >0
-              gear_change += "#{name}: #{@get_new_one(gear.name)}"
+              gear_change += "#{i18n.__(name)}: #{@get_new_one(gear.name)}"
           if gear_change.length > 0
             change_description += i18n.__("Gear change: %s. ",gear_change)
         if item.whats_changed.changes.reputation_map? and ! (item.whats_changed.changes.reputation_map instanceof Array)
