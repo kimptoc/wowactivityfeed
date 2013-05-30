@@ -51,7 +51,7 @@
 	.footer .copy { float:left; color:#ffffff; line-height:24px; font-size:11px; padding:0 0 0 60px}
 	.footer .social { float:right; text-align:left; padding:0 60px 0 0}
 	.footer .social ul { list-style:none; margin:0; padding:0}
-	.footer .social ul li { padding:0 0 0 16px; margin:0; width:24px; height:24px; float:left}
+	.footer .social ul li { padding:0 0 0 16px; margin:0; width:34px; height:24px; float:left}
 	.footer .social ul li a { width:24px; height:24px; display:block; }
 	.footer .social ul li a.soc_rss { background:url(../images/icons/ico_rss.png) no-repeat; }
 	.footer .social ul li a.soc_facebook { background:url(../images/icons/ico_f.png) no-repeat; }
