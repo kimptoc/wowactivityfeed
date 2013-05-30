@@ -10,7 +10,7 @@ block content
   .container
     div
       | #{i18n("View")} :
-      a(href='http://#{w.region}.battle.net/wow/en/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') #{i18n("armory")}
+      a(href='http://#{w.region}.battle.net/wow/#{w.locale.substring(0,2)}/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') #{i18n("armory")}
       &nbsp;-&nbsp;
       a(href='http://#{p.region}.battle.net/api/wow/guild/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=members,achievements,news,challenge') #{i18n("api")}
       //- &nbsp;-&nbsp;

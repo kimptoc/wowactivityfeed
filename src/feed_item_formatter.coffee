@@ -60,7 +60,7 @@ class wf.FeedItemFormatter
     "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
 
   armory_link: (p) =>
-    "http://#{p.region}.battle.net/wow/en/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
+    "http://#{p.region}.battle.net/wow/#{p.locale.substring(0,2)}/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
 
   wow_type: (type) =>
     wow_type = type
