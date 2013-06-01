@@ -8,6 +8,8 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+Performance... multiple API scraper servers?
+Very Busy when doing armory calls
 
 oops - taking non-standard locales:
  locales/favicon.ico.json
