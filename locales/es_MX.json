@@ -78,5 +78,22 @@
 	"New title(s):%s ": "New title(s):%s ",
 	"Gained some title(s): %s. ": "Gained some title(s): %s. ",
 	" Currently tracking activity for %s guilds and %s characters": " Currently tracking activity for %s guilds and %s characters",
-	"Took up %s": "Took up %s"
+	"Took up %s": "Took up %s",
+	"trinket1": "trinket1",
+	"head": "head",
+	"neck": "neck",
+	"shoulder": "shoulder",
+	"back": "back",
+	"chest": "chest",
+	"wrist": "wrist",
+	"waist": "waist",
+	"legs": "legs",
+	"finger1": "finger1",
+	"mainHand": "mainHand",
+	"hands": "hands",
+	"feet": "feet",
+	"finger2": "finger2",
+	"trinket2": "trinket2",
+	"offHand": "offHand",
+	"%s has left": "%s has left"
 }

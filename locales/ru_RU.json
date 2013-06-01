@@ -95,5 +95,10 @@
 	"trinket1": "trinket1",
 	"trinket2": "trinket2",
 	"mainHand": "mainHand",
-	"offHand": "offHand"
+	"offHand": "offHand",
+	"chest": "chest",
+	"neck": "neck",
+	"wrist": "wrist",
+	"waist": "waist",
+	"shirt": "shirt"
 }

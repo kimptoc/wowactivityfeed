@@ -90,5 +90,9 @@
 	"finger2": "finger2",
 	"trinket1": "trinket1",
 	"trinket2": "trinket2",
-	"offHand": "offHand"
+	"offHand": "offHand",
+	"wrist": "wrist",
+	"waist": "waist",
+	"chest": "chest",
+	"tabard": "tabard"
 }
