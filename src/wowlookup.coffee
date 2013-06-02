@@ -31,7 +31,8 @@ class wf.WowLookup
 
     request_defaults = 
       timeout: wf.ARMORY_CALL_TIMEOUT
-      pool: false
+      # pool: false
+      maxSockets: 1000
 
     if process.env.NODE_ENV == "production"
       wf.info "Its production - dont use a proxy to the armory"
