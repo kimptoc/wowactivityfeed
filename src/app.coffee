@@ -53,9 +53,10 @@ wf.app.configure ->
   wf.app.engine('jade', require('jade').__express)
   wf.app.use(express.bodyParser())  
   wf.app.use(express.methodOverride())  
+  wf.app.use(express.static(path.join(__dirname,'..', 'public')))
   wf.app.use(wf.app.router)  
   wf.app.set('port', wf.SITE_PORT)
-  wf.app.use(express.favicon())  
+  # wf.app.use(express.favicon())  
   # wf.app.use(express.logger('dev'))  
   wf.app.use(wf.expressLogger())
 
@@ -64,7 +65,6 @@ wf.app.configure ->
     dest: path.join(__dirname,'..', 'public')
   ))
 
-  wf.app.use(express.static(path.join(__dirname,'..', 'public')))
 
   # default: using 'accept-language' header to guess language settings
 #  wf.app.use(i18n.init)
@@ -295,13 +295,6 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
         item.name = item_lookup.name 
         results.push item
       res.send JSON.stringify(results)
-
-# static pages
-wf.app.get '/robots.txt', (req, res) ->
-  res.sendfile('public/robots.txt')
-
-wf.app.get '/favicon.ico', (req, res) ->
-  res.sendfile('public/images/favicon.ico')
 
 
 wf.app.get '/debug/wireframe1', (req, res) ->

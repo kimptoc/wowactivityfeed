@@ -10,6 +10,7 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 Performance... multiple API scraper servers?
 Very Busy when doing armory calls
+Perhaps run several processes on same box, eg per region, at different times (so node for webapp, node for scrape and mongo)
 
 oops - taking non-standard locales:
  locales/favicon.ico.json
