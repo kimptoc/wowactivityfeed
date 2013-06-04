@@ -26,7 +26,7 @@ block content
 
         each char in w.armory.members
           span(style="float:left")
-            a(href='/view/member/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(char.character.name)}/#{encodeURIComponent(w.locale)}',title='#{char.character.name} (level #{char.character.level}, rank #{char.rank})')
+            a(href='/view/member/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(char.character.name)}/#{encodeURIComponent(w.locale)}',title='#{char.character.name} (#{i18n("level")} #{char.character.level}, #{i18n("rank")} #{char.rank})')
               img(src='http://#{w.region}.battle.net/static-render/#{w.region}/#{char.character.thumbnail}',
                 onerror='charImgError(this)',
                 style='border:solid black 1px;')

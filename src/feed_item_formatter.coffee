@@ -72,7 +72,7 @@ class wf.FeedItemFormatter
 
   char_link: (p) =>
     alt_text = @get_formal_name(p)
-    alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
+    alt_text = "#{alt_text} (#{i18n.__('level')} #{p.armory.level})" if p.armory?.level?
     "<a href=\""+@armory_link(p)+"\" alt=\"#{alt_text}\" title=\"#{alt_text}\"><img src=\"http://#{p.region}.battle.net/static-render/#{p.region}/#{p.armory.thumbnail}\" align='left' style='border:solid black 1px;' class='char_image'></a>"
 
   get_formal_name: (p) ->
@@ -89,7 +89,7 @@ class wf.FeedItemFormatter
 
   char_name: (p) =>
     alt_text = @get_formal_name(p)
-    alt_text = "#{alt_text} (level #{p.armory.level})" if p.armory?.level?
+    alt_text = "#{alt_text} (#{i18n.__('level')} #{p.armory.level})" if p.armory?.level?
     "<a href=\""+@armory_link(p)+"\" alt='#{alt_text}' title='#{alt_text}'>#{p.armory.name}</a>"
 
   get_item: (items, item_id, locale, region) ->
