@@ -27,4 +27,4 @@ wf.timing_off = (name) ->
     wf.debug "Elapsed time:#{elapsed}ms:#{name}"
     wf.timing new Error("Elapsed time:#{elapsed}ms:#{name}") if elapsed > 3000
   else
-    wf.error "No timing info found for #{name}, timings:#{JSON.stringify(wf.timings)}"
+    wf.warn "No timing info found for #{name}, timings:#{JSON.stringify(wf.timings)}"
