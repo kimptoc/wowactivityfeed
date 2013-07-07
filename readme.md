@@ -8,6 +8,11 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+Use https://github.com/pazguille/shuffle-array/issues/2 for picking home page selection (and sort them)
+
+Promote Google group - https://groups.google.com/forum/?fromgroups#!forum/wow-activity-feed
+- link on site & on twitter
+
 Performance... multiple API scraper servers?
 Very Busy when doing armory calls
 Perhaps run several processes on same box, eg per region, at different times (so node for webapp, node for scrape and mongo)

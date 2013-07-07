@@ -76,6 +76,10 @@ wf.set_locale = (p_locale, p_realm, p_region) ->
 
 
 wf.format_date = (dt) ->
+  unless dt?
+    wf.error "format_date, passed null date"
+    dt = new Date()
+
   dateMoment = moment(dt).lang(wf.locale_lang[i18n.getLocale()])
   "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
 

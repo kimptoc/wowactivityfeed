@@ -239,6 +239,9 @@ class wf.FeedItemFormatter
     if change_description == ""
       wf.debug "No change found, so not generating a feed item"
       return null
+    unless change_date?
+      wf.debug "No change date found, so not generating a feed item, desc:#{change_description}"
+      return null
     max_title_length = 75
     max_description_length = 300
     if change_title.length > max_title_length
