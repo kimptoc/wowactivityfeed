@@ -10,6 +10,17 @@ class wf.SearchView extends Backbone.View
 
   template: _.template( $('#search-template').html() )
 
+  events:
+    'change #realm_region' : 'realm_selected'
+    'click #search_text' : 'searchtext_clicked'
+    'click #search_now' : 'searchNowClicked'
+
+  realm_selected: ->
+    console?.log "realm_selected"
+
+  searchtext_clicked: ->
+    console?.log "Search box clicked"
+
   initialize: =>
     @model.realms.bind('reset',@render)
     @model.results.bind('reset',@render)
@@ -44,5 +55,4 @@ class wf.SearchView extends Backbone.View
 
     $('#search_text').val(@name)
     $('#'+@realm_region_id).attr('selected','selected')
-    $('#search_now').on('click', @searchNowClicked)
     return this
