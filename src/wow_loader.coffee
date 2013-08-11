@@ -297,7 +297,7 @@ class wf.WoWLoader
     get_region_locale_realms = (param, region_callback) =>
       wowlookup.get_realms param.region, param.locale, (realms) ->
         if realms.length == 0
-          wf.error "Uh-oh For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
+          wf.warn "Uh-oh For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
           get_realms_error = true
         else
           wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"

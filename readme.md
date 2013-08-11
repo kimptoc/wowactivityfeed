@@ -8,6 +8,24 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+Review error logging - 
+
+Problem with unicode and app signature, maybe...
+
+This is direct:
+http://us.battle.net/api/wow/character/goldrinn/c%C3%AAix
+
+This is the runscope version:
+https://www.runscope.com/public/6e1ab5f0-19d5-4e9a-aedd-e4e83c020985/32d191d0-9cea-41df-a2bb-623ffd2928f0
+
+I get a nicely formatted json error:
+
+  "reason": "Invalid application signature."
+
+
+
+
+
 Use https://github.com/pazguille/shuffle-array/issues/2 for picking home page selection (and sort them)
 
 Promote Google group - https://groups.google.com/forum/?fromgroups#!forum/wow-activity-feed

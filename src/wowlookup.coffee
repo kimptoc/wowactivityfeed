@@ -110,7 +110,7 @@ class wf.WowLookup
     @with_armory (armory) ->
       armory.item {id:item_id, region, locale}, (err, item) ->
         if err
-          wf.error "Problem finding item id:#{item_id}/#{locale}/#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          wf.warn "WOWAPI:Problem finding item id:#{item_id}/#{locale}/#{region} error:#{err.message} : #{JSON.stringify(err)}"
           callback?(null)
         else
           item.item_id = item_id
@@ -142,7 +142,7 @@ class wf.WowLookup
         date_retrieved = new Date()
         all_realms = [] # results
         if err
-          wf.error "Problem finding realms for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          wf.warn "WOWAPI:Problem finding realms for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
         else
           wf.info "Region #{region} found #{realms.length} realm(s)"            
           for realm in realms
