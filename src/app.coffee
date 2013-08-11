@@ -214,13 +214,13 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
     label: JSON.stringify(req.headers)
     value: 1
 
-  wf.timing_on("/feed/#{req.params.name}")
 
   type = req.params.type
   type = 'member' if type == "character"
   region = req.params.region.toLocaleLowerCase()
   realm = req.params.realm.toLocaleLowerCase()
   name = req.params.name.toLocaleLowerCase()
+  wf.timing_on("/feed/#{name}")
 #  locale = req.params.locale or wf.REGION_LOCALE[region]
 
   unless _.contains(wf.all_regions, region)
