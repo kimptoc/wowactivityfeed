@@ -62,7 +62,7 @@ create_cron '00 00 3,12,15,21,23 * * *', ->
 # how to use waf
 create_cron '00 40 2,8,14,22 * * *', ->
   wf.info "cronjob tick...6 hourly, how to"
-  push_info("How to use guild/character RSS feed - https://wafbeta.uservoice.com/.")
+  push_info("To use RSS feed, see 'how to' entries https://wafbeta.uservoice.com/forums/181669-general.")
 
 # waf language conversion
 create_cron '00 15 4,9,13,21 * * *', ->
