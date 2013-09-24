@@ -59,6 +59,13 @@ create_cron '00 00 3,12,15,21,23 * * *', ->
           push_info("Uh-oh - something has gone horribly wrong... there may be trouble ahead - call @kimptoc urgently!")
 
 
+"Having trouble finding your toon on my site?  Send me the name/server and I will send you the link!  http://wowactivity.kimptoc.net/"
+
+# find a toon offer
+create_cron '00 05 22 * * *', ->
+  wf.info "cronjob tick...once a day, find a toon offer"
+  push_info("Having trouble finding a toon?  @ or DM me the name/realm & I will send you the link!")
+
 # how to use waf
 create_cron '00 40 2,8,14,22 * * *', ->
   wf.info "cronjob tick...6 hourly, how to"
