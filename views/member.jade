@@ -6,7 +6,7 @@ block htmlhead
 block content
   .container
     h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}, #{i18n("level")}: #{w.armory.level}
-    div History available: #{h.length}
+    div #{i18n("History available")}: #{h.length}
     if w.armory.guild 
       div 
         | #{i18n("Guild")}:
