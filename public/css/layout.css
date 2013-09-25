@@ -21,8 +21,8 @@
 	div.header_block { width:940px; padding:31px 0 0 0; margin:0 auto; position:relative; text-align:left}
 	/*Main Navugation*/
 	nav.head_nav { border-top:#2fc29e 1px solid; border-bottom:#2fc29e 1px solid; padding:1px 0; margin-bottom:70px}
-	nav.head_nav ul {border-top:#2fc29e 1px solid; border-bottom:#2fc29e 1px solid; list-style:none; margin:0; padding:18px 100px 18px 195px; display:block; overflow:hidden}
-	nav.head_nav ul li { margin:0; float:left; padding:0 6px 0 0; background:url(../images/menu_marker.png) no-repeat right center;}
+	nav.head_nav ul {border-top:#2fc29e 1px solid; border-bottom:#2fc29e 1px solid; list-style:none; margin:0; padding:18px 0 18px 0; display:block; overflow:hidden}
+	nav.head_nav ul li { margin:0; float:right; padding:0 6px 0 0; background:url(../images/menu_marker.png) no-repeat right center;}
 	nav.head_nav ul li.second { padding:0 190px 0 0px; background:none;}
 	nav.head_nav ul li.last { background:none;}
 	nav.head_nav ul li a {font-size:18px; line-height:20px; color:#ffffff; text-transform:uppercase; font-family:'YanoneKaffeesatzThin'; display:block; padding:0 15px; text-decoration:none}
