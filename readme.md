@@ -8,6 +8,8 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+Did ‘’ for  ‘xxx’ - If first bit blank, just say ‘progressed’ or similar
+
 Review error logging - 
 
 Problem with unicode and app signature, maybe...
@@ -46,6 +48,7 @@ slugify realm names (as blizz does...) eg Ревущий фьорд should becom
 
 maybe guild/char names too
 
+Try https://github.com/pid/speakingurl 
 
 
 

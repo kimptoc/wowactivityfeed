@@ -26,38 +26,6 @@ class wf.WoWLoader
     @wow.set_item_loader_queue async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
 
 
-#  ensure_registered_correct: (item, info, callback) =>
-#    if item.register_check != false and !info.error? and (item.name != info.name or item.realm != info.realm or item.region != info.region or item.locale != info.locale)
-#      wf.info "Registered entry is different, update registered"
-#      item_key =
-#        type: item.type
-#        region: item.region
-#        name: item.name
-#        realm: item.realm
-#        locale: item.locale
-#      new_item_key =
-#        type: info.type
-#        region: info.region
-#        name: info.name
-#        realm: info.realm
-#        locale: info.locale
-#      item.realm = info.realm
-#      item.region = info.region
-#      item.name = info.name
-#      item.locale = info.locale
-#      item.updated_at = new Date()
-#      store.load @wow.get_registered_collection(), new_item_key, null, (new_key_item)=>
-#        if new_key_item?
-#          # new key exists already, so delete old one
-#          store.remove @wow.get_registered_collection(), item_key, ->
-#            callback?(info)
-#        else
-#          store.upsert @wow.get_registered_collection(), item_key, item, ->
-#            callback?(info)
-#    else
-#      callback?(info)
-
-
   format_armory_info: () ->
 #  format_armory_info: (type, region, realm, name,locale, info, doc) ->
 #    param = {type,region,realm,name,locale,info,doc}
