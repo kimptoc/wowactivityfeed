@@ -8,6 +8,8 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+Show times on website in user timezone, not always GMT
+
 Did ‘’ for  ‘xxx’ - If first bit blank, just say ‘progressed’ or similar
 
 Review error logging - 
