@@ -82,7 +82,7 @@
   "Other Langs?": "Andere langs",
   "%s is now level %s!": "%s ist jetzt ab stufe %s!",
   "Guild %s is now at guild level %s!": "Gilde %s ist jetzt auf ebene der gilde %s!",
-  " Currently tracking activity for %s guilds and %s characters": null,
+  " Currently tracking activity for %s guilds and %s characters": " Derzeit verfolgung aktivitäten für %s gilden und %s zeichen",
   "head": "Kopf",
   "neck": "hals",
   "shoulder": "schulter",
