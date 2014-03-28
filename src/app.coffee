@@ -325,8 +325,22 @@ wf.app.get '/debug/colours', (req, res) ->
   res.render "colours", locales: null
 
 wf.app.get '/debug/registered.csv', (req, res) ->
+  # convert results to array, first row headers, for rest get columns in same order - use first object to get columns
   wf.wow.get_registered (results) ->
-    res.csv(results);    
+    headers_done = false
+    headers = []
+    results_as_array = []
+    for item in results
+      if !headers_done
+        for own key of item
+          headers.push key
+        results_as_array.push headers
+        headers_done = true
+      detail_row = []
+      for key in headers
+        detail_row.push item[key]
+      results_as_array.push detail_row
+    res.csv(results_as_array);
 
 wf.app.get '/debug/registered/:locale?', (req, res) ->
   wf.wow.get_registered (results) ->
