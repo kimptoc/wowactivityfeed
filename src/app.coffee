@@ -36,55 +36,53 @@ Array.prototype.sample = (n) -> sample(this, n)
 
 wf.app = express()
 
-wf.app.configure 'development', ->
-  wf.info "Express app.configure/development"
-  wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))   
-  
-wf.app.configure 'production', ->
-  wf.info "Express app.configure/production"
+if process.env.NODE_ENV == 'development'
+  wf.info "Express app/development"
+  wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
+
+if process.env.NODE_ENV == 'production'
+  wf.info "Express app/production"
   wf.SITE_URL = wf.SITE_URL_PROD
   wf.SITE_URL = process.env.SITE_URL if process.env.SITE_URL?
-  wf.app.use(express.errorHandler())   
+  wf.app.use(express.errorHandler())
 
-wf.app.configure ->
-  wf.info "App Startup/Express configure:env=#{wf.app.get('env')},dirname=#{__dirname}"
-  wf.app.set('views', __dirname + '/../views')  
-  wf.app.set('view engine', 'jade')  
-  wf.app.engine('jade', require('jade').__express)
-  wf.app.use(express.bodyParser())  
-  wf.app.use(express.methodOverride())  
-  wf.app.use(express.static(path.join(__dirname,'..', 'public')))
-  wf.app.use(wf.app.router)  
-  wf.app.set('port', wf.SITE_PORT)
-  # wf.app.use(express.favicon())  
-  # wf.app.use(express.logger('dev'))  
-  wf.app.use(wf.expressLogger())
+wf.info "App Startup/Express configure:env=#{wf.app.get('env')},dirname=#{__dirname}"
+wf.app.set('views', __dirname + '/../views')
+wf.app.set('view engine', 'jade')
+wf.app.engine('jade', require('jade').__express)
+# wf.app.use(express.bodyParser()) # for form handling
+# wf.app.use(express.methodOverride()) # for put/delete support
+wf.app.use(express.static(path.join(__dirname,'..', 'public')))
+wf.app.set('port', wf.SITE_PORT)
+# wf.app.use(express.favicon())
+# wf.app.use(express.logger('dev'))
+wf.app.use(wf.expressLogger())
 
-  wf.app.use(require('stylus').middleware(
-    src: path.join(__dirname,'..', 'stylus')
-    dest: path.join(__dirname,'..', 'public')
-  ))
+wf.app.use(require('stylus').middleware(
+  src: path.join(__dirname,'..', 'stylus')
+  dest: path.join(__dirname,'..', 'public')
+))
 
 
   # default: using 'accept-language' header to guess language settings
 #  wf.app.use(i18n.init)
 
-  wf.app.locals
-    i18n: i18n.__
-    i18n_locale: i18n.getLocale
+wf.app.locals
+  i18n: i18n.__
+  i18n_locale: i18n.getLocale
 
-  wf.wow ?= new wf.WoW ->
-    wf.wow_stats = new wf.WoWStats()
-    wf.wow_loader = new wf.WoWLoader(wf.wow)
-    # todo - push this into wow object
-    wf.feed_formatter = new wf.FeedItemFormatter()
-    # wf.wow.static_load()
-    wf.ensure_realms_loaded ->
-      if !wf.all_realms or wf.all_realms.length == 0
-        wf.wow_loader.static_loader ->
-          wf.info "Static load complete"
-          wf.all_realms = undefined
-          wf.ensure_realms_loaded()
+wf.wow ?= new wf.WoW ->
+  wf.wow_stats = new wf.WoWStats()
+  wf.wow_loader = new wf.WoWLoader(wf.wow)
+  # todo - push this into wow object
+  wf.feed_formatter = new wf.FeedItemFormatter()
+  # wf.wow.static_load()
+  wf.ensure_realms_loaded ->
+    if !wf.all_realms or wf.all_realms.length == 0
+      wf.wow_loader.static_loader ->
+        wf.info "Static load complete"
+        wf.all_realms = undefined
+        wf.ensure_realms_loaded()
 
 
 
@@ -124,7 +122,7 @@ get_feed = (wowthings, req = null, callback) ->
         for fi in fmt_items
           # wf.debug "Checking #{filterLastModified} vs #{fi.date}:#{filterLastModified == parseInt(fi.date)}"
           if  (!filterLastModified?) or filterLastModified == parseInt(fi.date)
-            feed.push(fi) 
+            feed.push(fi)
         callback?()
     # wf.debug "about to do async queue for formatting"
     feed_queue = async.queue feed_worker, 5
@@ -185,7 +183,7 @@ handle_view = (req, res) ->
 
 wf.app.get '/wow/:region/:type/:realm/:name/:locale?', (req, res) ->
   handle_view(req, res)
-  
+
 wf.app.get '/view/:type/:region/:realm/:name/:locale?', (req, res) ->
   handle_view(req, res)
 
@@ -196,14 +194,14 @@ wf.app.get '/feed/all.rss', (req, res) ->
   wf.wow.get_loaded (items) ->
     get_feed items, (items_to_publish) ->
       res.set('Content-Type', 'application/xml')
-      res.render "rss", 
+      res.render "rss",
         title: 'WoW Activity Feed'
         description: 'WoW Activity Feed - all changes'
         feed_url: "#{wf.SITE_URL}feed/all.rss"
         site_url: "#{wf.SITE_URL}"
         image_url: 'http://www.google.com/icon.png'
         feed:items_to_publish
- 
+
 wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
   wf.warn "#{req.path}::#{req.header('user-agent')}==#{JSON.stringify(req.headers)}"
   locale = wf.sort_locale(req,i18n)
@@ -231,7 +229,7 @@ wf.app.get '/feed/:type/:region/:realm/:name/:locale?.rss', (req, res) ->
     wf.timing_off("/feed/#{name}")
     get_feed items, (items_to_publish) ->
       res.set('Content-Type', 'application/xml')
-      res.render "rss", 
+      res.render "rss",
         title: i18n.__("WoW Activity Feed for %s",name)
         description: i18n.__("WoW Activity Feed for %s %s, of %s realm %s", type, name, region, realm)
         feed_url: "#{wf.SITE_URL}feed/#{type}/#{encodeURIComponent(region)}/#{encodeURIComponent(realm)}/#{encodeURIComponent(name)}.rss"
@@ -282,7 +280,7 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
     get_feed items, (items_to_publish) ->
       results = []
       if items? and items.length >0 # might get nothing back, so need to return empty array
-        item = items[0] 
+        item = items[0]
         item_lookup = {type, realm, region, name:item.name, locale}
         item_lookup.name = item.guild if type == "guild" and item.guild?
         item.waf_feed = items_to_publish
@@ -292,13 +290,13 @@ wf.app.get '/json/get/:type/:region/:realm/:name/:locale?', (req, res) ->
         item.armory_api_link = wf.feed_formatter.armory_api_link(item_lookup)
         item.wow_type = wf.feed_formatter.wow_type(type)
         item.wow_type_locale = i18n.__(item.wow_type)
-        item.name = item_lookup.name 
+        item.name = item_lookup.name
         results.push item
       res.send JSON.stringify(results)
 
 
 wf.app.get '/debug/wireframe1', (req, res) ->
-  res.render "wireframe1" 
+  res.render "wireframe1"
 
 wf.app.get '/debug/wireframe2', (req, res) ->
   res.render "wireframe2", locales: null
