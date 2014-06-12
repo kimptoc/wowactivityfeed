@@ -10,6 +10,7 @@
     },
     "dependencies":{
         "express":"",
+        "errorhandler":"",
         "jade":"",
         "stylus":"",
         "armory":"git://github.com/kimptoc/node-armory.git",

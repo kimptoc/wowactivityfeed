@@ -3,8 +3,9 @@ global.wf ?= {}
 require './init_nodefly'
 
 express = require('express')
+errorHandler = require('errorhandler')
+
 csv = require('express-csv')
-http = require('http')
 path = require('path')
 _ = require('underscore')
 async = require "async"
@@ -38,13 +39,13 @@ wf.app = express()
 
 if process.env.NODE_ENV == 'development'
   wf.info "Express app/development"
-  wf.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
+  wf.app.use(errorHandler({ dumpExceptions: true, showStack: true }))
 
 if process.env.NODE_ENV == 'production'
   wf.info "Express app/production"
   wf.SITE_URL = wf.SITE_URL_PROD
   wf.SITE_URL = process.env.SITE_URL if process.env.SITE_URL?
-  wf.app.use(express.errorHandler())
+  wf.app.use(errorHandler())
 
 wf.info "App Startup/Express configure:env=#{wf.app.get('env')},dirname=#{__dirname}"
 wf.app.set('views', __dirname + '/../views')
@@ -64,10 +65,7 @@ wf.app.use(require('stylus').middleware(
 ))
 
 
-  # default: using 'accept-language' header to guess language settings
-#  wf.app.use(i18n.init)
-
-wf.app.locals
+wf.app.locals =
   i18n: i18n.__
   i18n_locale: i18n.getLocale
 
@@ -383,5 +381,5 @@ wf.app.get '/:locale?', (req, res) ->
         res.render "index", title: 'Home', f: feed_sample, locales: wf.i18n_config.locales, root_url: '/', locale:req.params.locale, stats: {num_guilds, num_chars}
 
 
-http.createServer(wf.app).listen(wf.app.get('port'), ->
-  wf.info("Express server listening on port " + wf.app.get('port')))
+wf.app.listen wf.app.get('port'), ->
+  wf.info("Express server listening on port " + wf.app.get('port'))

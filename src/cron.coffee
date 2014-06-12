@@ -8,15 +8,15 @@ parseString = require('xml2js').parseString;
 
 require "./tweet"
 require './locale'
-  
+
 wf.armory_load_requested = false
 
 wf.tweeter = new wf.Tweet()
 
 create_cron = (cron_schedule, cron_task) ->
-  try 
+  try
     new cronJob cron_schedule, cron_task,
-      null, 
+      null,
       true, #/* Start the job right now */,
       null #/* Time zone of this job. */
   catch e
@@ -36,7 +36,7 @@ wf.info_queue = []
 
 push_info = (msg) ->
   now = new Date()
-  info = 
+  info =
     title: "WoW Activity @ #{wf.date_tweet(new Date())}"
     description: msg
     date: now
@@ -48,7 +48,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-create_cron '00 00 3,12,15,21,23 * * *', ->
+create_cron '00 00 3,11,19 * * *', ->
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
@@ -67,19 +67,19 @@ create_cron '00 05 22 * * *', ->
   push_info("Having trouble finding a toon?  @ or DM me the name/realm & I will send you the link!")
 
 # how to use waf
-create_cron '00 40 2,8,14,22 * * *', ->
+create_cron '00 40 2,10,18 * * *', ->
   wf.info "cronjob tick...6 hourly, how to"
   push_info("To use RSS feed, see 'how to' entries https://wafbeta.uservoice.com/forums/181669-general.")
 
 # waf language conversion
-create_cron '00 15 4,9,13,21 * * *', ->
+create_cron '00 15 4,12,20 * * *', ->
   wf.info "cronjob tick...6 hourly, locales"
   push_info "Help convert WoW Activity to your language - http://bit.ly/waflang // @webtranslateit"
 
 
 # how to use waf
 create_cron '00 35 00 * * *', ->
-# wf.counts4job = create_cron '00 10 17 * * *', -> 
+# wf.counts4job = create_cron '00 10 17 * * *', ->
   wf.info "cronjob tick...daily build status"
   request 'https://api.travis-ci.org/repos/kimptoc/wowactivityfeed.xml', (err1,resp1,body) ->
     parseString body, (err2,resp2) ->
@@ -120,11 +120,10 @@ create_cron '00 50 23 * * *', ->
   wf.wow_loader.static_loader ->
     wf.info "Static load complete"
 
-# wf.staticjob = new cronJob '00 00 00 * * *', (-> 
+# wf.staticjob = new cronJob '00 00 00 * * *', (->
 #   wf.debug "cronjob tick...load armory static"
 #   wf.wow.static_load()
 #   ),
-#   null, 
+#   null,
 #   true, #/* Start the job right now */,
 #   null #/* Time zone of this job. */
-
