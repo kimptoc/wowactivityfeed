@@ -293,8 +293,8 @@
       "dependencies": {
         "request": {
           "version": "2.14.1",
-          "from": "request@git://github.com/mreinstein/request.git",
-          "resolved": "git://github.com/mreinstein/request.git#43457936e7815050feb1cf1ed9e34fee9d94893b",
+          "from": "request@git://github.com/kimptoc/request.git",
+          "resolved": "git://github.com/kimptoc/request.git#43457936e7815050feb1cf1ed9e34fee9d94893b",
           "dependencies": {
             "form-data": {
               "version": "0.0.10",
