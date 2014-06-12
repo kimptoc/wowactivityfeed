@@ -252,7 +252,7 @@ class wf.FeedItemFormatter
       change_description = "#{@char_link(item)} #{@char_name(item)}: #{change_description}"
     else if item?.type == "guild"
       change_description = "#{@char_name(item)}: #{change_description}"
-    result = 
+    result =
       title: change_title
       description: change_description
       wow_type: @wow_type(item?.type)
@@ -308,7 +308,7 @@ class wf.FeedItemFormatter
     else
       description += " #{JSON.stringify(news_item)}"
 
-    result = 
+    result =
       title: change_title
       description: description
       wow_type: @wow_type(item?.type)
@@ -343,8 +343,14 @@ class wf.FeedItemFormatter
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "BOSSKILL"
-      change_title = "#{@get_formal_name(item)} - '#{feed_item.criteria.description}'"
-      description = i18n.__("%s %s Did:'%s' for '%s' - %s",@char_link(item),@char_name(item),feed_item.criteria.description,feed_item.achievement.title,feed_item.achievement?.description)
+      achievement_description = ""
+      achievement_description = "- #{feed_item.achievement?.description}" if !!feed_item.achievement?.description
+      if !!feed_item.criteria.description
+        change_title = "#{@get_formal_name(item)} - '#{feed_item.criteria.description}'"
+        description = i18n.__("%s %s Did:'%s' for '%s' - %s",@char_link(item),@char_name(item),feed_item.criteria.description,feed_item.achievement.title,achievement_description)
+      else
+        change_title = "#{@get_formal_name(item)} - '#{feed_item.achievement.title}'"
+        description = i18n.__("%s %s '%s' - %s",@char_link(item),@char_name(item),feed_item.achievement.title,achievement_description)
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"
@@ -356,7 +362,7 @@ class wf.FeedItemFormatter
       description += " #{JSON.stringify(feed_item)}"
       wf.error "Unrecognised type:#{feed_item.type}:#{description}"
 
-    result = 
+    result =
       title: change_title
       description: description
       wow_type: @wow_type(item?.type)

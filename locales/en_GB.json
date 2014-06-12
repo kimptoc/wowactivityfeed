@@ -1,6 +1,6 @@
 {
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
-	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' %s",
 	"%s has joined": "%s has joined",
 	"%s has left": "%s has left",
 	"Guild membership has changed: %s. ": "Guild membership has changed: %s. ",
@@ -102,5 +102,6 @@
 	"shirt": "shirt",
 	"tabard": "tabard",
 	"rank": "rank",
-	"Gave up %s": "Gave up %s"
+	"Gave up %s": "Gave up %s",
+	"%s %s '%s' - %s": "%s %s '%s' - %s"
 }
