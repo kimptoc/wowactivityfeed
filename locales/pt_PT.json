@@ -1,7 +1,7 @@
 {
   "%s %s now has %s! %s": "%s %s agora tem %s! %s",
-  "%s %s Did:'%s' for '%s' - %s": "%s %s fez:'%s' para '%s' %s",
-  "%s %s '%s' - %s": "%s %s '%s' %s",
+  "%s %s Did:'%s' for '%s' - %s": "%s %s fez:'%s' para '%s' (x%s) %s",
+  "%s %s '%s' - %s": "%s %s '%s' (x%s) %s",
   "%s has joined": "%s ingressou",
   "%s has left": "%s deixou",
   "Guild membership has changed: %s. ": "A afiliação da guilda foi alterada: %s. ",

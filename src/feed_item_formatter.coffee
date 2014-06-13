@@ -347,10 +347,10 @@ class wf.FeedItemFormatter
       achievement_description = "- #{feed_item.achievement?.description}" if !!feed_item.achievement?.description
       if !!feed_item.criteria.description
         change_title = "#{@get_formal_name(item)} - '#{feed_item.criteria.description}'"
-        description = i18n.__("%s %s Did:'%s' for '%s' - %s",@char_link(item),@char_name(item),feed_item.criteria.description,feed_item.achievement.title,achievement_description)
+        description = i18n.__("%s %s Did:'%s' for '%s' - %s",@char_link(item),@char_name(item),feed_item.criteria.description,feed_item.achievement.title,feed_item.quantity,achievement_description)
       else
         change_title = "#{@get_formal_name(item)} - '#{feed_item.achievement.title}'"
-        description = i18n.__("%s %s '%s' - %s",@char_link(item),@char_name(item),feed_item.achievement.title,achievement_description)
+        description = i18n.__("%s %s '%s' - %s",@char_link(item),@char_name(item),feed_item.achievement.title,feed_item.quantity,achievement_description)
       thingId = feed_item.criteria.id
 
     else if feed_item.type == "LOOT"

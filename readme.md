@@ -14,9 +14,6 @@ ogs/server.log.1:[2014-06-12 17:09:57.913] [ERROR] [default] - { [MongoError: in
 no char image, but getting updates...
 http://wowactivity.kimptoc.net/view/member/us/proudmoore/ultimadrood/pt_BR?ts=1402599567000&id=null
 
-spurious dash at the end
-http://wowactivity.kimptoc.net/view/member/eu/silvermoon/miyabi/en_GB?ts=1402646092000&id=23742
-
 
 Show times on website in user timezone, not always GMT
 
@@ -455,3 +452,5 @@ http://www.windowsazure.com/en-us/develop/nodejs/tutorials/deploying-with-cloud9
 
 appfrog/mongodb
 http://docs.appfog.com/frameworks/node
+
+http://blizzard.github.io/api-wow-docs/
