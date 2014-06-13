@@ -5,9 +5,12 @@ block htmlhead
 
 block content
   .container
-    h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}, #{i18n("level")}: #{w.armory.level}
+    if w.armory
+      h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}, #{i18n("level")}: #{w.armory.level}
+    else
+      h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}
     div #{i18n("History available")}: #{h.length}
-    if w.armory.guild 
+    if w.armory && w.armory.guild 
       div 
         | #{i18n("Guild")}:
         a(href='/view/guild/#{w.region}/#{w.realm}/#{w.armory.guild.name}/#{w.locale}')= w.armory.guild.name

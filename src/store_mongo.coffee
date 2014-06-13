@@ -58,7 +58,7 @@ class wf.StoreMongo
     @with_collection collection_name, (coll) ->
       coll.insert document_object, safe:true, (err, docs) ->
         if err
-          wf.error_no_store(err)
+          wf.error(err)
           stored_handler?(null)
         else
           wf.debug "saved in #{collection_name}:#{document_object}"
