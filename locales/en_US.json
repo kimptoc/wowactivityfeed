@@ -6,7 +6,7 @@
 	"%s is now rank %s": "%s is now rank %s",
 	"Rep change(s): %s. ": "Rep change(s): %s. ",
 	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' (x%s) %s",
-    "%s %s '%s' - %s": "%s %s '%s' (x%s) %s",
+	"%s %s '%s' - %s": "%s %s '%s' (x%s) %s",
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
 	"%s - %s bought %s": "%s - %s bought %s",
 	"%s bought %s %s": "%s bought %s %s",
@@ -102,5 +102,6 @@
 	"finger2": "finger2",
 	"trinket1": "trinket1",
 	"offHand": "offHand",
-	"shirt": "shirt"
+	"shirt": "shirt",
+	"rank": "rank"
 }

@@ -19,6 +19,12 @@ block content
       &nbsp;-&nbsp;
       a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/#{w.locale}.rss') #{i18n("rss")}
     hr
+    script(type='text/javascript').
+      function charImgError(image){
+      image.onerror = ""
+      image.src = "http://eu.battle.net//wow/static/images/2d/avatar/1-1.jpg"
+      return true;
+      }
     each item in f
       .clear
       div

@@ -14,6 +14,10 @@ ogs/server.log.1:[2014-06-12 17:09:57.913] [ERROR] [default] - { [MongoError: in
 no char image, but getting updates...
 http://wowactivity.kimptoc.net/view/member/us/proudmoore/ultimadrood/pt_BR?ts=1402599567000&id=null
 
+http://us.battle.net/static-render/us/proudmoore/214/2207702-avatar.jpg
+http://us.battle.net/static-render/us/proudmoore/168/153466024-avatar.jpg
+http://eu.battle.net//wow/static/images/2d/avatar/1-1.jpg
+http://us.battle.net/static-render/us/proudmoore/214/2207702-avatar.jpg
 
 Show times on website in user timezone, not always GMT
 
