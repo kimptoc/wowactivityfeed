@@ -44,6 +44,7 @@
 	"%s - got some loot - %s!": "%s - got some loot - %s!",
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
 	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+  "%s %s '%s' - %s": "%s %s '%s' %s",
 	"members": "members",
 	"History available": "History available",
 	"Unknown....": "Unknown....",

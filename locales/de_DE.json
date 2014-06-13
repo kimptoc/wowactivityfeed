@@ -1,6 +1,7 @@
 {
   "%s %s now has %s! %s": "%s %s jetzt hat %s! %s",
   "%s %s Did:'%s' for '%s' - %s": "%s %s Hat:'%s' für '%s' %s",
+  "%s %s '%s' - %s": "%s %s '%s' %s",
   "%s has joined": "%s hat verbunden",
   "%s has left": "%sVerlassen hat",
   "Guild membership has changed: %s. ": "Gilde-Mitgliedschaft hat sich geändert %s",

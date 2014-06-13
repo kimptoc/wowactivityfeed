@@ -2,6 +2,7 @@
 	"And as if by magic, %s appeared!": "And as if by magic, %s appeared!",
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
 	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+  "%s %s '%s' - %s": "%s %s '%s' %s",
 	"Yay, more achievement points - now at %s. ": "Yay, more achievement points - now at %s. ",
 	"Rep change(s): %s. ": "Rep change(s): %s. ",
 	"%s is now rank %s": "%s is now rank %s",

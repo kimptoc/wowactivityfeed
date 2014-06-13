@@ -1,6 +1,7 @@
 {
 	"%s %s now has %s! %s": "%s %s now has %s! %s",
 	"%s %s Did:'%s' for '%s' - %s": "%s %s Did:'%s' for '%s' - %s",
+  "%s %s '%s' - %s": "%s %s '%s' %s",
 	" %s - level %s! ": " %s - level %s! ",
 	"Now at level %s! ": "Now at level %s! ",
 	"Gear change: %s. ": "Gear change: %s. ",
