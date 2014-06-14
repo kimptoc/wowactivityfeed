@@ -126,10 +126,12 @@ class wf.WoWLoader
     # if not same, calc diff, then save it
     @wow.ensure_armory_indexes =>
       store.load @wow.get_armory_collection(), {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, {sort: {"lastModified": -1}}, (doc) =>
-        wf.debug "store_update:#{JSON.stringify(doc)}"
-        # bothNull = !param.info.lastModified? and !doc.lastModified?
-        # if doc? and (bothNull or doc.lastModified == param.info.lastModified)
-        if doc? and doc.lastModified == param.info.lastModified
+        wf.debug "store_update:#{param.name}:#{JSON.stringify(doc)}"
+        wf.debug "store_update:#{param.name}:#{JSON.stringify(param.info)}"
+        infoNull = !param.info.lastModified?
+        bothNull = infoNull and !doc?.lastModified?
+        if doc? and (bothNull or doc.lastModified == param.info.lastModified)
+        # if doc? and doc.lastModified == param.info.lastModified
           wf.debug "Ignored as no changes and saved already: #{param.name}"
           param.stored_handler?()
         else
