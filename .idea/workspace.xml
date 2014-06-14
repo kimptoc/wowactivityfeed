@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store_mongo.coffee" afterPath="$PROJECT_DIR$/src/store_mongo.coffee" />
-    </list>
+    <list default="true" id="89fe5eae-af60-42bc-b2fa-11c69301967d" name="Default" comment="" />
     <ignored path="wowfeed.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,7 +31,7 @@
       <file leaf-file-name="wow_loader.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="18" selection-start="5528" selection-end="5531" vertical-scroll-proportion="0.0" vertical-offset="1828" max-vertical-offset="4815">
+            <state line="144" column="18" selection-start="5601" selection-end="5604" vertical-scroll-proportion="0.0" vertical-offset="1873" max-vertical-offset="4845">
               <folding />
             </state>
           </provider>
@@ -553,7 +551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wow_loader.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="18" selection-start="5528" selection-end="5531" vertical-scroll-proportion="0.0" vertical-offset="1828" max-vertical-offset="4815">
+        <state line="144" column="18" selection-start="5601" selection-end="5604" vertical-scroll-proportion="0.0" vertical-offset="1873" max-vertical-offset="4845">
           <folding />
         </state>
       </provider>
