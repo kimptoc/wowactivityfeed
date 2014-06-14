@@ -127,6 +127,8 @@ class wf.WoWLoader
     @wow.ensure_armory_indexes =>
       store.load @wow.get_armory_collection(), {region:param.region, realm:param.realm, type:param.type, name:param.name, locale:param.locale}, {sort: {"lastModified": -1}}, (doc) =>
         wf.debug "store_update:#{JSON.stringify(doc)}"
+        param.info.lastModified ?= null
+        doc.lastModified ?= null
         if doc? and doc.lastModified == param.info.lastModified
           wf.debug "Ignored as no changes and saved already: #{param.name}"
           param.stored_handler?()

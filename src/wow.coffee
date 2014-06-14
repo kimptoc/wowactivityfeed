@@ -25,9 +25,11 @@ class wf.WoW
   registered_index_1 = {name:1, realm:1, region:1, type:1, locale:1}
   registered_ttl_index_2 = { updated_at: 1 } 
   realms_index_1 = {name:1, slug:1, region:1}
+
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1, locale:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
+  
   armory_item_index_1 = {item_id:1,locale:1,region:1}
   job_running_lock = false
   loader_queue = null
