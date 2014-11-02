@@ -6,10 +6,10 @@ class wf.CallLogger
 
   constructor: (wow, wowlookup, store) ->
 
-    wowlookup_get = wowlookup.get    
+    wowlookup_get = wowlookup.get
     wowlookup.get = (item_info, lastModified, callback) ->
       wf.debug "Wrapped armory call"
-      armory_stats = 
+      armory_stats =
         type: item_info.type
         region: item_info.region
         name: item_info.name
@@ -24,17 +24,17 @@ class wf.CallLogger
         store.insert wow.get_calls_collection(), armory_stats, ->
           callback?(info)
       ]
-    
+
     wowlookup_get_item = wowlookup.get_item
-    wowlookup.get_item = (item_id, locale, region, callback) ->
-      armory_stats = 
+    wowlookup.get_item = (item_id, locale, region, context, callback) ->
+      armory_stats =
         type: "item"
         region: region
         name: item_id
         realm: "na"
         locale: locale
         start_time: new Date().getTime()
-      wowlookup_get_item.apply wowlookup, [item_id, locale, region, (info) ->
+      wowlookup_get_item.apply wowlookup, [item_id, locale, region, context, (info) ->
         armory_stats.end_time = new Date().getTime()
         armory_stats.error = info?.error
         armory_stats.not_modified = (info is undefined and !armory_stats.error?)
@@ -42,7 +42,7 @@ class wf.CallLogger
         store.insert wow.get_calls_collection(), armory_stats, ->
           callback?(info)
       ]
-      
+
 #    wowlookup_get_races = wowlookup.get_races
 #    wowlookup.get_races = (region, callback) ->
 #      armory_stats =
@@ -79,7 +79,7 @@ class wf.CallLogger
 #
     wowlookup_get_realms = wowlookup.get_realms
     wowlookup.get_realms = (region, locale, callback) ->
-      armory_stats = 
+      armory_stats =
         type: "realms"
         region: region
         name: "realms"
@@ -95,5 +95,3 @@ class wf.CallLogger
         store.insert wow.get_calls_collection(), armory_stats, ->
           callback?(info)
       ]
-      
-
