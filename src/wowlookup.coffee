@@ -10,7 +10,7 @@ class wf.WowLookup
 
   armory_instance = null
   armory_connecting = false
-  armory_calls = 
+  armory_calls =
     guild: "guild"
     member: "character"
     character: "character"
@@ -25,11 +25,11 @@ class wf.WowLookup
 
   get_armory: () ->
     param = get_args(callback:Function)
-    armory_defaults = 
+    armory_defaults =
       publicKey: wf.WOW_API_PUBLIC_KEY
       privateKey: wf.WOW_API_PRIVATE_KEY
 
-    request_defaults = 
+    request_defaults =
       timeout: wf.ARMORY_CALL_TIMEOUT
       # pool: false
       maxSockets: 1000
@@ -45,6 +45,7 @@ class wf.WowLookup
           wf.info "Port is open? #{is_open}"
           if is_open
             wf.info "Found the proxy, so use it:#{is_open}"
+            request_defaults.strictSSL = false
             request_defaults.proxy = "http://localhost:8888"
             armory_defaults.request = request_defaults
             armory = require('armory').defaults(armory_defaults)
@@ -105,15 +106,16 @@ class wf.WowLookup
           thing?.locale = locale
           param.result_handler?(thing)
 
-  get_item: (item_id, locale, region = "eu", callback) ->
-    wf.debug "Item lookup:#{item_id}/#{locale}/#{region}"
+  get_item: (item_id, locale, region = "eu", context = null, callback) ->
+    wf.debug "Item lookup:#{item_id}/#{context}/#{locale}/#{region}"
     @with_armory (armory) ->
-      armory.item {id:item_id, region, locale}, (err, item) ->
+      armory.item {id:item_id, context, region, locale}, (err, item) ->
         if err
-          wf.warn "WOWAPI:Problem finding item id:#{item_id}/#{locale}/#{region} error:#{err.message} : #{JSON.stringify(err)}"
+          wf.warn "WOWAPI:Problem finding item id:#{item_id}/#{context}/#{locale}/#{region} error:#{err.message} : #{JSON.stringify(err)}"
           callback?(null)
         else
           item.item_id = item_id
+          item.context = context
           item.locale = locale
           item.region = region
           callback?(item)
@@ -144,7 +146,7 @@ class wf.WowLookup
         if err
           wf.warn "WOWAPI:Problem finding realms for region:#{region} error:#{err.message} : #{JSON.stringify(err)}"
         else
-          wf.info "Region #{region} found #{realms.length} realm(s)"            
+          wf.info "Region #{region} found #{realms.length} realm(s)"
           for realm in realms
             realm.region = region
             realm.lookup_locale = locale
@@ -161,4 +163,3 @@ class wf.WowLookup
 #        else
 #          wf.debug "wowlookup get_static(#{static_load_method}) result:[#{things.length}]#{JSON.stringify(things)}"
 #          callback?(things)
-

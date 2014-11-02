@@ -40,7 +40,7 @@ class wf.WoWLoader
     #   info.achievements_map = achievements_map
     #   achievements_criteria_map = {}
     #   for i in [0..info.achievements.criteria.length-1]
-    #     achievements_criteria_map[info.achievements.criteria[i]] = 
+    #     achievements_criteria_map[info.achievements.criteria[i]] =
     #       created: info.achievements.criteriaCreated[i]
     #       quantity: info.achievements.criteriaQuantity[i]
     #       timestamp: info.achievements.criteriaTimestamp[i]
@@ -207,7 +207,7 @@ class wf.WoWLoader
 #            @ensure_registered_correct item, info, callback
         else
           # send old info back, needed for guilds so we can query the members
-          callback?(doc?.armory) 
+          callback?(doc?.armory)
 
   armory_results_loader: (loader_queue, results_array) ->
     loader_queue.push results_array, (info) ->
@@ -219,8 +219,8 @@ class wf.WoWLoader
     wf.info "armory_load..."
     return if @wow.get_job_running_lock() # only run one at a time....
     @wow.set_job_running_lock(true)
-    try 
-      @wow.set_loader_queue async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads 
+    try
+      @wow.set_loader_queue async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads
       @wow.get_loader_queue().drain = =>
         wf.debug "armory_load:drain"
         @wow.set_job_running_lock(false)
@@ -312,7 +312,15 @@ class wf.WoWLoader
         unless doc?
           wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, (item)=>
             if item?
-              store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback
+              if item.name?
+                store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback
+              else if item.availableContexts? && item.availableContexts.length > 0
+                wf.warn "No item name, trying via context:#{JSON.stringify(item)}"
+                @wow.get_item_loader_queue().push {item_id:item.item_id,locale:item.locale,region:item.region,context:item.availableContexts[0]}
+                # see if context type item and requeue
+              else
+                wf.error "No item name, nor context:#{JSON.stringify(item)}"
+                callback?()
             else
               callback?()
         else
