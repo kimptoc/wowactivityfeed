@@ -271,3 +271,12 @@ class wf.WoW
           callback?(items)
     else
       callback?([])
+
+  load_items_by_id: (params, callback) ->
+    item_id_array = params.item_ids
+    if item_id_array? and item_id_array.length >0
+      store.ensure_index items_collection, armory_item_index_1, {dropDups:true}, ->
+        store.load_all items_collection, {item_id: {$in: item_id_array}}, null, (items) ->
+          callback?(items)
+    else
+      callback?([])
