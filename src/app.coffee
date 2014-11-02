@@ -351,6 +351,12 @@ wf.app.get '/debug/stats', (req, res) ->
   wf.wow_stats.armory_calls wf.wow, (result) ->
     res.render "message", msg: "<pre>"+wf.syntaxHighlight(JSON.stringify(result, undefined, 4))+"</pre>", locales: wf.i18n_config.locales, root_url: null
 
+wf.app.get '/debug/item/:region/:item_id/:locale?', (req, res) ->
+  locale = wf.sort_locale(req,i18n)
+  region = req.params.region?.toLocaleLowerCase()
+  wf.wow.load_items {item_ids:[req.params.item_id],locale,region}, (items) =>
+    res.render "message", msg: "Item:#{req.params.item_id}<p>#{JSON.stringify(items)}"
+
 wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
     res.render "logs", {logs, locales: null}

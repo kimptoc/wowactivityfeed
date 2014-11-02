@@ -8,11 +8,12 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
-history lookups on armory failing, but realm lookups ok??
-mongo history gone after one night??
 
 australian realms - anything to do to support them?
 getting unknown for item names on feed - arent they loaded as part of blizz api call?
+partly due to new context thing.
+but still getting unknowns, eg http://wowactivity.kimptoc.net/view/member/eu/darkspear/yhhbooy/en_GB?&id=112785
+
 
 track upstream changes to the node-armory lib, perhaps revert back to it.
 
