@@ -310,7 +310,7 @@ class wf.WoWLoader
     store.ensure_index @wow.get_items_collection(), @wow.get_armory_item_index_1(), {dropDups:true}, =>
       store.load @wow.get_items_collection(), item_info, null, (doc) =>
         unless doc?
-          wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, (item)=>
+          wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, item_info.context, (item)=>
             if item?
               if item.name?
                 store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback

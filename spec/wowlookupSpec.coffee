@@ -52,11 +52,11 @@ describe "wow armory lookup:", ->
 
     it "valid french member armory lookup basic", (done) ->
       wow = new wf.WowLookup()
-      wow.get {type:"member", region:"eu", realm:"Argent Dawn", name:"Grobmuk", locale:"fr_FR"}, 0, (result) ->
+      wow.get {type:"member", region:"eu", realm:"silvermoon", name:"redsamurai", locale:"fr_FR"}, 0, (result) ->
         should.exist result
         should.not.exist result.error
         should.exist result.locale
-        result.name.should.equal "Grobmuk"
+        result.name.should.equal "Redsamurai"
         result.locale.should.equal "fr_FR"
         done()
 
@@ -90,7 +90,7 @@ describe "wow armory lookup:", ->
 
     it "get item info/1", (done) ->
       wow = new wf.WowLookup()
-      wow.get_item 87417, "en_GB" , "eu", (info) ->
+      wow.get_item 87417, "en_GB" , "eu", null, (info) ->
         info.id.should.equal 87417
         info.locale.should.equal "en_GB"
         info.region.should.equal "eu"
@@ -99,11 +99,29 @@ describe "wow armory lookup:", ->
 
     it "get item info/2", (done) ->
       wow = new wf.WowLookup()
-      wow.get_item 87417, "pt_MX" , "us", (info) ->
+      wow.get_item 87417, "pt_MX" , "us", null, (info) ->
         info.id.should.equal 87417
         info.locale.should.equal "pt_MX"
         info.region.should.equal "us"
         info.name.should.equal "Cajado das Esperanças Despedaçadas"
+        done()
+
+    it "get item info/3 with context", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_item 112826, "en_US" , "us", "raid-finder", (info) ->
+        info.id.should.equal 112826
+        info.locale.should.equal "en_US"
+        info.region.should.equal "us"
+        info.name.should.equal "Ominous Mogu Greatboots"
+        done()
+
+    it "get item info/3 needs context", (done) ->
+      wow = new wf.WowLookup()
+      wow.get_item 112826, "en_US" , "us", null, (info) ->
+        info.id.should.equal 112826
+        info.locale.should.equal "en_US"
+        info.region.should.equal "us"
+        should.not.exist info.name
         done()
 
     it "get all realms", (done) ->
@@ -115,7 +133,7 @@ describe "wow armory lookup:", ->
         realms_by_region_and_slug = {}
         for realm in realms
           realms_by_region_and_slug[realm.region] ?= {}
-          region = realms_by_region_and_slug[realm.region] 
+          region = realms_by_region_and_slug[realm.region]
           existing = region[realm.slug]
           should.not.exist existing
           region[realm.slug] = true

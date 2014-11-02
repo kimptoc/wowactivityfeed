@@ -23,13 +23,13 @@ class wf.WoW
 
   static_index_1 = {id:1, static_type:1}
   registered_index_1 = {name:1, realm:1, region:1, type:1, locale:1}
-  registered_ttl_index_2 = { updated_at: 1 } 
+  registered_ttl_index_2 = { updated_at: 1 }
   realms_index_1 = {name:1, slug:1, region:1}
 
   armory_index_1 = {name:1, realm:1, region:1, type:1, lastModified:1, locale:1}
   armory_archived_ttl_index_2 = {archived_at:1}
   armory_accessed_ttl_index_3 = {accessed_at:1}
-  
+
   armory_item_index_1 = {item_id:1,locale:1,region:1}
   job_running_lock = false
   loader_queue = null
@@ -199,7 +199,7 @@ class wf.WoW
               # wf.debug "we dont have field:#{name}, so deleting changes for it"
               delete sanitised_changes.changes[name]
           item.armory = wf.restore sanitised_changes, previous_item.armory
-          # dont keep feed/news stuff from old entries - ideally should just do unique items on output... later perhaps 
+          # dont keep feed/news stuff from old entries - ideally should just do unique items on output... later perhaps
           delete item.armory.feed if item.armory.feed?
           delete item.armory.news if item.armory.news?
           previous_item_cache[@repatch_item_key(item)] = item
@@ -271,5 +271,3 @@ class wf.WoW
           callback?(items)
     else
       callback?([])
-
-
