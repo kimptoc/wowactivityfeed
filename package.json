@@ -6,7 +6,8 @@
         "npm": "1.1.x"
     },
     "scripts": {
-        "test": "make test"
+        "test": "make test",
+        "serve": "nodemon app.js"
     },
     "dependencies":{
         "express":"",

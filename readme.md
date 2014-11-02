@@ -8,13 +8,18 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+australian realms - anything to do to support them?
+getting unknown for item names on feed - arent they loaded as part of blizz api call?
+
+track character average item level/ilevel, status updates when it changes.
+
 dupe errors
 ogs/server.log.1:[2014-06-12 17:09:57.913] [ERROR] [default] - { [MongoError: insertDocument :: caused by :: 11000 E11000 duplicate key error index: wowfeed.armory_history.$name_1_realm_1_region_1_type_1_lastModified_1_locale_1  dup key: { : "taured", : "les sentinelles", : "eu", : "member", : null, : "fr_FR" }]
 
 
 Show times on website in user timezone, not always GMT
 
-Review error logging - 
+Review error logging -
 
 Problem with unicode and app signature, maybe...
 
@@ -52,7 +57,7 @@ slugify realm names (as blizz does...) eg Ревущий фьорд should becom
 
 maybe guild/char names too
 
-Try https://github.com/pid/speakingurl 
+Try https://github.com/pid/speakingurl
 
 
 
@@ -108,7 +113,7 @@ Getting errors in logs, eg about LEAF signature?
 Search issue - guild La XXVe Armée, eu realm Chants éternels - currently not finding it...
 
 Auto reconnect to mongo?
- 
+
 Perhaps have a url returning num registered (0 and if db problem) - for ease of checking site health...
  - trigger restart if 0 on that url (hourly check)
 
@@ -140,7 +145,7 @@ Error: connection closed
     at Socket._destroy.destroyed (net.js:358:10)
     at process.startup.processNextTick.process._tickCallback (node.js:244:9)
 
-    
+
 Intermittent error: - might be related to async 0.2 issue
 /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/connection/server.js:529
         throw err;
@@ -157,7 +162,7 @@ Error: Callback was already called.
     at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/store_mongo.js:97:59
     at null.<anonymous> (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/mongodb/collection.js:337:9)
 
-    
+
 
 setup new box:
 - configure driver to connect to replicaset, so that change of primary is handling automatically or just make others hidden!
@@ -207,9 +212,9 @@ maybe....
 --Realms etc – less frequent/more robust!
 - faq - how to use rss, with twitter, with fb, with google reader (etc), with guildlaunch.com
 - Lose copyright bit
-- Only do classes daily, ERROR: Problem finding classes for region:eu error:Daily limit exceeded : {} 
+- Only do classes daily, ERROR: Problem finding classes for region:eu error:Daily limit exceeded : {}
 - handle quotes in item names - http://wafbeta.kimptoc.net//view/member/eu/Stormrage/Slynm?ts=1355350538000&id=18203
-- Disable search btn while search is ongoing 
+- Disable search btn while search is ongoing
 - put generic char link on search, not the timespace specific link
 - if get "not found" for character/guild, dont add to registered collection
 - allow search by name only (no realm/region) - but only look at what we have cached?  Any use?
@@ -223,7 +228,7 @@ maybe....
 - show timestamp in msg body
 - http://wafbeta.kimptoc.net//view/member/eu/Nemesis/Spinlady?ts=1355917814000
 - Crusader Spinlady (Ðeus lo vult) New title(s): ', Master of the Ways'
- 
+
 - get duplicate key on item id - could be parallel timing thing
 -   err: 'E11000 duplicate key error index: wowfeed.armory_items.$item_id_1  dup key: { : 83801 }',
 - consider grunt-reduce for express asset pipeline - http://dailyjs.com/2012/12/10/extender-gridy-reduce/
@@ -332,12 +337,12 @@ http://wafbeta.kimptoc.net//view/member/us/Wildhammer/Darketernall?ts=1354166678
 Nodefly - any use?
 http://apm.nodefly.com/#dashboard
 
-- test feed 
+- test feed
   -  http://feedvalidator.org/check.cgi?url=http%3A%2F%2Fwafbeta.kimptoc.net%2Ffeed%2Fguild%2Feu%2FDarkspear%2FMean%2520Girls.rss
   -  http://validator.w3.org/appc/
 
 
-#### history 
+#### history
 - 1 week TTL for main/latest char entry, done, accessed_at
 - 1 day TTL for history items, done, archived_at
 - refresh everytime its viewed via get_history, done
@@ -392,8 +397,8 @@ node_modules/.bin/nodemon app.js
 start mongo - sudo port load mongodb
 and maybe sudo rm /opt/local/var/db/mongodb/mongod.lock
 run tests - bash ./node_modules/.bin/mocha js/*Spec.js
-or node ./node_modules/mocha/bin/mocha 
-run app - 
+or node ./node_modules/mocha/bin/mocha
+run app -
 node node_modules/nodemon/nodemon app.js
 compile coffee - same as above
 
@@ -415,7 +420,7 @@ Total:        599 1829 1412.5   1091    3887
 
 hosting:
 - http://www.lowendbox.com/
-- 
+-
 
 Unofficial WoW fansite kit - http://us.battle.net/wow/en/forum/topic/7006895011
 

@@ -20,7 +20,7 @@ describe "feed item formatter", ->
 
     it "basic item, new", (done)->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         whats_changed :
           overview : "NEW"
         lastModified : 0
@@ -31,15 +31,36 @@ describe "feed item formatter", ->
 
     it "basic item, no whats_changed", (done)->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         lastModified : 0
       f.process item, (d) ->
         d.length.should.equal 0
         done()
 
+    it "basic item, update to items", (done)->
+      f = new wf.FeedItemFormatter()
+      item =
+        name : "test"
+        armory :
+          level : 5
+          items :
+            averageItemLevel : 5
+            averageItemLevelEquipped : 6
+        whats_changed :
+          overview : "UPDATE"
+          changes :
+            items :
+              averageItemLevel : [3,5]
+              averageItemLevelEquipped : [2,6]
+        lastModified : 1
+      f.process item, (d)->
+        d[0].description.should.match /averageItemLevel: 5/
+        d[0].description.should.match /averageItemLevelEquipped: 6/
+        done()
+
     it "basic item, update", (done)->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         name : "test"
         armory :
           level : 5
@@ -55,7 +76,7 @@ describe "feed item formatter", ->
 
     it "get items", (done) ->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         name : "test"
         armory :
           level : 5
@@ -75,7 +96,7 @@ describe "feed item formatter", ->
 
     it "get_name, no titles", (done) ->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         name : "test"
         armory :
           name : "Test"
@@ -85,7 +106,7 @@ describe "feed item formatter", ->
 
     it "get_name, titles, none selected", (done) ->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         name : "test"
         armory:
           name : "Test"
@@ -99,7 +120,7 @@ describe "feed item formatter", ->
 
     it "get_name, titles, one selected", (done) ->
       f = new wf.FeedItemFormatter()
-      item = 
+      item =
         name : "test"
         armory:
           name : "Test"
