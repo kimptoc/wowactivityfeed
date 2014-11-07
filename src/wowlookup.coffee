@@ -107,7 +107,7 @@ class wf.WowLookup
           param.result_handler?(thing)
 
   get_item: (item_id, locale, region = "eu", context = null, callback) ->
-    wf.debug "Item lookup:#{item_id}/#{context}/#{locale}/#{region}"
+    wf.info "Item lookup:#{item_id}/#{context}/#{locale}/#{region}"
     @with_armory (armory) ->
       armory.item {id:item_id, context, region, locale}, (err, item) ->
         if err
