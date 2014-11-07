@@ -264,10 +264,11 @@ class wf.WoW
             found = false
             for it in items
               found = true if wanted == it.item_id
-            wf.wow.get_item_loader_queue().push {item_id:wanted,locale:params.locale,region:params.region} unless found
-#          items_hash = {}
-#          for i in items
-#            items_hash[i.item_id] = i
+            if found
+              wf.info "Found item in db:#{wanted}/#{params.locale}/#{params.region}"
+            else
+              wf.info "Not found item in db:#{wanted}/#{params.locale}/#{params.region}"
+              wf.wow.get_item_loader_queue().push {item_id:wanted,locale:params.locale,region:params.region}
           callback?(items)
     else
       callback?([])

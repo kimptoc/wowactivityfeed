@@ -355,6 +355,12 @@ wf.app.get '/debug/item/:item_id', (req, res) ->
   wf.wow.load_items_by_id {item_ids:[parseInt(req.params.item_id)]}, (items) =>
     res.render "message", msg: "Item:#{req.params.item_id}<p>#{JSON.stringify(items)}"
 
+wf.app.get '/debug/item2/:region/:item_id/:locale?', (req, res) ->
+  locale = wf.sort_locale(req,i18n)
+  region = req.params.region?.toLocaleLowerCase()
+  wf.wow.load_items {item_ids:[req.params.item_id],locale,region}, (items) =>
+    res.render "message", msg: "Item:#{req.params.item_id}<p>#{JSON.stringify(items)}"
+
 wf.app.get '/debug/logs/:type', (req, res) ->
   wf.get_logs req.params.type, (logs) ->
     res.render "logs", {logs, locales: null}

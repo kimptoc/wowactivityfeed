@@ -103,5 +103,7 @@
 	"trinket1": "trinket1",
 	"offHand": "offHand",
 	"shirt": "shirt",
-	"rank": "rank"
+	"rank": "rank",
+	"averageItemLevel": "averageItemLevel",
+	"averageItemLevelEquipped": "averageItemLevelEquipped"
 }
