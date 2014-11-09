@@ -142,7 +142,7 @@ class wf.WoWLoader
             items_to_get = feed_formatter.get_items new_item
             wf.debug "Loading char items:#{items_to_get.length}"
             for item_id in items_to_get
-              @wow.get_item_loader_queue().push {item_id,locale:param.locale,region:param.region}
+              @wow.push_item_loader_queue {item_id,locale:param.locale,region:param.region}
             if doc?
               store.update @wow.get_armory_collection(), doc, {$unset:{armory:1}, $set:{archived_at:new Date()}}, =>
                 wf.debug "Now saved #{param.info.name}/#{param.name}, updated old one"
@@ -240,7 +240,7 @@ class wf.WoWLoader
 
   static_loader: (callback) ->
 #    async.parallel {realms:@realms_loader, races:@races_loader, classes:@classes_loader}, callback
-    async.parallel {realms:@realms_loader}, callback
+    async.parallelLimit {realms:@realms_loader},2, callback
 
 #TODO make this code handle locales...
 #  load_static_claz: (type, claz, loaded_callback) ->
@@ -269,8 +269,8 @@ class wf.WoWLoader
     get_region_locale_realms = (param, region_callback) =>
       wowlookup.get_realms param.region, param.locale, (realms) ->
         if realms.length == 0
-          wf.warn "Uh-oh For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
-          get_realms_error = true
+          wf.warn "Uh-oh For region #{param.region}/#{param.locale}, NO realms returned!"
+          # get_realms_error = true  # TODO reenable this when blizz fixes CN/SEA regions
         else
           wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
         for realm in realms
@@ -287,7 +287,7 @@ class wf.WoWLoader
     for locale in wf.locales
       for region in wf.all_regions
         region_locales.push {region,locale}
-    async.forEach region_locales, get_region_locale_realms, =>
+    async.forEachLimit region_locales, 2, get_region_locale_realms, =>
       realms_array = []
       if ! get_realms_error
         realms_array = _.values(all_realms) if all_realms?
@@ -295,7 +295,9 @@ class wf.WoWLoader
         if realms_array? and realms_array.length > 0
           store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
             store.remove_all @wow.get_realms_collection(), =>
-              store.insert @wow.get_realms_collection(), realms_array, -> callback?(realms_array)
+              store.insert @wow.get_realms_collection(), realms_array, (arg1,arg2)->
+                wf.info "Insert realm result:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+                callback?(realms_array)
         else
           callback?(realms_array)
       else
@@ -307,22 +309,26 @@ class wf.WoWLoader
     # see if we have it already
     # if not, go to armory
     # persist
+    wf.info "Loading item:#{JSON.stringify(item_info)}"
     store.ensure_index @wow.get_items_collection(), @wow.get_armory_item_index_1(), {dropDups:true}, =>
       store.load @wow.get_items_collection(), item_info, null, (doc) =>
         unless doc?
           wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, item_info.context, (item)=>
             if item?
               if item.name?
+                wf.info "Saving found item:#{item_info.item_id}/#{item_info.locale}/#{item_info.region}"
                 store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback
               else if item.availableContexts? && item.availableContexts.length > 0
                 wf.warn "No item name, trying via context:#{JSON.stringify(item)}"
-                @wow.get_item_loader_queue().push {item_id:item.item_id,locale:item.locale,region:item.region,context:item.availableContexts[0]}
+                wf.wow.push_item_loader_queue {item_id:item.item_id,locale:item.locale,region:item.region,context:item.availableContexts[0]}
                 # see if context type item and requeue
                 callback?()
               else
                 wf.error "No item name, nor context:#{JSON.stringify(item)}"
                 callback?()
             else
+              wf.error "No item found at all:#{JSON.stringify(item_info.item_id)}"
               callback?()
         else
+          wf.error "Item found in db:#{JSON.stringify(item_info.item_id)}"
           callback?()

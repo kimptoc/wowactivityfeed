@@ -5,8 +5,8 @@ wf.SITE_URL = "http://localhost:#{wf.SITE_PORT}"
 wf.SITE_URL_PROD = "http://waf1.eu01.aws.af.cm/"
 wf.HISTORY_LIMIT = 12
 wf.HISTORY_SAVE_LIMIT = 4
-wf.ARMORY_CALL_THREADS = 20
-wf.ITEM_LOADER_THREADS = 20
+wf.ARMORY_CALL_THREADS = 2
+wf.ITEM_LOADER_THREADS = 2
 wf.ARMORY_CALL_TIMEOUT = 30000
 wf.ARMORY_LOOKUP_TIMEOUT = 30
 wf.INFO_HISTORY_LIMIT = 30
@@ -31,7 +31,8 @@ wf.i18n_config =
   defaultLocale: wf.locale_default
   directory: 'locales'
 
-wf.all_regions = ["eu","us","cn","kr","tw"]
+# wf.all_regions = ["eu","us","cn","kr","tw","sea"]
+wf.all_regions = ["sea"]
 
 wf.REGION_LOCALE =
   us: "en_US"
@@ -41,7 +42,7 @@ wf.REGION_LOCALE =
   zh: "zh_TW"
   tw: "zh_TW"
 
-wf.locale_lang = 
+wf.locale_lang =
   'en_US':'en'
   'es_MX':'es'
   'pt_BR':'pt-br'

@@ -8,13 +8,30 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
-getting unknown for item names on feed - arent they loaded as part of blizz api call?
-partly due to new context thing.
-but still getting unknowns, eg http://wowactivity.kimptoc.net/view/member/eu/darkspear/yhhbooy/en_GB?&id=112785
--- still not fixed now...
-http://wowactivity.kimptoc.net/view/member/eu/silvermoon/badimage/de_DE?ts=1415045804000&id=112557
-http://wowactivity.kimptoc.net/view/member/eu/silvermoon/badimage/en_GB?ts=1415045804000&id=112557
-http://wowactivity.kimptoc.net/view/member/eu/silvermoon/badimage/es_ES?ts=1415045804000&id=112557
+are we handling multi-realm guilds?
+
+use new API endpoints!!!
+- for in page links - not possible, as need apikey - do it on server and display on page
+- for lookups
+
+- getting frequent over limit errors - asked for higher
+- not compressing responses
+- no chinese region
+
+## NEW BATTLE NET API ISSUES
+- last modified does not work - API issue
+
+remove use of forked armory, reasons for it:
+- gzip support, now in request
+- new item context (probably need to refork)
+- use https
+- new api (refork)
+- pass options onwards to request (gzip, proxy...)
+- better handle json parse errors (eg when using proxy)
+- handle auth properly
+- header date?
+- encodeURI of path
+
 
 australian realms - anything to do to support them?
 

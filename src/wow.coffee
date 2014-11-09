@@ -53,6 +53,12 @@ class wf.WoW
     item_loader_queue
 
   set_item_loader_queue: (queue) ->
+    queue.drain = (arg1,arg2) ->
+      wf.info "Item loader queue drain:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    queue.empty = (arg1,arg2) ->
+      wf.info "Item loader queue empty:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    queue.saturated = (arg1,arg2) ->
+      wf.info "Item loader queue saturated:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     item_loader_queue = queue
 
   get_armory_pending_queue: ->
@@ -255,6 +261,11 @@ class wf.WoW
   get_realms: (callback) ->
     store.load_all_with_fields realms_collection, {}, {name:1, region:1, locale:1, slug:1}, {sort:{name:1, region:1}}, callback
 
+  push_item_loader_queue: (options) ->
+    wf.wow.get_item_loader_queue().push options, (arg1,arg2) ->
+      wf.info "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    wf.info "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
+
   load_items: (params, callback) ->
     item_id_array = params.item_ids
     if item_id_array? and item_id_array.length >0
@@ -268,7 +279,7 @@ class wf.WoW
               wf.info "Found item in db:#{wanted}/#{params.locale}/#{params.region}"
             else
               wf.info "Not found item in db:#{wanted}/#{params.locale}/#{params.region}"
-              wf.wow.get_item_loader_queue().push {item_id:wanted,locale:params.locale,region:params.region}
+              wf.wow.push_item_loader_queue {item_id:wanted,locale:params.locale,region:params.region}
           callback?(items)
     else
       callback?([])
