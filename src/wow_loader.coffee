@@ -318,6 +318,7 @@ class wf.WoWLoader
                 wf.warn "No item name, trying via context:#{JSON.stringify(item)}"
                 @wow.get_item_loader_queue().push {item_id:item.item_id,locale:item.locale,region:item.region,context:item.availableContexts[0]}
                 # see if context type item and requeue
+                callback?()
               else
                 wf.error "No item name, nor context:#{JSON.stringify(item)}"
                 callback?()
