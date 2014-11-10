@@ -33,7 +33,6 @@ class wf.WoW
   armory_item_index_1 = {item_id:1,locale:1,region:1}
   job_running_lock = false
   loader_queue = null
-  armory_pending_queue = []
   item_loader_queue = null
 
   constructor: (callback)->
@@ -47,6 +46,12 @@ class wf.WoW
     loader_queue
 
   set_loader_queue: (queue) ->
+    queue.drain = (arg1,arg2) ->
+      wf.info "Char loader queue drain:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    queue.empty = (arg1,arg2) ->
+      wf.info "Char loader queue empty:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    queue.saturated = (arg1,arg2) ->
+      wf.info "Char loader queue saturated:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     loader_queue = queue
 
   get_item_loader_queue: ->
@@ -60,12 +65,6 @@ class wf.WoW
     queue.saturated = (arg1,arg2) ->
       wf.info "Item loader queue saturated:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     item_loader_queue = queue
-
-  get_armory_pending_queue: ->
-    armory_pending_queue
-
-  clear_armory_pending_queue: ->
-    armory_pending_queue = []
 
   get_job_running_lock: ->
     job_running_lock
@@ -126,8 +125,7 @@ class wf.WoW
               param.registered_handler?(true)
           else
             wf.debug "Not Registered #{param.item_info.name}"
-            armory_pending_queue.push param.item_info
-            wf.armory_load_requested = true # new item/guild, so do an armory load soon
+            wf.wow.unshift_loader_queue param.item_info
             param.item_info.updated_at = new Date()
             store.add registered_collection,param.item_info, ->
               wf.debug "Now Registered #{param.item_info.name}"
@@ -168,7 +166,6 @@ class wf.WoW
 
   get_loaded: (loaded_handler) ->
     @ensure_armory_indexes =>
-      # store.load_all armory_collection, {}, {limit:wf.HISTORY_LIMIT,sort: {"lastModified": -1}}, loaded_handler
       store.load_all_with_fields armory_collection, {}, fields_to_select,
         {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (results) =>
           @repatch_results(results, loaded_handler)
@@ -265,6 +262,25 @@ class wf.WoW
     wf.wow.get_item_loader_queue().push options, (arg1,arg2) ->
       wf.info "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     wf.info "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
+
+  handle_loader_complete: (info) ->
+    wf.info "Char loader queue worker complete:#{JSON.stringify(info)}"
+    if info?.type == "guild" and info?.members?
+      for member in info.members
+        # TODO - only queue members that are not registered themselves...
+        wf.wow.push_loader_queue type: "member", region: info.region.toLocaleLowerCase(), realm: info.realm.toLocaleLowerCase(), name: member.character.name.toLocaleLowerCase(), locale: info.locale, ignore_requeue: true
+    unless info?.ignore_requeue
+      wf.info "requeuing:#{info?.name}"
+      wf.wow.push_loader_queue info
+
+  push_loader_queue: (options) ->
+    #TODO - only queue if not there already...
+    wf.wow.get_loader_queue().push options, @handle_loader_complete
+    wf.info "Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
+
+  unshift_loader_queue: (options) ->
+    wf.wow.get_loader_queue().unshift options, @handle_loader_complete
+    wf.info "Char loader queue size:#{wf.wow.get_loader_queue().length()}"
 
   load_items: (params, callback) ->
     item_id_array = params.item_ids

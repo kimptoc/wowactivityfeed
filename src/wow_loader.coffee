@@ -24,6 +24,7 @@ class wf.WoWLoader
     new wf.CallLogger(@wow, wowlookup, store)
     feed_formatter = new wf.FeedItemFormatter()
     @wow.set_item_loader_queue async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
+    @wow.set_loader_queue async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads
 
 
   format_armory_info: () ->
@@ -203,38 +204,24 @@ class wf.WoWLoader
         if info?
           @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
             # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+            info.ignore_requeue = item?.ignore_requeue
             callback?(info)
 #            @ensure_registered_correct item, info, callback
         else
           # send old info back, needed for guilds so we can query the members
+          doc?.armory?.ignore_requeue = item?.ignore_requeue
           callback?(doc?.armory)
 
   armory_results_loader: (loader_queue, results_array) ->
-    loader_queue.push results_array, (info) ->
-      if info?.type == "guild" and info?.members?
-        for member in info.members
-          loader_queue.push type: "member", region: info.region.toLocaleLowerCase(), realm: info.realm.toLocaleLowerCase(), name: member.character.name.toLocaleLowerCase(), locale: info.locale, register_check:false
+    wf.wow.push_loader_queue results_array
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
-    return if @wow.get_job_running_lock() # only run one at a time....
-    @wow.set_job_running_lock(true)
+    # return if @wow.get_job_running_lock() # only run one at a time....
+    # @wow.set_job_running_lock(true)
     try
-      @wow.set_loader_queue async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads
-      @wow.get_loader_queue().drain = =>
-        wf.debug "armory_load:drain"
-        @wow.set_job_running_lock(false)
-        @wow.set_loader_queue(null)
-        loaded_callback?()
-      if @wow.get_armory_pending_queue()? and @wow.get_armory_pending_queue().length >0
-        wf.info "Loading from armory_pending_queue, length:#{@wow.get_armory_pending_queue().length}"
-        temp_pending_queue = @wow.get_armory_pending_queue()[..]
-        wf.info "Loading from armory_pending_queue/temp, length:#{temp_pending_queue.length}"
-        @wow.clear_armory_pending_queue()
-        @armory_results_loader(@wow.get_loader_queue(), temp_pending_queue)
-      else
-        @wow.get_registered (results_array) =>
-          @armory_results_loader(@wow.get_loader_queue(), results_array)
+      @wow.get_registered (results_array) =>
+        @armory_results_loader(@wow.get_loader_queue(), results_array)
     catch e
       wf.error "armory_load:#{e}"
 
@@ -330,5 +317,5 @@ class wf.WoWLoader
               wf.error "No item found at all:#{JSON.stringify(item_info.item_id)}"
               callback?()
         else
-          wf.error "Item found in db:#{JSON.stringify(item_info.item_id)}"
+          wf.info "Item found in db:#{JSON.stringify(item_info.item_id)}"
           callback?()

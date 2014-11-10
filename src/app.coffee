@@ -81,6 +81,8 @@ wf.wow ?= new wf.WoW ->
         wf.info "Static load complete"
         wf.all_realms = undefined
         wf.ensure_realms_loaded()
+    #TODO - only start this after realms loaded...
+    wf.wow_loader.armory_load()
 
 
 

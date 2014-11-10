@@ -24,10 +24,10 @@ create_cron = (cron_schedule, cron_task) ->
 
 
 #create_cron '00 00,30 * * * *', ->
-create_cron '00 00 * * * *', ->
+# create_cron '00 00 * * * *', ->
 #create_cron '00 00 */2 * * *', ->
-  wf.info "cronjob tick... time to check armory for char/guild updates"
-  wf.armory_load_requested = true
+  # wf.info "cronjob tick... time to check armory for char/guild updates"
+  # wf.armory_load_requested = true
 
 wf.info_queue = []
 
@@ -108,12 +108,12 @@ create_cron '00 25 02 * * *', ->
 
 
 
-create_cron '*/4 * * * * *', ->
-  wf.debug "cronjob tick...check if armory load requested (running now? #{wf.wow.get_job_running_lock()})"
-  if wf.armory_load_requested
-    wf.armory_load_requested = false
-    wf.info "time for armory_load..."
-    wf.wow_loader.armory_load()
+# create_cron '*/4 * * * * *', ->
+#   wf.debug "cronjob tick...check if armory load requested (running now? #{wf.wow.get_job_running_lock()})"
+#   if wf.armory_load_requested
+#     wf.armory_load_requested = false
+#     wf.info "time for armory_load..."
+#     wf.wow_loader.armory_load()
 
 create_cron '00 50 23 * * *', ->
   wf.info "Reloading realms"

@@ -11,25 +11,24 @@ require './locale'
 class wf.WoWStats
 
   armory_calls: (wow, callback)->
-    info = 
+    info =
       startup_time: wf.date_stats(startup_time)
       memory_usage: process.memoryUsage()
       node_uptime: process.uptime()
       armory_load:
-        armory_load_running: wow.get_job_running_lock()
-        number_running: wow.get_loader_queue()?.running() 
+        number_running: wow.get_loader_queue()?.running()
         number_queued: wow.get_loader_queue()?.length()
       item_loader_queue:
         number_running: wow.get_item_loader_queue()?.running()
         number_queued: wow.get_item_loader_queue()?.length()
     wow.get_store().dbstats wow.get_collections(), (stats) ->
-      info.db = stats      
+      info.db = stats
       start_of_day = moment().startOf('day').valueOf()
       yesterday = moment().startOf('day').subtract(days:1).valueOf()
       twohours_ago = moment().subtract(hours:2).valueOf()
-      wow.get_store().aggregate wow.get_calls_collection(), 
+      wow.get_store().aggregate wow.get_calls_collection(),
         [
-          { $project: 
+          { $project:
             type: 1
             start_time: 1
             error: 1
@@ -37,18 +36,18 @@ class wf.WoWStats
             not_modifieds:{$cmp: ["$not_modified", false]}
             date_category:{$cond:[$gte:["$start_time", twohours_ago],"last-2hours", $cond:[$gte:["$start_time", start_of_day],"today",$cond:[$gte:["$start_time", yesterday],"yesterday", "before-yesterday"]]]}
           },
-          { $group : 
+          { $group :
             # _id: "$type"
             # _id:{ error:"$error", type:"$type"}
             _id:{ date_category:"$date_category", type:"$type", error:"$error"}
             totalByType:{ $sum:1 }
             earliest: {$min: "$start_time"}
             latest: {$max: "$start_time"}
-            errors: {$sum: "$errors"} 
+            errors: {$sum: "$errors"}
             not_modified: {$sum :"$not_modifieds"}
           }
-        ], 
-        {}, 
+        ],
+        {},
         (results) ->
           if results?
             results2 = {}
@@ -70,4 +69,3 @@ class wf.WoWStats
             # info.aggregate = results
             info.aggregate_calls = results2
           callback?(info)
-
