@@ -269,7 +269,7 @@ class wf.WoW
       for member in info.members
         # TODO - only queue members that are not registered themselves...
         wf.wow.push_loader_queue type: "member", region: info.region.toLocaleLowerCase(), realm: info.realm.toLocaleLowerCase(), name: member.character.name.toLocaleLowerCase(), locale: info.locale, ignore_requeue: true
-    unless info?.ignore_requeue
+    unless !info || info.ignore_requeue
       wf.info "requeuing:#{info?.name}"
       wf.wow.push_loader_queue info
 
