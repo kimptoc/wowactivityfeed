@@ -1,6 +1,10 @@
 {
     "name":"wowfeed",
     "version":"0.0.1",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/kimptoc/wowactivityfeed.git"
+    },
     "engines": {
         "node": "0.8.x",
         "npm": "1.1.x"
