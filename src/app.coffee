@@ -104,6 +104,16 @@ get_feed_all = (callback) ->
   wf.wow.get_loaded (wowthings) ->
     get_feed wowthings, callback
 
+wf.app.get '/maxlevels/:locale?', (req, res) ->
+  wf.sort_locale(req,i18n)
+  get_maxlevels_all (feed) ->
+    wf.sort_locale(req,i18n)
+    res.render "maxlevels", f: feed, locales: wf.i18n_config.locales, root_url: '/maxlevels/'
+
+get_maxlevels_all = (callback) ->
+  wf.wow.get_all_by_filter {type:"member","armory.level":100,"whats_changed.changes.level":{$exists:true}},null,(wowthings) ->
+    get_feed wowthings, callback
+
 get_feed = (wowthings, req = null, callback) ->
   if 'function' == typeof req
     callback = req
