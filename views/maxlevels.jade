@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    h3.bordered #{i18n("Latest Toons at Max Level!")}
+    hr
+    if f
+      each item in f
+        .item_update
+          h5
+            a(href='#{item.url}') !{item.title}
+          span &nbsp; !{item.description}
+            small &nbsp; #{item.date_formatted}
+
+
+//    hr
+//    #{JSON.stringify(colls)}

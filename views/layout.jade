@@ -1,17 +1,17 @@
 !!! 5
-//if lt IE 7 
-  html.ie.ie6(lang='en')  
-//if IE 7 
-  html.ie.ie7(lang='en')  
-//if IE 8 
-  html.ie.ie8(lang='en')  
+//if lt IE 7
+  html.ie.ie6(lang='en')
+//if IE 7
+  html.ie.ie7(lang='en')
+//if IE 8
+  html.ie.ie8(lang='en')
 // [if (gte IE 9)|!(IE)] <!
 html(lang='en')
   // <![endif]
   head
     //
     //   Basic Page Needs
-    //    ================================================== 
+    //    ==================================================
     meta(charset='utf-8')
     title #{i18n("WoW Activity Feed")}
     meta(name='description', content='')
@@ -19,11 +19,11 @@ html(lang='en')
     meta(name="google-site-verification", content="aSXLarDjtjGxv6pLFq0tOkpkQduv3DjaAVYCkfkRNaI")
     //
     //   Mobile Specific Metas
-    //    ================================================== 
+    //    ==================================================
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     //
     //   CSS
-    //    ================================================== 
+    //    ==================================================
     link(rel='stylesheet', href='/css/base.css')
     link(rel='stylesheet', href='/css/skeleton.css')
     link(rel='stylesheet', href='/css/layout.css')
@@ -35,7 +35,7 @@ html(lang='en')
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
     //
     //   Favicons
-    //    ================================================== 
+    //    ==================================================
     link(rel='shortcut icon', href='/images/favicon.ico')
     link(rel='apple-touch-icon', href='/images/apple-touch-icon.png')
     link(rel='apple-touch-icon', sizes='72x72', href='/images/apple-touch-icon-72x72.png')
@@ -45,7 +45,7 @@ html(lang='en')
   body
 
     //   JS
-    //    ================================================== 
+    //    ==================================================
     script(type='text/javascript', src='/js/jquery-1.7.1.min.js')
     script(src='/js/tabs.js')
     script(type='text/javascript', src='/js/jquery.mobile.customized.min.js')
@@ -55,7 +55,7 @@ html(lang='en')
 
     //
     //   Primary Page Layout
-    //    ================================================== 
+    //    ==================================================
     // Delete everything in this .container and get started on your own site!
     header
       .header_block
@@ -72,6 +72,8 @@ html(lang='en')
           ul.mainmenu
             li
               a(href='/everyone/#{i18n_locale()}') #{i18n("All Updates")}
+            li
+              a(href='/maxlevels/#{i18n_locale()}') #{i18n("Max Levels!")}
             //- li
             //-   a(href='/debug/armory_load') Armory!
             //- li
@@ -125,7 +127,7 @@ html(lang='en')
     include includes/uservoice.jade
     include includes/google_analytics
     //- include includes/github.jade
-    
+
     //
     //   End Document
-    //  ================================================== 
+    //  ==================================================

@@ -22,8 +22,9 @@
 	/*Main Navugation*/
 	nav.head_nav { border-top:#2fc29e 1px solid; border-bottom:#2fc29e 1px solid; padding:1px 0; margin-bottom:70px}
 	nav.head_nav ul {border-top:#2fc29e 1px solid; border-bottom:#2fc29e 1px solid; list-style:none; margin:0; padding:18px 0 18px 0; display:block; overflow:hidden}
-	nav.head_nav ul li { margin:0; float:right; padding:0 6px 0 0; background:url(../images/menu_marker.png) no-repeat right center;}
-	nav.head_nav ul li.second { padding:0 190px 0 0px; background:none;}
+	/*nav.head_nav ul li { margin:0; float:right; padding:0 6px 0 0; background:url(../images/menu_marker.png) no-repeat right center;}*/
+	nav.head_nav ul li { margin:0; float:left; padding:0 6px 0 0; }
+	nav.head_nav ul li.second { padding:0 0px 0 600px; background:none;}
 	nav.head_nav ul li.last { background:none;}
 	nav.head_nav ul li a {font-size:18px; line-height:20px; color:#ffffff; text-transform:uppercase; font-family:'YanoneKaffeesatzThin'; display:block; padding:0 15px; text-decoration:none}
 	nav.head_nav ul li a:hover {color:#2fc29e; text-decoration:none }
@@ -65,9 +66,9 @@
 	.divider40 {background-position:40.7% 0}
 	.divider60 {background-position:59.4% 0}
 	.block_mar40 { margin-bottom:40px!important}
-	
+
 	ul.portfolio li .portfolio_overlay .zoom  { display:block}
-	
+
 	/* Tablet Portrait size to standard 960 (devices and browsers) */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
 	body { overflow-x:hidden}
@@ -87,7 +88,7 @@
 	.sti-menu li a h2 {top:10px; left:0px; padding:0; font-size:26px;}
 	/*Footer*/
 	.footer { width:768px; margin:0 auto; padding:30px 0 30px 0; background:#5e5f5f; text-align:left}
-	
+
 	/*Fixes*/
 	ul.featured_images li { margin:0; padding:0 20px 10px 0px; border:none; float:left}
 	ul.featured_images li:first-child { padding:0 20px 10px 0px; border:none}
@@ -125,11 +126,11 @@
 	.footer .copy { float:left; color:#ffffff; line-height:24px; font-size:11px; padding:0 0 0 30px}
 	.footer .social { float:right; text-align:left; padding:0 30px 0 0}
 	.footer .social ul { list-style:none; margin:0; padding:0}
-	
+
 	ul.portfolio li .portfolio_overlay .zoom { display:none}
 	/*Fixes*/
 	ul.featured_images li { margin:0; padding:0 20px 10px 0px; border:none; float:left}
-	ul.featured_images li:first-child { padding:0 20px 10px 0px; border:none}	
+	ul.featured_images li:first-child { padding:0 20px 10px 0px; border:none}
 	.columns { padding-bottom:40px}
 	.block_mar40 { margin-bottom:0px!important}
 	/*Dividers*/
@@ -152,10 +153,10 @@
 	/*Logo*/
 	.logo { position:absolute; right:10px!important; margin:0px; top:5px; background:url(../images/bg_main.png) repeat; width:160px; height:140px;}
 	.logo a { background:url(../images/bg_logo.png) no-repeat; width:150px; height:145px; position:absolute; top:-5px; left:5px; display:block; color:#fff; font-size:37px; line-height:39px; text-align:center; text-transform:uppercase; text-decoration:none; font-family:'YanoneKaffeesatzLight'}
-	.logo a span { display:block; text-align:center; padding:25px 0 9px 0; color:#ffffff; font-size:18px; line-height:20px; font-family:'YanoneKaffeesatzLight'}	
+	.logo a span { display:block; text-align:center; padding:25px 0 9px 0; color:#ffffff; font-size:18px; line-height:20px; font-family:'YanoneKaffeesatzLight'}
 	/*Slider*/
 	.top_slider { width:300px; margin:0 auto; z-index:100; overflow:hidden}
-	#top_slider { margin-bottom:50px!important}	
+	#top_slider { margin-bottom:50px!important}
 	/*Animated Blocks*/
 	.sti-menu { width:300px; margin:0 0 45px 0}
 	.sti-menu li { width:130px; margin:0 10px; height:330px; padding-bottom:15px}
@@ -174,7 +175,7 @@
 
 	/*Fixes*/
 	ul.featured_images li { margin:0; padding:0 20px 10px 0px; border:none; float:left}
-	ul.featured_images li:first-child { padding:0 20px 10px 0px; border:none}	
+	ul.featured_images li:first-child { padding:0 20px 10px 0px; border:none}
 	.columns { padding-bottom:30px}
 	.block_mar40 { margin-bottom:0px!important}
 	/*Dividers*/
