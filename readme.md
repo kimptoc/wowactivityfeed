@@ -8,13 +8,31 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 ## TODO
 
+realm reloading
+- cater for removed realms
+- currently deletes all and then loads whats good
+- maybe do it per region, load region, if seems ok, delete existing and save 
+
+continuous char loads
+- does search/new member/guild work ok?
+- intermittent crashes? did a fix, but could be due to no data returned, leading to requeue failing. Maybe go back to db to do requeues
+eg on drain, although only started when went to having 2 threads...
+- how to handle not found chars, drop from queue until next restart (but then most probably due to guild membership)
+- how does current server trigger restart?  log rotation
+- seems to be crashing intra day - but at least restarting ok
+
+update to include changes from the beforenet site - max levels page
+
+update related npm packages to latest
+
+review/reduce tweets produced
+
 are we handling multi-realm guilds?
 
 use new API endpoints!!!
 - for in page links - not possible, as need apikey - do it on server and display on page
 - for lookups
 
-- getting frequent over limit errors - asked for higher
 - not compressing responses
 - no chinese region
 

@@ -14,7 +14,7 @@
         "serve": "nodemon app.js"
     },
     "dependencies":{
-        "express":"",
+        "express":"~4",
         "errorhandler":"",
         "jade":"",
         "stylus":"",

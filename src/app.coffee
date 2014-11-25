@@ -354,10 +354,10 @@ wf.app.get '/debug/registered/:locale?', (req, res) ->
   wf.wow.get_registered (results) ->
     res.render "registered", reg: results, locales: wf.i18n_config.locales, root_url: '/registered/'
 
-wf.app.get '/debug/armory_load', (req, res) ->
-  wf.armory_load_requested = true
-  wf.wow.get_registered (regs) ->
-    res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds", locales: null
+# wf.app.get '/debug/armory_load', (req, res) ->
+#   wf.armory_load_requested = true
+#   wf.wow.get_registered (regs) ->
+#     res.render "armory_load", res: "Armory load requested - #{regs.length} registered members/guilds", locales: null
 
 wf.app.get '/debug/stats', (req, res) ->
   wf.wow_stats.armory_calls wf.wow, (result) ->

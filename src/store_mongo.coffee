@@ -24,7 +24,11 @@ class wf.StoreMongo
     @with_collection collection_name, (coll) ->
       wf.debug "now to remove all '#{collection_name}'"
       coll.remove {}, safe:true, (err) ->
-        wf.error(err) if err
+        if err
+          wf.error "Problem removing all for '#{collection_name}'"
+          wf.error(err)
+        else
+          wf.info "Successfully removed all for '#{collection_name}'"
         removed_handler?()
 
   ensure_index: (collection_name, fieldSpec, options, callback) ->
@@ -36,7 +40,7 @@ class wf.StoreMongo
         wf.error(err) if err
         wf.debug "Trying to create index on #{collection_name} - maybe did it:#{index_name}"
         callback?(index_name)
-      
+
   add: (collection_name, document_object, stored_handler) ->
     @insert collection_name, document_object, (coll)->
       if coll?
@@ -49,19 +53,51 @@ class wf.StoreMongo
               if err
                 wf.error(err)
                 stored_handler?(null)
-              else 
+              else
                 stored_handler?(count)
       else
         stored_handler?(null)
 
   insert: (collection_name, document_object, stored_handler) ->
+    wf.info "about to do insert"
     @with_collection collection_name, (coll) ->
+      wf.info "about to do insert/got collection:#{collection_name}:#{document_object?.name}-#{document_object?.region}:#{JSON.stringify(document_object)}"
       coll.insert document_object, safe:true, (err, docs) ->
+        wf.info "about to do insert/insert returned"
         if err
+          wf.error "insert/got an error trying to save:#{collection_name}/#{document_object}"
           wf.error(err)
           stored_handler?(null)
         else
-          wf.debug "saved in #{collection_name}:#{document_object}"
+          wf.info "saved in #{collection_name}:#{document_object}"
+          stored_handler?(coll)
+
+  insert_many: (collection_name, documents, stored_handler) ->
+    wf.info "about to do insert_many"
+    @with_collection collection_name, (coll) ->
+      wf.info "about to do insert_many/got collection:#{collection_name}:#{documents?.length}:#{JSON.stringify(documents)}"
+      coll.insertMany documents, safe:true, (err, docs) ->
+        wf.info "about to do insert_many/insert returned"
+        if err
+          wf.error "insert_many/got an error trying to save:#{collection_name}/#{JSON.stringify(documents)}"
+          wf.error(err)
+          stored_handler?(null)
+        else
+          wf.info "insert_many/saved in #{collection_name}:#{documents}"
+          stored_handler?(coll)
+
+  insert_one: (collection_name, document, stored_handler) ->
+    wf.info "about to do insert_one"
+    @with_collection collection_name, (coll) ->
+      wf.info "about to do insert_one/got collection:#{collection_name}:#{JSON.stringify(document)}"
+      coll.insertOne document, safe:true, (err, docs) ->
+        wf.info "about to do insert_one/insert returned"
+        if err
+          wf.error "insert_one/got an error trying to save:#{collection_name}/#{JSON.stringify(document)}"
+          wf.error(err)
+          stored_handler?(null)
+        else
+          wf.info "insert_one/saved in #{collection_name}:#{JSON.stringify(document)}"
           stored_handler?(coll)
 
   create_collection: (collection_name, options, callback) ->
@@ -148,7 +184,7 @@ class wf.StoreMongo
             else
               wf.debug "load_all/2, got collection:#{collection_name} contents, now as array(#{docs.length}), err:#{err}"
               loaded_handler?(docs)
-  
+
 
   aggregate: (collection_name, pipeline, options, callback) ->
     @with_collection collection_name, (coll) ->
@@ -225,4 +261,3 @@ class wf.StoreMongo
           wf.info "Connected to MongoDB:#{client}"
           mongo_connecting = false
           worker?(client)
-

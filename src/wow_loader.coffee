@@ -202,6 +202,7 @@ class wf.WoWLoader
       wowlookup.get item, doc?.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
+          wf.info "Saving:#{JSON.stringify(item)}/#{JSON.stringify(info)}"
           @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
             # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
             info.ignore_requeue = item?.ignore_requeue
@@ -259,7 +260,7 @@ class wf.WoWLoader
           wf.warn "Uh-oh For region #{param.region}/#{param.locale}, NO realms returned!"
           # get_realms_error = true  # TODO reenable this when blizz fixes CN/SEA regions
         else
-          wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}"
+          wf.info "For region #{param.region}/#{param.locale}, realms returned:#{realms.length}/#{JSON.stringify(realms[0])}"
         for realm in realms
           realm_region_key = realm.name + realm.region
           existing = all_realms[realm_region_key]
@@ -282,9 +283,15 @@ class wf.WoWLoader
         if realms_array? and realms_array.length > 0
           store.ensure_index @wow.get_realms_collection(), @wow.get_realms_index_1(), null, =>
             store.remove_all @wow.get_realms_collection(), =>
-              store.insert @wow.get_realms_collection(), realms_array, (arg1,arg2)->
-                wf.info "Insert realm result:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
-                callback?(realms_array)
+              store.insert_many @wow.get_realms_collection(), realms_array, ->
+                 wf.info "Insert realm completed"
+                 callback?(realms_array)
+#              for realm in realms_array
+#                wf.info "Storing realm:#{JSON.stringify(realm)}"
+#                store.insert_one @wow.get_realms_collection(), realm
+                # , (arg1)->
+                # wf.info "Insert realm result:#{JSON.stringify(arg1)}"  # gives circular convert error :(
+                # callback?(realms_array)
         else
           callback?(realms_array)
       else
