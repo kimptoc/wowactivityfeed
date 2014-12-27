@@ -103,5 +103,7 @@
 	"shirt": "shirt",
 	"tabard": "tabard",
 	"rank": "rank",
-	"Gave up %s": "Gave up %s"
+	"Gave up %s": "Gave up %s",
+	"averageItemLevel": "averageItemLevel",
+	"averageItemLevelEquipped": "averageItemLevelEquipped"
 }
