@@ -104,6 +104,6 @@
 	"tabard": "tabard",
 	"rank": "rank",
 	"Gave up %s": "Gave up %s",
-	"averageItemLevel": "averageItemLevel",
-	"averageItemLevelEquipped": "averageItemLevelEquipped"
+	"averageItemLevel": "Average Item Level",
+	"averageItemLevelEquipped": "Average Item Level Equipped"
 }

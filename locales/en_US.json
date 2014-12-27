@@ -104,8 +104,8 @@
 	"offHand": "offHand",
 	"shirt": "shirt",
 	"rank": "rank",
-	"averageItemLevel": "averageItemLevel",
-	"averageItemLevelEquipped": "averageItemLevelEquipped",
+	"averageItemLevel": "Average Item Level",
+	"averageItemLevelEquipped": "Average Item Level Equipped",
 	"Max Levels!": "Max Levels!",
 	"Latest Toons at Max Level!": "Latest Toons at Max Level!"
 }
