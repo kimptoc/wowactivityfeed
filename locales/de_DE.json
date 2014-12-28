@@ -1,5 +1,5 @@
 {
-  "%s %s now has %s! %s": "%s %s hat jetzt %s! %s",
+  "%s %s now has %s! %s": "%s %s hat %s erbeutet! %s",
   "%s %s Did:'%s' for '%s' - %s": "%s %s Hat:'%s' für '%s' - %s",
   "%s %s '%s' - %s": null,
   "%s has joined": "%s ist beigetreten",
@@ -29,8 +29,8 @@
   "WoW Activity Feed": "WoW Aktivitäts-Feed",
   "WoW": "WoW",
   "Feed": "Feed",
-  "Search for a character or guild": "Suche nach einem Charakter oder einer Gilde",
-  "[select a realm/region]": "[wähle den Server und die Region aus]",
+  "Search for a character or guild": "Suche nach Charakter und/oder Gilde",
+  "[select a realm/region]": "[Server und die Region auswählen]",
   "Search": "Suche",
   "Search complete, total found:": "Suche beendet, insgesamt gefunden:",
   "Recent Updates": "letzte Änderungen",
