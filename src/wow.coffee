@@ -264,8 +264,8 @@ class wf.WoW
 
   push_item_loader_queue: (options) ->
     wf.wow.get_item_loader_queue().push options, (arg1,arg2) ->
-      wf.info "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
-    wf.info "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
+      wf.debug "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+    wf.debug "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
 
   handle_loader_complete: (info) ->
     # wf.info "Char loader queue worker complete:#{JSON.stringify(info)}"
@@ -274,17 +274,17 @@ class wf.WoW
         # TODO - only queue members that are not registered themselves...
         wf.wow.push_loader_queue type: "member", region: info.region.toLocaleLowerCase(), realm: info.realm.toLocaleLowerCase(), name: member.character.name.toLocaleLowerCase(), locale: info.locale, ignore_requeue: true
     unless !info || info.ignore_requeue
-      wf.info "requeuing:#{info?.name}"
+      wf.info "requeuing:#{info?.name}/#{info?.region}/#{info?.realm}/#{info?.type}/#{info?.locale}"
       wf.wow.push_loader_queue info
 
   push_loader_queue: (options) ->
     #TODO - only queue if not there already...
     wf.wow.get_loader_queue().push options, @handle_loader_complete
-    wf.info "Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
+    wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
 
   unshift_loader_queue: (options) ->
     wf.wow.get_loader_queue().unshift options, @handle_loader_complete
-    wf.info "Char loader queue size:#{wf.wow.get_loader_queue().length()}"
+    wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}"
 
   load_items: (params, callback) ->
     item_id_array = params.item_ids
@@ -296,7 +296,7 @@ class wf.WoW
             for it in items
               found = true if wanted == it.item_id
             if found
-              wf.info "Found item in db:#{wanted}/#{params.locale}/#{params.region}"
+              wf.debug "Found item in db:#{wanted}/#{params.locale}/#{params.region}"
             else
               wf.info "Not found item in db:#{wanted}/#{params.locale}/#{params.region}"
               wf.wow.push_item_loader_queue {item_id:wanted,locale:params.locale,region:params.region}

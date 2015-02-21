@@ -324,5 +324,5 @@ class wf.WoWLoader
               wf.error "No item found at all:#{JSON.stringify(item_info.item_id)}"
               callback?()
         else
-          wf.info "Item found in db:#{JSON.stringify(item_info.item_id)}"
+          wf.debug "Item found in db:#{JSON.stringify(item_info.item_id)}"
           callback?()

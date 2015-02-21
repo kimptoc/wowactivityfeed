@@ -59,45 +59,45 @@ class wf.StoreMongo
         stored_handler?(null)
 
   insert: (collection_name, document_object, stored_handler) ->
-    wf.info "about to do insert"
+    wf.debug "debug to do insert"
     @with_collection collection_name, (coll) ->
-      wf.info "about to do insert/got collection:#{collection_name}:#{document_object?.name}-#{document_object?.region}:#{JSON.stringify(document_object)}"
+      wf.debug "about to do insert/got collection:#{collection_name}:#{document_object?.name}-#{document_object?.region}:#{JSON.stringify(document_object)}"
       coll.insert document_object, safe:true, (err, docs) ->
-        wf.info "about to do insert/insert returned"
+        wf.debug "about to do insert/insert returned"
         if err
           wf.error "insert/got an error trying to save:#{collection_name}/#{document_object}"
           wf.error(err)
           stored_handler?(null)
         else
-          wf.info "saved in #{collection_name}:#{document_object}"
+          wf.debug "saved in #{collection_name}:#{document_object}"
           stored_handler?(coll)
 
   insert_many: (collection_name, documents, stored_handler) ->
-    wf.info "about to do insert_many"
+    wf.debug "about to do insert_many"
     @with_collection collection_name, (coll) ->
-      wf.info "about to do insert_many/got collection:#{collection_name}:#{documents?.length}:#{JSON.stringify(documents)}"
+      wf.debug "about to do insert_many/got collection:#{collection_name}:#{documents?.length}:#{JSON.stringify(documents)}"
       coll.insertMany documents, safe:true, (err, docs) ->
-        wf.info "about to do insert_many/insert returned"
+        wf.debug "about to do insert_many/insert returned"
         if err
           wf.error "insert_many/got an error trying to save:#{collection_name}/#{JSON.stringify(documents)}"
           wf.error(err)
           stored_handler?(null)
         else
-          wf.info "insert_many/saved in #{collection_name}:#{documents}"
+          wf.debug "insert_many/saved in #{collection_name}:#{documents}"
           stored_handler?(coll)
 
   insert_one: (collection_name, document, stored_handler) ->
-    wf.info "about to do insert_one"
+    wf.debug "about to do insert_one"
     @with_collection collection_name, (coll) ->
-      wf.info "about to do insert_one/got collection:#{collection_name}:#{JSON.stringify(document)}"
+      wf.debug "about to do insert_one/got collection:#{collection_name}:#{JSON.stringify(document)}"
       coll.insertOne document, safe:true, (err, docs) ->
-        wf.info "about to do insert_one/insert returned"
+        wf.debug "about to do insert_one/insert returned"
         if err
           wf.error "insert_one/got an error trying to save:#{collection_name}/#{JSON.stringify(document)}"
           wf.error(err)
           stored_handler?(null)
         else
-          wf.info "insert_one/saved in #{collection_name}:#{JSON.stringify(document)}"
+          wf.debug "insert_one/saved in #{collection_name}:#{JSON.stringify(document)}"
           stored_handler?(coll)
 
   create_collection: (collection_name, options, callback) ->
