@@ -202,7 +202,7 @@ class wf.WoWLoader
       wowlookup.get item, doc?.lastModified, (info) =>
         # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
         if info?
-          wf.info "Saving:#{JSON.stringify(item)}/#{JSON.stringify(info)}"
+          wf.debug "Saving:#{JSON.stringify(item)}/#{JSON.stringify(info)}"
           @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
             # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
             info.ignore_requeue = item?.ignore_requeue
@@ -310,7 +310,7 @@ class wf.WoWLoader
           wowlookup.get_item item_info.item_id, item_info.locale, item_info.region, item_info.context, (item)=>
             if item?
               if item.name?
-                wf.info "Saving found item:#{item_info.item_id}/#{item_info.locale}/#{item_info.region}"
+                wf.debug "Saving found item:#{item_info.item_id}/#{item_info.locale}/#{item_info.region}"
                 store.upsert @wow.get_items_collection(), {item_id:item_info.item_id, locale:item_info.locale, region:item_info.region} , item, callback
               else if item.availableContexts? && item.availableContexts.length > 0
                 wf.warn "No item name, trying via context:#{JSON.stringify(item)}"
