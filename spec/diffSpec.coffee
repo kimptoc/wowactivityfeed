@@ -13,9 +13,9 @@ describe "diff utils", ->
     #     done()
 
     it "do a diff", (done) ->
-      obj1 = 
+      obj1 =
         name: "foo"
-      obj2 = 
+      obj2 =
         name: "bar"
       diff = wf.calc_changes obj1, obj2
       diff.overview.should.equal "UPDATE"
@@ -23,10 +23,12 @@ describe "diff utils", ->
       done()
 
     it "do a patch", (done) ->
-      obj1 = 
+      obj1 =
         name: "foo"
-      obj2 = 
+        widgets: 5
+      obj2 =
         name: "bar"
+        widgets: 6
       diff = wf.calc_changes obj1, obj2
       obj3 = wf.restore diff, obj2
       obj3.should.eql obj1
@@ -34,7 +36,7 @@ describe "diff utils", ->
       done()
 
     it "no old obj, ie new", (done) ->
-      obj1 = 
+      obj1 =
         name: "foo"
       diff = wf.calc_changes null, obj1
       diff.overview.should.equal "NEW"
@@ -58,7 +60,7 @@ describe "diff utils", ->
       done()
 
     it "diff no change", (done) ->
-      obj1 = 
+      obj1 =
         name: "foo"
       diff = wf.calc_changes obj1, obj1
       should.exist diff

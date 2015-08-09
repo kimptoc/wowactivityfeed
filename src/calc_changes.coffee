@@ -4,11 +4,11 @@ jsdiff = require "jsondiffpatch"
 
 wf.calc_changes = (old_obj, new_obj) ->
   if old_obj?
-    whats_changed = 
+    whats_changed =
       overview : "UPDATE"
       changes : jsdiff.diff(old_obj, new_obj)
   else
-    whats_changed = 
+    whats_changed =
       overview : "NEW"
 
   return whats_changed
@@ -22,6 +22,8 @@ wf.restore = (whats_changed, new_obj) ->
     try
       jsdiff.unpatch(old_obj, whats_changed?.changes)
     catch e
+      wf.error "OLD:#{old_obj}"
+      wf.error "CHANGES:#{whats_changed?.changes}"
       wf.error "jsdiff.unpatch:#{e}"
-    
+
   return old_obj
