@@ -18,7 +18,7 @@ class wf.Tweet
         access_token_secret:  process.env.WAF_ACCESS_TOKEN_SECRET
 
   update: (message, callback) ->
-    wf.debug "Sending Tweet update:#{message}"
+    wf.info "Sending Tweet update:#{message}"
     if @twit?
       @twit.post 'statuses/update', { status: message }, (err, reply)->
         wf.error JSON.stringify(err) if err?
