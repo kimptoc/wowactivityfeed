@@ -48,7 +48,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-create_cron '00 00 3,11,19 * * *', ->
+create_cron '00 12 3,11,20 * * *', ->
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
@@ -72,7 +72,7 @@ create_cron '00 40 2,10,18 * * *', ->
   push_info("To use RSS feed, see 'how to' entries https://wafbeta.uservoice.com/forums/181669-general.")
 
 # waf language conversion
-create_cron '00 15 4,12,20 * * *', ->
+create_cron '00 15 4,12,19 * * *', ->
   wf.info "cronjob tick...6 hourly, locales"
   push_info "Help convert WoW Activity to your language - http://bit.ly/waflang // @webtranslateit"
 
