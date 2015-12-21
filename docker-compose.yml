@@ -1,0 +1,62 @@
+# adhoc:
+#   build: .
+#   command: 'bash -c ''node db.js  '''
+#   working_dir: /app/user
+#   environment:
+#     PORT: 8080
+#     MONGOLAB_URI: 'mongolab:27017'
+#   ports:
+#     - '8080:8080'
+#   links:
+#     - mongolab
+dev:
+  build: .
+  command: 'bash -c "(./node_modules/coffee-script/bin/coffee --compile --watch --output js/ src/ spec/ src_common) & (./node_modules/coffee-script/bin/coffee --compile --watch --output public/js-cs src_client src_common) & while true; do echo `date`: still here; sleep 10; done"'
+  # command: 'bash -c ''./node_modules/mocha/bin/mocha js/storeMongoSpec.js  '''
+  working_dir: /app/wowfeed
+  environment:
+    MONGOLAB_URI: 'mongolab:27017'
+  volumes:
+    - '.:/app/wowfeed'
+  links:
+    - mongolab
+  stdin_open: true
+  tty: true
+test:
+  build: .
+  command: 'bash -c ''./node_modules/mocha/bin/mocha js/storeMongoSpec.js  '''
+  working_dir: /app/wowfeed
+  environment:
+    MONGOLAB_URI: 'mongolab:27017'
+  volumes:
+    - '.:/app/wowfeed'
+  links:
+    - mongolab
+# web:
+#   build: .
+#   command: 'bash -c ''node app.js  '''
+#   volumes:
+#     - '.:/app/user'
+#   working_dir: /app/user
+#   environment:
+#     PORT: 8080
+#     MONGOLAB_URI: 'mongolab:27017'
+#   ports:
+#     - '8080:8080'
+#   links:
+#     - mongolab
+# shell:
+#   build: .
+#   command: bash
+#   working_dir: /app/user
+#   environment:
+#     PORT: 8080
+#     MONGOLAB_URI: 'mongolab:27017'
+#   ports:
+#     - '8080:8080'
+#   links:
+#     - mongolab
+#   volumes:
+#     - '.:/app/user'
+mongolab:
+  image: mongo:2.4.14

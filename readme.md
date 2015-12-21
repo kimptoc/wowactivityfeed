@@ -4,41 +4,104 @@
 
 LIVE SITE: http://wowactivity.kimptoc.net/
 
+Docker-ise!
+- test1/mongo- DONE, can connect/data persists
+- test2/node, with npm
+- PROD, mongo, node, source, npm packages, run app
+- DEV/unit tests, mongo, node, npm packages, (mount source for quick re-run)  run tests
+- DEV/run app: mongo, node, npm  packages, (mount source for quick re-run)  run app
+
+TODO
+- run it locally, env settings issue? El Capitan issue?
+- log when it cycles through all chars - perhaps use dummy char marker to identify this
+
+- make it work with docker for ease of re-deployment, assuming can docker enable virtual linux hosts - http://www.kontena.io/
+or DEIS - http://deis.io/get-deis/?utm_source=javascriptweekly&utm_medium=email
+
+- getting times in the future, esp. from US updates... timezone? maybe times are UTC, esp in summer time?
+
+MongoDB
+To have launchd start mongodb at login:
+  ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+Then to load mongodb now:
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+Or, if you don't want/need launchctl, you can just run:
+  mongod --config /usr/local/etc/mongod.conf
+
+Using old mongo/node
+MongoDB shell version: 2.4.12
+$ node -v / v0.10.40
+
+
+
+deploy via passenger - https://www.digitalocean.com/community/tutorials/how-to-deploy-a-rails-app-with-passenger-and-apache-on-ubuntu-14-04
+set env vars via mod_env http://httpd.apache.org/docs/2.4/mod/mod_env.html
+require all granted error - http://stackoverflow.com/questions/21265191/apache-authtype-not-set-500-error
+
 If you want the site/feed filler text in your language (not English) - you can help here: https://webtranslateit.com/en/projects/6337-Wow-activity-/project_locales
+
+WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
+
+
+Machine learning
+- suggest kit to get, based off what other toons are getting (of similar level/type/focus)
+- spot anomalies
+- activity over time, busy/quiet periods, whats hot this week
+
 
 ## TODO
 
+jsondiff giving intermittent erros, not sure what its affecting - ERROR: jsdiff.unpatch:Error: reverse failed -
+
+enable gzip on requests to armory/battle.net - not working - maybe now - http://us.battle.net/en/forum/topic/15538504599
+
+do cross realm guilds work, ie does it get realm from member list or assume same as guild
+are we handling multi-realm guilds?
+
+
 realm reloading
+- review changes made - any o/s issues?
 - cater for removed realms
 - currently deletes all and then loads whats good
-- maybe do it per region, load region, if seems ok, delete existing and save 
+- maybe do it per region, load region, if seems ok, delete existing and save
 
 continuous char loads
 - does search/new member/guild work ok?
 - intermittent crashes? did a fix, but could be due to no data returned, leading to requeue failing. Maybe go back to db to do requeues
 eg on drain, although only started when went to having 2 threads...
-- how to handle not found chars, drop from queue until next restart (but then most probably due to guild membership)
-- how does current server trigger restart?  log rotation
+- how to handle not found chars, drop from queue until next restart (but then most probably due to guild membership) - have a 'failed' list
+- how does current server trigger restart?  via log rotation
 - seems to be crashing intra day - but at least restarting ok
-
-update to include changes from the beforenet site - max levels page
+- indicate how long a pass through is taking, perhaps on stats page, but how - dummy entry?
 
 update related npm packages to latest
 
 review/reduce tweets produced
 
-are we handling multi-realm guilds?
-
 use new API endpoints!!!
 - for in page links - not possible, as need apikey - do it on server and display on page
 - for lookups
 
-- not compressing responses
-- no chinese region
+- not compressing responses, handled via apache??
+- no chinese/sea region
+- australian realms - anything to do to support them?  http://wow.joystiq.com/2014/10/23/blizzard-announces-locally-hosted-australian-realms/
+
+
+Analytics - http://www.javaworld.com/article/2858307/data-storage/mongodb-gets-its-first-native-analytics-tool.html#tk.rss_javaappdev
+
+
+## SPLIT INTO SEP SERVICES
+- eg using sourced https://github.com/mateodelnorte/sourced for event sourcing
+using Meteor oplog view on mongo
+Servicebus/eg via rabbitmq
+
+see https://github.com/electronifie for tips
+
 
 ## NEW BATTLE NET API ISSUES
 - last modified does not work - API issue
 
+DONE - reforked armory
 remove use of forked armory, reasons for it:
 - gzip support, now in request
 - new item context (probably need to refork)
@@ -51,9 +114,7 @@ remove use of forked armory, reasons for it:
 - encodeURI of path
 
 
-australian realms - anything to do to support them?
 
-track upstream changes to the node-armory lib, perhaps revert back to it.
 
 dupe errors
 ogs/server.log.1:[2014-06-12 17:09:57.913] [ERROR] [default] - { [MongoError: insertDocument :: caused by :: 11000 E11000 duplicate key error index: wowfeed.armory_history.$name_1_realm_1_region_1_type_1_lastModified_1_locale_1  dup key: { : "taured", : "les sentinelles", : "eu", : "member", : null, : "fr_FR" }]
@@ -337,7 +398,6 @@ http://wafbeta.kimptoc.net//view/member/us/Wildhammer/Darketernall?ts=1354166678
 - feed/track talents/glyphs changes
 - feed/track pvp/battleground changes, number won/lost?
 - feed/track progression/raids changes?
-- getting times in the future, esp. from US updates... timezone? maybe times are UTC?
 - track calls to website - where are they coming from (ip, referring site, browser, ...)
 - cache class/race static for display (eg mage/orc ...)
 - about page, http://www.sitepoint.com/css3-starwars-scrolling-text/?utm_source=hackernewsletter&utm_medium=email ...
