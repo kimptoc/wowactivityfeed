@@ -5,11 +5,13 @@
 LIVE SITE: http://wowactivity.kimptoc.net/
 
 Docker-ise!
+- how to ensure tidy images/containers --rm?
 - test1/mongo- DONE, can connect/data persists
-- test2/node, with npm
-- PROD, mongo, node, source, npm packages, run app
-- DEV/unit tests, mongo, node, npm packages, (mount source for quick re-run)  run tests
-- DEV/run app: mongo, node, npm  packages, (mount source for quick re-run)  run app
+- test2/node, with npm - DONE
+- PROD, mongo (continue from prev session), node, source, npm packages, run app
+- DEV/cli-dev - DONE
+- DEV/unit tests, mongo (empty), node, npm packages, coffee compile, mocha run tests/watch code (mount source for quick re-run)  run tests
+- DEV/run app: mongo (continue from prev session), node, npm  packages, (mount source for quick re-run)  run app
 
 TODO
 - run it locally, env settings issue? El Capitan issue?

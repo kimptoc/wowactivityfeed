@@ -2,6 +2,8 @@
 
 date
 
+mkdir -p ~/.forever/logs
+
 ps -leaf | grep node
 forever stopall
 sleep 2

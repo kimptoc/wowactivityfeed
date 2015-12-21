@@ -1,13 +1,15 @@
 #FROM heroku/nodejs
 FROM node:0.10.37
 
-RUN apt-get update && apt-get install -y vim zsh
+RUN apt-get update && apt-get install -y vim zsh less
 
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh && cp /root/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
 
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vundle.vim
 COPY docker_vimrc /root/.vimrc
 RUN vim +PluginInstall +qall
+
+RUN npm install -g coffee-script forever mocha
 
 RUN mkdir -p /app/wowfeed/
 WORKDIR /app/wowfeed/

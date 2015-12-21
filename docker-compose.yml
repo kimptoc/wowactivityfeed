@@ -1,18 +1,6 @@
-# adhoc:
-#   build: .
-#   command: 'bash -c ''node db.js  '''
-#   working_dir: /app/user
-#   environment:
-#     PORT: 8080
-#     MONGOLAB_URI: 'mongolab:27017'
-#   ports:
-#     - '8080:8080'
-#   links:
-#     - mongolab
 dev:
   build: .
-  command: 'bash -c "(./node_modules/coffee-script/bin/coffee --compile --watch --output js/ src/ spec/ src_common) & (./node_modules/coffee-script/bin/coffee --compile --watch --output public/js-cs src_client src_common) & while true; do echo `date`: still here; sleep 10; done"'
-  # command: 'bash -c ''./node_modules/mocha/bin/mocha js/storeMongoSpec.js  '''
+  command: 'bash -c "(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & while true; do echo `date`: still here; sleep 10; done"'
   working_dir: /app/wowfeed
   environment:
     MONGOLAB_URI: 'mongolab:27017'
@@ -24,39 +12,37 @@ dev:
   tty: true
 test:
   build: .
-  command: 'bash -c ''./node_modules/mocha/bin/mocha js/storeMongoSpec.js  '''
+  command: 'bash -c ''mocha --watch js/wowlookupSpec.js  '''
   working_dir: /app/wowfeed
   environment:
-    MONGOLAB_URI: 'mongolab:27017'
+    MONGO_HOST: mongolab
+    MONGO_PORT: 27017
+    MONGO_DB: wowfeed
   volumes:
     - '.:/app/wowfeed'
   links:
     - mongolab
-# web:
-#   build: .
-#   command: 'bash -c ''node app.js  '''
-#   volumes:
-#     - '.:/app/user'
-#   working_dir: /app/user
-#   environment:
-#     PORT: 8080
-#     MONGOLAB_URI: 'mongolab:27017'
-#   ports:
-#     - '8080:8080'
-#   links:
-#     - mongolab
-# shell:
-#   build: .
-#   command: bash
-#   working_dir: /app/user
-#   environment:
-#     PORT: 8080
-#     MONGOLAB_URI: 'mongolab:27017'
-#   ports:
-#     - '8080:8080'
-#   links:
-#     - mongolab
-#   volumes:
-#     - '.:/app/user'
+  stdin_open: true
+  tty: true
+web:
+  build: .
+  command: 'bash -c ''./run_server.sh && while true; do echo `date`: still here; sleep 10; done '''
+  volumes:
+    - '.:/app/wowfeed'
+  working_dir: /app/wowfeed
+  environment:
+    PORT: 8080
+    MONGOLAB_URI: 'mongolab:27017'
+    MONGO_HOST: mongolab
+    MONGO_PORT: 27017
+    MONGO_DB: wowfeed
+    WOW_API_PUBLIC_KEY:
+    WOW_API_PRIVATE_KEY:
+  ports:
+    - '8080:3000'
+  links:
+    - mongolab
+  stdin_open: true
+  tty: true
 mongolab:
   image: mongo:2.4.14
