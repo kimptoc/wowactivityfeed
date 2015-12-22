@@ -5,12 +5,13 @@
 LIVE SITE: http://wowactivity.kimptoc.net/
 
 Docker-ise!
+- twitter working?
 - how to ensure tidy images/containers --rm?
 - test1/mongo- DONE, can connect/data persists
 - test2/node, with npm - DONE
 - PROD, mongo (continue from prev session), node, source, npm packages, run app
 - DEV/cli-dev - DONE
-- DEV/unit tests, mongo (empty), node, npm packages, coffee compile, mocha run tests/watch code (mount source for quick re-run)  run tests
+- DEV/unit tests, mongo (empty/ok, diff db), node, npm packages, coffee compile, mocha run tests/watch code (mount source for quick re-run)  run tests
 - DEV/run app: mongo (continue from prev session), node, npm  packages, (mount source for quick re-run)  run app
 
 TODO

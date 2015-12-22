@@ -1,25 +1,32 @@
+code:
+  image: busybox
+  volumes:
+    - '.:/app/wowfeed'
 dev:
   build: .
   command: 'bash -c "(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & while true; do echo `date`: still here; sleep 10; done"'
   working_dir: /app/wowfeed
   environment:
     MONGOLAB_URI: 'mongolab:27017'
-  volumes:
-    - '.:/app/wowfeed'
+    wowPublicKey:
+  volumes_from:
+    - code
   links:
     - mongolab
   stdin_open: true
   tty: true
 test:
   build: .
-  command: 'bash -c ''mocha --watch js/wowlookupSpec.js  '''
+  # command: 'bash -c ''(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & (mocha --watch -g "get all realms 1" js/wowlookupSpec.js) & while true; do echo `date`: still here; sleep 10; done '''
+  command: 'bash -c ''(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & (mocha --watch js/wowlookupSpec.js) & while true; do echo `date`: still here; sleep 10; done '''
   working_dir: /app/wowfeed
   environment:
     MONGO_HOST: mongolab
     MONGO_PORT: 27017
     MONGO_DB: wowfeed
-  volumes:
-    - '.:/app/wowfeed'
+    wowPublicKey:
+  volumes_from:
+    - code
   links:
     - mongolab
   stdin_open: true
@@ -27,8 +34,8 @@ test:
 web:
   build: .
   command: 'bash -c ''./run_server.sh && while true; do echo `date`: still here; sleep 10; done '''
-  volumes:
-    - '.:/app/wowfeed'
+  volumes_from:
+    - code
   working_dir: /app/wowfeed
   environment:
     PORT: 8080
@@ -36,8 +43,26 @@ web:
     MONGO_HOST: mongolab
     MONGO_PORT: 27017
     MONGO_DB: wowfeed
-    WOW_API_PUBLIC_KEY:
-    WOW_API_PRIVATE_KEY:
+    wowPublicKey:
+  ports:
+    - '8080:3000'
+  links:
+    - mongolab
+  stdin_open: true
+  tty: true
+webdev:
+  build: .
+  command: 'bash -c ''(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & nodemon app.js & while true; do echo `date`: still here; sleep 10; done '''
+  volumes_from:
+    - code
+  working_dir: /app/wowfeed
+  environment:
+    PORT: 8080
+    MONGOLAB_URI: 'mongolab:27017'
+    MONGO_HOST: mongolab
+    MONGO_PORT: 27017
+    MONGO_DB: wowfeed
+    wowPublicKey:
   ports:
     - '8080:3000'
   links:

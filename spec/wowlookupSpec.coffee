@@ -129,10 +129,11 @@ describe "wow armory lookup:", ->
         should.not.exist info.name
         done()
 
-    it "get all realms", (done) ->
+    it "get all realms 1", (done) ->
       wow = new wf.WowLookup()
       wow.get_realms "eu", "en_GB", (realms) ->
         should.exist realms
+        should.exist realms[0]
         should.exist realms[0].region
         realms.length.should.be.above(10)
         realms_by_region_and_slug = {}
@@ -144,7 +145,7 @@ describe "wow armory lookup:", ->
           region[realm.slug] = true
         done()
 
-    it "get all realms", (done) ->
+    it "get all realms 2", (done) ->
       wow = new wf.WowLookup()
       wow.get_realms "eu", "ru_RU", (realms) ->
         should.exist realms

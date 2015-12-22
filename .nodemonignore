@@ -13,3 +13,5 @@ views/*
 .DS_Store
 etc
 locales
+node_modules.osx
+node_modules

@@ -9,8 +9,8 @@ beforeEach (done) ->
   wf.info "==============      TEST BEGINS         ================="
   wf.info "========================================================="
 
-  wf.mongo_info = 
-    "hostname":"localhost"
+  wf.mongo_info =
+    "hostname": if process.env.MONGO_HOST then process.env.MONGO_HOST else "localhost"
     "port":27017
     "username":""
     "password":""
@@ -22,4 +22,3 @@ beforeEach (done) ->
     wf.wow = wow
     wow.clear_all ->
       done()
-

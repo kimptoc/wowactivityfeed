@@ -9,7 +9,7 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vund
 COPY docker_vimrc /root/.vimrc
 RUN vim +PluginInstall +qall
 
-RUN npm install -g coffee-script forever mocha
+RUN npm install -g coffee-script forever mocha nodemon
 
 RUN mkdir -p /app/wowfeed/
 WORKDIR /app/wowfeed/
