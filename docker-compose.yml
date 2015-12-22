@@ -44,6 +44,10 @@ web:
     MONGO_PORT: 27017
     MONGO_DB: wowfeed
     wowPublicKey:
+    WAF_CONSUMER_KEY:
+    WAF_CONSUMER_SECRET:
+    WAF_ACCESS_TOKEN:
+    WAF_ACCESS_TOKEN_SECRET:
   ports:
     - '8080:3000'
   links:

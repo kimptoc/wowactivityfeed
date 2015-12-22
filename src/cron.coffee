@@ -56,7 +56,7 @@ create_cron '00 12 3,11,20 * * *', ->
         if num_chars? and num_chars > 0 and num_guilds? and num_guilds > 0
           push_info("Currently tracking #{num_guilds} guilds and #{num_chars} toons.")
         else
-          push_info("Uh-oh - something has gone horribly wrong... there may be trouble ahead - call @kimptoc urgently!")
+          push_info("Uh-oh - something is wrong- there may be trouble ahead - call @kimptoc!")
 
 
 "Having trouble finding your toon on my site?  Send me the name/server and I will send you the link!  http://wowactivity.kimptoc.net/"
