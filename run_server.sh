@@ -3,6 +3,7 @@
 date
 
 mkdir -p ~/.forever/logs
+mkdir logs
 
 ps -leaf | grep node
 forever stopall
