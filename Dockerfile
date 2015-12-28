@@ -21,6 +21,8 @@ COPY package.json /app/wowfeed/
 COPY npm-shrinkwrap.json /app/wowfeed/
 RUN npm install
 
+VOLUME /app/wowfeed/
+
 #COPY . .
 
 #ONBUILD COPY . /usr/src/app
