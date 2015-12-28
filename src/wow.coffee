@@ -282,6 +282,7 @@ class wf.WoW
     wf.wow.get_loader_queue().push options, @handle_loader_complete
     wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
 
+  #add to front of queue for immediate processing
   unshift_loader_queue: (options) ->
     wf.wow.get_loader_queue().unshift options, @handle_loader_complete
     wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}"

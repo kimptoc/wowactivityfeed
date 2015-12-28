@@ -5,7 +5,11 @@
 LIVE SITE: http://wowactivity.kimptoc.net/
 
 Docker-ise!
-- twitter working?
+- install sysstat and
+  replace_text 'ENABLED="false"', 'ENABLED="true"', '/etc/default/sysstat'
+- apache front end to app, like on prod
+- try on docker VM
+- twitter working? YUP
 - how to ensure tidy images/containers --rm?
 - test1/mongo- DONE, can connect/data persists
 - test2/node, with npm - DONE

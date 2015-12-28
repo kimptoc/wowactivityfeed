@@ -1,7 +1,10 @@
 #FROM heroku/nodejs
 FROM node:0.10.37
 
-RUN apt-get update && apt-get install -y vim zsh less
+RUN apt-get update && apt-get install -y vim zsh less nmap dnsutils mtr-tiny python-software-properties
+
+#TODO also install sysstat - but it doesn't work
+#RUN echo 'ENABLED="true"' >/etc/default/sysstat && service sysstat restart
 
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh && cp /root/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
 
