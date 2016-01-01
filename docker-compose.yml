@@ -38,7 +38,7 @@ web:
     - code
   working_dir: /app/wowfeed
   environment:
-    PORT: 8080
+    PORT: 3000
     MONGOLAB_URI: 'mongolab:27017'
     MONGO_HOST: mongolab
     MONGO_PORT: 27017
@@ -57,17 +57,21 @@ web:
   tty: true
 webdev:
   build: .
-  command: 'bash -c ''(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & nodemon app.js & while true; do echo `date`: still here; sleep 10; done '''
+  command: 'bash -c ''(coffee --compile --watch --output js/ src/ spec/ src_common) & (coffee --compile --watch --output public/js-cs src_client src_common) & nodemon app.js --delay 2 & while true; do echo `date`: still here; sleep 10; done '''
   volumes_from:
     - code
   working_dir: /app/wowfeed
   environment:
-    PORT: 8080
+    PORT: 3000
     MONGOLAB_URI: 'mongolab:27017'
     MONGO_HOST: mongolab
     MONGO_PORT: 27017
     MONGO_DB: wowfeed
     wowPublicKey:
+    WAF_CONSUMER_KEY:
+    WAF_CONSUMER_SECRET:
+    WAF_ACCESS_TOKEN:
+    WAF_ACCESS_TOKEN_SECRET:
     SITE_URL:
   ports:
     - '8080:3000'
