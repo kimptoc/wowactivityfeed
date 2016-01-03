@@ -46,7 +46,14 @@ class wf.WoW
   get_loader_queue: ->
     loader_queue
 
+  start_loader_queue: ->
+    #wf.info ".Starting loader q - ignored"
+    wf.info ".Starting loader q"
+    loader_queue.resume()
+    wf.info ".Started loader q"
+
   set_loader_queue: (queue) ->
+    queue.pause()
     queue.drain = (arg1,arg2) ->
       wf.info "Char loader queue drain:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     queue.empty = (arg1,arg2) ->
@@ -265,10 +272,11 @@ class wf.WoW
   push_item_loader_queue: (options) ->
     wf.wow.get_item_loader_queue().push options, (arg1,arg2) ->
       wf.debug "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
-    wf.debug "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
+    wf.info "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
 
   handle_loader_complete: (info) ->
     # wf.info "Char loader queue worker complete:#{JSON.stringify(info)}"
+    wf.info "loader complete/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(info)}"
     if info?.type == "guild" and info?.members?
       for member in info.members
         # TODO - only queue members that are not registered themselves...
@@ -280,12 +288,12 @@ class wf.WoW
   push_loader_queue: (options) ->
     #TODO - only queue if not there already...
     wf.wow.get_loader_queue().push options, @handle_loader_complete
-    wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
+    wf.info "push/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
 
   #add to front of queue for immediate processing
   unshift_loader_queue: (options) ->
     wf.wow.get_loader_queue().unshift options, @handle_loader_complete
-    wf.debug "Char loader queue size:#{wf.wow.get_loader_queue().length()}"
+    wf.info "unshift/Char loader queue size:#{wf.wow.get_loader_queue().length()}"
 
   load_items: (params, callback) ->
     item_id_array = params.item_ids

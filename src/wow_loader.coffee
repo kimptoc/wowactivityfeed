@@ -23,7 +23,9 @@ class wf.WoWLoader
     store = @wow.get_store()
     new wf.CallLogger(@wow, wowlookup, store)
     feed_formatter = new wf.FeedItemFormatter()
+    # for wow items
     @wow.set_item_loader_queue async.queue(@item_loader, wf.ITEM_LOADER_THREADS)
+    # for wow toons/guilds
     @wow.set_loader_queue async.queue(@armory_item_loader, wf.ARMORY_CALL_THREADS ) # wf.ARMORY_CALL_THREADS  max threads
 
 
@@ -198,31 +200,37 @@ class wf.WoWLoader
 
   armory_item_loader: (item, callback) =>
     wf.debug "armory_item_loader:#{item?.name}"
-    store.load @wow.get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm, locale: item.locale}, {sort: {"lastModified": -1}}, (doc) =>
-      wowlookup.get item, doc?.lastModified, (info) =>
-        # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
-        if info?
-          wf.debug "Saving:#{JSON.stringify(item)}/#{JSON.stringify(info)}"
-          @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
-            # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
-            info.ignore_requeue = item?.ignore_requeue
-            callback?(info)
-#            @ensure_registered_correct item, info, callback
-        else
-          # send old info back, needed for guilds so we can query the members
-          doc?.armory?.ignore_requeue = item?.ignore_requeue
-          callback?(doc?.armory)
+    if item.type == 'MARKER' && item.name == 'START'
+      wf.info "Got the MARKER - we are starting again"
+      callback?(item)
+    else
+      store.load @wow.get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm, locale: item.locale}, {sort: {"lastModified": -1}}, (doc) =>
+        wowlookup.get item, doc?.lastModified, (info) =>
+          # wf.info "Info back for #{info?.name}, members:#{info?.members?.length}"
+          if info?
+            wf.debug "Saving:#{JSON.stringify(item)}/#{JSON.stringify(info)}"
+            @store_update item.type, item.region, item.realm, item.name, item.locale, info, =>
+              # wf.debug "Checking registered:#{item.name} vs #{info.name} and #{item.realm} vs #{info.realm}, error?#{info.error == null}"
+              info.ignore_requeue = item?.ignore_requeue
+              callback?(info)
+  #            @ensure_registered_correct item, info, callback
+          else
+            # send old info back, needed for guilds so we can query the members
+            doc?.armory?.ignore_requeue = item?.ignore_requeue
+            callback?(doc?.armory)
 
   armory_results_loader: (loader_queue, results_array) ->
     wf.wow.push_loader_queue results_array
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
+    @armory_results_loader(@wow.get_loader_queue(), {type:'MARKER',name:'START',region:'',realm:'',locale:''})
     # return if @wow.get_job_running_lock() # only run one at a time....
     # @wow.set_job_running_lock(true)
     try
       @wow.get_registered (results_array) =>
         @armory_results_loader(@wow.get_loader_queue(), results_array)
+      setTimeout (=> @wow.start_loader_queue()), 1000 # give db 10 seconds to load toons
     catch e
       wf.error "armory_load:#{e}"
 
@@ -321,7 +329,7 @@ class wf.WoWLoader
                 wf.error "No item name, nor context:#{JSON.stringify(item)}"
                 callback?()
             else
-              wf.error "No item found at all:#{JSON.stringify(item_info.item_id)}"
+              wf.error "No item found at all:#{JSON.stringify(item_info.item_id)}/#{JSON.stringify(item_info)}"
               callback?()
         else
           wf.debug "Item found in db:#{JSON.stringify(item_info.item_id)}"

@@ -4,6 +4,11 @@
 
 LIVE SITE: http://wowactivity.kimptoc.net/
 
+If you want the site/feed filler text in your language (not English) - you can help here: https://webtranslateit.com/en/projects/6337-Wow-activity-/project_locales
+
+WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
+
+
 Docker-ise!
 - install sysstat and
   replace_text 'ENABLED="false"', 'ENABLED="true"', '/etc/default/sysstat'
@@ -39,16 +44,12 @@ Using old mongo/node
 MongoDB shell version: 2.4.12
 $ node -v / v0.10.40
 
-
+Using NGINX...
+https://www.nginx.com/blog/5-performance-tips-for-node-js-applications/?utm_source=nodeweekly&utm_medium=email
 
 deploy via passenger - https://www.digitalocean.com/community/tutorials/how-to-deploy-a-rails-app-with-passenger-and-apache-on-ubuntu-14-04
 set env vars via mod_env http://httpd.apache.org/docs/2.4/mod/mod_env.html
 require all granted error - http://stackoverflow.com/questions/21265191/apache-authtype-not-set-500-error
-
-If you want the site/feed filler text in your language (not English) - you can help here: https://webtranslateit.com/en/projects/6337-Wow-activity-/project_locales
-
-WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
-
 
 Machine learning
 - suggest kit to get, based off what other toons are getting (of similar level/type/focus)
