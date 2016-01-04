@@ -67,11 +67,11 @@ class wf.WoW
 
   set_item_loader_queue: (queue) ->
     queue.drain = (arg1,arg2) ->
-      wf.info "Item loader queue drain:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+      wf.debug "Item loader queue drain:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     queue.empty = (arg1,arg2) ->
-      wf.info "Item loader queue empty:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+      wf.debug "Item loader queue empty:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     queue.saturated = (arg1,arg2) ->
-      wf.info "Item loader queue saturated:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
+      wf.debug "Item loader queue saturated:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
     item_loader_queue = queue
 
   get_job_running_lock: ->
@@ -272,7 +272,7 @@ class wf.WoW
   push_item_loader_queue: (options) ->
     wf.wow.get_item_loader_queue().push options, (arg1,arg2) ->
       wf.debug "Item loader queue worker complete:#{JSON.stringify(arg1)}/#{JSON.stringify(arg2)}"
-    wf.info "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
+    wf.debug "Item loader queue size:#{wf.wow.get_item_loader_queue().length()}"
 
   handle_loader_complete: (info) ->
     # wf.info "Char loader queue worker complete:#{JSON.stringify(info)}"
@@ -288,7 +288,7 @@ class wf.WoW
   push_loader_queue: (options) ->
     #TODO - only queue if not there already...
     wf.wow.get_loader_queue().push options, @handle_loader_complete
-    wf.info "push/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
+    wf.debug "push/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(options)}"
 
   #add to front of queue for immediate processing
   unshift_loader_queue: (options) ->

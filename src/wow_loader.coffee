@@ -311,7 +311,7 @@ class wf.WoWLoader
     # see if we have it already
     # if not, go to armory
     # persist
-    wf.info "Loading item:#{JSON.stringify(item_info)}"
+    wf.debug "Loading item:#{JSON.stringify(item_info)}"
     store.ensure_index @wow.get_items_collection(), @wow.get_armory_item_index_1(), {dropDups:true}, =>
       store.load @wow.get_items_collection(), item_info, null, (doc) =>
         unless doc?
