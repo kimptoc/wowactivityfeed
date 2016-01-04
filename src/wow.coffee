@@ -276,7 +276,7 @@ class wf.WoW
 
   handle_loader_complete: (info) ->
     # wf.info "Char loader queue worker complete:#{JSON.stringify(info)}"
-    wf.info "loader complete/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(info)}"
+    wf.debug "loader complete/Char loader queue size:#{wf.wow.get_loader_queue().length()}:#{JSON.stringify(info)}"
     if info?.type == "guild" and info?.members?
       for member in info.members
         # TODO - only queue members that are not registered themselves...
