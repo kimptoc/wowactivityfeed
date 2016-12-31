@@ -32,6 +32,7 @@ wf.i18n_config =
   directory: 'locales'
 
 wf.all_regions = ["eu","us","cn","kr","tw","sea"]
+# wf.all_regions = ["eu"]
 
 wf.REGION_LOCALE =
   us: "en_US"
@@ -89,7 +90,7 @@ if process.env.MONGODB_P708DEFAULT_URL?
   wf.mongo_info.db = dbparts[4]
   wf.info "Looks like a pogoapp host:#{process.env.MONGODB_P708DEFAULT_URL}/#{JSON.stringify(wf.mongo_info)}"
 else if process.env.MONGO_HOST?
-  wf.info "Found MONGO_HOST, using that:#{process.env.MONGO_HOST}:#{process.env.MONGO_PORT}"
+  wf.info "Found MONGO_HOST, using that:#{process.env.MONGO_HOST}:#{process.env.MONGO_PORT}/#{typeof process.env.MONGO_HOST}"
   wf.mongo_info = {}
   wf.mongo_info.hostname = process.env.MONGO_HOST
   wf.mongo_info.port = parseInt(process.env.MONGO_PORT)
