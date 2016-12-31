@@ -11,6 +11,9 @@ sleep 2
 forever list
 ps -leaf | grep node
 
+rm -f logs/*
+rm -f /home/kimptoc/.forever/logs/*
+
 coffee --compile --output js/ src/ spec/ src_common
 coffee --compile --output public/js-cs src_client src_common
 
