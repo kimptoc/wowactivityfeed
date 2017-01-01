@@ -10,6 +10,8 @@ WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-ac
 
 
 Docker-ise!
+- docker-compose up mongolab code web
+- logs held on host system.
 - install sysstat and
   replace_text 'ENABLED="false"', 'ENABLED="true"', '/etc/default/sysstat'
 - apache front end to app, like on prod
@@ -503,6 +505,14 @@ node_modules/.bin/nodemon app.js
 
 
 ## ON OSX
+
+download 2.* version of mongo
+under projecr dir, ensure these dirs exist
+var/lib/mongodb
+var/log/mongodb
+
+then run mongo like this - assuming 2.6.12 in downloads dir
+~/Downloads/mongodb-osx-x86_64-2.6.12/bin/mongod --config etc/mongodb-dev.conf
 
 start mongo - sudo port load mongodb
 and maybe sudo rm /opt/local/var/db/mongodb/mongod.lock

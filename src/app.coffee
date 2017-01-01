@@ -1,5 +1,14 @@
 global.wf ?= {}
 
+# require('longjohn')
+
+# opbeat = require('opbeat').start
+#            organizationId: 'cd5328432d2b4c1d987df64366cff616'
+#            appId: '2205cdf757'
+#            secretToken: '367cf2a1cf9b3d1461c0a63f53c562a14e9cdb51'
+
+# opbeat.captureError(new Error('is opbeat ok?'))
+
 require './init_nodefly'
 
 express = require('express')
@@ -382,15 +391,15 @@ wf.app.get '/debug/logs/:type', (req, res) ->
 #    res.render "message", msg: "Database cleared!", locales:[]
 
 wf.app.get '/debug/sample_data', (req, res) ->
-  wf.wow.get_history "eu", "Soulflayer".toLocaleLowerCase(), "guild", "Мб Ро".toLocaleLowerCase(),"ru_RU"
+  # wf.wow.get_history "eu", "Soulflayer".toLocaleLowerCase(), "guild", "Мб Ро".toLocaleLowerCase(),"ru_RU"
   wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "guild", "Mean Girls".toLocaleLowerCase(),"en_GB"
-  wf.wow.get_history "us", "Earthen Ring".toLocaleLowerCase(), "guild", "alea iacta est".toLocaleLowerCase(),"en_US"
-  wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"fr_FR"
-  wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"en_GB"
-  wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptoc".toLocaleLowerCase(),"en_GB"
-  wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptopanda".toLocaleLowerCase(),"en_GB"
-  wf.wow.get_history "us", "kaelthas".toLocaleLowerCase(), "member", "Feåtherz".toLocaleLowerCase(),"pt_BR"
-  wf.wow.get_history "tw", "銀翼要塞".toLocaleLowerCase(), "guild", "雅典娜戰爭女神".toLocaleLowerCase(),"zh_TW"
+  # wf.wow.get_history "us", "Earthen Ring".toLocaleLowerCase(), "guild", "alea iacta est".toLocaleLowerCase(),"en_US"
+  # wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"fr_FR"
+  # wf.wow.get_history "eu", "Chants éternels".toLocaleLowerCase(), "guild", "La XXVe Armée".toLocaleLowerCase(),"en_GB"
+  # wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptoc".toLocaleLowerCase(),"en_GB"
+  # wf.wow.get_history "eu", "Darkspear".toLocaleLowerCase(), "member", "Kimptopanda".toLocaleLowerCase(),"en_GB"
+  # wf.wow.get_history "us", "kaelthas".toLocaleLowerCase(), "member", "Feåtherz".toLocaleLowerCase(),"pt_BR"
+  # wf.wow.get_history "tw", "銀翼要塞".toLocaleLowerCase(), "guild", "雅典娜戰爭女神".toLocaleLowerCase(),"zh_TW"
   res.render "message", msg: "Sample data registered", locales: null
 
 

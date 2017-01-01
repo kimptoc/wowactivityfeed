@@ -201,8 +201,10 @@ class wf.WoWLoader
   armory_item_loader: (item, callback) =>
     wf.debug "armory_item_loader:#{item?.name}"
     if item.type == 'MARKER' && item.name == 'START'
-      wf.info "Got the MARKER - we are starting again"
-      callback?(item)
+      wf.info "Got the MARKER - we are starting again:#{JSON.stringify(item)}"
+#      async.nextTick ->
+      setTimeout (=> callback?(item)), 1000 # request in 1 second
+#        callback?(item)
     else
       store.load @wow.get_armory_collection(), {type: item.type, region: item.region, name: item.name, realm: item.realm, locale: item.locale}, {sort: {"lastModified": -1}}, (doc) =>
         wowlookup.get item, doc?.lastModified, (info) =>
@@ -224,9 +226,9 @@ class wf.WoWLoader
 
   armory_load: (loaded_callback) =>
     wf.info "armory_load..."
+    return if @wow.get_job_running_lock() # only run one at a time....
+    @wow.set_job_running_lock(true)
     @armory_results_loader(@wow.get_loader_queue(), {type:'MARKER',name:'START',region:'',realm:'',locale:''})
-    # return if @wow.get_job_running_lock() # only run one at a time....
-    # @wow.set_job_running_lock(true)
     try
       @wow.get_registered (results_array) =>
         @armory_results_loader(@wow.get_loader_queue(), results_array)
