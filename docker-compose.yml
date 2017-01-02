@@ -33,7 +33,7 @@ test:
   tty: true
 web:
   build: .
-  command: 'bash -c ''./run_server.sh && while true; do echo `date`: still here; sleep 10; done '''
+  command: 'bash -c ''./run_server.sh && while true; do echo `date`: still here; forever list; sleep 10; done '''
   volumes_from:
     - code
   working_dir: /app/wowfeed
