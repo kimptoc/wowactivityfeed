@@ -1,7 +1,7 @@
 {
  "appenders": [
    {
-    "type": "file",
+    "type": "fileSync",
     "filename": "logs/server.log",
     "maxLogSize": 10240000,
     "backups": 5

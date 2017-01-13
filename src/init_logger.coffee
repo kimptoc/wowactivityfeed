@@ -7,7 +7,9 @@ log4js = require "log4js"
 wf.logs_collection = "logs"
 
 
-if process.env.NODE_ENV == "test"
+if process.env.LOG4JS_SYNC
+  log4js.configure(path.join('config','log4js_config_sync.json'))
+else if process.env.NODE_ENV == "test"
   log4js.configure(path.join('config','log4js_config_test.json'))
 else if process.env.NODE_ENV == "production"
   log4js.configure(path.join('config','log4js_config_prod.json'))
