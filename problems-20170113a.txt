@@ -1,0 +1,27 @@
+Getting error
+
+/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/utils.js:93
+    process.nextTick(function() { throw err; });
+                                        ^
+RangeError: Maximum call stack size exceeded
+
+
+Or it just seems to hang (but maybe would end with above if left...)
+
+Seems to be in different toons
+
+Trying with longjohn - any better traces? nope
+
+??
+
+[2017-01-13 22:35:03.521] [DEBUG] [default] - checking armory index/1
+[2017-01-13 22:35:03.524] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:name_1_realm_1_region_1_type_1_lastModified_1_locale_1
+[2017-01-13 22:35:03.525] [DEBUG] [default] - checking armory index/2
+[2017-01-13 22:35:03.528] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:archived_at_1
+[2017-01-13 22:35:03.528] [DEBUG] [default] - checking armory index/3
+[2017-01-13 22:35:03.530] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:accessed_at_1
+[2017-01-13 22:35:03.530] [DEBUG] [default] - load:coll:armory_history, key:{"region":"eu","realm":"Ysondre","type":"member","name":"Alaïsia","locale":"fr_FR"}, options:{"sort":{"lastModified":-1},"l
+[2017-01-13 22:35:03.752] [DEBUG] [default] - store_update:Alaïsia:{"region":"eu","realm":"Ysondre","type":"member","name":"Alaïsia","locale":"fr_FR","lastModified":1483916023000,"armory":{"lastModi
+kimptoc:wowactivityfeed/ (master✗) $ tail -40 logs/server.log | cut -c1-200                                                                                                         [22:37:50]
+[2017-01-13 22:35:03.818] [DEBUG] [default] - store_update:Alaïsia:{"lastModified":1484344163000,"name":"Alaïsia","realm":"Ysondre","battlegroup":"Vengeance / Rache","class":2,"race":10,"gender":1,"
+[2017-01-13 22:35:03.832] [DEBUG] [default] - New or updated: Alaïsia/Alaïsia/[object Object]

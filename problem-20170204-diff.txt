@@ -1,0 +1,18 @@
+[2017-02-04 08:15:05.899] [INFO] console - Context {
+  delta: {},
+  pipe: 'reverse',
+  options: undefined,
+  nested: true,
+  exiting: false }
+[2017-02-04 08:15:05.900] [ERROR] [default] - OLD:[object Object]
+[2017-02-04 08:15:05.901] [ERROR] [default] - CHANGES:[object Object]
+[2017-02-04 08:15:05.902] [ERROR] [default] - jsdiff.unpatch:Error: reverse failed
+[2017-02-04 08:15:05.906] [INFO] console - Context {
+  delta: {},
+  pipe: 'reverse',
+  options: undefined,
+  nested: true,
+  exiting: false }
+[2017-02-04 08:15:05.906] [ERROR] [default] - OLD:[object Object]
+[2017-02-04 08:15:05.907] [ERROR] [default] - CHANGES:[object Object]
+[2017-02-04 08:15:05.908] [ERROR] [default] - jsdiff.unpatch:Error: reverse failed

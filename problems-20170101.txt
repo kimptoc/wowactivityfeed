@@ -1,0 +1,78 @@
+try just website or just crawler - any better?
+
+laptop - get error about filter
+el capitan issue?
+
+liquid1 - get error about auth/fixed that, but get other error
+
+overzold/prod - web struggles/
+- uses 100% cpu
+
+did docker version work?
+starts, but gets stuck
+
+try other server/vm? - similar issues
+
+overzold
+node app.js                                                                   [18:02:40]
+js-bson: Failed to load c++ bson extension, using pure JS version
+
+/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/utils.js:93
+    process.nextTick(function() { throw err; });
+                                        ^
+RangeError: Maximum call stack size exceeded
+
+
+
+laptop issue/was running mongo 3.4/driver not compatible
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                                                                                                    [18:45:25]
+
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:93
+    process.nextTick(function() { throw err; });
+                                        ^
+TypeError: Cannot call method 'filter' of undefined
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/db.js:483:51
+    at handleCallback (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:91:12)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/db.js:248:7
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:747:13
+    at Callbacks.emit (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:87:3)
+    at null.messageHandler (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:216:23)
+    at Socket.<anonymous> (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/node_modules/mongodb-core/lib/connection/connection.js:250:22)
+    at Socket.emit (events.js:95:17)
+    at Socket.<anonymous> (_stream_readable.js:765:14)
+    at Socket.emit (events.js:92:17)
+
+
+allyourvps
+
+node app.js
+
+util.js:35
+  var str = String(f).replace(formatRegExp, function(x) {
+                      ^
+RangeError: Maximum call stack size exceeded
+
+
+
+liquid1
+
+mongo perms issue/removed user, blanked env user/pw and it progressed but then got call stack error
+
+node app.js
+js-bson: Failed to load c++ bson extension, using pure JS version
+
+/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/utils.js:93
+    process.nextTick(function() { throw err; });
+                                        ^
+TypeError: Cannot call method 'createCollection' of null
+    at /home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:154:28
+    at /home/kimptoc/public_html/wowactivityfeed/js/store_mongo.js:388:55
+    at handleCallback (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/utils.js:91:12)
+    at /home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/lib/db.js:1087:24
+    at /home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:851:20
+    at /home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/auth/mongocr.js:111:17
+    at /home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:745:46
+    at Callbacks.emit (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:87:3)
+    at null.messageHandler (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:216:23)
+    at Socket.<anonymous> (/home/kimptoc/public_html/wowactivityfeed/node_modules/mongodb/node_modules/mongodb-core/lib/connection/connection.js:250:22)
