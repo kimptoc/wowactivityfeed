@@ -27,7 +27,7 @@ should          1.2.2   1.2.2  11.2.0
 sinon           1.7.3   1.7.3  1.17.7  
 stylus         0.36.1  0.36.1  0.54.5  
 uslug           1.0.3   1.0.3   1.0.4  - LIVE
-xml2js          0.2.8   0.2.8  0.4.17  
+xml2js          0.2.8   0.2.8  0.4.17 - LIVE
 -- log4js 0.6.21 ->  1.1.0  - LIVE
 -- jade -> pug
 -- underscore 1.7.0 ->  1.8.3 - LIVE
