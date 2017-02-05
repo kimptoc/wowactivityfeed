@@ -80,11 +80,11 @@ wf.format_date = (dt) ->
     wf.error "format_date, passed null date"
     dt = new Date()
 
-  dateMoment = moment(dt).lang(wf.locale_lang[i18n.getLocale()])
+  dateMoment = moment(dt).locale(wf.locale_lang[i18n.getLocale()])
   "#{dateMoment.fromNow()}, #{dateMoment.format("D MMM YYYY H:mm")}"
 
 wf.date_stats = (dt) ->
-  moment(dt).lang('en').format("H:mm:ss ddd")
+  moment(dt).locale('en').format("H:mm:ss ddd")
 
 wf.date_tweet = (dt) ->
-  moment(dt).lang('en').format("H:mm D MMM")
+  moment(dt).locale('en').format("H:mm D MMM")
