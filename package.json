@@ -1,46 +1,46 @@
 {
-    "name":"wowfeed",
-    "version":"0.0.1",
-    "repository": {
-      "type": "git",
-      "url": "git://github.com/kimptoc/wowactivityfeed.git"
-    },
-    "engines": {
-        "node": "0.8.x",
-        "npm": "1.1.x"
-    },
-    "scripts": {
-        "test": "make test",
-        "serve": "nodemon app.js"
-    },
-    "dependencies":{
-        "express":"~4",
-        "errorhandler":"",
-        "jade":"",
-        "stylus":"",
-        "armory":"git://github.com/kimptoc/node-armory.git",
-        "coffee-script":"",
-        "mocha":"",
-        "should":"",
-        "nodemon":"",
-        "mongodb":"",
-        "log4js":"",
-        "jsondiffpatch":"",
-        "cron":"",
-        "sinon":"",
-        "portchecker":"",
-        "moment":"",
-        "async":"",
-        "nodetime":"",
-        "underscore":"",
-        "ga":"",
-        "cheerio":"",
-        "request":"",
-        "twit":"",
-        "xml2js":"",
-        "arguejs":"",
-        "i18n":"",
-        "uslug":"",
-        "express-csv":""
-    }
+  "name": "wowfeed",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kimptoc/wowactivityfeed.git"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "scripts": {
+    "test": "make test",
+    "serve": "nodemon app.js"
+  },
+  "dependencies": {
+    "arguejs": "",
+    "armory": "git://github.com/kimptoc/node-armory.git",
+    "async": "",
+    "cheerio": "",
+    "coffee-script": "^1.12.3",
+    "cron": "",
+    "errorhandler": "",
+    "express": "^4.14.1",
+    "express-csv": "",
+    "ga": "",
+    "i18n": "",
+    "jade": "",
+    "jsondiffpatch": "",
+    "log4js": "",
+    "mocha": "",
+    "moment": "",
+    "mongodb": "",
+    "nodemon": "",
+    "nodetime": "",
+    "portchecker": "",
+    "request": "",
+    "should": "",
+    "sinon": "",
+    "stylus": "",
+    "twit": "",
+    "underscore": "",
+    "uslug": "",
+    "xml2js": ""
+  }
 }
