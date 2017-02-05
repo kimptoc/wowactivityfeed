@@ -16,7 +16,7 @@ Update things
 - modules
 -- log4js 0.6.21 ->  1.1.0  - LIVE
 -- jade -> pug
--- underscore 1.7.0 ->  1.8.3
+-- underscore 1.7.0 ->  1.8.3 - LIVE
 -- request 2.48.0 -> 2.79.0 - LIVE
 -- twit 1.1.18 ->  2.2.5 - LIVE
 -- moment 2.1.0 -> 2.17.1 - LIVE
