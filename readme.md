@@ -14,15 +14,17 @@ Update things
 - coffeescript was 1.6.2 aim for 1.12.3 - LIVE
 - forever 0.10.8 -> 0.15.3 - LIVE
 - modules
+-- log4js 0.6.21 ->  1.1.0  - LIVE
+-- jade -> pug
+-- underscore 1.7.0 ->  1.8.3
+-- request 2.48.0 -> 2.79.0
+-- twit 1.1.18 ->  2.2.5
+-- moment 2.1.0 -> 2.17.1
+-- nodetime - ??
 -- express - 4.10.4 -> 4.14.1 (done manually due to shrinkwrap issue)//LIVE
 -- express-csv - ok
--- jade -> pug
--- jsondiffpatch 0.1.20 -> 0.2.4
--- log4js
--- async 0.9.0 -> 2.1.4
--- underscore
--- request
--- twit
+-- jsondiffpatch 0.1.20 -> 0.2.4 - LIVE
+-- async 0.9.0 -> 2.1.4 - LIVE
 -- nodemon 1.2.1 - broken, needs new node? reinstall seemed to fix it. updated to 1.11.0 ok.
 - mongodb and its lib, 2.4.14
 
