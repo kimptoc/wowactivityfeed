@@ -19,12 +19,12 @@ Update things
 -- jade -> pug
 -- jsondiffpatch 0.1.20 -> 0.2.4
 -- log4js
--- async
+-- async 0.9.0 -> 2.1.4
 -- underscore
 -- request
 -- twit
 -- nodemon 1.2.1 - broken, needs new node? reinstall seemed to fix it. updated to 1.11.0 ok.
-- mongo/its lib, 2.4.14
+- mongodb and its lib, 2.4.14
 
 
 seems to be crashing more now... locally too - which is useful!
