@@ -54,8 +54,8 @@ describe "feed item formatter", ->
               averageItemLevelEquipped : [2,6]
         lastModified : 1
       f.process item, (d)->
-        d[0].description.should.match /averageItemLevel: 5/
-        d[0].description.should.match /averageItemLevelEquipped: 6/
+        d[0].description.should.match /Average Item Level: 5/
+        d[0].description.should.match /Average Item Level Equipped: 6/
         done()
 
     it "basic item, update", (done)->
