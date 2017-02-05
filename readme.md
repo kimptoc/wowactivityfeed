@@ -17,8 +17,8 @@ Update things
 -- log4js 0.6.21 ->  1.1.0  - LIVE
 -- jade -> pug
 -- underscore 1.7.0 ->  1.8.3
--- request 2.48.0 -> 2.79.0
--- twit 1.1.18 ->  2.2.5
+-- request 2.48.0 -> 2.79.0 - LIVE
+-- twit 1.1.18 ->  2.2.5 - LIVE
 -- moment 2.1.0 -> 2.17.1
 -- nodetime - ??
 -- express - 4.10.4 -> 4.14.1 (done manually due to shrinkwrap issue)//LIVE
