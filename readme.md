@@ -9,6 +9,39 @@ If you want the site/feed filler text in your language (not English) - you can h
 WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
 
 
+Update things
+- node, currently 0.10.37, aim for 6.9.5 - LIVE
+- coffeescript was 1.6.2 aim for 1.12.3 - LIVE
+- forever 0.10.8 -> 0.15.3 - LIVE
+- modules
+-- express - 4.10.4 -> 4.14.1 (done manually due to shrinkwrap issue)//LIVE
+-- express-csv - ok
+-- jade -> pug
+-- jsondiffpatch 0.1.20 -> 0.2.4
+-- log4js
+-- async
+-- underscore
+-- request
+-- twit
+-- nodemon 1.2.1 - broken, needs new node? reinstall seemed to fix it. updated to 1.11.0 ok.
+- mongo/its lib, 2.4.14
+
+
+seems to be crashing more now... locally too - which is useful!
+
+npm WARN deprecated nodetime@0.8.17: Nodetime shut down on August 31, 2015. See AppDynamics Node.js Agent http://appdynamics.com/nodejs
+npm WARN deprecated jade@1.11.0: Jade has been renamed to pug, please install the latest version of pug instead of jade
+
+
+node-gyp fails to install on server, also on osx/laptop - part of coffee-script
+
+sprinkle/node install - probably wrong version now, should be 6.9.5
+
+npm shrinkwrap fails - https://github.com/npm/npm/issues/11493
+
+don't use shrinkwrap as it doesnt work - use explicit versions in package.json
+
+
 Docker-ise!
 - docker-compose up mongolab code web
 - logs held on host system.
