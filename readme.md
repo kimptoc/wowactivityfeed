@@ -16,8 +16,8 @@ Update things
 - modules
 cheerio        0.12.1  0.12.1  0.22.0  
 cron            1.0.5   1.0.5   1.2.1 - LIVE
-errorhandler    1.3.0   1.3.0   1.5.0  
-i18n            0.4.1   0.4.1   0.8.3  
+errorhandler    1.3.0   1.3.0   1.5.0 - LIVE
+i18n            0.4.1   0.4.1   0.8.3 - API changed, needs more investigation
 jade           0.34.1  0.34.1  1.11.0  
 mocha          1.12.0  1.12.0   3.2.0  
 mongodb         2.0.7   2.0.7  2.2.22  
@@ -26,7 +26,7 @@ nodetime       0.8.13  0.8.13  0.8.17
 should          1.2.2   1.2.2  11.2.0  
 sinon           1.7.3   1.7.3  1.17.7  
 stylus         0.36.1  0.36.1  0.54.5  
-uslug           1.0.3   1.0.3   1.0.4  
+uslug           1.0.3   1.0.3   1.0.4  - LIVE
 xml2js          0.2.8   0.2.8  0.4.17  
 -- log4js 0.6.21 ->  1.1.0  - LIVE
 -- jade -> pug
