@@ -1,5 +1,21 @@
 global.wf ||= {}
 
+jsonfile = require 'jsonfile'
+touch = require 'touch'
+
+restart_stats_file = "restart_stats.json"
+touch.sync restart_stats_file
+restart_stats = jsonfile.readFileSync(restart_stats_file,throws:false)
+if !restart_stats
+  restart_stats = {}
+
+if restart_stats.count
+  restart_stats.count += 1
+else
+  restart_stats.count = 1
+
+jsonfile.writeFileSync(restart_stats_file, restart_stats)
+
 startup_time = new Date().getTime()
 
 moment = require "moment"
