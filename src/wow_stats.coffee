@@ -12,7 +12,7 @@ if !restart_stats
 if restart_stats.count
   restart_stats.count += 1
 else
-  restart_stats.count = 1
+  restart_stats.count = 0
 
 jsonfile.writeFileSync(restart_stats_file, restart_stats)
 
@@ -29,6 +29,7 @@ class wf.WoWStats
   armory_calls: (wow, callback)->
     info =
       startup_time: wf.date_stats(startup_time)
+      restarts_by_forever: restart_stats.count
       memory_usage: process.memoryUsage()
       node_uptime: process.uptime()
       armory_load:
