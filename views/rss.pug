@@ -3,7 +3,7 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
     channel
         title= title
         link= site_url
-        atom:link(href='#{feed_url}', rel='self', type='application/rss+xml')
+        atom:link(href=feed_url, rel='self', type='application/rss+xml')
         description= description
         //language en-US
         if feed.length

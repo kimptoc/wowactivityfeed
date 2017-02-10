@@ -1,5 +1,5 @@
 include includes/caliper
-include templates/search_template.jade
+include templates/search_template.pug
 script(type='text/javascript', src='/js/async.js')
 script(type='text/javascript', src='/js-cs/string.js')
 // backbone
@@ -14,6 +14,5 @@ script(type='text/javascript', src='/js-cs/search_view.js')
 //- script(type='text/javascript', src='/js-cs/router.js')
 script(type='text/javascript', src='/js-cs/search.js')
 #backbone_container
-:coffeescript
-  # console.log "Bootstrap the backbone bit of the app"
-  wf.Search.init('#{ locale }')
+script(type='text/javascript').
+  wf.Search.init('#{locale}')

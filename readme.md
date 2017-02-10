@@ -8,6 +8,8 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
 
+Getting intermittent char image not found - eg some of zombie raiders guild
+
 
 Update things
 - node, currently 0.10.37, aim for 6.9.5 - LIVE

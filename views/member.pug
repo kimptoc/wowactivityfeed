@@ -1,0 +1,33 @@
+extends layout
+
+block htmlhead
+  meta(name="robots", content="noindex")
+
+block content
+  .container
+    if w.armory
+      h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}, #{i18n("level")}: #{w.armory.level}
+    else
+      h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}
+    div #{i18n("History available")}: #{h.length}
+    if w.armory && w.armory.guild 
+      div 
+        | #{i18n("Guild")}: &nbsp;
+        a(href='/view/guild/'+w.region+'/'+w.realm+'/'+w.armory.guild.name+'/'+w.locale)= w.armory.guild.name
+    div
+      | #{i18n("View")}: &nbsp;
+      a(href='http://'+p.region+'.battle.net/wow/'+w.locale.substring(0,2)+'/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'/simple') #{i18n("armory")}
+      | &nbsp;
+      a(href='http://'+p.region+'.battle.net/api/wow/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale='+w.locale) #{i18n("api")}
+      | &nbsp;
+      a(href='/feed/'+w.type+'/'+encodeURIComponent(w.region)+'/'+encodeURIComponent(w.realm)+'/'+encodeURIComponent(w.name)+'/'+w.locale+'.rss') #{i18n("rss")}
+    hr
+    each item in f
+      .clear
+      div
+        | &nbsp;
+        h5 #{item.title}
+        div !{item.description}
+        span #{item.date_formatted}
+        span 
+          a(href=item.url) #{i18n("link")}

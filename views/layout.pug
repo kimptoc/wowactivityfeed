@@ -1,4 +1,3 @@
-!!! 5
 //if lt IE 7
   html.ie.ie6(lang='en')
 //if IE 7
@@ -6,6 +5,12 @@
 //if IE 8
   html.ie.ie8(lang='en')
 // [if (gte IE 9)|!(IE)] <!
+script(type='text/javascript').
+  function charImgError(image){
+  image.onerror = ""
+  image.src = "http://eu.battle.net//wow/static/images/2d/avatar/1-1.jpg"
+  return true;
+  }
 html(lang='en')
   // <![endif]
   head
@@ -67,13 +72,13 @@ html(lang='en')
                         if locale == i18n_locale()
                             span.current_locale #{locale.substring(0,2).toLocaleUpperCase()}
                         else
-                            a(href='#{root_url}#{locale}') #{locale.substring(0,2).toLocaleUpperCase()}
+                            a(href=root_url+locale) #{locale.substring(0,2).toLocaleUpperCase()}
         nav.head_nav
           ul.mainmenu
             li
-              a(href='/everyone/#{i18n_locale()}') #{i18n("All Updates")}
+              a(href='/everyone/'+i18n_locale()) #{i18n("All Updates")}
             li
-              a(href='/maxlevels/#{i18n_locale()}') #{i18n("Max Levels!")}
+              a(href='/maxlevels/'+i18n_locale()) #{i18n("Max Levels!")}
             //- li
             //-   a(href='/debug/armory_load') Armory!
             //- li
@@ -81,7 +86,7 @@ html(lang='en')
             //- li
             //-   a(href='/about') About
         .logo
-          a(href='/#{i18n_locale()}')
+          a(href='/'+i18n_locale())
             span #{i18n("WoW")}
             | #{i18n("Feed")}
 
@@ -118,10 +123,10 @@ html(lang='en')
 
     block content_footer
 
-    include includes/wowhead.jade
-    include includes/uservoice.jade
+    include includes/wowhead.pug
+    include includes/uservoice.pug
     include includes/google_analytics
-    //- include includes/github.jade
+    //- include includes/github.pug
 
     //
     //   End Document

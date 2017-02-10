@@ -58,8 +58,8 @@ if process.env.NODE_ENV == 'production'
 
 wf.info "App Startup/Express configure:env=#{wf.app.get('env')},dirname=#{__dirname}"
 wf.app.set('views', __dirname + '/../views')
-wf.app.set('view engine', 'jade')
-wf.app.engine('jade', require('jade').__express)
+wf.app.set('view engine', 'pug')
+#wf.app.engine('jade', require('pug').__express)
 # wf.app.use(express.bodyParser()) # for form handling
 # wf.app.use(express.methodOverride()) # for put/delete support
 wf.app.use(express.static(path.join(__dirname,'..', 'public')))
