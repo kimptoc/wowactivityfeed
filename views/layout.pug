@@ -72,7 +72,7 @@ html(lang='en')
                         if locale == i18n_locale()
                             span.current_locale #{locale.substring(0,2).toLocaleUpperCase()}
                         else
-                            a(href='#{root_url}#{locale}') #{locale.substring(0,2).toLocaleUpperCase()}
+                            a(href=root_url+locale) #{locale.substring(0,2).toLocaleUpperCase()}
         nav.head_nav
           ul.mainmenu
             li

@@ -8,7 +8,7 @@ block content
       each item in f
         .item_update
           h5 
-            a(href='#{item.url}') !{item.title}
+            a(href=item.url) !{item.title}
           span &nbsp; !{item.description}
             small &nbsp; #{item.date_formatted}
 
