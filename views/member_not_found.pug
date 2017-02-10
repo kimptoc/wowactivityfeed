@@ -11,7 +11,7 @@ block content
     div
       | &nbsp;#{i18n("View")} :
       a(href='http://#{p.region}.battle.net/wow/#{w.locale.substring(0,2)}/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/simple') #{i18n("armory")}
-      &nbsp;-&nbsp;
+      -&nbsp;
       a(href='http://#{p.region}.battle.net/api/wow/character/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{w.locale}') #{i18n("api")}
       //- &nbsp;-&nbsp;
       //- a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}.rss') rss

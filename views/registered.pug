@@ -8,7 +8,7 @@ block content
       ul
       each i in reg
         li 
-          a(href='/view/#{i.type}/#{encodeURIComponent(i.region)}/#{encodeURIComponent(i.realm)}/#{encodeURIComponent(i.name)}/#{encodeURIComponent(i.locale)}') #{i.name} / #{i.type} - #{i.realm} (#{i.region}-#{i.locale})
+          a(href='/view/'+i.type+'/'+encodeURIComponent(i.region)+'/'+encodeURIComponent(i.realm)+'/'+encodeURIComponent(i.name)+'/'+encodeURIComponent(i.locale)) #{i.name} / #{i.type} - #{i.realm} (#{i.region}-#{i.locale})
             small #{i18n("last viewed")}:[#{i.updated_at}]
     else
       h3 #{i18n("Nothing registered yet!")}

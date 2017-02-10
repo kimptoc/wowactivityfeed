@@ -4,7 +4,7 @@ script(type='text/template',id='search-template')
       .search_box
         .fourteen.columns
           form
-            input#search_text(type='text', placeholder='#{i18n("Search for a character or guild")}', autofocus)
+            input#search_text(type='text', placeholder=i18n("Search for a character or guild"), autofocus)
 
             select#realm_region
               option(value="") #{i18n("[select a realm/region]")}
@@ -15,7 +15,7 @@ script(type='text/template',id='search-template')
               //-   each r in realms
               //-     option #{r.name} (#{r.region})
 
-              input#search_now(type="submit",name="SUBMIT",value="#{i18n('Search')}")
+              input#search_now(type="submit",name="SUBMIT",value=i18n('Search'))
 
     .offset-by-three
         .ten.columns

@@ -11,19 +11,12 @@ block content
     div
       | #{i18n("View")} :
       a(href='http://#{w.region}.battle.net/wow/#{w.locale.substring(0,2)}/guild/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/') #{i18n("armory")}
-      &nbsp;-&nbsp;
+      -&nbsp;
       a(href='http://#{p.region}.battle.net/api/wow/guild/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=members,achievements,news,challenge&locale=#{w.locale}') #{i18n("api")}
-      &nbsp;-&nbsp;
+      -&nbsp;
       a(href='/feed/#{w.type}/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(w.name)}/#{encodeURIComponent(w.locale)}.rss') #{i18n("rss")}
     .columns.sixteen.arial_narrow16.txt_center.margin_bot20
       if w.armory.members
-        script(type='text/javascript').
-          function charImgError(image){
-          image.onerror = ""
-          image.src = "http://eu.battle.net//wow/static/images/2d/avatar/1-1.jpg"
-          return true;
-          }
-
         each char in w.armory.members
           span(style="float:left")
             a(href='/view/member/#{encodeURIComponent(w.region)}/#{encodeURIComponent(w.realm)}/#{encodeURIComponent(char.character.name)}/#{encodeURIComponent(w.locale)}',title='#{char.character.name} (#{i18n("level")} #{char.character.level}, #{i18n("rank")} #{char.rank})')
@@ -31,7 +24,6 @@ block content
                 onerror='charImgError(this)',
                 style='border:solid black 1px;')
               div= char.character.name
-            &nbsp;
       else
         h3 #{i18n("No members found")}
       hr
