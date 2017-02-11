@@ -22,7 +22,23 @@ errorhandler    1.3.0   1.3.0   1.5.0 - LIVE
 i18n            0.4.1   0.4.1   0.8.3 - API changed, needs more investigation
 jade           0.34.1  0.34.1  1.11.0  
 mocha          1.12.0  1.12.0   3.2.0  
-mongodb         2.0.7   2.0.7  2.2.22  
+mongodb         2.0.7   2.0.7  2.2.22
+- need to upgrade db 2.4 -> 2.6 -> 3.0 -> 3.2 -> 3.4 (or just wipe db and start again)
+remove calls/logs db to get re-created in good way.
+> use wowfeed
+switched to db wowfeed
+> db.armory_calls.drop()
+true
+> db.logs.drop()
+true
+
+ db.upgradeCheckAllDBs()
+
+ security
+
+ try new client with old db
+ 
+
 nodemon         1.2.1   1.2.1  1.11.0  
 nodetime       0.8.13  0.8.13  0.8.17  
 should          1.2.2   1.2.2  11.2.0  

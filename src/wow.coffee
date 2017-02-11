@@ -38,7 +38,7 @@ class wf.WoW
 
   constructor: (callback)->
     wf.info "WoW constructor"
-    store.create_collection calls_collection, capped:true, autoIndexId:false, size: 400000000, (err, result)=>
+    store.create_collection calls_collection, capped:true, autoIndexId:true, size: 400000000, (err, result)=>
       wf.info "Created capped collection:#{calls_collection}. #{err}, #{result}"
       wf.wow ?= this
       callback?(this)

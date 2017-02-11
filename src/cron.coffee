@@ -13,6 +13,14 @@ wf.armory_load_requested = false
 
 wf.tweeter = new wf.Tweet()
 
+cron_how_to_use_waf = '00 35 00 * * *'
+cron_count_registered = '00 12 3,11,20 * * *'
+cron_find_a_toon = '00 05 22 * * *'
+cron_how_to_use = '00 40 2,10,18 * * *'
+cron_language_conversion = '00 15 4,12,19 * * *'
+cron_counts = '00 25 02 * * *'
+cron_reload_realms = '00 50 23 * * *'
+
 create_cron = (cron_schedule, cron_task) ->
   try
     new cronJob cron_schedule, cron_task,
@@ -48,7 +56,7 @@ push_info = (msg) ->
 
 
 # count of guilds/members registered
-create_cron '00 12 3,11,20 * * *', ->
+create_cron cron_count_registered, ->
   wf.info "cronjob tick...6 hourly, guild/member counts"
   if wf.wow?
     wf.wow.get_store().count wf.wow.get_registered_collection(), {type:'guild'}, (num_guilds) ->
@@ -62,23 +70,23 @@ create_cron '00 12 3,11,20 * * *', ->
 "Having trouble finding your toon on my site?  Send me the name/server and I will send you the link!  http://wowactivity.kimptoc.net/"
 
 # find a toon offer
-create_cron '00 05 22 * * *', ->
+create_cron cron_find_a_toon, ->
   wf.info "cronjob tick...once a day, find a toon offer"
   push_info("Having trouble finding a toon?  @ or DM me the name/realm & I will send you the link!")
 
 # how to use waf
-create_cron '00 40 2,10,18 * * *', ->
+create_cron cron_how_to_use, ->
   wf.info "cronjob tick...6 hourly, how to"
   push_info("To use RSS feed, see 'how to' entries https://wafbeta.uservoice.com/forums/181669-general.")
 
 # waf language conversion
-create_cron '00 15 4,12,19 * * *', ->
+create_cron cron_language_conversion, ->
   wf.info "cronjob tick...6 hourly, locales"
   push_info "Help convert WoW Activity to your language - http://bit.ly/waflang // @webtranslateit"
 
 
 # how to use waf
-create_cron '00 35 00 * * *', ->
+create_cron cron_how_to_use_waf, ->
 # wf.counts4job = create_cron '00 10 17 * * *', ->
   wf.info "cronjob tick...daily build status"
   request 'https://api.travis-ci.org/repos/kimptoc/wowactivityfeed.xml', (err1,resp1,body) ->
@@ -92,7 +100,7 @@ create_cron '00 35 00 * * *', ->
 
 
 # count of calls yesterday
-create_cron '00 25 02 * * *', ->
+create_cron cron_counts, ->
   wf.info "cronjob tick...daily guild/member calls"
   if wf.wow?
     start_of_day = moment().startOf('day').valueOf()
@@ -115,7 +123,7 @@ create_cron '00 25 02 * * *', ->
 #     wf.info "time for armory_load..."
 #     wf.wow_loader.armory_load()
 
-create_cron '00 50 23 * * *', ->
+create_cron cron_reload_realms, ->
   wf.info "Reloading realms"
   wf.wow_loader.static_loader ->
     wf.info "Static load complete"

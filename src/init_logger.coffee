@@ -67,7 +67,7 @@ wf.info "Running in environment:#{process.env.NODE_ENV}"
 
 wf.logging_init = (store) ->
   wf.log_store = store
-  store.create_collection wf.logs_collection, capped:true, autoIndexId:false, size: 40000000, (err, result)=>
+  store.create_collection wf.logs_collection, capped:true, autoIndexId:true, size: 40000000, (err, result)=>
     wf.info "Created logs collection:#{wf.logs_collection}. #{err}, #{result}"
 
 wf.get_logs = (type, callback) ->
