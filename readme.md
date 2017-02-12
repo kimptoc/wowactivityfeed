@@ -8,7 +8,14 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
 
-Still crashing
+Still crashing/try node 7.5.0 - any more stable?
+- seems to be ... but node v7 not supported on ubuntu 12.04
+- need to update server...
+- tried more memory, but not helping
+
+try guessing object size to bypass json diff issue or use other diff engines
+
+Why restart stats not updating on server
 
 
 Getting intermittent char image not found - eg some of zombie raiders guild

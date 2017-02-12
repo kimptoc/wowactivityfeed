@@ -23,7 +23,7 @@ export PORT=3000
 
 rm restart_stats.json
 
-forever start -a -l logs/forever.log -o logs/out.log -e logs/err.log app.js
+forever start -c "node --max-old-space-size=2048" -a -l logs/forever.log -o logs/out.log -e logs/err.log app.js
 #nohup node app.js 2>&1 >logs/node.log &
 forever list
 ps -leaf | grep node
