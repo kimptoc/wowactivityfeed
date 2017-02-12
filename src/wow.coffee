@@ -14,7 +14,6 @@ class wf.WoW
   store = new wf.StoreMongo()
   registered_collection = "registered"
   armory_collection = "armory_history"
-  static_collection = "armory_static"
   calls_collection = "armory_calls"
   items_collection = "armory_items"
   realms_collection = "armory_realms"
@@ -81,7 +80,7 @@ class wf.WoW
     job_running_lock = running
 
   get_collections: ->
-    [armory_collection, calls_collection, registered_collection, items_collection, static_collection, realms_collection, wf.logs_collection]
+    [armory_collection, calls_collection, registered_collection, items_collection, realms_collection, wf.logs_collection]
 
   get_calls_collection: ->
     calls_collection
@@ -109,9 +108,6 @@ class wf.WoW
 
   get_realms_index_1: ->
     realms_index_1
-
-  get_static_collection: ->
-    static_collection
 
   get_static_index_1: ->
     static_index_1
@@ -152,10 +148,9 @@ class wf.WoW
         store.drop_collection calls_collection, ->
           store.remove_all items_collection, ->
             store.remove_all realms_collection, ->
-              store.remove_all static_collection, ->
-                wf.all_realms = undefined
-                wf.regions_to_locales = undefined
-                cleared_handler?()
+              wf.all_realms = undefined
+              wf.regions_to_locales = undefined
+              cleared_handler?()
 
 
   clear_registered: (cleared_handler) ->
@@ -254,7 +249,7 @@ class wf.WoW
         store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>
           if param.type == "guild" # if its a guild, also query for guild members
             wf.debug "Got a guild, so also query for members..."
-            selector = {type:"member", region:param.region, realm:param.realm, locale:param.locale, "armory.guild.name":results[0].armory.name}
+            selector = {type:"member", region:param.region, realm:param.realm, locale:param.locale, "armory.guild.name":results[0]?.armory?.name}
             wf.debug "querying db for:#{selector.type}/#{selector.region}/#{selector.realm}/#{selector["armory.guild.name"]}/#{param.locale}"
             store.load_all_with_fields armory_collection, selector, fields_to_select, {limit:wf.HISTORY_LIMIT, sort: {"lastModified": -1}}, (members) =>
               store.update armory_collection, selector, {$set:{accessed_at:new Date()}}, =>

@@ -15,3 +15,4 @@ etc
 locales
 node_modules.osx
 node_modules
+restart_stats.json

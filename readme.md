@@ -8,8 +8,16 @@ If you want the site/feed filler text in your language (not English) - you can h
 
 WoW Activity Chrome Extension - https://chrome.google.com/webstore/detail/wow-activity-lookup/njapjedhnpfpbfdeaaigolgoeeichfaj?hl=en
 
+Still crashing
+
+
 Getting intermittent char image not found - eg some of zombie raiders guild
 
+
+Why no tweets? hootsuite disabled it due to failed connections
+also want to get it feeding to facebook?
+seems like hootsuite posts are not mirrored, but API ones direct from web are
+- so add a cron to replace hootsuite.
 
 Update things
 - node, currently 0.10.37, aim for 6.9.5 - LIVE
@@ -24,6 +32,19 @@ jade           0.34.1  0.34.1  1.11.0
 mocha          1.12.0  1.12.0   3.2.0  
 mongodb         2.0.7   2.0.7  2.2.22
 - need to upgrade db 2.4 -> 2.6 -> 3.0 -> 3.2 -> 3.4 (or just wipe db and start again)
+
+
+// fix mongodb auth schema // done - now on mongodb 3.4.2.
+> use admin
+switched to db admin
+> db.system.version.find( { _id: "authSchema" })
+> db.getSiblingDB("admin").runCommand({authSchemaUpgrade: 1 });
+{ "done" : true, "ok" : 1 }
+> db.system.version.find( { _id: "authSchema" })
+{ "_id" : "authSchema", "currentVersion" : 5 }
+
+
+//done the below
 remove calls/logs db to get re-created in good way.
 > use wowfeed
 switched to db wowfeed
@@ -32,12 +53,12 @@ true
 > db.logs.drop()
 true
 
- db.upgradeCheckAllDBs()
+ db.upgradeCheckAllDBs()/2.6 items addressed
 
- security
+ security?
 
- try new client with old db
- 
+ try new client with old db//done+live
+
 
 nodemon         1.2.1   1.2.1  1.11.0  
 nodetime       0.8.13  0.8.13  0.8.17  

@@ -1,0 +1,123 @@
+Seems to be a diff/large object issue -
+
+try other diff implementations?
+- https://github.com/flitbit/diff
+- https://github.com/Tixit/odiff
+- https://github.com/cosmicanant/recursive-diff
+- https://www.npmjs.com/package/object-diff
+
+patch for jsondiff?
+how to identify large objects?
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                              [11:03:14]
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:98
+    process.nextTick(function() { throw err; });
+                                  ^
+
+RangeError: Maximum call stack size exceeded
+    at Array.matchItems [as match] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/arrays.js:42:20)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:49:14)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:50:23)
+
+
+
+
+[2017-02-12 11:03:48.350] [DEBUG] [default] - checking armory index/1
+[2017-02-12 11:03:48.350] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:name_1_realm_1_region_1_type_1_lastModified_1_lo
+[2017-02-12 11:03:48.350] [DEBUG] [default] - checking armory index/2
+[2017-02-12 11:03:48.351] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:archived_at_1
+[2017-02-12 11:03:48.351] [DEBUG] [default] - checking armory index/3
+[2017-02-12 11:03:48.352] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:accessed_at_1
+[2017-02-12 11:03:48.352] [DEBUG] [default] - load:coll:armory_history, key:{"region":"us","realm":"elune","type":"member","name":"mealah","locale":"e
+[2017-02-12 11:03:48.430] [DEBUG] [default] - store_update:mealah:{"_id":"589fa8f5f088e32c310f36d5","region":"us","realm":"elune","type":"member","nam
+
+
+
+2017-02-12 11:19:53.431] [DEBUG] [default] - checking armory index/2
+[2017-02-12 11:19:53.433] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:archived_at_1
+[2017-02-12 11:19:53.433] [DEBUG] [default] - checking armory index/3
+[2017-02-12 11:19:53.434] [DEBUG] [default] - Trying to create index on armory_history - maybe did it:accessed_at_1
+[2017-02-12 11:19:53.434] [DEBUG] [default] - load:coll:armory_history, key:{"region":"us","realm":"elune","type":"member","name":"mealah","locale":"e
+[2017-02-12 11:19:53.539] [DEBUG] [default] - store_update:mealah:{"_id":"589fa8f5f088e32c310f36d5","region":"us","realm":"elune","type":"member","nam
+[2017-02-12 11:19:53.557] [DEBUG] [default] - store_update:mealah:{"lastModified":1486876195000,"name":"Mealah","realm":"Elune","battlegroup":"Ruin","
+[2017-02-12 11:19:53.560] [DEBUG] [default] - New or updated: Mealah/mealah/[object Object]
+
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                                                                                                    [11:18:50]
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:98
+    process.nextTick(function() { throw err; });
+                                  ^
+
+RangeError: Maximum call stack size exceeded
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:40:25)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:50:23)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:50:23)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:50:23)
+
+
+
+
+
+
+kimptoc:wowfeed.osx/ (master✗) $ node jd-test.js                                                                                                                [11:28:56]
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/arrays.js:42
+function matchItems(array1, array2, index1, index2, context) {
+                   ^
+
+RangeError: Maximum call stack size exceeded
+    at Array.matchItems [as match] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/arrays.js:42:20)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:49:14)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:58:12)
+    at backtrack (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:58:12)
+
+
+after putting try/catch on the js diff
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                                                                                                    [11:48:37]
+
+<--- Last few GCs --->
+
+  517835 ms: Mark-sweep 1277.0 (1438.7) -> 1277.0 (1438.7) MB, 815.8 / 0.0 ms [allocation failure] [scavenge might not succeed].
+  518889 ms: Mark-sweep 1277.0 (1438.7) -> 1277.0 (1438.7) MB, 1053.7 / 0.0 ms [allocation failure] [scavenge might not succeed].
+  519984 ms: Mark-sweep 1277.0 (1438.7) -> 1286.7 (1419.7) MB, 1094.2 / 0.0 ms [last resort gc].
+  520873 ms: Mark-sweep 1286.7 (1419.7) -> 1296.9 (1417.7) MB, 887.9 / 0.0 ms [last resort gc].
+
+
+<--- JS stacktrace --->
+
+==== JS stack trace =========================================
+
+Security context: 0x11ac9e7cfb51 <JS Object>
+    2: lengthMatrix [/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:~13] [pc=0x1a46db8e8402] (this=0x11ac9e7e6f19 <JS Global Object>,array1=0x2ed77839bc91 <JS Array[7035]>,array2=0x2ed77839bc71 <JS Array[7040]>,match=0x31d52e194679 <JS Function matchItems (SharedFunctionInfo 0x4899d428481)>,context=0x2ed77839bc49 <an Object with map 0x9738fa73c21>)
+    3: g...
+
+FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
+ 1: node::Abort() [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 2: node::FatalException(v8::Isolate*, v8::Local<v8::Value>, v8::Local<v8::Message>) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 3: v8::internal::V8::FatalProcessOutOfMemory(char const*, bool) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 4: v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationSpace) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 5: v8::internal::Runtime_AllocateInTargetSpace(int, v8::internal::Object**, v8::internal::Isolate*) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 6: 0x1a46dac079a7
+ 7: 0x1a46dbb3da85
+[1]    16013 abort      node app.js
+
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                                                                                                    [11:58:52]
+Context {
+  delta: {},
+  pipe: 'reverse',
+  options: {},
+  nested: true,
+  exiting: false }
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:98
+    process.nextTick(function() { throw err; });
+                                  ^
+
+TypeError: Cannot read property 'name' of undefined
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow.js:525:57
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/store_mongo.js:201:57
+    at handleCallback (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:95:56)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/collection.js:1051:5
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb-core/lib/connection/pool.js:455:18
+    at _combinedTickCallback (internal/process/next_tick.js:67:7)
+    at process._tickCallback (internal/process/next_tick.js:98:9)

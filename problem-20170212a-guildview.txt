@@ -1,0 +1,153 @@
+
+
+http://wowactivity.kimptoc.net/view/guild/eu/kilrogg/l%20i%20g%20h%20t%20n%20i%20n%20g/ru_RU?ts=1486903620000&id=134203
+
+but this seems to work- well, doesnt error - but doesnt get the guild either
+http://localhost:4000/view/guild/eu/kilrogg/l_i_g_h_t_n_i_n_g/
+
+looks like ?. feature is coffee only and not usable in pug
+
+TypeError: /Users/kimptoc/Dropbox/dev/wowfeed.osx/views/guild.pug:8
+   6| block content
+   7|   .container
+ > 8|     h3.bordered #{w.region}-#{w.locale} / #{w.realm} / #{i18n("guild")}: #{w.name}, #{i18n("level")}: #{w.armory.level} / #{i18n("members")}: #{w.armory.members?w.armory.members.length:'?'}
+   9|     if h
+   10|       div #{i18n("History available")}: #{h.length}
+   11|     div
+
+Cannot read property 'level' of undefined
+   at eval (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:253:65)
+   at template (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:547:141)
+   at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:418:38)
+   at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:408:21)
+   at View.exports.__express [as engine] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:455:11)
+   at View.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/view.js:126:8)
+   at tryRender (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:639:10)
+   at EventEmitter.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:591:3)
+   at ServerResponse.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/response.js:960:7)
+   at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:259:22
+   at Object.feed_queue.drain (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:197:49)
+   at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:2246:19
+   at apply (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:20:25)
+   at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:56:12
+   at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:840:16
+   at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:188:51
+
+
+
+
+
+
+kimptoc:wowfeed.osx/ (master✗) $ node app.js                                                                                                                    [12:43:32]
+Context {
+  delta: {},
+  pipe: 'reverse',
+  options: {},
+  nested: true,
+  exiting: false }
+Context {
+  delta: {},
+  pipe: 'reverse',
+  options: {},
+  nested: true,
+  exiting: false }
+TypeError: /Users/kimptoc/Dropbox/dev/wowfeed.osx/views/guild.pug:8
+    6| block content
+    7|   .container
+  > 8|     h3.bordered #{w.region}-#{w.locale} / #{w.realm} / #{i18n("guild")}: #{w.name}, #{i18n("level")}: #{w.armory.level} / #{i18n("members")}: #{w.armory.members?w.armory.members.length:'?'}
+    9|     if h
+    10|       div #{i18n("History available")}: #{h.length}
+    11|     div
+
+Cannot read property 'level' of undefined
+    at eval (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:253:65)
+    at template (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:547:141)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:418:38)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:408:21)
+    at View.exports.__express [as engine] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:455:11)
+    at View.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/view.js:126:8)
+    at tryRender (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:639:10)
+    at EventEmitter.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:591:3)
+    at ServerResponse.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/response.js:960:7)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:259:22
+    at Object.feed_queue.drain (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:197:49)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:2246:19
+    at apply (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:20:25)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:56:12
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:840:16
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:188:51
+TypeError: /Users/kimptoc/Dropbox/dev/wowfeed.osx/views/guild.pug:8
+    6| block content
+    7|   .container
+  > 8|     h3.bordered #{w.region}-#{w.locale} / #{w.realm} / #{i18n("guild")}: #{w.name}, #{i18n("level")}: #{w.armory.level} / #{i18n("members")}: #{w.armory.members?w.armory.members.length:'?'}
+    9|     if h
+    10|       div #{i18n("History available")}: #{h.length}
+    11|     div
+
+Cannot read property 'level' of undefined
+    at eval (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:253:65)
+    at template (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:547:141)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:418:38)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:408:21)
+    at View.exports.__express [as engine] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:455:11)
+    at View.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/view.js:126:8)
+    at tryRender (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:639:10)
+    at EventEmitter.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:591:3)
+    at ServerResponse.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/response.js:960:7)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:259:22
+    at Object.feed_queue.drain (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:197:49)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:2246:19
+    at apply (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:20:25)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:56:12
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:840:16
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:188:51
+TypeError: /Users/kimptoc/Dropbox/dev/wowfeed.osx/views/guild.pug:8
+    6| block content
+    7|   .container
+  > 8|     h3.bordered #{w.region}-#{w.locale} / #{w.realm} / #{i18n("guild")}: #{w.name}, #{i18n("level")}: #{w.armory.level} / #{i18n("members")}: #{w.armory.members?w.armory.members.length:'?'}
+    9|     if h
+    10|       div #{i18n("History available")}: #{h.length}
+    11|     div
+
+Cannot read property 'level' of undefined
+    at eval (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:253:65)
+    at template (eval at wrap (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug-runtime/wrap.js:6:10), <anonymous>:547:141)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:418:38)
+    at Object.exports.renderFile (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:408:21)
+    at View.exports.__express [as engine] (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/pug/lib/index.js:455:11)
+    at View.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/view.js:126:8)
+    at tryRender (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:639:10)
+    at EventEmitter.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/application.js:591:3)
+    at ServerResponse.render (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/express/lib/response.js:960:7)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:259:22
+    at Object.feed_queue.drain (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:197:49)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:2246:19
+    at apply (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:20:25)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:56:12
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/async/dist/async.js:840:16
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/app.js:188:51
+
+<--- Last few GCs --->
+
+ 2359520 ms: Mark-sweep 1200.6 (1434.7) -> 1200.5 (1434.7) MB, 801.8 / 0.0 ms [allocation failure] [scavenge might not succeed].
+ 2360434 ms: Mark-sweep 1200.5 (1434.7) -> 1200.6 (1434.7) MB, 913.4 / 0.0 ms [allocation failure] [scavenge might not succeed].
+ 2361296 ms: Mark-sweep 1200.6 (1434.7) -> 1212.2 (1418.7) MB, 862.1 / 0.0 ms [last resort gc].
+ 2362294 ms: Mark-sweep 1212.2 (1418.7) -> 1223.8 (1418.7) MB, 997.3 / 0.0 ms [last resort gc].
+
+
+<--- JS stacktrace --->
+
+==== JS stack trace =========================================
+
+Security context: 0x6da67fcfb51 <JS Object>
+    2: lengthMatrix [/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/jsondiffpatch/src/filters/lcs.js:~13] [pc=0x1cf932eb6502] (this=0x6da67fe6f19 <JS Global Object>,array1=0x2bd9f35a3519 <JS Array[7035]>,array2=0x2bd9f35a34f9 <JS Array[7040]>,match=0x10355a194871 <JS Function matchItems (SharedFunctionInfo 0x315ba8427081)>,context=0x2bd9f35a34d1 <an Object with map 0x2d738d465fc9>)
+    3: g...
+
+FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
+ 1: node::Abort() [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 2: node::FatalException(v8::Isolate*, v8::Local<v8::Value>, v8::Local<v8::Message>) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 3: v8::internal::V8::FatalProcessOutOfMemory(char const*, bool) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 4: v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationSpace) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 5: v8::internal::Runtime_AllocateInTargetSpace(int, v8::internal::Object**, v8::internal::Isolate*) [/Users/kimptoc/.nodenv/versions/6.9.5/bin/node]
+ 6: 0x1cf931c079a7
+[1]    18746 abort      node app.js
