@@ -1,10 +1,10 @@
 Seems to be a diff/large object issue -
 
 try other diff implementations?
-- https://github.com/flitbit/diff
-- https://github.com/Tixit/odiff
-- https://github.com/cosmicanant/recursive-diff
-- https://www.npmjs.com/package/object-diff
+- https://github.com/flitbit/diff - diff format
+- https://github.com/Tixit/odiff - diff format
+- https://github.com/cosmicanant/recursive-diff - diff format
+- https://www.npmjs.com/package/object-diff - diff format
 
 patch for jsondiff?
 how to identify large objects?

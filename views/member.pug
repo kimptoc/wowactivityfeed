@@ -9,6 +9,8 @@ block content
       h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}, #{i18n("level")}: #{w.armory.level}
     else
       h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}
+    if w.armory && w.armory.thumbnail
+      img(align='right' src="http://render-"+w.region+".worldofwarcraft.com/character/"+w.armory.thumbnail.replace('avatar','inset'))
     div #{i18n("History available")}: #{h.length}
     if w.armory && w.armory.guild 
       div 
@@ -21,6 +23,7 @@ block content
       a(href='http://'+p.region+'.battle.net/api/wow/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale='+w.locale) #{i18n("api")}
       | &nbsp;
       a(href='/feed/'+w.type+'/'+encodeURIComponent(w.region)+'/'+encodeURIComponent(w.realm)+'/'+encodeURIComponent(w.name)+'/'+w.locale+'.rss') #{i18n("rss")}
+
     hr
     each item in f
       .clear
