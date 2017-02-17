@@ -30,8 +30,6 @@ wf.restore = (whats_changed, new_obj) ->
     try
       jsdiff.unpatch(old_obj, whats_changed?.changes)
     catch e
-      wf.error "OLD:#{JSON.stringify(old_obj).length}"
-      wf.error "CHANGES:#{JSON.stringify(whats_changed?.changes).length}"
-      wf.error "jsdiff.unpatch:#{e}"
+      wf.error "OLD:#{JSON.stringify(old_obj).length}/CHANGES:#{JSON.stringify(whats_changed?.changes).length}/jsdiff.unpatch:#{e}"
 
   return old_obj
