@@ -1,0 +1,46 @@
+
+kimptoc:wowfeed.osx/ (master✗) $ tail logs/server.log                                                                                                      [0:25:54]
+[2017-02-18 00:25:47.837] [WARN] [default] - wowlookup error looking for undefined,undefined,eu,en_GB,member:When in doubt, blow it up. (page not found) :"When in doubt, blow it up. (page not found)" : {}
+[2017-02-18 00:25:47.837] [DEBUG] [default] - debug to do insert
+[2017-02-18 00:25:47.838] [DEBUG] [default] - about to do insert/got collection:logs:undefined-undefined:{"timestamp":"2017-02-18T00:25:47.837Z","message":"wowlookup error looking for undefined,undefined,eu,en_GB,member:When in doubt, blow it up. (page not found) :\"When in doubt, blow it up. (page not found)\" : {}","type":"WARN","stack":"","error_arguments":"","error_type":""}
+[2017-02-18 00:25:47.839] [DEBUG] [default] - debug to do insert
+[2017-02-18 00:25:47.839] [DEBUG] [default] - about to do insert/got collection:armory_calls:undefined-eu:{"type":"member","region":"eu","locale":"en_GB","start_time":1487377546356,"end_time":1487377547839,"error":"When in doubt, blow it up. (page not found)","not_modified":false,"had_error":true}
+[2017-02-18 00:25:47.840] [DEBUG] [default] - about to do insert/insert returned
+[2017-02-18 00:25:47.841] [DEBUG] [default] - saved in logs:[object Object]
+[2017-02-18 00:25:47.841] [DEBUG] [default] - about to do insert/insert returned
+[2017-02-18 00:25:47.841] [DEBUG] [default] - saved in armory_calls:[object Object]
+[2017-02-18 00:25:47.841] [DEBUG] [default] - Saving:{"type":"member","region":"eu","locale":"en_GB"}/{"type":"member","region":"eu","locale":"en_GB","error":"When in doubt, blow it up. (page not found)","lastModified":0,"info":"Armory lookup member info for eu/en_GB, undefined, undefined"}
+
+[2017-02-18 00:14:43.121] [WARN] [default] - wowlookup error looking for undefined,undefined,eu,en_GB,member:When in doubt, blow it up. (page not found) :"When in doubt, blow it up. (page not found)" : {}
+[2017-02-18 00:14:43.121] [DEBUG] [default] - debug to do insert
+[2017-02-18 00:14:43.122] [DEBUG] [default] - about to do insert/got collection:logs:undefined-undefined:{"timestamp":"2017-02-18T00:14:43.121Z","message":"wowlookup error looking for undefined,undefined,eu,en_GB,member:When in doubt, blow it up. (page not found) :\"When in doubt, blow it up. (page not found)\" : {}","type":"WARN","stack":"","error_arguments":"","error_type":""}
+[2017-02-18 00:14:43.122] [DEBUG] [default] - debug to do insert
+[2017-02-18 00:14:43.122] [DEBUG] [default] - about to do insert/got collection:armory_calls:undefined-eu:{"type":"member","region":"eu","locale":"en_GB","start_time":1487376882760,"end_time":1487376883122,"error":"When in doubt, blow it up. (page not found)","not_modified":false,"had_error":true}
+[2017-02-18 00:14:43.123] [DEBUG] [default] - about to do insert/insert returned
+[2017-02-18 00:14:43.124] [DEBUG] [default] - saved in logs:[object Object]
+[2017-02-18 00:14:43.124] [DEBUG] [default] - about to do insert/insert returned
+[2017-02-18 00:14:43.124] [DEBUG] [default] - saved in armory_calls:[object Object]
+[2017-02-18 00:14:43.124] [DEBUG] [default] - Saving:{"type":"member","region":"eu","locale":"en_GB"}/{"type":"member","region":"eu","locale":"en_GB","error":"When in doubt, blow it up. (page not found)","lastModified":0,"info":"Armory lookup member info for eu/en_GB, undefined, undefined"}
+
+/Users/kimptoc/.nodenv/shims/node app.js
+/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:98
+    process.nextTick(function() { throw err; });
+                                  ^
+
+Error: parameter 'realm' waiting for String argument but received Undefined
+    at __ (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/arguejs/argue.js:93:19)
+    at WoWLoader.wf.WoWLoader.WoWLoader.store_update (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:160:15)
+    at WoWLoader.store_update (/Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:4:59)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/wow_loader.js:292:30
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/call_logger.js:31:55
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/js/store_mongo.js:106:59
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/collection.js:525:5
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/collection.js:703:5
+    at handleCallback (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/utils.js:95:56)
+    at executeCommands (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/bulk/ordered.js:398:12)
+    at resultHandler (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/bulk/ordered.js:425:5)
+    at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb-core/lib/connection/pool.js:455:18
+    at _combinedTickCallback (internal/process/next_tick.js:67:7)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+
+Process finished with exit code 1

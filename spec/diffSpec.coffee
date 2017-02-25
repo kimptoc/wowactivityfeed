@@ -1,5 +1,6 @@
 should = require 'should'
 assert = require 'assert'
+jsonfile = require 'jsonfile'
 
 require "./commonSpec"
 require './init_logger'
@@ -65,4 +66,33 @@ describe "diff utils", ->
       diff = wf.calc_changes obj1, obj1
       should.exist diff
       should.not.exist diff.changes
+      done()
+
+    it "restore when no change", (done) ->
+      obj1 =
+        name: "foo"
+      restored = wf.restore {changes:{}}, obj1
+      should.exist restored
+      restored.should.eql obj1
+      done()
+
+    it "restore test from file1", (done) ->
+      test_case = jsonfile.readFileSync("spec-resources/unpatch_error_1.json")
+      restored = wf.restore test_case.changes, test_case.old
+      should.exist restored
+      restored.should.eql test_case.old
+      done()
+
+    it "restore test from file2", (done) ->
+      test_case = jsonfile.readFileSync("spec-resources/unpatch_error_2.json")
+      restored = wf.restore test_case.changes, test_case.old
+      should.exist restored
+      restored.should.eql test_case.old
+      done()
+
+    it "restore test from file3", (done) ->
+      test_case = jsonfile.readFileSync("spec-resources/unpatch_error_3.json")
+      restored = wf.restore test_case.changes, test_case.old
+      should.exist restored
+      restored.should.eql test_case.old
       done()

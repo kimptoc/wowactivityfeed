@@ -1,0 +1,5 @@
+https://github.com/kimptoc/wowactivityfeed/issues/34
+
+ERROR: The field 'safe' is not valid for an index specification. Specification: { ns: "wowfeed.registered", key: { updated_at: 1 }, name: "updated_at_1", unique: false, expireAfterSeconds: 604800, safe: true } -
+MongoError: The field 'safe' is not valid for an index specification. Specification: { ns: "wowfeed.registered", key: { updated_at: 1 }, name: "updated_at_1", unique: false, expireAfterSeconds: 604800, safe: true } at Function.MongoError.create (/Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb-core/lib/error.js:31:11) at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb/lib/db.js:1083:80 at /Users/kimptoc/Dropbox/dev/wowfeed.osx/node_modules/mongodb-core/lib/connection/pool.js:455:18 at _combinedTickCallback (internal/process/next_tick.js:67:7) at process._tickCallback (internal/process/next_tick.js:98:9)
+- Fri Feb 24 2017 23:39:33 GMT+0000 (GMT)
