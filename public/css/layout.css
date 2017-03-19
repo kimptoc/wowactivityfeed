@@ -59,6 +59,7 @@
 	.footer .social ul li a.soc_flicker { background:url(../images/icons/ico_flick.png) no-repeat; }
 	.footer .social ul li a.soc_twitter { background:url(../images/icons/ico_t.png) no-repeat; }
 	.footer .social ul li a.soc_github { background:url(../images/icons/octocat.png) no-repeat; }
+	.footer .social ul li a.soc_gratipay { background:url(../images/icons/gratipay-heart-coin.bw.svg) no-repeat; background-size: 32px 32px; background-position: -4px -4px; }
 	.footer .social ul li a.soc_text { color:#ffffff; font-size:11px; width: 48px; }
 
 	/*Dividers*/
