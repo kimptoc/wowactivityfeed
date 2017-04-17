@@ -57,10 +57,10 @@ class wf.FeedItemFormatter
       callback?(results)
 
   achievement_link: (achievement) ->
-    "<a href=\"http://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
+    "<a href=\"https://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
 
   armory_link: (p) =>
-    "http://#{p.region}.battle.net/wow/#{p.locale?.substring(0,2)}/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
+    "https://#{p.region}.battle.net/wow/#{p.locale?.substring(0,2)}/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
 
   wow_type: (type) =>
     wow_type = type
@@ -68,12 +68,12 @@ class wf.FeedItemFormatter
     return wow_type
 
   armory_api_link: (p) =>
-    "http://#{p.region}.battle.net/api/wow/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{p.locale}"
+    "https://#{p.region}.battle.net/api/wow/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale=#{p.locale}"
 
   char_link: (p) =>
     alt_text = @get_formal_name(p)
     alt_text = "#{alt_text} (#{i18n.__('level')} #{p.armory.level})" if p.armory?.level?
-    "<a href=\""+@armory_link(p)+"\" alt=\"#{alt_text}\" title=\"#{alt_text}\"><img src=\"http://render-#{p.region}.worldofwarcraft.com/character/#{p.armory.thumbnail}\" align='left' style='border:solid black 1px;' class='char_image' onerror='charImgError(this)'></a>"
+    "<a href=\""+@armory_link(p)+"\" alt=\"#{alt_text}\" title=\"#{alt_text}\"><img src=\"https://render-#{p.region}.worldofwarcraft.com/character/#{p.armory.thumbnail}\" align='left' style='border:solid black 1px;' class='char_image' onerror='charImgError(this)'></a>"
 
   get_formal_name: (p) ->
     # wf.debug "titles - get name #{JSON.stringify(p.armory?.titles)}"
@@ -104,7 +104,7 @@ class wf.FeedItemFormatter
     #todo - handle not found, img link, wowhead link/hover...
     a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{@get_item(items,item_id,i18n.getLocale(),region)?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items, region)}' alt='#{@item_name(item_id, items, region)}'>"
     a_text = i18n.__("Unknown...") unless @get_item(items,item_id,i18n.getLocale(),region)
-    return "<a href='http://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
+    return "<a href='https://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
 
   item_name: (item_id, items, region) ->
     #todo - handle not found, img link, wowhead link/hover...

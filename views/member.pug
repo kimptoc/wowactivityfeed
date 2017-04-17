@@ -10,7 +10,7 @@ block content
     else
       h3.bordered #{p.region} / #{p.realm} / #{i18n("member")}: #{w.name}
     if w.armory && w.armory.thumbnail
-      img(align='right' src="http://render-"+w.region+".worldofwarcraft.com/character/"+w.armory.thumbnail.replace('avatar','inset'))
+      img(align='right' src="https://render-"+w.region+".worldofwarcraft.com/character/"+w.armory.thumbnail.replace('avatar','inset'))
     div #{i18n("History available")}: #{h.length}
     if w.armory && w.armory.guild 
       div 
@@ -18,9 +18,9 @@ block content
         a(href='/view/guild/'+w.region+'/'+w.realm+'/'+w.armory.guild.name+'/'+w.locale)= w.armory.guild.name
     div
       | #{i18n("View")}: &nbsp;
-      a(href='http://'+p.region+'.battle.net/wow/'+w.locale.substring(0,2)+'/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'/simple') #{i18n("armory")}
+      a(href='https://'+p.region+'.battle.net/wow/'+w.locale.substring(0,2)+'/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'/simple') #{i18n("armory")}
       | &nbsp;
-      a(href='http://'+p.region+'.battle.net/api/wow/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale='+w.locale) #{i18n("api")}
+      a(href='https://'+p.region+'.battle.net/api/wow/character/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=achievements,guild,feed,hunterPets,professions,progression,pvp,quests,reputation,stats,talents,titles,items,pets,petSlots,mounts&locale='+w.locale) #{i18n("api")}
       | &nbsp;
       a(href='/feed/'+w.type+'/'+encodeURIComponent(w.region)+'/'+encodeURIComponent(w.realm)+'/'+encodeURIComponent(w.name)+'/'+w.locale+'.rss') #{i18n("rss")}
 

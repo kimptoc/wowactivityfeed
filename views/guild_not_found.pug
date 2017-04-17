@@ -10,7 +10,7 @@ block content
   .container
     div
       | #{i18n("View")}: &nbsp;
-      a(href='http://'+w.region+'.battle.net/wow/'+w.locale.substring(0,2)+'/guild/'+encodeURIComponent(w.realm)+'/'+encodeURIComponent(w.name)+'/') #{i18n("armory")}
+      a(href='https://'+w.region+'.battle.net/wow/'+w.locale.substring(0,2)+'/guild/'+encodeURIComponent(w.realm)+'/'+encodeURIComponent(w.name)+'/') #{i18n("armory")}
       | &nbsp;
-      a(href='http://'+p.region+'.battle.net/api/wow/guild/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=members,achievements,news,challenge') #{i18n("api")}
+      a(href='https://'+p.region+'.battle.net/api/wow/guild/'+encodeURIComponent(p.realm)+'/'+encodeURIComponent(p.name)+'?fields=members,achievements,news,challenge') #{i18n("api")}
       | &nbsp;
