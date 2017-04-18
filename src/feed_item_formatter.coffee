@@ -57,7 +57,7 @@ class wf.FeedItemFormatter
       callback?(results)
 
   achievement_link: (achievement) ->
-    "<a href=\"https://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"http://us.media.blizzard.com/wow/icons/56/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
+    "<a href=\"https://www.wowhead.com/achievement=#{achievement.id}\" alt=\"#{achievement.title}\" title=\"#{achievement.title}\" rel='domain=#{i18n.getLocale()}'><img src=\"//wow.zamimg.com/images/wow/icons/large/#{achievement.icon}.jpg\" align='right' style='border:solid yellow 1px;'></a>"
 
   armory_link: (p) =>
     "https://#{p.region}.battle.net/wow/#{p.locale?.substring(0,2)}/#{@wow_type(p.type)}/#{encodeURIComponent(p.realm)}/#{encodeURIComponent(p.name)}/"
@@ -102,7 +102,7 @@ class wf.FeedItemFormatter
 
   item_link: (item_id, items, region) ->
     #todo - handle not found, img link, wowhead link/hover...
-    a_text = "<img src='http://us.media.blizzard.com/wow/icons/56/#{@get_item(items,item_id,i18n.getLocale(),region)?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items, region)}' alt='#{@item_name(item_id, items, region)}'>"
+    a_text = "<img src='//wow.zamimg.com/images/wow/icons/large/#{@get_item(items,item_id,i18n.getLocale(),region)?.icon}.jpg' align='right' style='border:solid yellow 1px;' title='#{@item_name(item_id, items, region)}' alt='#{@item_name(item_id, items, region)}'>"
     a_text = i18n.__("Unknown...") unless @get_item(items,item_id,i18n.getLocale(),region)
     return "<a href='https://www.wowhead.com/item=#{item_id}' rel='domain=#{i18n.getLocale()}'>#{a_text}</a>"
 
