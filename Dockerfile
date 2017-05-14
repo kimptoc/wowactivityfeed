@@ -12,13 +12,15 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vund
 COPY docker_vimrc /root/.vimrc
 RUN vim +PluginInstall +qall
 
+RUN touch /etc/build3
+
 RUN npm install -g coffee-script forever mocha nodemon
 
 RUN mkdir -p /app/wowfeed/
 WORKDIR /app/wowfeed/
 
 COPY package.json /app/wowfeed/
-COPY npm-shrinkwrap.json /app/wowfeed/
+#COPY npm-shrinkwrap.json /app/wowfeed/
 RUN npm install
 
 VOLUME /app/wowfeed/node_modules

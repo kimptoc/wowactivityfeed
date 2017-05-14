@@ -80,4 +80,6 @@ webdev:
   stdin_open: true
   tty: true
 mongolab:
-  image: mongo:2.4.14
+  image: mongo:3.4.2
+  ports:
+    - '27017:27017'
