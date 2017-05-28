@@ -11,7 +11,9 @@
   },
   "scripts": {
     "test": "make test",
-    "serve": "nodemon app.js"
+    "serve": "nodemon app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "arguejs": "0.2.3",
@@ -42,6 +44,8 @@
     "twit": "^2.2.5",
     "underscore": "^1.8.3",
     "uslug": "^1.0.4",
-    "xml2js": "^0.4.17"
-  }
+    "xml2js": "^0.4.17",
+    "snyk": "^1.31.0"
+  },
+  "snyk": true
 }
