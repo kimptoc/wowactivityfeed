@@ -119,7 +119,7 @@ jade - view templates - https://github.com/visionmedia/jade#readme
 underscore - http://underscorejs.org/
 
 sinon - mocks for testing - http://sinonjs.org/docs/#mocks
-mocha - for testing - http://visionmedia.github.com/mocha/
+mocha - for testing - http://mochajs.org/
 should - for testing - https://github.com/visionmedia/should.js
 
 html2jade tool - https://github.com/donpark/html2jade
