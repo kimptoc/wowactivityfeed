@@ -1,5 +1,10 @@
 # WoW Activity Feed
 
+SITE IS NOW OFFLINE.  Its not been updated for the new Blizzard API and so will not be getting updates.
+https://twitter.com/WowActivityFeed/status/1079886967943380994
+
+
+
 [![Build Status via Travis CI](https://travis-ci.org/kimptoc/wowactivityfeed.png?branch=master)](https://travis-ci.org/kimptoc/wowactivityfeed)
 
 LIVE SITE: http://wowactivity.kimptoc.net/
