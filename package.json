@@ -34,7 +34,7 @@
     "mongodb": "^2.2.26",
     "nodemon": "^1.11.0",
     "portchecker": "0.1.2",
-    "pug": "^2.0.0-rc.1",
+    "pug": "^3.0.0",
     "pug-lint": "^2.4.0",
     "request": "^2.81.0",
     "should": "^11.2.0",
