@@ -18,7 +18,7 @@
   "dependencies": {
     "arguejs": "0.2.3",
     "armory": "git://github.com/kimptoc/node-armory.git",
-    "async": "^2.4.0",
+    "async": "^3.2.2",
     "coffee-script": "^1.12.3",
     "cron": "^1.2.1",
     "errorhandler": "^1.5.0",
